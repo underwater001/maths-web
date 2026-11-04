@@ -5,7 +5,9 @@
     "parent": "hub",
     "order": 1,
     "summary": "Core arithmetic topics: the largest share of Tier 1 and Tier 2 Quant.",
-    "links": []
+    "links": [],
+    "hue": 255,
+    "short": "Arithmetic"
   },
   "number-system": {
     "label": "Number system",
@@ -159,7 +161,9 @@
     "parent": "hub",
     "order": 2,
     "summary": "Identities, equations, inequalities, surds and indices.",
-    "links": []
+    "links": [],
+    "hue": 15,
+    "short": "Algebra"
   },
   "algebraic-identities": {
     "label": "Algebraic identities",
@@ -212,7 +216,9 @@
     "parent": "hub",
     "order": 3,
     "summary": "Lines, triangles, circles and polygons: heavy in Tier 1 and Tier 2.",
-    "links": []
+    "links": [],
+    "hue": 150,
+    "short": "Geometry"
   },
   "lines-angles": {
     "label": "Lines & angles",
@@ -264,7 +270,9 @@
     "parent": "hub",
     "order": 4,
     "summary": "Areas, perimeters, surface areas and volumes.",
-    "links": []
+    "links": [],
+    "hue": 75,
+    "short": "Mensuration"
   },
   "mensuration-2d": {
     "label": "Mensuration 2D",
@@ -295,7 +303,9 @@
     "parent": "hub",
     "order": 5,
     "summary": "Ratios, identities and heights and distances.",
-    "links": []
+    "links": [],
+    "hue": 320,
+    "short": "Trigonometry"
   },
   "trig-ratios": {
     "label": "Ratios & identities",
@@ -324,7 +334,9 @@
     "parent": "hub",
     "order": 6,
     "summary": "Data interpretation and basic statistics.",
-    "links": []
+    "links": [],
+    "hue": 195,
+    "short": "Data"
   },
   "data-interpretation": {
     "label": "Data interpretation",
@@ -348,6 +360,7 @@
     ]
   },
   "c-capital-time": {
+    "short": "Capital × time",
     "label": "Profit shares follow capital × time",
     "kind": "concept",
     "parent": "partnership",
@@ -356,6 +369,7 @@
     "links": []
   },
   "c-late-entry": {
+    "short": "Late entry",
     "label": "Late entry and changing capital",
     "kind": "concept",
     "parent": "partnership",
@@ -364,6 +378,7 @@
     "links": []
   },
   "c-working-partner": {
+    "short": "Working partner",
     "label": "Working partner's extra share",
     "kind": "concept",
     "parent": "partnership",
@@ -372,6 +387,7 @@
     "links": []
   },
   "c-common-unit": {
+    "short": "Common unit",
     "label": "Rent shared by animals: one common unit",
     "kind": "concept",
     "parent": "partnership",
@@ -380,6 +396,7 @@
     "links": []
   },
   "q-pt-two": {
+    "short": "Two partners",
     "label": "Two partners: share or total profit",
     "kind": "qtype",
     "parent": "c-capital-time",
@@ -389,6 +406,7 @@
     "priority": "high"
   },
   "q-pt-late": {
+    "short": "Joins late",
     "label": "Partners join at different times",
     "kind": "qtype",
     "parent": "c-late-entry",
@@ -398,6 +416,7 @@
     "priority": "high"
   },
   "q-pt-working": {
+    "short": "Extra % for work",
     "label": "One partner works for extra %",
     "kind": "qtype",
     "parent": "c-working-partner",
@@ -407,6 +426,7 @@
     "priority": "medium"
   },
   "q-pt-pasture": {
+    "short": "Pasture / rent",
     "label": "Pasture / rent with animal equivalence",
     "kind": "qtype",
     "parent": "c-common-unit",

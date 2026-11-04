@@ -1,0 +1,8 @@
+{
+  "topics": {
+    "partnership": {
+      "pyqs": "pyqs/partnership.json",
+      "practice": "practice/partnership.json"
+    }
+  }
+}

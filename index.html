@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A growing knowledge web of SSC CGL Quant: topics, concepts and question types, each with formulas, fast methods, past questions and practice.">
+<title>Maths Web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a radial web (centre → subjects → topics → concepts → question types) beside a reading panel; stacks on phones. */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --sunk:#eaeef3; --ink:#18212c; --muted:#5a6575; --line:#d6dce5;
+  --accent:#2448c8; --new:#c97a06; --new-soft:#fbefd9; --hi:#b3261e; --hi-soft:#fde4e1;
+  --ok:#1d7a46; --ok-soft:#e3f4ea;
+  --display:"Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0e131a; --surface:#151c25; --sunk:#1b2430; --ink:#e4e9f0; --muted:#97a2b2; --line:#2a3441;
+  --accent:#86a2ff; --new:#ffb84a; --new-soft:#3a2b10; --hi:#ff8a80; --hi-soft:#3d1714;
+  --ok:#6fd39b; --ok-soft:#143325; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0e131a; --surface:#151c25; --sunk:#1b2430; --ink:#e4e9f0; --muted:#97a2b2; --line:#2a3441;
+  --accent:#86a2ff; --new:#ffb84a; --new-soft:#3a2b10; --hi:#ff8a80; --hi-soft:#3d1714;
+  --ok:#6fd39b; --ok-soft:#143325; color-scheme:dark }
+
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--display)}
+.page{padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:14px 20px;display:flex;flex-direction:column;gap:12px;min-height:100%;box-sizing:border-box}
+
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 20px}
+.brand h1{margin:0;font-size:26px;font-weight:800;letter-spacing:-0.015em;line-height:1.1;text-wrap:balance}
+.brand p{margin:4px 0 0;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.stats{display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.stats b{color:var(--ink);font-weight:500}
+
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.search{flex:1 1 260px;min-width:0;position:relative}
+.search input{width:100%;box-sizing:border-box;font:inherit;font-size:15px;padding:9px 12px 9px 34px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2}
+.search input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,440px);gap:14px;flex:1;min-height:0}
+.web-wrap{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;height:min(80vh,900px);min-height:420px}
+#web{width:100%;height:100%;display:block;cursor:grab;touch-action:none}
+#web:active{cursor:grabbing}
+.web-note{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--muted);font-size:15px;line-height:1.5;pointer-events:none}
+.web-note[hidden]{display:none!important}
+.zoom{position:absolute;right:10px;bottom:10px;display:flex;flex-direction:column;gap:6px}
+.zoom button{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 17px/1 var(--display);cursor:pointer}
+.zoom button:focus-visible{outline:2px solid var(--accent)}
+.key{position:absolute;left:10px;bottom:10px;display:flex;flex-wrap:wrap;gap:4px 12px;font-family:var(--mono);font-size:11px;color:var(--muted);background:color-mix(in srgb, var(--surface) 88%, transparent);padding:6px 8px;border-radius:6px;max-width:calc(100% - 70px)}
+.key span{display:inline-flex;align-items:center;gap:5px}
+.key i{display:inline-block;width:10px;height:10px;border-radius:50%}
+.key .k-new{border:2px solid var(--new);width:8px;height:8px}
+.key .k-link{width:16px;height:0;border-radius:0;border-top:1.5px dashed var(--muted)}
+
+/* SVG */
+.lk{fill:none;stroke-opacity:.42}
+.xlk{fill:none;stroke:var(--muted);stroke-dasharray:3 4;stroke-opacity:.55;stroke-width:1.2}
+.nd{cursor:pointer}
+.nd circle.dot{stroke:var(--surface);stroke-width:1.5}
+.nd .ring{fill:none;stroke:var(--new);stroke-width:2}
+.nd text{font-family:var(--display);fill:var(--ink);paint-order:stroke;stroke:var(--surface);stroke-width:3px;stroke-linejoin:round}
+.nd.br text{font-size:11.5px;font-weight:500}
+.nd.jn text{font-size:13.5px;font-weight:800;letter-spacing:.01em}
+.nd.hub text{font-size:11px;font-weight:800;fill:var(--surface);stroke:none}
+.nd:focus{outline:none}
+.nd:focus-visible circle.dot{stroke:var(--accent);stroke-width:3}
+.nd.empty{opacity:.28}
+.dimmed .nd:not(.lit){opacity:.16}
+.dimmed .lk:not(.lit){stroke-opacity:.08}
+.dimmed .xlk:not(.lit){stroke-opacity:.08}
+.xlk.lit{stroke:var(--accent);stroke-opacity:.9;stroke-dasharray:none;stroke-width:1.6}
+.nd.sel circle.dot{stroke:var(--ink);stroke-width:2.5}
+.nd.hit circle.dot{stroke:var(--accent);stroke-width:3}
+
+/* Panel */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 18px 22px;overflow:auto;height:min(80vh,900px);min-height:420px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;min-width:0}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
+.panel h2{margin:0;font-size:22px;font-weight:800;letter-spacing:-0.01em;line-height:1.15;text-wrap:balance}
+.panel h3{margin:0;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+.panel p.lead{margin:0;font-family:var(--body);font-size:15.5px;line-height:1.5;color:var(--ink)}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:12.5px;color:var(--muted)}
+.crumbs button{font:inherit;color:var(--accent);background:none;border:0;padding:0;cursor:pointer}
+.crumbs button:hover{text-decoration:underline}
+.meta-row{display:flex;flex-wrap:wrap;gap:4px 14px;font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:13px;display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-align:left}
+.chip:hover{border-color:var(--muted)}
+.chip:focus-visible{outline:2px solid var(--accent)}
+.chip i{width:8px;height:8px;border-radius:50%;flex:none}
+.chip .n{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.chip .nw{font-family:var(--mono);font-size:10px;color:var(--new);font-weight:500}
+.section{display:flex;flex-direction:column;gap:8px}
+.date-h{font-family:var(--mono);font-size:12px;color:var(--muted);padding-bottom:4px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+.tag{padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.03em}
+.tag.bg{border:1px dashed var(--line);color:var(--muted)}
+.tag.fresh{background:var(--new-soft);color:var(--new)}
+.tag.p-high{background:var(--hi-soft);color:var(--hi)}
+.tag.p-medium{border:1px solid var(--line);color:var(--ink)}
+.tag.p-low{color:var(--muted);opacity:.8}
+.empty-msg{font-family:var(--body);font-size:15px;color:var(--muted);line-height:1.5;margin:0}
+.btn-link{font:inherit;font-size:13px;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;align-self:flex-start}
+.jgroup{display:flex;flex-direction:column;gap:6px;padding-top:4px}
+.jgroup h3 i{width:10px;height:10px;border-radius:50%}
+
+/* maths content */
+.formula{border:1px solid var(--line);border-radius:6px;padding:9px 11px;display:flex;flex-direction:column;gap:3px;background:var(--sunk)}
+.formula .tx{font:500 13px/1.5 var(--mono);overflow-wrap:anywhere}
+.formula .nt{font-family:var(--body);font-size:14px;color:var(--muted);line-height:1.45}
+.ledger{display:grid;grid-template-columns:5.6rem minmax(0,1fr);gap:10px 12px;margin:0}
+.ledger dt{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);padding-top:3px}
+.ledger dt.trap{color:var(--hi)}
+.ledger dd{margin:0;min-width:0;font-family:var(--body);font-size:15px;line-height:1.5}
+.ledger ul{margin:0;padding-left:1.1rem;display:flex;flex-direction:column;gap:4px}
+.q{border:1px solid var(--line);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:9px}
+.q .src{font:500 12px var(--mono);color:var(--accent)}
+.q .src a{color:inherit}
+.q p{margin:0;font-family:var(--body);font-size:15.5px;line-height:1.5}
+.opts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr));gap:6px}
+.opts li,.opts button.opt{font:500 13px var(--mono);border:1px solid var(--line);border-radius:6px;padding:6px 9px;display:flex;gap:7px;min-width:0;background:var(--surface);color:var(--ink);text-align:left}
+.opts li span,.opts button.opt span{color:var(--muted)}
+.opts button.opt{cursor:pointer}
+.opts button.opt:hover{border-color:var(--muted)}
+.opts button.opt:focus-visible{outline:2px solid var(--accent)}
+.opts button.opt.right{background:var(--ok-soft);border-color:var(--ok)}
+.opts button.opt.wrong{background:var(--hi-soft);border-color:var(--hi)}
+.opts button.opt[disabled]{cursor:default}
+details summary{cursor:pointer;font-size:13px;color:var(--accent);font-weight:600}
+details[open] summary{margin-bottom:8px}
+.sol{display:flex;flex-direction:column;gap:6px;font-family:var(--body);font-size:15px}
+.sol .key-a{font:600 13px var(--mono);color:var(--ok)}
+.sol ol{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:4px}
+.lv{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lv.harder{color:var(--hi)}
+.why{font-family:var(--body);font-size:14.5px;color:var(--muted);margin:0}
+.rows{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.rows li{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.rows li:last-child{border-bottom:0}
+.rows .ref{font:500 12px var(--mono);color:var(--accent)}
+.rows .ans{font:500 12.5px var(--mono);color:var(--ink)}
+.rows .ref a{color:inherit}
+.note{font-family:var(--body);font-size:14px;color:var(--muted);border-left:2px solid var(--line);padding-left:10px;margin:0;line-height:1.5}
+
+@media (max-width: 900px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .web-wrap{height:62vh;min-height:360px}
+  .panel{height:auto;min-height:0;overflow:visible}
+  .brand h1{font-size:22px}
+}
+@media (max-width: 520px){ .ledger{grid-template-columns:1fr;gap:2px} .ledger dd{margin-bottom:8px} }
+.nav{display:flex;gap:14px;margin-top:6px;font:500 13px var(--mono)}
+.nav a{color:var(--accent);text-decoration:none}
+.nav a:hover{text-decoration:underline}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+</style>
+<style id="jstyles"></style>
+</head>
+<body>
+<div class="page">
+<header class="top">
+    <div class="brand">
+      <h1>Maths Web</h1>
+      <p id="sub">Loading the web…</p>
+      <nav class="nav" aria-label="Site"><a href="https://github.com/underwater001/maths-web">GitHub</a></nav>
+    </div>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="controls">
+    <label class="search" for="q">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Search formulas, tricks, question types, topics" autocomplete="off" aria-label="Search">
+    </label>
+    <div class="seg" role="group" aria-label="Show" id="show" title="Which topics to highlight on the web">
+      <button type="button" data-v="all" aria-pressed="true">All topics</button>
+      <button type="button" data-v="pyq" aria-pressed="false">Has past questions</button>
+      <button type="button" data-v="built" aria-pressed="false">Fully built</button>
+    </div>
+  </div>
+
+  <main class="layout">
+    <section class="web-wrap" aria-label="Knowledge web">
+      <svg id="web" role="img" aria-label="Radial web of maths topics, concepts and question types"></svg>
+      <div class="web-note" id="note">Loading the web…</div>
+      <div class="key" aria-hidden="true">
+        <span><i class="k-new"></i>fully built</span>
+        <span><i class="k-link"></i>related topics</span>
+        <span>dot size = past questions</span>
+      </div>
+      <div class="zoom">
+        <button type="button" id="zin" aria-label="Zoom in">+</button>
+        <button type="button" id="zout" aria-label="Zoom out">−</button>
+        <button type="button" id="zfit" aria-label="Fit whole web" style="font-size:13px">⤢</button>
+      </div>
+    </section>
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+(function(){
+const S = { nodes:new Map(), formulas:[], methods:{}, idx:[], pyqs:[], practice:[], papers:[], show:'all', q:'', sel:null, status:'loading', loaded:false, fitted:false,
+            cnt:new Map(), built:new Set() };
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const md = s => esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+const plural = (n,w) => n + ' ' + w + (n===1?'':(/(ch|sh|s|x)$/.test(w)?'es':'s'));
+const LAYERS = [['standard','Standard'],['fast','Fast'],['ultra','Ultra-calc'],['eliminate','Eliminate']];
+
+/* ---------- derived data ---------- */
+function parentOf(n){ const p = n && n.parent; return (p && p !== 'hub' && S.nodes.has(p)) ? p : 'hub'; }
+function junctionOf(id){ let cur = S.nodes.get(id), guard = 0; while(cur && parentOf(cur) !== 'hub' && guard++ < 20) cur = S.nodes.get(parentOf(cur)); return cur ? cur.id : null; }
+function color(id){ const j = junctionOf(id); return j ? `var(--j-${j})` : 'var(--muted)'; }
+function kidsOf(id){ return [...S.nodes.values()].filter(m => parentOf(m)===id).sort((a,b)=>(a.order??999)-(b.order??999)||a.label.localeCompare(b.label)); }
+function descendants(id){ const out = new Set([id]); let added = true; while(added){ added=false; for(const n of S.nodes.values()){ if(!out.has(n.id) && out.has(parentOf(n))){ out.add(n.id); added=true; } } } return out; }
+function linksOf(id){ const s = new Set(); const n = S.nodes.get(id); (n && n.links || []).forEach(x => S.nodes.has(x) && s.add(x)); for(const m of S.nodes.values()) if((m.links||[]).includes(id)) s.add(m.id); s.delete(id); return s; }
+function paper(id){ return S.papers.find(p => p.id === id); }
+function short(pid){ return 'S' + String(pid).slice(-1); }
+function derive(){
+  S.cnt = new Map();
+  for (const n of S.nodes.values()){
+    let c = 0;
+    if (n.kind === 'qtype') c = S.pyqs.filter(p => p.qtype === n.id).length;
+    else if (n.kind === 'topic' && !kidsOf(n.id).length) c = S.idx.filter(r => r.topic === n.id).length;
+    S.cnt.set(n.id, c);
+  }
+  S.built = new Set();
+  for (const n of S.nodes.values()) if (n.kind === 'qtype'){ let cur = n, g = 0; while (cur && g++ < 20){ S.built.add(cur.id); const p = parentOf(cur); if (p === 'hub') break; cur = S.nodes.get(p); } }
+}
+function subCount(id){ let t = S.cnt.get(id)||0; kidsOf(id).forEach(k => t += subCount(k.id)); return t; }
+function passes(id){ const n = S.nodes.get(id); if (!n || parentOf(n)==='hub') return true;
+  if (S.show === 'pyq') return subCount(id) > 0; if (S.show === 'built') return S.built.has(id); return true; }
+function q(){ return S.q.toLowerCase(); }
+function nodeHit(n){ return S.q && n.label.toLowerCase().includes(q()); }
+
+/* ---------- junction colours (stored hue per subject keeps colours stable as the web grows) ---------- */
+function paintJunctions(){
+  const js = [...S.nodes.values()].filter(n => parentOf(n)==='hub').sort((a,b)=>(a.order??99)-(b.order??99));
+  let light='', dark='';
+  js.forEach((j,i) => { const h = Number.isFinite(j.hue) ? j.hue : Math.round((250 + i*360/Math.max(js.length,1))%360);
+    light += `--j-${j.id}:oklch(0.56 0.15 ${h});`; dark += `--j-${j.id}:oklch(0.78 0.12 ${h});`; });
+  $('jstyles').textContent = `:root{${light}} @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){${dark}}} :root[data-theme="dark"]{${dark}}`;
+}
+
+/* ---------- web ---------- */
+const svg = d3.select('#web');
+const g = svg.append('g');
+const zoom = d3.zoom().scaleExtent([0.25,5]).on('zoom', e => g.attr('transform', e.transform));
+svg.call(zoom).on('dblclick.zoom', null);
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+$('zin').onclick = () => svg.transition().duration(reduce?0:250).call(zoom.scaleBy, 1.35);
+$('zout').onclick = () => svg.transition().duration(reduce?0:250).call(zoom.scaleBy, 1/1.35);
+$('zfit').onclick = () => fit(true);
+svg.on('click', e => { if (e.target === svg.node()) select(null); });
+
+let layoutPts = new Map();
+function buildHierarchy(){
+  const kids = new Map();
+  for (const n of S.nodes.values()){ const p = parentOf(n); if(!kids.has(p)) kids.set(p, []); kids.get(p).push(n); }
+  const sortK = a => a.sort((x,y)=>(x.order??999)-(y.order??999) || String(x.label).localeCompare(String(y.label)));
+  const make = id => ({ id, children: sortK(kids.get(id)||[]).map(n => make(n.id)) });
+  return d3.hierarchy(make('hub'));
+}
+function drawWeb(){
+  g.selectAll('*').remove();
+  if (!S.nodes.size){ return; }
+  const root = buildHierarchy();
+  const leaves = root.leaves().length;
+  const maxDepth = d3.max(root.descendants(), d => d.depth) || 1;
+  const R = Math.max(400, leaves * 24 / (2*Math.PI));
+  d3.tree().size([2*Math.PI, R]).separation((a,b) => (a.parent===b.parent?1:1.8)/Math.min(Math.max(a.depth,1),2))(root);
+  const r1 = R*0.38;
+  root.each(d => { d.y = d.depth===0 ? 0 : d.depth===1 ? r1 : r1 + (d.depth-1)*((R-r1)/Math.max(maxDepth-1,1)); });
+  const pt = d => [d.y*Math.sin(d.x), -d.y*Math.cos(d.x)];
+  layoutPts = new Map(root.descendants().map(d => [d.data.id, {x:d.x, y:d.y, p:pt(d), depth:d.depth}]));
+
+  const sub = new Map(); root.eachAfter(d => { let c = S.cnt.get(d.data.id)||0; (d.children||[]).forEach(k => c += sub.get(k.data.id)); sub.set(d.data.id, c); });
+  const hits = new Set(); if (S.q) for (const n of S.nodes.values()) if (nodeHit(n)) hits.add(n.id);
+
+  g.append('g').selectAll('path').data(root.links()).join('path')
+    .attr('class', d => 'lk lk-' + d.target.data.id)
+    .attr('d', d3.linkRadial().angle(d=>d.x).radius(d=>d.y))
+    .attr('stroke', d => d.source.depth===0 ? 'var(--line)' : color(d.target.data.id))
+    .attr('stroke-width', d => d.source.depth===0 ? 2 : 1 + Math.min(4, Math.sqrt(sub.get(d.target.data.id)||0)*0.6));
+
+  const xl = []; const seen = new Set();
+  for (const n of S.nodes.values()) for (const t of (n.links||[])){
+    if (!layoutPts.has(n.id) || !layoutPts.has(t)) continue;
+    const k = [n.id,t].sort().join('|'); if (seen.has(k)) continue; seen.add(k); xl.push({a:n.id,b:t});
+  }
+  g.append('g').selectAll('path').data(xl).join('path')
+    .attr('class', d => `xlk x-${d.a} x-${d.b}`)
+    .attr('d', d => { const A = layoutPts.get(d.a).p, B = layoutPts.get(d.b).p; const c = [(A[0]+B[0])*0.28, (A[1]+B[1])*0.28]; return `M${A[0]},${A[1]} Q${c[0]},${c[1]} ${B[0]},${B[1]}`; });
+
+  const node = g.append('g').selectAll('g').data(root.descendants()).join('g')
+    .attr('class', d => { const id=d.data.id; const c=['nd', d.depth===0?'hub':d.depth===1?'jn':'br'];
+      if (d.depth>1 && !passes(id)) c.push('empty'); if (hits.has(id)) c.push('hit'); return c.join(' '); })
+    .attr('data-id', d => d.data.id)
+    .attr('transform', d => { const [x,y] = pt(d); return `translate(${x},${y})`; })
+    .attr('tabindex', d => d.depth===0 ? null : 0)
+    .attr('role', d => d.depth===0 ? null : 'button')
+    .attr('aria-label', d => { if(d.depth===0) return null; const n=S.nodes.get(d.data.id); return `${n.label}, ${plural(sub.get(d.data.id)||0,'past question')}`; })
+    .on('click', (e,d) => { e.stopPropagation(); select(d.depth===0 ? null : d.data.id);
+      if (window.innerWidth <= 900) $('panel').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'}); })
+    .on('keydown', (e,d) => { if (e.key==='Enter' || e.key===' '){ e.preventDefault(); select(d.data.id); } });
+
+  const rad = d => d.depth===0 ? 24 : d.depth===1 ? 11 : Math.min(13, 4 + Math.sqrt(sub.get(d.data.id)||0)*1.9);
+  node.filter(d => d.depth>1 && S.built.has(d.data.id))
+    .append('circle').attr('class','ring').attr('r', d => rad(d)+3.5);
+  node.append('circle').attr('class','dot').attr('r', rad)
+    .attr('fill', d => d.depth===0 ? 'var(--ink)' : color(d.data.id));
+  node.append('title').text(d => d.depth===0 ? 'SSC CGL Quant' : `${S.nodes.get(d.data.id).label} · ${plural(sub.get(d.data.id)||0,'past question')}`);
+
+  node.filter(d=>d.depth===0).append('text').attr('text-anchor','middle').attr('dy','0.35em').text('Quant');
+  node.filter(d=>d.depth===1).append('text')
+    .attr('dy','0.35em')
+    .attr('transform', d => { const deg = d.x*180/Math.PI - 90; return d.x < Math.PI ? `rotate(${deg})` : `rotate(${deg+180})`; })
+    .attr('x', d => (d.x < Math.PI ? -1 : 1) * 16)
+    .attr('text-anchor', d => d.x < Math.PI ? 'end' : 'start')
+    .text(d => S.nodes.get(d.data.id).short || S.nodes.get(d.data.id).label);
+  // leaf labels run outward; labels of nodes that have children run inward so they never sit on their own branches
+  node.filter(d=>d.depth>1).append('text')
+    .attr('dy','0.32em')
+    .attr('transform', d => { const deg = d.x*180/Math.PI - 90; return d.x < Math.PI ? `rotate(${deg})` : `rotate(${deg+180})`; })
+    .attr('x', d => (d.x < Math.PI ? 1 : -1) * (d.children ? -1 : 1) * (rad(d)+5))
+    .attr('text-anchor', d => (d.x < Math.PI) !== !!d.children ? 'start' : 'end')
+    .text(d => S.nodes.get(d.data.id).short || S.nodes.get(d.data.id).label);
+
+  applyHighlight();
+  if (!S.fitted){ fit(false); S.fitted = true; }
+}
+function applyHighlight(){
+  const lit = new Set();
+  if (S.sel && S.nodes.has(S.sel)){
+    let cur = S.sel, guard=0; while(cur && cur!=='hub' && guard++<20){ lit.add(cur); cur = parentOf(S.nodes.get(cur)); }
+    descendants(S.sel).forEach(x => lit.add(x)); linksOf(S.sel).forEach(x => lit.add(x)); lit.add('hub');
+  } else if (S.q){
+    g.selectAll('.nd.hit').each(function(){ lit.add(this.getAttribute('data-id')); }); lit.add('hub');
+    [...lit].forEach(id => { let cur = S.nodes.get(id), guard=0; while(cur && guard++<20){ lit.add(cur.id); const p = parentOf(cur); if(p==='hub') break; cur = S.nodes.get(p); } });
+  }
+  g.classed('dimmed', lit.size > 0);
+  g.selectAll('.nd').classed('lit', function(){ return lit.has(this.getAttribute('data-id')); }).classed('sel', function(){ return this.getAttribute('data-id')===S.sel; });
+  g.selectAll('.lk').classed('lit', d => lit.has(d.target.data.id) && lit.has(d.source.data.id));
+  g.selectAll('.xlk').classed('lit', d => S.sel && (d.a===S.sel || d.b===S.sel));
+}
+function fit(animate){
+  const el = svg.node(); const b = g.node().getBBox(); const w = el.clientWidth, h = el.clientHeight;
+  if (!b.width || !w || !h) return;
+  const s = Math.min(w/(b.width+30), h/(b.height+30), 2.2);
+  const t = d3.zoomIdentity.translate(w/2 - s*(b.x+b.width/2), h/2 - s*(b.y+b.height/2)).scale(s);
+  (animate && !reduce ? svg.transition().duration(400) : svg).call(zoom.transform, t);
+}
+
+/* ---------- panel building blocks ---------- */
+function chip(id, count, flag){
+  const n = S.nodes.get(id); if(!n) return '';
+  return `<button type="button" class="chip" data-go="${esc(id)}"><i style="background:${color(id)}"></i>${esc(n.label)}${count!=null?` <span class="n">${count}</span>`:''}${flag?` <span class="nw">${flag}</span>`:''}</button>`;
+}
+function formulaHtml(f){ return `<div class="formula"><span class="tx">${esc(f.text)}</span>${f.note?`<span class="nt">${esc(f.note)}</span>`:''}</div>`; }
+function methodHtml(qid){
+  const m = S.methods[qid]; if (!m) return '';
+  const rows = LAYERS.map(([k,l]) => `<dt>${l}</dt><dd>${esc(m[k])}</dd>`).join('')
+    + `<dt class="trap">Traps</dt><dd><ul>${(m.traps||[]).map(t=>`<li>${esc(t)}</li>`).join('')}</ul></dd>`;
+  return `<dl class="ledger">${rows}</dl>`;
+}
+function srcLink(pid, qno){ const p = paper(pid); const t = `${short(pid)} Q${qno}`; return p && p.link ? `<a href="${esc(p.link)}" target="_blank" rel="noopener" title="Open the source paper">${t}</a>` : t; }
+function pyqHtml(x){
+  const opts = x.options.map((o,i)=>`<li><span>(${'abcd'[i]})</span>${esc(o)}</li>`).join('');
+  const steps = x.solution.map(s=>`<li>${esc(s)}</li>`).join('');
+  return `<div class="q"><span class="src">${srcLink(x.paper, x.qno)} · SSC CGL Tier 1 · 12 Sep 2025</span><p>${esc(x.text)}</p><ul class="opts">${opts}</ul>
+    <details><summary>Show solution</summary><div class="sol"><span class="key-a">Answer (${x.key}) ${esc(x.options['abcd'.indexOf(x.key)])}</span><ol>${steps}</ol></div></details></div>`;
+}
+function practiceHtml(p){
+  const btn = p.options.map((o,i)=>`<button type="button" class="opt" data-k="${'abcd'[i]}"><span>(${'abcd'[i]})</span>${esc(o)}</button>`).join('');
+  return `<div class="q pq" data-key="${p.key}"><span class="lv ${p.level}">${p.level==='harder'?'One level harder':'Same level'}</span><p>${esc(p.text)}</p><div class="opts">${btn}</div><p class="why" hidden>${esc(p.solution)}</p></div>`;
+}
+function idxRows(rows){
+  return `<ul class="rows">${rows.map(r => `<li><span class="ref">${srcLink(r.paper, r.qno)}</span><span class="ans">answer ${esc(r.answer)}</span>${r.qtype?`<button type="button" class="chip" data-go="${esc(r.qtype)}"><i style="background:${color(r.qtype)}"></i>${esc(S.nodes.get(r.qtype).label)}</button>`:''}</li>`).join('')}</ul>`;
+}
+const kindName = n => parentOf(n)==='hub' ? 'Subject' : ({topic:'Topic', concept:'Concept', qtype:'Question type'}[n.kind] || 'Topic');
+
+/* ---------- panel ---------- */
+function renderPanel(){
+  const P = $('panel');
+  if (S.status==='none'){ P.innerHTML = `<p class="eyebrow">Couldn't load</p><h2>The data files didn't load</h2><p class="lead">Check your connection and refresh the page.</p>`; return; }
+  if (!S.loaded){ P.innerHTML = `<p class="eyebrow">Loading</p><p class="empty-msg">Fetching subjects, topics and questions…</p>`; return; }
+  if (S.q) return renderSearch(P);
+  if (S.sel && S.nodes.has(S.sel)) return renderNode(P);
+  renderOverview(P);
+}
+function renderOverview(P){
+  const topics = [...S.nodes.values()].filter(n => n.kind==='topic');
+  const built = topics.filter(t => S.built.has(t.id));
+  const todo = topics.filter(t => !S.built.has(t.id) && subCount(t.id) > 0).sort((a,b)=>subCount(b.id)-subCount(a.id));
+  P.innerHTML = `
+    <p class="eyebrow">SSC CGL Tier 1 and Tier 2 · Quant</p>
+    <h2>${plural(built.length,'topic')} fully built</h2>
+    <div class="meta-row"><span>${todo.length} more ${todo.length===1?'topic has':'topics have'} past questions waiting</span><span>${S.idx.length} past questions filed</span><span>${S.idx.length} of ${S.idx.length} answers recomputed in code</span></div>
+    <p class="lead">Each dot is a topic, a concept or a question type. Click one to see its formulas, the standard, fast and ultra-calc methods, how to eliminate options, past questions and practice. Dashed lines join related topics.</p>
+    <div class="section"><p class="eyebrow">Built</p><div class="chips">${built.map(t=>chip(t.id, subCount(t.id))).join('') || '<p class="empty-msg">Nothing built yet.</p>'}</div></div>
+    <div class="section"><p class="eyebrow">Next, by number of past questions</p><div class="chips">${todo.map(t=>chip(t.id, subCount(t.id))).join('')}</div></div>
+    <div class="section"><p class="eyebrow">Sources</p><ul class="rows">${S.papers.map(p=>`<li><span class="ref">${p.link?`<a href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.exam)} · ${p.date} · shift ${p.shift}</a>`:esc(p.exam)}</span><span class="ans">${esc(p.publisher)} similar paper · ${esc(p.quant)}</span></li>`).join('')}</ul></div>
+    <p class="note">These first papers are coaching-made similar papers, not the official CGL papers, so the counts show that publisher's style. Priorities stay provisional until official papers are added.</p>`;
+}
+function renderNode(P){
+  const id = S.sel, n = S.nodes.get(id); const desc = descendants(id); const kids = kidsOf(id);
+  const crumbs = []; let cur = parentOf(n), guard=0; while(cur!=='hub' && guard++<20){ crumbs.unshift(cur); cur = parentOf(S.nodes.get(cur)); }
+  const rel = [...linksOf(id)];
+  const total = subCount(id);
+  const isBuilt = S.built.has(id);
+  let body = '';
+  if (n.kind === 'concept'){
+    const fs = S.formulas.filter(f => f.node === id);
+    body += `<div class="section"><p class="eyebrow">Formulas</p>${fs.map(formulaHtml).join('')}</div>`;
+  } else if (n.kind === 'qtype'){
+    const m = S.methods[id] || {};
+    const fs = (m.formulas||[]).map(fid => S.formulas.find(f => f.id===fid)).filter(Boolean);
+    const qs = S.pyqs.filter(p => p.qtype===id), ps = S.practice.filter(p => p.qtype===id);
+    body += `<div class="section"><p class="eyebrow">Formulas used</p>${fs.map(formulaHtml).join('')}</div>`;
+    body += `<div class="section"><p class="eyebrow">How to solve</p>${methodHtml(id)}</div>`;
+    body += `<div class="section"><p class="eyebrow">Past questions</p>${qs.map(pyqHtml).join('')}</div>`;
+    body += `<div class="section"><p class="eyebrow">Practice · tap an answer</p>${ps.map(practiceHtml).join('')}</div>`;
+  } else if (n.kind === 'topic'){
+    const fs = S.formulas.filter(f => desc.has(f.node));
+    const rows = S.idx.filter(r => r.topic === id);
+    if (fs.length) body += `<div class="section"><p class="eyebrow">Formulas</p>${fs.map(formulaHtml).join('')}</div>`;
+    if (rows.length) body += `<div class="section"><p class="eyebrow">Past questions filed here</p>${idxRows(rows)}</div>`;
+    if (!isBuilt) body += `<p class="note">Not built yet. ${rows.length ? `${plural(rows.length,'past question')} are filed here and their answers are checked. ` : 'No past question has landed here yet. '}Ask Claude to build this topic and it will get formulas, question types, the four solving layers and practice, the way Partnership has.</p>`;
+  } else {
+    const topics = kids.filter(k => k.kind==='topic');
+    body += `<p class="note">${plural(topics.length,'topic')} in this subject. ${topics.filter(t=>S.built.has(t.id)).length} fully built.</p>`;
+  }
+  P.innerHTML = `
+    <div class="crumbs"><button type="button" data-go="">Web</button>${crumbs.map(c=>` › <button type="button" data-go="${esc(c)}">${esc(S.nodes.get(c).label)}</button>`).join('')}</div>
+    <div><p class="eyebrow" style="color:${color(id)}">${kindName(n)}</p><h2>${esc(n.label)}</h2></div>
+    ${n.summary ? `<p class="lead">${md(n.summary)}</p>` : ''}
+    <div class="meta-row"><span>${plural(total,'past question')}</span>${isBuilt?'<span>fully built</span>':''}${n.priority?`<span class="tag p-${esc(n.priority)}" title="Provisional: judged from similar papers only">${esc(n.priority)} priority</span>`:''}</div>
+    ${kids.length ? `<div class="section"><p class="eyebrow">${parentOf(n)==='hub'?'Topics':n.kind==='topic'?'Concepts':'Question types'}</p><div class="chips">${kids.map(k=>chip(k.id, subCount(k.id), S.built.has(k.id)&&k.kind==='topic'?'built':'')).join('')}</div></div>` : ''}
+    ${rel.length ? `<div class="section"><p class="eyebrow">Connected topics</p><div class="chips">${rel.map(r=>chip(r, subCount(r))).join('')}</div></div>` : ''}
+    ${body}
+    <button type="button" class="btn-link" data-go="">← Back to overview</button>`;
+}
+function renderSearch(P){
+  const t = q();
+  const nodes = [...S.nodes.values()].filter(n => n.label.toLowerCase().includes(t) || (n.summary||'').toLowerCase().includes(t));
+  const fs = S.formulas.filter(f => (f.text+' '+(f.note||'')).toLowerCase().includes(t));
+  const ms = Object.entries(S.methods).filter(([id,m]) => LAYERS.some(([k]) => (m[k]||'').toLowerCase().includes(t)) || (m.traps||[]).some(x => x.toLowerCase().includes(t)));
+  const qs = S.pyqs.filter(x => (x.text+' '+x.solution.join(' ')).toLowerCase().includes(t));
+  const total = nodes.length + fs.length + ms.length + qs.length;
+  P.innerHTML = `
+    <p class="eyebrow">Search</p>
+    <h2>${plural(total,'match')} for “${esc(S.q)}”</h2>
+    ${nodes.length ? `<div class="section"><p class="eyebrow">Topics and types</p><div class="chips">${nodes.slice(0,24).map(n=>chip(n.id, subCount(n.id))).join('')}</div></div>` : ''}
+    ${fs.length ? `<div class="section"><p class="eyebrow">Formulas</p>${fs.map(f=>formulaHtml(f)+`<div class="chips">${chip(f.node)}</div>`).join('')}</div>` : ''}
+    ${ms.length ? `<div class="section"><p class="eyebrow">Methods mentioning it</p><div class="chips">${ms.map(([id])=>chip(id)).join('')}</div></div>` : ''}
+    ${qs.length ? `<div class="section"><p class="eyebrow">Past questions</p>${qs.map(pyqHtml).join('')}</div>` : ''}
+    ${total ? '' : '<p class="empty-msg">Try a shorter word, a formula name, or a number.</p>'}`;
+}
+$('panel').addEventListener('click', e => {
+  const o = e.target.closest('button.opt');
+  if (o){ const card = o.closest('.pq'); if (card && !o.disabled){ const key = card.dataset.key;
+    card.querySelectorAll('button.opt').forEach(x => { x.disabled = true; if (x.dataset.k === key) x.classList.add('right'); });
+    if (o.dataset.k !== key) o.classList.add('wrong');
+    const w = card.querySelector('.why'); if (w) w.hidden = false; } return; }
+  const b = e.target.closest('[data-go]'); if(!b) return;
+  const id = b.getAttribute('data-go');
+  if (S.q && id){ S.q=''; $('q').value=''; drawWeb(); }
+  select(id || null);
+  $('panel').scrollTop = 0;
+});
+
+/* ---------- state changes ---------- */
+function select(id){
+  S.sel = id && S.nodes.has(id) ? id : null;
+  try { if (S.sel) history.replaceState(null,'','#'+S.sel); else history.replaceState(null,'',location.pathname+location.search); } catch(e){}
+  applyHighlight(); renderPanel();
+}
+window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (h !== (S.sel||'')) select(h||null); });
+$('show').addEventListener('click', e => { const b = e.target.closest('button'); if(!b) return;
+  S.show = b.dataset.v; [...$('show').querySelectorAll('button')].forEach(x => x.setAttribute('aria-pressed', String(x===b)));
+  drawWeb(); });
+let qt; $('q').addEventListener('input', e => { clearTimeout(qt); qt = setTimeout(() => { S.q = e.target.value.trim(); if(S.q) S.sel=null; drawWeb(); renderPanel(); }, 160); });
+
+function renderHeader(){
+  const js = [...S.nodes.values()].filter(n=>parentOf(n)==='hub').length;
+  const topics = [...S.nodes.values()].filter(n=>n.kind==='topic');
+  $('sub').textContent = S.status==='none' ? 'Data files did not load' : (S.loaded ? 'SSC CGL Tier 1 and Tier 2 Quant, built from past questions' : 'Loading the web…');
+  $('stats').innerHTML = S.nodes.size ? `<span><b>${js}</b> subjects</span><span><b>${topics.length}</b> topics</span><span><b>${topics.filter(t=>S.built.has(t.id)).length}</b> built</span><span><b>${S.idx.length}</b> past questions</span><span><b>${S.papers.length}</b> papers</span>` : '';
+  const note = $('note');
+  if (S.status==='none'){ note.hidden=false; note.textContent='The data files did not load. Refresh to try again.'; }
+  else if (!S.loaded){ note.hidden=false; note.textContent='Loading the web…'; }
+  else note.hidden = true;
+}
+function schedule(){ requestAnimationFrame(() => { derive(); paintJunctions(); renderHeader(); drawWeb();
+  const h = location.hash.slice(1); if (h && S.nodes.has(h) && !S.sel) { S.sel = h; applyHighlight(); }
+  renderPanel(); }); }
+let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => fit(false), 200); });
+
+renderHeader(); renderPanel();
+
+/* ---------- data ---------- */
+/* Reads the repo's own data files. data/manifest.json lists the per-topic files (pyqs/, practice/). */
+const get = async p => { const r = await fetch(p + '?v=' + Date.now(), {cache:'no-store'}); if (!r.ok) throw new Error(p + ' ' + r.status); return r.json(); };
+async function loadData(){
+  if (window.__DATA__) return window.__DATA__;
+  const [nodes, formulas, methods, idx, papers, manifest] = await Promise.all(['nodes','formulas','methods','pyq_index','papers','manifest'].map(n => get('data/' + n + '.json')));
+  const topicFiles = Object.values(manifest.topics || {});
+  const pyqs = (await Promise.all(topicFiles.map(t => get('data/' + t.pyqs)))).flat();
+  const practice = (await Promise.all(topicFiles.map(t => get('data/' + t.practice)))).flat();
+  return { nodes, formulas, methods, pyq_index: idx, papers, pyqs, practice };
+}
+(async () => {
+  try {
+    const d = await loadData();
+    S.nodes = new Map(Object.entries(d.nodes).map(([id,n]) => [id, Object.assign({id}, n)]));
+    S.formulas = d.formulas; S.methods = d.methods; S.idx = d.pyq_index; S.papers = d.papers; S.pyqs = d.pyqs; S.practice = d.practice;
+    S.loaded = true; S.status = 'ok';
+    schedule();
+  } catch (e) { console.error(e); S.status = 'none'; renderHeader(); renderPanel(); }
+})();
+})();
+</script>
+</body>
+</html>
