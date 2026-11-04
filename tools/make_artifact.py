@@ -4,7 +4,7 @@
     python3 tools/make_artifact.py OUT.html
 
 The page reads window.__DATA__[path] before it tries to fetch, so the inlined copy behaves exactly like the site.
-Only the data the page can ask for is inlined: core.json, every shard and every index file.
+Only the data the page can ask for is inlined: core.json, every shard and every paper file (the Sources page lists a paper's questions).
 """
 import json, os, re, sys
 
@@ -16,7 +16,7 @@ links = "".join(re.findall(r"<link [^>]*>", src))
 styles = "".join(re.findall(r"<style[^>]*>.*?</style>", src, flags=re.S))
 body = re.search(r"<body>(.*)</body>", src, flags=re.S).group(1)
 data = {}
-for sub in ("", "shards", "index"):
+for sub in ("", "shards", "papers"):
     d = os.path.join(ROOT, "data", sub)
     for f in sorted(os.listdir(d)):
         if f.endswith(".json") and (sub or f == "core.json"):

@@ -4,8 +4,9 @@ Same rules as every topic: PYQs are condensed restatements (own words, same numb
 recomputed; every wrong-option note carries a check; every practice answer is found by two methods.
 """
 from fractions import Fraction as F
+from math import gcd
 
-from bank import bound, mistake, pyq, prac
+from bank import APPROX, bound, exact2, fmt_value, inr, mistake, pyq, prac, variants
 
 TOPIC = "profit-loss"      # a topic node in data/tree.json
 PREFIX = "pl"              # practice ids pl-p01, pl-p02, ... (append new items at the end so old ids never move)
@@ -62,6 +63,7 @@ FORMULAS = [
 
 METHODS = {
     "q-pl-chain": {
+        "cue": 'A marked price above cost, one or more discounts (maybe a flat ₹ off), then the profit % or the cost price is asked.',
         "formulas": ["pl-f1", "pl-f2", "pl-f3", "pl-f4", "pl-f5"],
         "tech": ["multiplier", "estimate", "back-substitute", "cancel-first"],
         "standard": "Call the cost 100 (or CP). Marked price = CP × (1 + m). Selling price = marked price × (1 − d). Profit % = SP ÷ CP − 1. If the SP is given and the CP asked, divide the SP by the chain multiplier.",
@@ -80,6 +82,7 @@ METHODS = {
                        "Two successive discounts equal to one single discount."],
     },
     "q-pl-weight": {
+        "cue": "'Uses a weight of 900 g for 1 kg', or 'a weight 25% less than the actual', possibly with a markup or discount as well.",
         "formulas": ["pl-f6", "pl-f7", "pl-f1"],
         "tech": ["fraction-percent", "multiplier"],
         "standard": "Say the dealer charges for 1 kg but gives less. Money received for the goods he handed over, divided by what those goods cost him, gives the multiplier. With a discount, multiply by (1 − d) first.",
@@ -96,6 +99,7 @@ METHODS = {
                        "Cheating both ways: buys with a heavier weight and sells with a lighter one."],
     },
     "q-pl-free": {
+        "cue": "'Buy 3 get 1 free', units donated or given away, and the overall profit or loss on the whole lot.",
         "formulas": ["pl-f8", "pl-f13", "pl-f1"],
         "tech": ["sign-check", "multiplier", "estimate"],
         "standard": "Work out the cost of everything, then the money that came in: units sold × price after discount, spread over the free units (money = units handed out × price × n ÷ (n + f)). Overall % = (money in − cost) ÷ cost.",
@@ -112,6 +116,7 @@ METHODS = {
                        "Overall profit when only part of the stock is sold at a loss."],
     },
     "q-pl-rate": {
+        "cue": "Prices given as 'n for ₹x', or several kinds of goods mixed in a ratio and sold at one rate.",
         "formulas": ["pl-f9", "pl-f10", "pl-f1"],
         "tech": ["sign-check", "common-unit", "estimate"],
         "standard": "Find the cost per piece of each kind (x ÷ n). Mix in the given ratio to get the cost per piece of the mix. Find the selling price per piece. Profit % = SP ÷ CP − 1.",
@@ -127,6 +132,7 @@ METHODS = {
                        "Find the selling rate for a target profit."],
     },
     "q-pl-equal": {
+        "cue": "'Profit at one price equals the loss at another', or two articles sold at the same price with equal % profit and loss.",
         "formulas": ["pl-f11", "pl-f12", "pl-f1"],
         "tech": ["symmetry", "sign-check"],
         "standard": "Profit at SP₁ is SP₁ − CP; loss at SP₂ is CP − SP₂. Set them equal: CP = (SP₁ + SP₂) ÷ 2. Then find the result at any third price from that CP.",
@@ -265,7 +271,7 @@ def rupee_chain(cp, m, discounts):
     return sp
 
 
-def practice_items():
+def _hand_items():
     out = []
     # ---------------- markup, discount, profit ----------------
     out.append(prac("q-pl-chain", "same", "A trader marks goods 40% above cost and allows a discount of 10%. Find his profit %.",
@@ -337,4 +343,209 @@ def practice_items():
                     [(F(0), "Thought +20% and −20% cancel."), (F(4), "Got the size right but the sign wrong."), ((2 * sp_eq - cp1 - cp2) / (2 * sp_eq) * 100, "Took the loss on the total selling price instead of the total cost.")],
                     "Costs: 1,200 ÷ 1.2 = 1,000 and 1,200 ÷ 0.8 = 1,500. Total cost 2,500, receipts 2,400. Loss = 100 ÷ 2,500 = 4%.",
                     -F(20 * 20, 100), fmt="pctsigned", tech=["symmetry", "sign-check"]))
+    return out
+
+
+# ----------------------------------------------------------------------------------------------
+# Generated practice (see tools/bank.variants): clean numbers, three named-mistake traps, a second-method check.
+# ----------------------------------------------------------------------------------------------
+def pc(x):
+    """A fraction of 1 as a percentage Fraction."""
+    return F(x) * 100
+
+
+def _ap(v):
+    return "" if exact2(v) else APPROX
+
+
+def t_chain_profit(rng):
+    m, d = rng.choice([20, 25, 30, 40, 50, 60, 80]), rng.choice([5, 10, 12, 15, 20, 25])
+    ans = pc((1 + F(m, 100)) * (1 - F(d, 100)) - 1)
+    if ans <= 0: return None
+    item = rng.choice(["a fan", "a bag", "a pair of shoes", "a clock", "a mixer"])
+    return prac("q-pl-chain", "same", f"A shopkeeper marks {item} {m}% above its cost and allows a discount of {d}% on the marked price. Find his profit %." + _ap(ans),
+                ans, [(F(m - d), f"Subtracted the percentages: {m} − {d}."), (F(d * (100 + m), 100), f"Gave the discount amount as a % of cost: {d}% of {100 + m}."), (pc((1 + F(m, 100)) / (1 - F(d, 100)) - 1), "Divided by (1 − d) instead of multiplying.")],
+                f"Multiplier = {100 + m}% × {100 - d}% = {float((1 + F(m, 100)) * (1 - F(d, 100))):.4g}. Profit = {float(ans):.4g}%.", rupee_chain(1000, m, [d]) / 10 - 100, fmt="pct", tech=["multiplier", "fraction-percent"])
+
+
+def t_chain_flat(rng):
+    m, d, p = rng.choice([40, 50, 60, 70, 80]), rng.choice([10, 20, 25, 30]), rng.choice([5, 8, 10, 12, 15])
+    k = (1 + F(m, 100)) * (1 - F(d, 100)) - (1 + F(p, 100))
+    if k <= 0: return None
+    flat = rng.choice([60, 90, 120, 150, 180, 240, 300, 360, 450, 600]); cp = flat / k
+    if cp.denominator != 1 or cp % 50 or cp < 600: return None
+    ch = (1 + F(m, 100)) * (1 - F(d, 100)) - 1
+    return prac("q-pl-chain", "harder", f"A shopkeeper marks goods {m}% above cost, allows a {d}% discount and a further ₹{flat} off, and still makes a {p}% profit. Find the cost price.",
+                cp, [(F(flat) / ch, f"Forgot the {p}% profit that is still made."), (F(flat) / (F(m - d, 100)), f"Used {m} − {d} = {m - d}% as the margin."), (F(flat) / F(p, 100), f"Took the whole ₹{flat} as the {p}% profit.")],
+                f"SP = {1 + F(m, 100)} × {1 - F(d, 100)} × CP − {flat} = {float(ch + 1):.4g} CP − {flat}. Set it equal to {1 + F(p, 100)} CP. Then {float(k):.4g} CP = {flat}. CP = {int(cp)}. Check: {float(ch + 1):.4g} × {int(cp)} − {flat} is {1 + F(p, 100)} × {int(cp)}.",
+                cp if rupee_chain(cp, m, [d]) - flat == (1 + F(p, 100)) * cp else None, concepts=2, steps=5, tech=["back-substitute", "bounds"])
+
+
+def t_two_disc_cp(rng):
+    d1, d2, p = rng.choice([10, 20, 25]), rng.choice([5, 10, 15, 20]), rng.choice([5, 8, 10, 12, 20])
+    cp = rng.choice([800, 1000, 1200, 1500, 2000, 2400, 3000, 4000]); mp = F(cp) * (1 + F(p, 100)) / ((1 - F(d1, 100)) * (1 - F(d2, 100)))
+    if mp.denominator != 1 or mp % 10: return None
+    sp = mp * (1 - F(d1, 100)) * (1 - F(d2, 100))
+    return prac("q-pl-chain", "harder", f"The marked price of an article is {inr(mp)}. After successive discounts of {d1}% and {d2}% it is sold at a {p}% profit. Find the cost price.",
+                F(cp), [(mp * (1 - F(d1 + d2, 100)) / (1 + F(p, 100)), f"Added the discounts: {d1}% + {d2}% = {d1 + d2}%."), (sp * (1 + F(p, 100)), "Multiplied by (1 + p) instead of dividing."), (sp - F(p, 100) * sp, f"Took {p}% off the selling price instead of dividing by {1 + F(p, 100)}.")],
+                f"SP = {int(mp)} × {1 - F(d1, 100)} × {1 - F(d2, 100)} = {int(sp)}. SP is {100 + p}% of CP. CP = {int(sp)} ÷ {1 + F(p, 100)} = {cp}. The successive discounts together are {d1 + d2 - F(d1 * d2, 100)}%, not {d1 + d2}%. That is why CP is not the sum-based value.",
+                F(mp) * (F(100 - d1) * F(100 - d2) / 100) / (100 + p) * F(100, 100) * 1 if False else F(sp * 100, 100 + p), concepts=2, steps=5, tech=["multiplier", "cancel-first"])
+
+
+def t_weight_simple(rng):
+    w, p = rng.choice([800, 840, 880, 900, 920, 950, 960]), rng.choice([0, 0, 10, 20, 25])
+    ans = pc((1 + F(p, 100)) * F(1000, w) - 1); sh = F(1000 - w, 10)
+    nm = f"sells at cost price" if p == 0 else f"sells at a {p}% profit on the cost of what he hands over"
+    return prac("q-pl-weight", "same", f"A dishonest dealer uses a {w} g weight for 1 kg and {nm}. Find his overall gain %." + _ap(ans),
+                ans, [(F(p) + sh, "Added the shortage % to the profit % instead of multiplying."), (pc(F(1000 - w, w)) if p else pc(F(1000 - w, 1000)), "Ignored the profit." if p else "Divided by the true weight (1,000) instead of the false weight."), (pc((1 + F(p, 100)) * F(1000, w)), "Gave the multiplier as a percentage without taking off 100.")],
+                f"He charges for 1,000 g but hands over {w} g. Multiplier = {1 + F(p, 100)} × 1000/{w} = {float((1 + F(p, 100)) * F(1000, w)):.5g}. Gain = {float(ans):.4g}%.",
+                (F(1000 * (100 + p), 100) - F(w)) / F(w) * 100, fmt="pct", tech=["fraction-percent", "multiplier"])
+
+
+def t_weight_discount(rng):
+    m, d, w = rng.choice([10, 20, 25, 30, 40]), rng.choice([5, 10, 15, 20]), rng.choice([800, 840, 900, 920, 950])
+    mult = (1 + F(m, 100)) * (1 - F(d, 100)) * F(1000, w); ans = pc(mult - 1)
+    return prac("q-pl-weight", "harder", f"A dealer marks goods {m}% above cost, allows a {d}% discount and uses a {w} g weight for 1 kg. Find his profit %." + _ap(ans),
+                ans, [(pc((1 + F(m, 100)) * (1 - F(d, 100)) - 1), "Ignored the false weight."), (F(m - d) + F(1000 - w, 10), "Added the percentages."), (pc((1 + F(m, 100)) * (1 - F(d, 100)) * (1 + F(1000 - w, 1000)) - 1), "Took the shortage as a gain on the true weight instead of dividing by the false weight.")],
+                f"Markup and discount: {1 + F(m, 100)} × {1 - F(d, 100)} = {float((1 + F(m, 100)) * (1 - F(d, 100))):.4g}. False weight: × 1000/{w}. Multiplier = {float(mult):.5g}. Profit = {float(ans):.4g}%. The effects multiply; they do not add.",
+                (rupee_chain(1000, m, [d]) - F(w)) / F(w) * 100, fmt="pct", concepts=3, steps=5, tech=["multiplier", "fraction-percent"])
+
+
+def t_weight_both(rng):
+    b, s, p = rng.choice([1050, 1100, 1200]), rng.choice([800, 900, 950]), rng.choice([0, 0, 10, 20])
+    ans = pc((1 + F(p, 100)) * F(b, s) - 1)
+    at = "at cost price" if p == 0 else f"at a {p}% profit"
+    # second method: buy b-gram-for-1-kg lots until the sold kilos are whole, then count the rupees
+    lots = s // gcd(s, b) if False else s
+    cost = F(1000) * s                       # buy s lots of 'one kg' (each pays 1000, receives b grams)
+    grams = F(b) * s
+    sold_kg = grams / s                       # each sold 'kg' is s grams
+    receipts = sold_kg * F(1000) * (1 + F(p, 100))
+    return prac("q-pl-weight", "harder", f"A dishonest dealer buys with a {b} g weight for 1 kg and sells {at} using a {s} g weight for 1 kg. Find his gain %." + _ap(ans),
+                ans, [(pc(F(1000, s) * (1 + F(p, 100)) - 1), "Counted only the cheating on the selling side."), (pc(F(b - 1000, 1000)) + pc(F(1000 - s, 1000)) + F(p), "Added the buying and selling shortages."), (pc((1 + F(p, 100)) * F(s, b) - 1), "Inverted the ratio of the two weights.")],
+                f"Paying for 1,000 g he receives {b} g. Selling a 'kilo' he gives only {s} g. So the {b} g he receives is sold as {b}/{s} kilos. Multiplier = {1 + F(p, 100)} × {b}/{s} = {float((1 + F(p, 100)) * F(b, s)):.5g}. Gain = {float(ans):.4g}%.",
+                (receipts - cost) / cost * 100, fmt="pct", concepts=2, steps=5, heavy=True, tech=["multiplier", "fraction-percent"])
+
+
+def t_free_loss(rng):
+    n, f_, m, d = rng.choice([3, 4, 5, 6, 9, 10]), rng.choice([1, 2]), rng.choice([0, 20, 25, 30, 40]), rng.choice([0, 10, 20])
+    if m == 0 and d: return None
+    mult = (1 + F(m, 100)) * (1 - F(d, 100)) * F(n, n + f_); ans = pc(mult - 1)
+    if ans == 0: return None
+    pre = f"goods marked {m}% above cost, a {d}% discount, and the offer" if (m and d) else (f"goods marked {m}% above cost and the offer" if m else "goods at cost and the offer")
+    txt = f"A trader sells {pre} of buy {n}, get {f_} free. Find his overall profit or loss %." + _ap(ans)
+    free_unit = F(1) - F(n, n + f_)
+    base = (1 + F(m, 100)) * (1 - F(d, 100))
+    return prac("q-pl-free", "same", txt, ans,
+                [(pc(base - 1), "Ignored the free units."), (pc(base * (1 - F(f_, n)) - 1), f"Took the free units as {f_}/{n} off instead of {f_} in {n + f_}."), (pc(mult), "Gave the multiplier as a percentage without taking off 100.")],
+                f"Buyers pay for {n} and receive {n + f_}, so each unit brings {n}/{n + f_} of the price. Price per unit after markup and discount = {float(base):.4g} × cost. Multiplier = {float(base):.4g} × {n}/{n + f_} = {float(mult):.5g}. Result = {float(ans):.4g}%.",
+                (base * n * 7 - F(n + f_) * 7) / (F(n + f_) * 7) * 100, fmt="pctsigned", tech=["sign-check", "multiplier"])
+
+
+def t_free_donation(rng):
+    n, f_ = rng.choice([(10, 3), (5, 1), (4, 1), (3, 1), (9, 1)]); U = rng.choice([800, 1000, 1200, 1500, 2000]); don = rng.choice([100, 150, 200, 300])
+    cu = rng.choice([40, 50, 60, 80]); mp = rng.choice([70, 80, 100, 110, 120]); d = rng.choice([10, 15, 20])
+    out_units = U - don
+    if out_units % (n + f_): return None
+    payers = F(out_units * n, n + f_); recv = payers * mp * (1 - F(d, 100)); cost = F(U * cu)
+    ans = (recv - cost) / cost * 100
+    if ans == 0: return None
+    pu = mp * (1 - F(d, 100))
+    return prac("q-pl-free", "harder", f"A company makes {U} units at ₹{cu} each and donates {don} units. It sells the rest at a {d}% discount on the market price of ₹{mp} a unit, with {f_} units free for every {n} bought. All {U} units are distributed. Find the overall profit or loss %." + _ap(ans),
+                ans, [((F(U - don) * pu - cost) / cost * 100, "Ignored the free units."), ((F(U * n, n + f_) * pu - cost) / cost * 100, "Counted the donated units as sold as well."), ((F(out_units) * mp * F(n, n + f_) - cost) / cost * 100, "Forgot the discount.")],
+                f"Cost = {U} × {cu} = {int(cost)}. Donated units earn nothing, so {out_units} units reach buyers. Price after discount = {float(pu):.4g}. {f_} free with every {n}: buyers pay for {n} of every {n + f_}, so {float(payers):.5g} units are paid for. Receipts = {float(recv):.6g}. Result = {float(ans):.4g}%.",
+                (F(out_units) / (F(n + f_, n)) * pu - cost) / cost * 100, fmt="pctsigned", concepts=3, heavy=True, steps=5, tech=["sign-check", "multiplier", "estimate"])
+
+
+def t_rate_simple(rng):
+    n1, x1, n2, x2 = rng.choice([2, 3, 4, 5, 6, 8, 12]), rng.choice([10, 15, 20, 30, 40, 45]), rng.choice([2, 3, 4, 5, 6, 8, 10]), rng.choice([10, 15, 20, 30, 40, 45, 50])
+    ans = pc(F(x2, n2) / F(x1, n1) - 1)
+    if ans == 0 or abs(ans) > 120: return None
+    it = rng.choice(["pencils", "oranges", "eggs", "pens", "mangoes"])
+    L = n1 * n2 // gcd(n1, n2)
+    return prac("q-pl-rate", "same", f"{it.capitalize()} are bought at {n1} for ₹{x1} and sold at {n2} for ₹{x2}. Find the profit or loss %." + _ap(ans),
+                ans, [(pc(F(x1, n1) / F(x2, n2) - 1), "Divided by the selling price instead of the cost price."), (pc(F(x2, n2) / F(x1, n1)), "Gave SP ÷ CP as a percentage without taking off 100."), (pc(F(n1 - n2, n1)), "Compared the numbers of pieces instead of the prices.")],
+                f"Per piece: cost ₹{float(F(x1, n1)):.4g}, sale ₹{float(F(x2, n2)):.4g}. Take {L} pieces: cost {F(x1 * L, n1)}, sale {F(x2 * L, n2)}. Result = {float(ans):.4g}%.",
+                (F(x2 * L, n2) - F(x1 * L, n1)) / F(x1 * L, n1) * 100, fmt="pctsigned", tech=["common-unit"])
+
+
+def t_rate_mix(rng):
+    c1, c2 = rng.choice([20, 24, 30, 36, 40, 48]), rng.choice([30, 36, 42, 50, 60, 72]); r1, r2 = rng.choice([(3, 2), (2, 3), (1, 2), (2, 1), (3, 1), (1, 3), (4, 1)])
+    if c1 == c2: return None
+    avg = F(c1 * r1 + c2 * r2, r1 + r2); sp = rng.choice([x for x in range(25, 80) if x != avg])
+    ans = pc(F(sp) / avg - 1)
+    simple = F(c1 + c2, 2)
+    return prac("q-pl-rate", "harder", f"Two kinds of rice costing ₹{c1} and ₹{c2} a kg are mixed in the ratio {r1} : {r2} and sold at ₹{sp} a kg. Find the profit or loss %." + _ap(ans),
+                ans, [(pc(F(sp) / simple - 1), f"Used the simple average ₹{float(simple):.4g} instead of the weighted cost ₹{float(avg):.4g}."), (pc(F(sp) / F(c1 * r2 + c2 * r1, r1 + r2) - 1), "Mixed the ratio the wrong way round."), (F(sp) - avg, "Gave the profit per kg as a percentage.")],
+                f"Cost of the mix = ({c1}×{r1} + {c2}×{r2}) ÷ {r1 + r2} = ₹{float(avg):.5g} a kg. The mix always costs between ₹{min(c1, c2)} and ₹{max(c1, c2)}. Result = ({sp} − {float(avg):.5g}) ÷ {float(avg):.5g} = {float(ans):.4g}%.",
+                (F(sp) * (r1 + r2) - F(c1 * r1 + c2 * r2)) / F(c1 * r1 + c2 * r2) * 100, fmt="pctsigned", concepts=2, steps=5, tech=["sign-check", "estimate"])
+
+
+def t_rate_mix3(rng):
+    kinds = rng.sample([("wheat", 5, 40), ("rye", 6, 45), ("oats", 4, 36), ("maize", 8, 56), ("barley", 3, 27), ("millet", 10, 90)], 3)
+    w = rng.choice([(2, 2, 3), (1, 2, 3), (3, 1, 2), (2, 3, 4)]); ns, xs = rng.choice([3, 4, 5, 6]), rng.choice([20, 24, 25, 28, 30, 32, 40])
+    costs = [F(x, n) for _, n, x in kinds]; avg = sum(a * b for a, b in zip(w, costs)) / sum(w); sp = F(xs, ns)
+    ans = pc(sp / avg - 1)
+    if ans == 0 or abs(ans) > 150: return None
+    simple = sum(costs) / 3
+    L = 1
+    for d_ in [avg.denominator, sp.denominator]: L = L * d_ // gcd(L, d_)
+    return prac("q-pl-rate", "harder", f"A baker buys " + ", ".join(f"{k} at {n} for ₹{x}" for k, n, x in kinds) + f", mixes them in the ratio {w[0]} : {w[1]} : {w[2]} and sells all of it at {ns} for ₹{xs}. Find the profit or loss %." + _ap(ans),
+                ans, [(pc(sp / simple - 1), "Used the simple average of the three costs."), (pc(sp / (sum(a * b for a, b in zip(w[::-1], costs)) / sum(w)) - 1), "Used the ratio in the wrong order."), (pc(sp / max(costs) - 1), "Took the dearest cost as the cost of the mix.")],
+                "Cost per piece: " + ", ".join(f"{k} {float(c):.4g}" for (k, _, _), c in zip(kinds, costs)) + f". Mix of {sum(w)} pieces costs {float(avg * sum(w)):.5g}, i.e. {float(avg):.5g} each. Selling price per piece = {float(sp):.5g}. Multiply both by {L} to clear fractions: cost {avg * L}, sale {sp * L}. Result = {float(ans):.4g}%.",
+                ((sp * L) - (avg * L)) / (avg * L) * 100, fmt="pctsigned", concepts=2, heavy=True, steps=5, tech=["sign-check", "common-unit", "estimate"])
+
+
+def t_equal_cp(rng):
+    cp = rng.choice([1500, 2000, 2400, 2500, 3000, 3600, 4000, 5000, 6400]); k = rng.choice([100, 150, 200, 250, 300, 400, 500, 600])
+    if k >= cp: return None
+    s1, s2 = cp + k, cp - k
+    if rng.random() < 0.5:
+        return prac("q-pl-equal", "same", f"The profit made when an article is sold for ₹{s1} equals the loss made when it is sold for ₹{s2}. Find its cost price.",
+                    F(cp), [(F(s1), "Took the higher price."), (F(s2), "Took the lower price."), (F(s1 + s2), "Added the two prices without halving.")],
+                    f"₹{s1} − CP = CP − ₹{s2}, so CP = ({s1} + {s2}) ÷ 2 = ₹{cp}.", F(cp) if (s1 - cp) == (cp - s2) else None, tech=["symmetry"])
+    ans = F(k, cp) * 100
+    return prac("q-pl-equal", "same", f"The profit made at a selling price of ₹{s1} equals the loss made at ₹{s2}. Find the profit % at ₹{s1}." + _ap(ans),
+                ans, [(F(s1 - cp, s1) * 100, "Took the profit on the selling price instead of the cost."), (F(s1 - cp, s2) * 100, "Divided by the lower selling price."), (F(s1 - s2, cp) * 100, "Used the gap between the two prices as the profit.")],
+                f"CP = ({s1} + {s2}) ÷ 2 = {cp}. Profit = {s1} − {cp} = {k}. Profit % = {k} ÷ {cp} × 100 = {float(ans):.4g}%.", F(s1 - s2, s1 + s2) * 100, fmt="pct", tech=["symmetry", "fraction-percent"])
+
+
+def t_equal_target(rng):
+    cp = rng.choice([1500, 2000, 2400, 2500, 3000, 4000, 5000, 6400]); k = rng.choice([100, 150, 200, 250, 300, 400, 500]); p = rng.choice([5, 10, 12, 15, 20, 25])
+    if k >= cp: return None
+    s1, s2 = cp + k, cp - k; target = F(cp) * (1 + F(p, 100))
+    if target.denominator != 1: return None
+    return prac("q-pl-equal", "harder", f"The profit at a selling price of ₹{s1} equals the loss at ₹{s2}. At what selling price will there be a {p}% profit?",
+                target, [(F(s1) * (1 + F(p, 100)), f"Took {p}% on the higher price."), (F(cp) + p, f"Added {p} rupees instead of {p}%."), (F(s1 + s2) * (1 + F(p, 100)), "Skipped the halving when finding the cost.")],
+                f"CP = ({s1} + {s2}) ÷ 2 = {cp}. A {p}% profit means SP = {cp} × {1 + F(p, 100)}. SP = ₹{int(target)}. The cost is the midpoint, so no calculation with the higher or lower price is needed. Only the cost matters.",
+                F(cp + (s1 - cp) * 0) * (100 + p) / 100 if (s1 - cp) == (cp - s2) else None, concepts=2, steps=5, tech=["symmetry", "multiplier"])
+
+
+def t_equal_same_sp(rng):
+    x = rng.choice([10, 20, 25, 40, 50]); sp = rng.choice([900, 1200, 1500, 1800, 2400, 3000, 3600, 4500])
+    c1, c2 = F(sp) / (1 + F(x, 100)), F(sp) / (1 - F(x, 100))
+    if c1.denominator != 1 or c2.denominator != 1: return None
+    loss = c1 + c2 - 2 * sp
+    return prac("q-pl-equal", "harder", f"Two articles are sold at ₹{sp} each, one at a {x}% profit and the other at a {x}% loss. Find the total gain or loss in rupees.",
+                -loss, [(F(0), f"Thought +{x}% and −{x}% cancel."), (loss, "Got the size right but the sign wrong."), (-F(x * 2 * sp, 100), f"Took {x}% of the total selling price.")],
+                f"Costs: {sp} ÷ {1 + F(x, 100)} = {int(c1)} and {sp} ÷ {1 - F(x, 100)} = {int(c2)}. Total cost = {int(c1 + c2)}. Total selling price = {2 * sp}. The difference is a loss of {int(loss)}. As a % of total cost it is {x}²/100 = {F(x * x, 100)}%. It is never a gain.",
+                -(F(x * x, 100) / 100) * (c1 + c2), fmt="inrsigned", concepts=2, steps=5, tech=["symmetry", "sign-check"])
+
+
+def practice_items():
+    out = _hand_items()
+    out += variants(PREFIX, "chain-profit", 2, t_chain_profit)
+    out += variants(PREFIX, "chain-flat", 2, t_chain_flat)
+    out += variants(PREFIX, "two-disc-cp", 2, t_two_disc_cp)
+    out += variants(PREFIX, "weight-simple", 3, t_weight_simple)
+    out += variants(PREFIX, "weight-discount", 2, t_weight_discount)
+    out += variants(PREFIX, "weight-both", 2, t_weight_both)
+    out += variants(PREFIX, "free-loss", 3, t_free_loss)
+    out += variants(PREFIX, "free-donation", 3, t_free_donation)
+    out += variants(PREFIX, "rate-simple", 3, t_rate_simple)
+    out += variants(PREFIX, "rate-mix", 2, t_rate_mix)
+    out += variants(PREFIX, "rate-mix3", 2, t_rate_mix3)
+    out += variants(PREFIX, "equal-cp", 2, t_equal_cp)
+    out += variants(PREFIX, "equal-target", 2, t_equal_target)
+    out += variants(PREFIX, "equal-same-sp", 2, t_equal_same_sp)
     return out

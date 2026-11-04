@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 """Assemble the site's data from the topic shards and the paper files. Cheap: no question is re-verified here.
 
-    python3 tools/build.py            # fail if any topic shard is stale, else write data/core.json and data/index/
+    python3 tools/build.py            # fail if any topic shard is stale, else write data/core.json
     python3 tools/build.py --rebuild  # first rebuild the stale shards (tools/build_topic.py --all)
 
 Inputs   data/tree.json            junctions and topics (hand-kept; a new topic is one new entry)
          data/papers/<id>.json     one file per paper: its details and one row per Quant question (topic, key, answer)
          data/shards/<topic>.json  built by tools/build_topic.py: concepts, question types, formulas, methods, PYQs, practice
-Outputs  data/core.json            small, loaded at start: all nodes, paper list, likelihood stats, light question list
-         data/index/<topic>.json   the indexed PYQs of each topic, even topics without a shard yet
+Outputs  data/core.json            small, loaded at start: all nodes, paper list, likelihood stats, light question list, web references
 
 The site loads core.json first and fetches a topic's shard only when that topic is opened, so the
 start-up cost stays the same however many questions are added.
@@ -108,7 +107,8 @@ def main():
             seen.add(r["qno"])
             if nodes.get(r["topic"], {}).get("kind") != "topic": errs.append(f"{p['id']} Q{r['qno']}: {r['topic']!r} is not a topic in data/tree.json")
             rows.append({"id": f"{p['id']}-Q{r['qno']}", "paper": p["id"], "kind": p["kind"], "exam": p["exam"], "topic": r["topic"]})
-        papers.append({k: v for k, v in p.items() if k != "rows"} | {"n": len(p["rows"])})
+        tc = Counter(r["topic"] for r in p["rows"])
+        papers.append({k: v for k, v in p.items() if k != "rows"} | {"n": len(p["rows"]), "topics": dict(sorted(tc.items()))})
     if errs:
         print("BUILD FAILED"); [print(" -", e) for e in errs]; sys.exit(1)
 
@@ -131,21 +131,18 @@ def main():
         for q in s["pyqs"]: bank_rows.append([q["id"], t, q["qtype"], q["level"], "pyq", q["tech"]])
         for q in s["practice"]: bank_rows.append([q["id"], t, q["qtype"], q["level"], "practice", q["tech"]])
 
+    by_topic = Counter(r["topic"] for r in rows)
     topics_meta = {}
-    by_topic = defaultdict(list)
-    for p in sorted(os.listdir(os.path.join(DATA, "papers"))):
-        pj = jload(os.path.join(DATA, "papers", p))
-        for r in pj["rows"]:
-            by_topic[r["topic"]].append({"id": f"{pj['id']}-Q{r['qno']}", "paper": pj["id"], "qno": r["qno"], "key": r["key"], "answer": r["answer"], "verified": r["verified"]})
-    for t, rs in sorted(by_topic.items()):
-        write_if_changed(os.path.join(DATA, "index", t + ".json"), rs)
     for k, n in nodes.items():
         if n["kind"] == "topic":
             s = shards.get(k)
-            topics_meta[k] = {"indexed": len(by_topic.get(k, [])), "built": bool(s), "pyqs": len(s["pyqs"]) if s else 0, "practice": len(s["practice"]) if s else 0, **({"v": s["src_hash"]} if s else {})}
+            topics_meta[k] = {"indexed": by_topic.get(k, 0), "built": bool(s), "pyqs": len(s["pyqs"]) if s else 0, "practice": len(s["practice"]) if s else 0, **({"v": s["src_hash"]} if s else {})}
+    refs = [{"topic": t, **r} for t, s in shards.items() for r in s.get("refs", [])]
+    # how many filed questions of each paper became quizzes
+    for p in papers: p["built"] = sum(1 for s in shards.values() for q in s["pyqs"] if q["paper"] == p["id"])
 
     core = {"nodes": nodes, "papers": papers, "stats": stats, "topics": topics_meta, "bank": {"cols": cols, "rows": bank_rows},
-            "techniques": bank.TECHNIQUES,
+            "techniques": bank.TECHNIQUES, "refs": refs,
             "rubric": {"steps": "1–2 steps = 1 point, 3–4 = 2, 5 or more = 3", "concepts": "+1 for each extra concept combined", "heavy": "+1 for big or awkward numbers",
                        "trap": "+1 if a wrong option is the result of a common mistake", "levels": "up to 2 Easy, 3–4 Medium, 5 or more Hard"},
             "likelihood": "High if the type appeared in at least 2/3 of the analysed shifts, Medium if at least 1/3, Low otherwise. Always read it with the number of shifts."}

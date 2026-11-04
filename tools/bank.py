@@ -3,7 +3,7 @@
 A topic lives in tools/topics/<name>.py and is built with `python3 tools/build_topic.py <name>`.
 See README.md for the module interface.
 """
-import re
+import random, re, zlib
 from fractions import Fraction as F
 
 # ----------------------------------------------------------------------------------------------
@@ -156,9 +156,34 @@ def pyq(paper, qno, qtype, text, options, key, solution, calc, expect, tol=0, *,
 # (value, note) pairs, the result of a named mistake, which become the other three options.
 #   fmt  how values are shown (see fmt_value)   variant  "same" level as the PYQs, or "harder"
 # ----------------------------------------------------------------------------------------------
-def prac(qtype, variant, text, correct, traps, why, check, fmt="inr", tech=(), concepts=None, heavy=False, steps=None):
+def prac(qtype, variant, text, correct, traps, why, check, fmt="inr", tech=(), concepts=None, heavy=False, steps=None, uid=None):
     """Difficulty uses the same rubric as PYQs: steps default to the sentences of `why`, concepts to 1 (2 for a
     'harder' item), and the three traps always count as a trap."""
     return {"qtype": qtype, "variant": variant, "text": text, "correct": correct, "traps": traps, "why": why, "check": check,
             "fmt": fmt, "tech": list(tech), "concepts": concepts or (2 if variant == "harder" else 1), "heavy": heavy,
-            "steps": steps or max(1, len(re.findall(r"\.(?:\s|$)", why)))}
+            "steps": steps or max(1, len(re.findall(r"\.(?:\s|$)", why))), "uid": uid}
+
+
+def variants(prefix, name, n, gen):
+    """n fresh, deterministic practice items from one template. gen(rng) draws parameters and returns prac(...), or None
+    to reject the draw (numbers not clean). Ids are f"{prefix}-{name}-NN", so adding more of one template never moves
+    another's. The second-method check inside each item is still enforced by the build."""
+    out, seen = [], set()
+    for i in range(n):
+        base = zlib.crc32(f"{prefix}:{name}:{i}".encode())
+        for attempt in range(600):
+            p = gen(random.Random(base + attempt * 7919))
+            if p is None or p["text"] in seen: continue
+            if len({fmt_value(v, p["fmt"]) for v in [p["correct"]] + [t[0] for t in p["traps"]]}) != 4: continue
+            p["uid"] = f"{prefix}-{name}-{i + 1:02d}"; seen.add(p["text"]); out.append(p); break
+        else:
+            raise RuntimeError(f"template {name}: no clean draw found for variant {i + 1}")
+    return out
+
+
+def exact2(v):
+    """True if v (as a percentage or amount) is exact to two decimals, so the question needs no 'approximately'."""
+    return (F(v) * 100).denominator == 1
+
+
+APPROX = " Give the answer correct to two decimal places."

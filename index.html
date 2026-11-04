@@ -209,6 +209,79 @@ details[open] summary{margin-bottom:8px}
 .variations{margin:0;padding-left:1.1rem;font-family:var(--body);font-size:15px;line-height:1.5;display:flex;flex-direction:column;gap:3px}
 @media (max-width: 900px){ .bank{grid-template-columns:minmax(0,1fr)} .filters{position:static} }
 @media (prefers-reduced-motion: reduce){ *{transition:none!important} }
+
+[hidden]{display:none!important}
+/* bank: by topic */
+.bankwrap{display:flex;flex-direction:column;gap:12px;flex:1}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:12px}
+.tcard{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--c,var(--muted));border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.tcard h3{margin:0;font-size:18px;font-weight:800;letter-spacing:-0.01em}
+.tcard .sub{font-family:var(--body);font-size:14.5px;color:var(--muted);margin:0;line-height:1.45}
+.tcard .btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--line)}
+.bar{height:6px;border-radius:3px;background:var(--sunk);overflow:hidden;display:flex}
+.bar i{display:block;height:100%}
+.bar .ok{background:var(--ok)} .bar .no{background:var(--hi)}
+.weak{font:500 12px var(--mono);color:var(--hi)}
+.waiting{opacity:.8}
+/* sources */
+.srcwrap{display:flex;flex-direction:column;gap:14px;max-width:980px}
+.srcwrap h2{margin:0;font-size:22px;font-weight:800}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:9px;min-width:0}
+.pcard h3{margin:0;font-size:16px;font-weight:700}
+.plist{width:100%;border-collapse:collapse;font-size:13.5px}
+.plist th,.plist td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.plist th{font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.tscroll{overflow-x:auto}
+.ext{color:var(--accent);font-weight:600;text-decoration:none}
+.ext:hover{text-decoration:underline}
+/* learn */
+.lhead{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.lhead h2{margin:0;font-size:24px;font-weight:800;letter-spacing:-0.01em;text-wrap:balance}
+.lgrid{display:grid;grid-template-columns:minmax(210px,260px) minmax(0,1fr);gap:14px;align-items:start}
+.outline{position:sticky;top:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:2px;max-height:calc(100vh - 24px);overflow:auto;min-width:0}
+.outline button.oi{font:500 13.5px var(--display);text-align:left;background:none;border:0;border-radius:6px;padding:7px 8px;color:var(--ink);cursor:pointer;display:grid;grid-template-columns:1.1rem minmax(0,1fr);gap:6px;align-items:baseline}
+.outline button.oi:hover{background:var(--sunk)}
+.outline button.oi.cur{background:var(--ink);color:var(--surface)}
+.outline button.oi.t2{padding-left:22px;font-size:13px;color:var(--muted)}
+.outline button.oi.t2.cur{color:var(--surface)}
+.outline button.oi:focus-visible{outline:2px solid var(--accent)}
+.outline .mk{font:600 11px var(--mono);color:var(--ok)}
+.otoggle{display:none}
+.lmain{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.lmain h2{margin:0;font-size:23px;font-weight:800;letter-spacing:-0.01em;line-height:1.15;text-wrap:balance}
+.lmain h3{margin:0;font-size:14px;font-weight:700}
+.lmain .lead{margin:0;font-family:var(--body);font-size:16.5px;line-height:1.55}
+.lnav{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;border-top:1px solid var(--line);padding-top:14px}
+.lnav .btn[disabled]{opacity:.4;cursor:default}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr));gap:8px}
+.tile{border:1px solid var(--line);border-radius:8px;padding:9px 11px;background:var(--sunk);display:flex;flex-direction:column;gap:2px}
+.tile b{font:700 22px var(--display)}
+.tile span{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.capsule{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:8px}
+.capsule div{border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;font-family:var(--body);font-size:15px;line-height:1.45;background:var(--sunk)}
+.capsule div b{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.capsule .tp b{color:var(--hi)}
+.banner{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;background:var(--new-soft);border-radius:8px;padding:9px 12px;font-size:14px}
+.banner button{font:600 13px var(--display);color:var(--accent);background:none;border:0;cursor:pointer;padding:0}
+.cur-list{display:flex;flex-direction:column;gap:10px}
+.cur-list .c{display:flex;flex-direction:column;gap:6px}
+.qprog{height:8px;border-radius:4px;background:var(--sunk);overflow:hidden}
+.qprog i{display:block;height:100%;background:var(--accent);transition:width .2s}
+.lq{display:flex;flex-direction:column;gap:12px}
+.lq .qtext{margin:0;font-family:var(--body);font-size:18px;line-height:1.55}
+.lq .opts{grid-template-columns:repeat(auto-fit,minmax(11rem,1fr))}
+.lq .opts button.opt{font-size:14.5px;padding:10px 12px}
+.qrow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px 12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+.qrow:last-child{border-bottom:0}
+.score{font:800 40px var(--display);letter-spacing:-0.02em}
+@media (max-width: 900px){
+  .lgrid{grid-template-columns:minmax(0,1fr)}
+  .outline{position:static;max-height:none;display:none}
+  .outline.open{display:flex}
+  .otoggle{display:inline-flex;align-self:flex-start;font:600 13px var(--display);padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--accent);cursor:pointer}
+  .lmain{padding:14px}
+}
 </style>
 <style id="jstyles"></style>
 </head>
@@ -231,6 +304,7 @@ details[open] summary{margin-bottom:8px}
     <div class="seg tabs" role="group" aria-label="View" id="tabs">
       <button type="button" data-view="web" aria-pressed="true">Web</button>
       <button type="button" data-view="bank" aria-pressed="false">Question bank</button>
+      <button type="button" data-view="sources" aria-pressed="false">Sources</button>
     </div>
     <div class="seg" role="group" aria-label="Show" id="show" title="Which topics to highlight on the web">
       <button type="button" data-v="all" aria-pressed="true">All topics</button>
@@ -257,10 +331,30 @@ details[open] summary{margin-bottom:8px}
     <aside class="panel" id="panel" aria-live="polite"></aside>
   </main>
 
-  <section class="bank" id="bank" hidden aria-label="Question bank">
-    <aside class="filters" id="filters"></aside>
-    <div class="cards" id="cards" aria-live="polite"></div>
+  <section class="bankwrap" id="bank" hidden aria-label="Question bank">
+    <div class="seg" role="group" aria-label="Question bank view" id="btabs" style="align-self:flex-start">
+      <button type="button" data-bt="topic" aria-pressed="true">By topic</button>
+      <button type="button" data-bt="mixed" aria-pressed="false">Mixed practice</button>
+    </div>
+    <div id="bytopic"></div>
+    <div class="bank" id="mixed" hidden>
+      <aside class="filters" id="filters"></aside>
+      <div class="cards" id="cards" aria-live="polite"></div>
+    </div>
   </section>
+
+  <section id="learn" hidden aria-label="Learn a topic">
+    <div class="lhead" id="lhead"></div>
+    <div class="lgrid">
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+        <button type="button" class="otoggle" id="otoggle">Outline</button>
+        <nav class="outline" id="outline" aria-label="Topic outline"></nav>
+      </div>
+      <article class="lmain" id="lmain" aria-live="polite"></article>
+    </div>
+  </section>
+
+  <section id="sources" hidden aria-label="Sources"></section>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
@@ -269,7 +363,7 @@ details[open] summary{margin-bottom:8px}
 /* State. core.json is loaded at start (nodes, papers, stats, a light list of every question). A topic's shard
    (formulas, methods, full questions) is fetched only when that topic is opened, so start-up cost stays flat as the bank grows. */
 const S = { nodes:new Map(), papers:[], stats:{papers:0,topics:{},qtypes:{}}, tmeta:{}, rows:[], techniques:{}, rubric:{}, likNote:'',
-            sd:{}, sp:{}, ix:{}, idx:{}, show:'all', q:'', sel:null, view:'web', status:'loading', loaded:false, fitted:false, cnt:new Map(), built:new Set(),
+            sd:{}, sp:{}, refs:[], bankTab:'topic', show:'all', q:'', sel:null, view:'web', status:'loading', loaded:false, fitted:false, cnt:new Map(), built:new Set(),
             f:{topic:'', qtype:'', level:new Set(), lik:new Set(), src:'', status:'', tech:'', sort:'asked'}, shown:20, prog:{} };
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -293,7 +387,6 @@ function kidsOf(id){ return [...S.nodes.values()].filter(m => parentOf(m)===id).
 function descendants(id){ const out = new Set([id]); let added = true; while(added){ added=false; for(const n of S.nodes.values()){ if(!out.has(n.id) && out.has(parentOf(n))){ out.add(n.id); added=true; } } } return out; }
 function linksOf(id){ const s = new Set(); const n = S.nodes.get(id); (n && n.links || []).forEach(x => S.nodes.has(x) && s.add(x)); for(const m of S.nodes.values()) if((m.links||[]).includes(id)) s.add(m.id); s.delete(id); return s; }
 function paper(id){ return S.papers.find(p => p.id === id); }
-function short(pid){ return 'S' + String(pid).slice(-1); }
 const qstat = id => S.stats.qtypes[id], tstat = id => S.stats.topics[id];
 function derive(){
   S.cnt = new Map();
@@ -323,11 +416,10 @@ const get = async (p, v) => {
 function loadShard(t){
   if (!t || !(S.tmeta[t] && S.tmeta[t].built)) return Promise.resolve(null);
   if (!S.sp[t]) S.sp[t] = get('data/shards/' + t + '.json', S.tmeta[t].v).then(d => {
-    d.byId = new Map([...d.pyqs.map(x => [x.id, Object.assign({src:'pyq'}, x)]), ...d.practice.map(x => [x.id, Object.assign({src:'practice'}, x)])]);
+    d.byId = new Map([...d.pyqs.map(x => [x.id, Object.assign({src:'pyq', topic:t}, x)]), ...d.practice.map(x => [x.id, Object.assign({src:'practice', topic:t}, x)])]);
     S.sd[t] = d; return d; });
   return S.sp[t];
 }
-function loadIndex(t){ if (!S.ix[t]) S.ix[t] = get('data/index/' + t + '.json').then(d => (S.idx[t] = d)).catch(() => (S.idx[t] = [])); return S.ix[t]; }
 const allBuilt = () => Object.keys(S.tmeta).filter(t => S.tmeta[t].built);
 const formulasOf = t => (S.sd[t] ? S.sd[t].formulas : []);
 
@@ -398,9 +490,9 @@ function drawWeb(){
     .attr('tabindex', d => d.depth===0 ? null : 0)
     .attr('role', d => d.depth===0 ? null : 'button')
     .attr('aria-label', d => { if(d.depth===0) return null; const n=S.nodes.get(d.data.id); return `${n.label}, ${plural(sub.get(d.data.id)||0,'past question')}`; })
-    .on('click', (e,d) => { e.stopPropagation(); select(d.depth===0 ? null : d.data.id);
-      if (window.innerWidth <= 900) $('panel').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'}); })
-    .on('keydown', (e,d) => { if (e.key==='Enter' || e.key===' '){ e.preventDefault(); select(d.data.id); } });
+    .on('click', (e,d) => { e.stopPropagation(); activate(d.depth===0 ? null : d.data.id);
+      if (S.view==='web' && window.innerWidth <= 900) $('panel').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'}); })
+    .on('keydown', (e,d) => { if (e.key==='Enter' || e.key===' '){ e.preventDefault(); activate(d.data.id); } });
 
   const rad = d => d.depth===0 ? 24 : d.depth===1 ? 11 : Math.min(13, 4 + Math.sqrt(sub.get(d.data.id)||0)*1.9);
   node.filter(d => d.depth>1 && S.built.has(d.data.id))
@@ -449,11 +541,32 @@ function fit(animate){
 }
 
 /* ---------- building blocks ---------- */
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function fmtDate(d){ const m = /^(\d{4})-(\d\d)-(\d\d)$/.exec(d||''); return m ? `${+m[3]} ${MONTHS[+m[2]-1]} ${m[1]}` : (d||''); }
 function chip(id, count, flag){
   const n = S.nodes.get(id); if(!n) return '';
   return `<button type="button" class="chip" data-go="${esc(id)}"><i style="background:${color(id)}"></i>${esc(n.label)}${count!=null?` <span class="n">${count}</span>`:''}${flag?` <span class="nw">${flag}</span>`:''}</button>`;
 }
 function formulaHtml(f){ return `<div class="formula"><span class="tx">${esc(f.text)}</span>${f.note?`<span class="nt">${esc(f.note)}</span>`:''}</div>`; }
+const techTag = k => `<span class="tag tech">${esc(S.techniques[k] || k)}</span>`;
+const lvlTag = (lv, title) => `<span class="lvl lvl-${esc(lv)}" ${title?`title="${esc(title)}"`:''}>${esc(lv)}</span>`;
+const likKey = l => String(l||'not seen').replace(' ','-');
+const likShort = st => { const l = st ? st.lik : 'not seen'; return `<span class="tag lik-${likKey(l)}">${l==='not seen'?'not seen':l}</span>`; };
+const likTag = st => { const l = st ? st.lik : 'not seen'; const n = S.stats.papers; return `<span class="tag lik-${likKey(l)}" title="${st ? `Asked in ${st.shifts} of ${n} analysed shifts` : 'Not seen in the papers analysed so far'}">${l==='not seen'?'not seen yet':l+' likelihood'}</span>`; };
+function whyText(w){ if(!w) return ''; const bits=[`${w.steps} step${w.steps===1?'':'s'}`]; if(w.concepts>1) bits.push(`${w.concepts} concepts`); if(w.heavy) bits.push('heavy numbers'); if(w.trap) bits.push('a common-mistake option'); return bits.join(', '); }
+function askedLine(st, label){
+  const n = S.stats.papers;
+  if (!st) return `<p class="statline">${label}: not seen in the ${plural(n,'shift')} analysed so far.</p>`;
+  return `<p class="statline"><b>${label}:</b> asked ${plural(st.n,'time')} in <b>${st.shifts} of ${n}</b> shifts${st.perShift!=null?`, about <b>${st.perShift}</b> per shift`:''} · ${likTag(st)}</p>`;
+}
+function mixLine(st){ if(!st || !st.levels) return ''; return `<p class="mix">${LEVELS.map(l=>`<span>${lvlTag(l)} ${st.levels[l]||0}</span>`).join('')}</p>`; }
+/* Where a past question came from: plain text. The links to the papers live on the Sources page only. */
+function pLabel(x){ const p = paper(x.paper) || {}; return [p.exam, fmtDate(p.date), p.shift ? 'Shift ' + p.shift : '', 'Q' + x.qno].filter(Boolean).join(' · '); }
+const kindName = n => parentOf(n)==='hub' ? 'Subject' : ({topic:'Topic', concept:'Concept', qtype:'Question type'}[n.kind] || 'Topic');
+const isBuiltTopic = t => !!(t && S.tmeta[t] && S.tmeta[t].built);
+const conceptsOf = t => kidsOf(t).filter(n => n.kind === 'concept');
+const typesOf = t => conceptsOf(t).flatMap(c => kidsOf(c.id).filter(n => n.kind === 'qtype'));
+const methodOf = x => ((S.sd[x.topic] || {methods:{}}).methods || {})[x.qtype] || {};
 function methodHtml(m){
   if (!m) return '';
   const rows = LAYERS.map(([k,l]) => `<dt>${l}</dt><dd>${esc(m[k])}</dd>`).join('')
@@ -462,50 +575,43 @@ function methodHtml(m){
     + ((m.tech||[]).length ? `<dt>Tricks</dt><dd>${m.tech.map(techTag).join(' ')}</dd>` : '');
   return `<dl class="ledger">${rows}</dl>`;
 }
-const techTag = k => `<span class="tag tech">${esc(S.techniques[k] || k)}</span>`;
-const lvlTag = (lv, title) => `<span class="lvl lvl-${esc(lv)}" ${title?`title="${esc(title)}"`:''}>${esc(lv)}</span>`;
-const likKey = l => String(l||'not seen').replace(' ','-');
-const likTag = (st) => { const l = st ? st.lik : 'not seen'; const n = S.stats.papers; return `<span class="tag lik-${likKey(l)}" title="${st ? `Asked in ${st.shifts} of ${n} analysed shifts` : 'Not seen in the papers analysed so far'}">${l==='not seen'?'not seen yet':l+' likelihood'}</span>`; };
-function srcLink(pid, qno){ const p = paper(pid); const t = `${short(pid)} Q${qno}`; return p && p.link ? `<a href="${esc(p.link)}" target="_blank" rel="noopener" title="Open the source paper">${t}</a>` : t; }
-function whyText(w){ if(!w) return ''; const bits=[`${w.steps} step${w.steps===1?'':'s'}`]; if(w.concepts>1) bits.push(`${w.concepts} concepts`); if(w.heavy) bits.push('heavy numbers'); if(w.trap) bits.push('a common-mistake option'); return bits.join(', '); }
-function askedLine(st, label){
-  const n = S.stats.papers;
-  if (!st) return `<p class="statline">${label}: not seen in the ${plural(n,'shift')} analysed so far.</p>`;
-  return `<p class="statline"><b>${label}:</b> asked ${plural(st.n,'time')} in <b>${st.shifts} of ${n}</b> shifts${st.perShift!=null?`, about <b>${st.perShift}</b> per shift`:''} · ${likTag(st)}</p>`;
-}
-function mixLine(st){ if(!st || !st.levels) return ''; return `<p class="mix">${LEVELS.map(l=>`<span>${lvlTag(l)} ${st.levels[l]||0}</span>`).join('')}</p>`; }
 
-/* One question as a quiz card. `x` is a PYQ or a practice item from a shard. */
-function cardHtml(x){
-  const isP = x.src === 'pyq';
-  const pr = S.prog[x.id];
-  const head = isP
-    ? `<span class="src">${srcLink(x.paper, x.qno)} · ${esc((paper(x.paper)||{}).exam||'')} · ${esc((paper(x.paper)||{}).date||'')}</span>`
-    : `<span class="src" style="color:var(--muted)">Practice · ${x.variant==='harder'?'one level harder':'same level'}</span>`;
-  const btn = x.options.map((o,i)=>`<button type="button" class="opt" data-k="${'abcd'[i]}"><span>(${'abcd'[i]})</span>${esc(o)}</button>`).join('');
+/* What is shown after an answer: solution, fastest way in, elimination, why each wrong option is wrong, the type's traps. */
+function revealInner(x){
+  const m = methodOf(x);
   const sol = Array.isArray(x.solution) ? `<ol>${x.solution.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>` : `<p style="margin:0">${esc(x.solution)}</p>`;
   const wr = Object.entries(x.wrong||{}).map(([k,w]) => `<li><b>(${k}) ${esc(x.options['abcd'.indexOf(k)])}</b><span>${esc(w.note)} <em class="${w.kind}">${w.kind==='mistake'?'common mistake':'ruled out'}</em></span></li>`).join('');
-  const st = qstat(x.qtype), qn = S.nodes.get(x.qtype);
-  const t = (x.tech||[]).map(techTag).join('');
+  const fast = x.trick || m.fast;
+  return `<div class="sol"><h4>Solution</h4>${sol}</div>
+    ${fast ? `<div><h4>${x.trick?'Fastest way in':'Fast method'}</h4><div class="trick">${esc(fast)}</div></div>` : ''}
+    ${m.eliminate ? `<div><h4>Eliminate using the options</h4><div class="trick">${esc(m.eliminate)}</div></div>` : ''}
+    ${wr ? `<div><h4>Why not the others</h4><ul class="wn">${wr}</ul></div>` : ''}
+    ${(m.traps||[]).length ? `<details><summary>Traps in this type</summary><ul class="variations">${m.traps.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></details>` : ''}
+    <div class="tags">${(x.tech||[]).map(techTag).join('')}</div>`;
+}
+function headTags(x){
+  const isP = x.src === 'pyq', st = qstat(x.qtype), qn = S.nodes.get(x.qtype);
+  return `${isP ? `<span class="src" style="font:500 12px var(--mono);color:var(--accent)">${esc(pLabel(x))}</span>` : `<span class="src" style="font:500 12px var(--mono);color:var(--muted)">${x.variant==='harder'?'Challenge · one level harder':'Practice · same level'}</span>`}
+    ${lvlTag(x.level, isP ? whyText(x.why) : '')}${likTag(st)}${qn?`<span class="tag tech">${esc(qn.short||qn.label)}</span>`:''}`;
+}
+const optBtns = (x, chosen) => x.options.map((o,i)=>{ const k = 'abcd'[i]; const cls = chosen ? (k===x.key ? ' right' : (k===chosen ? ' wrong' : '')) : ''; return `<button type="button" class="opt${cls}" data-k="${k}" ${chosen?'disabled':''}><span>(${k})</span>${esc(o)}</button>`; }).join('');
+
+/* One question as a card in the mixed-practice list. `x` is a PYQ or a practice item from a shard. */
+function cardHtml(x){
+  const pr = S.prog[x.id], qn = S.nodes.get(x.qtype);
   return `<div class="q qz" data-id="${esc(x.id)}" data-key="${x.key}">
-    <div class="qhead">${head}${lvlTag(x.level, isP ? whyText(x.why) : '')}${likTag(st)}${pr?`<span class="tag ${pr.r?'lik-medium':'lik-high'}">${pr.r?'you got it right':'you got it wrong'}</span>`:''}</div>
+    <div class="qhead">${headTags(x)}${pr?`<span class="tag ${pr.r?'lik-medium':'lik-high'}">${pr.r?'you got it right':'you got it wrong'}</span>`:''}</div>
     <p>${esc(x.text)}</p>
-    <div class="opts">${btn}</div>
+    <div class="opts">${optBtns(x)}</div>
     <button type="button" class="qbtn" data-reveal>Show answer</button>
     <div class="rv" hidden>
       <div class="verdict"></div>
-      <div class="sol"><h4>Solution</h4>${sol}</div>
-      ${x.trick ? `<div><h4>Fastest way in</h4><div class="trick">${esc(x.trick)}</div></div>` : ''}
-      ${wr ? `<div><h4>Why not the others</h4><ul class="wn">${wr}</ul></div>` : ''}
-      <div class="tags">${t}${qn?`<button type="button" class="chip" data-go="${esc(x.qtype)}"><i style="background:${color(x.qtype)}"></i>${esc(qn.label)}: methods</button>`:''}</div>
+      ${revealInner(x)}
+      ${qn?`<div class="tags"><button type="button" class="chip" data-learn="qtype:${esc(x.qtype)}"><i style="background:${color(x.qtype)}"></i>Learn this type: ${esc(qn.label)}</button></div>`:''}
     </div></div>`;
 }
-const kindName = n => parentOf(n)==='hub' ? 'Subject' : ({topic:'Topic', concept:'Concept', qtype:'Question type'}[n.kind] || 'Topic');
-function idxRows(rows){
-  return `<ul class="rows">${rows.map(r => `<li><span class="ref">${srcLink(r.paper, r.qno)}</span><span class="ans">answer ${esc(r.answer)}</span></li>`).join('')}</ul>`;
-}
 
-/* ---------- web panel ---------- */
+/* ---------- web panel (slim: a short description and the way into Learn) ---------- */
 function renderPanel(){
   const P = $('panel');
   if (S.status==='none'){ P.innerHTML = `<p class="eyebrow">Couldn't load</p><h2>The data files didn't load</h2><p class="lead">Check your connection and refresh the page.</p>`; return; }
@@ -521,73 +627,45 @@ function renderOverview(P){
   const topics = [...S.nodes.values()].filter(n => n.kind==='topic');
   const built = topics.filter(t => S.built.has(t.id));
   const todo = topics.filter(t => !S.built.has(t.id) && (tstat(t.id)||{}).n > 0).sort((a,b)=>tstat(b.id).n-tstat(a.id).n);
-  const nbank = S.rows.length;
   P.innerHTML = `
     <p class="eyebrow">SSC CGL Tier 1 and Tier 2 · Quant</p>
-    <h2>${nbank} questions in the bank</h2>
+    <h2>${S.rows.length} questions in the bank</h2>
     <div class="meta-row"><span>${plural(built.length,'topic')} built</span><span>${todo.length} more ${todo.length===1?'has':'have'} past questions waiting</span><span>${Object.values(S.tmeta).reduce((a,m)=>a+m.indexed,0)} past questions filed</span></div>
-    <button type="button" class="btn" data-bank="">Open the question bank →</button>
-    <p class="lead">Each dot is a topic, a concept or a question type. Click one for its formulas, the standard, fast and ultra-calc methods, how to eliminate options, the traps, past questions and practice.</p>
+    <div class="chips"><button type="button" class="btn" data-bank="">Question bank →</button><button type="button" class="btn ghost" data-view="sources">Sources</button></div>
+    <p class="lead">Each dot is a topic, a concept or a question type. Tap a question type (an end dot) to learn that topic: the concepts first, then the methods, then the quiz.</p>
     <div class="section"><p class="eyebrow">Most asked question types</p>
       <ul class="rows">${topAsked(6).map(([id,st])=>`<li><button type="button" class="chip" data-go="${esc(id)}"><i style="background:${color(id)}"></i>${esc(S.nodes.get(id).label)}</button><span class="ans">${st.shifts} of ${S.stats.papers} shifts · ${st.n} q</span>${likTag(st)}</li>`).join('')}</ul>
       <p class="note">${esc(S.likNote)} With only ${plural(S.stats.papers,'shift')} analysed, read this as a rough guide.</p></div>
     <div class="section"><p class="eyebrow">Built</p><div class="chips">${built.map(t=>chip(t.id, (tstat(t.id)||{}).n)).join('') || '<p class="empty-msg">Nothing built yet.</p>'}</div></div>
-    <div class="section"><p class="eyebrow">Next, by number of past questions</p><div class="chips">${todo.map(t=>chip(t.id, tstat(t.id).n)).join('')}</div></div>
-    <div class="section"><p class="eyebrow">Sources</p><ul class="rows">${S.papers.map(p=>`<li><span class="ref">${p.link?`<a href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.exam)} · ${p.date} · shift ${p.shift}</a>`:esc(p.exam)}</span><span class="ans">${esc(p.publisher)} ${esc(p.kind.replace('-',' '))} · ${esc(p.quant)}</span></li>`).join('')}</ul></div>
-    <p class="note">These first papers are coaching-made similar papers, not the official CGL papers, so the counts show that publisher's style. Likelihood stays provisional until official papers are added.</p>`;
+    <div class="section"><p class="eyebrow">Next, by number of past questions</p><div class="chips">${todo.map(t=>chip(t.id, tstat(t.id).n)).join('')}</div></div>`;
 }
 function renderNode(P){
   const id = S.sel, n = S.nodes.get(id); const kids = kidsOf(id);
-  const t = topicOf(id), builtT = t && S.tmeta[t] && S.tmeta[t].built;
-  if (builtT && !S.sd[t]){ loadShard(t).then(() => { if (S.sel === id && !S.q && S.view==='web') renderPanel(); }); }
-  const shard = builtT ? S.sd[t] : null;
-  if (t && !builtT && !S.idx[t]) loadIndex(t).then(() => { if (S.sel === id && !S.q) renderPanel(); });
+  const t = topicOf(id), builtT = isBuiltTopic(t);
   const crumbs = []; let cur = parentOf(n), guard=0; while(cur!=='hub' && guard++<20){ crumbs.unshift(cur); cur = parentOf(S.nodes.get(cur)); }
   const rel = [...linksOf(id)];
   const total = subCount(id);
-  const isBuilt = S.built.has(id);
-  const loading = builtT && !shard ? '<p class="empty-msg">Loading this topic…</p>' : '';
-  let body = '', stat = '';
-  if (n.kind === 'concept'){
-    const fs = shard ? shard.formulas.filter(f => f.node === id) : [];
-    body += loading || `<div class="section"><p class="eyebrow">Formulas</p>${fs.map(formulaHtml).join('')}</div>`;
-  } else if (n.kind === 'qtype'){
-    stat = askedLine(qstat(id), 'This type') + mixLine(qstat(id));
-    if (shard){
-      const m = shard.methods[id] || {};
-      const fs = (m.formulas||[]).map(fid => shard.formulas.find(f => f.id===fid)).filter(Boolean);
-      const qs = shard.pyqs.filter(p => p.qtype===id).map(x => shard.byId.get(x.id)), ps = shard.practice.filter(p => p.qtype===id).map(x => shard.byId.get(x.id));
-      body += `<button type="button" class="btn" data-bank="qtype:${esc(id)}">Practice this type in the bank →</button>`;
-      body += `<div class="section"><p class="eyebrow">Formulas used</p>${fs.map(formulaHtml).join('')}</div>`;
-      body += `<div class="section"><p class="eyebrow">How to solve</p>${methodHtml(m)}</div>`;
-      body += `<div class="section"><p class="eyebrow">Past questions · tap an answer</p>${qs.map(cardHtml).join('')}</div>`;
-      body += `<div class="section"><p class="eyebrow">Practice · tap an answer</p>${ps.map(cardHtml).join('')}</div>`;
-    } else body += loading;
-  } else if (n.kind === 'topic'){
+  let stat = '', go = '';
+  if (n.kind === 'qtype'){ stat = askedLine(qstat(id), 'This type') + mixLine(qstat(id)); if (builtT) go = `<button type="button" class="btn" data-learn="qtype:${esc(id)}">Learn this topic →</button>`; }
+  else if (n.kind === 'concept'){ if (builtT) go = `<button type="button" class="btn" data-learn="concept:${esc(id)}">Learn this concept →</button>`; }
+  else if (n.kind === 'topic'){
     stat = askedLine(tstat(id), 'This topic');
-    const rows = S.idx[id] || [];
-    if (shard){
-      body += `<button type="button" class="btn" data-bank="topic:${esc(id)}">Practice this topic in the bank →</button>`;
-      if (shard.formulas.length) body += `<div class="section"><p class="eyebrow">Formulas</p>${shard.formulas.map(formulaHtml).join('')}</div>`;
-      if ((shard.refs||[]).length) body += `<div class="section"><p class="eyebrow">Read more (outside sources, not copied)</p><ul class="rows">${shard.refs.map(r=>`<li style="display:block"><a href="${esc(r.url)}" target="_blank" rel="noopener" style="color:var(--accent)">${esc(r.title)}</a><div class="note">${esc(r.note)}</div></li>`).join('')}</ul></div>`;
-    } else if (builtT) body += loading;
-    else {
-      if (rows.length) body += `<div class="section"><p class="eyebrow">Past questions filed here</p>${idxRows(rows)}</div>`;
-      body += `<p class="note">Not built yet. ${rows.length ? `${plural(rows.length,'past question')} are filed here and their answers are checked. ` : 'No past question has landed here yet. '}Send material on this topic and it will get formulas, question types, the four solving layers, traps and practice.</p>`;
-    }
-  } else {
-    const tops = kids.filter(k => k.kind==='topic');
-    body += `<p class="note">${plural(tops.length,'topic')} in this subject. ${tops.filter(x=>S.built.has(x.id)).length} fully built.</p>`;
+    if (builtT) go = `<button type="button" class="btn" data-learn="start:${esc(id)}">Start learning →</button> <button type="button" class="btn ghost" data-learn="quiz:${esc(id)}">Go to the quiz</button>`;
   }
+  const rows = (S.tmeta[id]||{}).indexed || 0;
+  const note = n.kind==='topic' && !builtT ? `<p class="note">Not built yet. ${rows ? `${plural(rows,'past question')} are filed here and their answers are checked. ` : 'No past question has landed here yet. '}Send material on this topic and it will get its concepts, question types, solving methods, traps and a quiz.</p>` : '';
+  const tops = kids.filter(k => k.kind==='topic');
   P.innerHTML = `
     <div class="crumbs"><button type="button" data-go="">Web</button>${crumbs.map(c=>` › <button type="button" data-go="${esc(c)}">${esc(S.nodes.get(c).label)}</button>`).join('')}</div>
     <div><p class="eyebrow" style="color:${color(id)}">${kindName(n)}</p><h2>${esc(n.label)}</h2></div>
     ${n.summary ? `<p class="lead">${md(n.summary)}</p>` : ''}
-    <div class="meta-row"><span>${plural(total,'past question')}</span>${isBuilt?'<span>fully built</span>':''}</div>
+    <div class="meta-row"><span>${plural(total,'past question')}</span>${S.built.has(id)?'<span>fully built</span>':''}</div>
     ${stat}
+    ${go ? `<div class="chips">${go}</div>` : ''}
+    ${note}
     ${kids.length ? `<div class="section"><p class="eyebrow">${parentOf(n)==='hub'?'Topics':n.kind==='topic'?'Concepts':'Question types'}</p><div class="chips">${kids.map(k=>chip(k.id, subCount(k.id), S.built.has(k.id)&&k.kind==='topic'?'built':'')).join('')}</div></div>` : ''}
+    ${parentOf(n)==='hub' ? `<p class="note">${plural(tops.length,'topic')} in this subject. ${tops.filter(x=>S.built.has(x.id)).length} fully built.</p>` : ''}
     ${rel.length ? `<div class="section"><p class="eyebrow">Connected topics</p><div class="chips">${rel.map(r=>chip(r, subCount(r))).join('')}</div></div>` : ''}
-    ${body}
     <button type="button" class="btn-link" data-go="">← Back to overview</button>`;
 }
 let searchToken = 0;
@@ -601,7 +679,7 @@ function renderSearch(P){
   const fs = [], ms = [], qs = [];
   for (const b of bt){ const d = S.sd[b];
     d.formulas.forEach(f => { if ((f.text+' '+(f.note||'')).toLowerCase().includes(t)) fs.push(f); });
-    Object.entries(d.methods).forEach(([id,m]) => { if (LAYERS.some(([k]) => (m[k]||'').toLowerCase().includes(t)) || (m.traps||[]).concat(m.variations||[]).some(x => x.toLowerCase().includes(t))) ms.push(id); });
+    Object.entries(d.methods).forEach(([id,m]) => { if (LAYERS.some(([k]) => (m[k]||'').toLowerCase().includes(t)) || (m.cue||'').toLowerCase().includes(t) || (m.traps||[]).concat(m.variations||[]).some(x => x.toLowerCase().includes(t))) ms.push(id); });
     d.pyqs.forEach(x => { if ((x.text+' '+x.solution.join(' ')+' '+(x.trick||'')).toLowerCase().includes(t)) qs.push(d.byId.get(x.id)); });
   }
   const total = nodes.length + fs.length + ms.length + qs.length;
@@ -611,11 +689,42 @@ function renderSearch(P){
     ${nodes.length ? `<div class="section"><p class="eyebrow">Topics and types</p><div class="chips">${nodes.slice(0,24).map(n=>chip(n.id, subCount(n.id))).join('')}</div></div>` : ''}
     ${fs.length ? `<div class="section"><p class="eyebrow">Formulas</p>${fs.map(f=>formulaHtml(f)+`<div class="chips">${chip(f.node)}</div>`).join('')}</div>` : ''}
     ${ms.length ? `<div class="section"><p class="eyebrow">Methods mentioning it</p><div class="chips">${ms.map(id=>chip(id)).join('')}</div></div>` : ''}
-    ${qs.length ? `<div class="section"><p class="eyebrow">Past questions</p>${qs.slice(0,20).map(cardHtml).join('')}</div>` : ''}
+    ${qs.length ? `<div class="section"><p class="eyebrow">Past questions</p><ul class="rows">${qs.slice(0,20).map(x=>`<li style="display:block"><div class="note">${esc(x.text.length>150 ? x.text.slice(0,150)+'…' : x.text)}</div><div class="chips" style="margin-top:6px"><button type="button" class="chip" data-learn="qtype:${esc(x.qtype)}"><i style="background:${color(x.qtype)}"></i>Learn: ${esc(S.nodes.get(x.qtype).label)}</button></div></li>`).join('')}</ul></div>` : ''}
     ${total ? '' : '<p class="empty-msg">Try a shorter word, a formula name, or a number.</p>'}`;
 }
 
-/* ---------- question bank ---------- */
+/* ---------- question bank: by topic ---------- */
+const topicRows = t => S.rows.filter(r => r.topic === t);
+function progOf(rows){ let tried=0, right=0; for (const r of rows){ const p = S.prog[r.id]; if (p){ tried++; if (p.r) right++; } } return {tried, right, wrong: tried-right}; }
+function weakTypes(t){
+  const c = {}; for (const r of topicRows(t)){ const p = S.prog[r.id]; if (p && !p.r) c[r.qtype] = (c[r.qtype]||0)+1; }
+  return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,3);
+}
+function renderByTopic(){
+  const topics = [...S.nodes.values()].filter(n => n.kind==='topic');
+  const built = topics.filter(t => isBuiltTopic(t.id)), waiting = topics.filter(t => !isBuiltTopic(t.id) && (S.tmeta[t.id]||{}).indexed > 0).sort((a,b)=>S.tmeta[b.id].indexed-S.tmeta[a.id].indexed);
+  const mem = loadLearnMem();
+  $('bytopic').innerHTML = `
+    <p class="statline" style="margin-bottom:10px">Pick a topic. You learn its concepts and methods first, then the quiz starts: past questions, practice at the same level, then harder ones.</p>
+    <div class="tgrid">${built.map(t => {
+      const rows = topicRows(t.id), py = rows.filter(r=>r.src==='pyq').length, pr = rows.length - py, p = progOf(rows), st = tstat(t.id), types = typesOf(t.id);
+      const mix = LEVELS.map(l => `<span>${lvlTag(l)} ${rows.filter(r=>r.level===l).length}</span>`).join('');
+      const m = mem[t.id], weak = weakTypes(t.id);
+      return `<div class="tcard" style="--c:${color(t.id)}">
+        <h3>${esc(t.label)}</h3>
+        <p class="sub">${esc(t.summary||'')}</p>
+        <div class="meta-row"><span>${py} past</span><span>${pr} practice</span><span>${types.length} types</span>${st?`<span>${st.shifts} of ${S.stats.papers} shifts</span>`:''}</div>
+        <p class="mix">${mix}</p>
+        <div class="bar" title="${p.tried} tried, ${p.right} right"><i class="ok" style="width:${rows.length?p.right/rows.length*100:0}%"></i><i class="no" style="width:${rows.length?p.wrong/rows.length*100:0}%"></i></div>
+        <p class="statline">${p.tried ? `You have tried <b>${p.tried}</b> of ${rows.length}, <b>${p.right}</b> right.` : 'You have not tried any question here yet.'}</p>
+        ${weak.length ? `<p class="weak">Keeps going wrong: ${weak.map(([q,n]) => esc((S.nodes.get(q)||{}).short || q) + ' (' + n + ')').join(', ')}</p>` : ''}
+        <div class="btns">${m && m.i > 0 ? `<button type="button" class="btn" data-learn="resume:${esc(t.id)}">Continue</button><button type="button" class="btn ghost" data-learn="start:${esc(t.id)}">Start over</button>` : `<button type="button" class="btn" data-learn="start:${esc(t.id)}">Start learning</button>`}<button type="button" class="btn ghost" data-learn="quiz:${esc(t.id)}">Go to quiz</button></div>
+        <div class="chips">${types.map(q=>`<button type="button" class="chip" data-learn="qtype:${esc(q.id)}"><i style="background:${color(q.id)}"></i>${esc(q.short||q.label)}${likShort(qstat(q.id))}</button>`).join('')}</div>
+      </div>`; }).join('') || '<p class="empty-msg">No topic is built yet.</p>'}</div>
+    ${waiting.length ? `<div class="section" style="margin-top:14px"><p class="eyebrow">Waiting to be built</p><div class="chips waiting">${waiting.map(t=>chip(t.id, S.tmeta[t.id].indexed)).join('')}</div><p class="note">The number is how many past questions are already filed under the topic. Send material and it gets built.</p></div>` : ''}`;
+}
+
+/* ---------- question bank: mixed practice ---------- */
 function matchRows(){
   const f = S.f;
   const rows = S.rows.filter(r => {
@@ -644,7 +753,7 @@ function matchRows(){
 const tg = (name, val, label, on) => `<button type="button" data-f="${name}" data-v="${esc(val)}" aria-pressed="${on}">${esc(label)}</button>`;
 function renderFilters(n){
   const f = S.f, tops = allBuilt().sort();
-  const types = Object.values(S.nodes ? Object.fromEntries(S.nodes) : {}).filter(x => x.kind==='qtype' && (!f.topic || topicOf(x.id)===f.topic) && S.tmeta[topicOf(x.id)] && S.tmeta[topicOf(x.id)].built);
+  const types = [...S.nodes.values()].filter(x => x.kind==='qtype' && (!f.topic || topicOf(x.id)===f.topic) && isBuiltTopic(topicOf(x.id)));
   const techs = Object.entries(S.techniques);
   $('filters').innerHTML = `
     <div class="fcount">${n} question${n===1?'':'s'} match</div>
@@ -662,6 +771,9 @@ function renderFilters(n){
 let bankToken = 0;
 async function renderBank(){
   if (!S.loaded) return;
+  [...$('btabs').querySelectorAll('button')].forEach(b => b.setAttribute('aria-pressed', String(b.dataset.bt === S.bankTab)));
+  $('bytopic').hidden = S.bankTab !== 'topic'; $('mixed').hidden = S.bankTab !== 'mixed';
+  if (S.bankTab === 'topic'){ renderByTopic(); return; }
   const tok = ++bankToken;
   const rows = matchRows();
   renderFilters(rows.length);
@@ -675,20 +787,298 @@ async function renderBank(){
   cards.innerHTML = vis.map(r => cardHtml(S.sd[r.topic].byId.get(r.id))).join('') + (rows.length > vis.length ? `<button type="button" class="more" data-more>Show ${Math.min(20, rows.length - vis.length)} more (${rows.length - vis.length} left)</button>` : '');
 }
 function openBank(spec){
-  if (spec !== undefined){
-    S.f = {topic:'', qtype:'', level:new Set(), lik:new Set(), src:'', status:'', tech:'', sort:'asked'}; S.shown = 20;
+  S.bankTab = 'topic';
+  if (spec){
+    S.f = {topic:'', qtype:'', level:new Set(), lik:new Set(), src:'', status:'', tech:'', sort:'asked'}; S.shown = 20; S.bankTab = 'mixed';
     const [k,v] = String(spec).split(':'); if (k === 'topic') S.f.topic = v; if (k === 'qtype'){ S.f.qtype = v; S.f.topic = topicOf(v) || ''; }
   }
   setView('bank');
 }
+
+/* ---------- Learn: one topic as a guided flow ---------- */
+const L = { t:null, steps:[], i:0, max:0, jump:null, quiz:null };
+function loadLearnMem(){ try { return JSON.parse(localStorage.getItem('mw-learn')||'{}') || {}; } catch(e){ return {}; } }
+function saveLearnMem(){ if (!L.t) return; try { const m = loadLearnMem(); m[L.t] = {i:L.i, max:L.max}; localStorage.setItem('mw-learn', JSON.stringify(m)); } catch(e){} }
+function buildSteps(t){
+  const steps = [{k:'overview'}];
+  for (const c of conceptsOf(t)){ steps.push({k:'concept', id:c.id}); for (const q of kidsOf(c.id).filter(n => n.kind==='qtype')) steps.push({k:'qtype', id:q.id}); }
+  steps.push({k:'quiz'});
+  return steps;
+}
+/* spec: start:<topic> | resume:<topic> | quiz:<topic> | concept:<id> | qtype:<id> (opens at the first concept, with a link down to the type) */
+async function openLearn(spec){
+  const [k, id] = String(spec).split(':');
+  const t = (k === 'qtype' || k === 'concept') ? topicOf(id) : id;
+  if (!isBuiltTopic(t)) return;
+  const same = L.t === t && L.steps.length;
+  L.t = t; L.jump = null; if (!same){ L.steps = []; L.i = 0; L.max = 0; L.quiz = null; }
+  setView('learn');
+  await loadShard(t);
+  if (L.t !== t) return;
+  if (!same) L.steps = buildSteps(t);
+  const mem = loadLearnMem()[t] || {i:0, max:0};
+  const at = (kind, rid) => Math.max(0, L.steps.findIndex(s => s.k === kind && (rid == null || s.id === rid)));
+  if (k === 'start'){ L.i = 0; L.max = 0; }
+  else if (k === 'resume'){ L.i = Math.min(mem.i || 0, L.steps.length - 1); L.max = Math.max(mem.max || 0, L.i); }
+  else if (k === 'quiz'){ L.i = at('quiz'); L.max = Math.max(L.max, L.i); L.quiz = null; }
+  else if (k === 'concept'){ L.i = at('concept', id); L.max = Math.max(L.max, L.i); }
+  else if (k === 'qtype'){ L.i = Math.min(1, L.steps.length - 1); L.max = Math.max(L.max, L.i); L.jump = id; }
+  saveLearnMem(); renderLearn(true);
+}
+const stepLabel = s => s.k === 'overview' ? 'Overview' : s.k === 'quiz' ? 'Quiz' : (S.nodes.get(s.id) || {}).short || (S.nodes.get(s.id) || {}).label;
+function typeTally(t, qid){
+  const d = S.sd[t]; const py = d.pyqs.filter(p => p.qtype === qid).length, pr = d.practice.filter(p => p.qtype === qid);
+  return {py, same: pr.filter(p => p.variant !== 'harder').length, hard: pr.filter(p => p.variant === 'harder').length};
+}
+function renderLearn(scroll){
+  const t = L.t, d = t && S.sd[t];
+  if (!t || !S.loaded) return;
+  if (!d || !L.steps.length){ $('lhead').innerHTML = ''; $('outline').innerHTML = ''; $('lmain').innerHTML = '<p class="empty-msg">Loading this topic…</p>'; return; }
+  const n = S.nodes.get(t), st = L.steps[L.i];
+  const concepts = conceptsOf(t);
+  $('lhead').innerHTML = `
+    <div class="crumbs"><button type="button" data-view="bank">Question bank</button> › <span>${esc(n.label)}</span></div>
+    <h2 style="color:${color(t)}">${esc(n.label)}</h2>
+    <div class="qprog" title="Step ${L.i+1} of ${L.steps.length}"><i style="width:${(L.i+1)/L.steps.length*100}%"></i></div>`;
+  let ol = '';
+  L.steps.forEach((s, i) => {
+    const t2 = s.k === 'qtype';
+    const mk = i < L.max && i !== L.i ? '✓' : '';
+    const cn = s.k === 'concept' ? concepts.findIndex(c => c.id === s.id) + 1 : 0;
+    ol += `<button type="button" class="oi${t2?' t2':''}${i===L.i?' cur':''}" data-step="${i}"><span class="mk">${mk}</span><span>${cn ? cn + '. ' : ''}${esc(stepLabel(s))}${s.k==='quiz' ? ` · ${S.rows.filter(r=>r.topic===t).length}` : ''}</span></button>`;
+  });
+  $('outline').innerHTML = ol;
+  $('otoggle').textContent = `Outline · step ${L.i+1} of ${L.steps.length}`;
+  const main = $('lmain');
+  if (st.k === 'overview') main.innerHTML = stepOverview(t, d);
+  else if (st.k === 'concept') main.innerHTML = stepConcept(t, d, st);
+  else if (st.k === 'qtype') main.innerHTML = stepType(t, d, st);
+  else main.innerHTML = stepQuiz(t, d);
+  if (scroll) { try { $('lhead').scrollIntoView({block:'start', behavior:'auto'}); } catch(e){} }
+}
+function learnNav(label){
+  const first = L.i === 0, last = L.i === L.steps.length - 1;
+  return `<div class="lnav"><button type="button" class="btn ghost" data-prev ${first?'disabled':''}>← Back</button>${last ? '' : `<button type="button" class="btn" data-next>${esc(label)}</button>`}</div>`;
+}
+const nextLabel = () => { const nx = L.steps[L.i + 1]; if (!nx) return ''; if (nx.k === 'quiz') return 'Start the quiz →'; if (nx.k === 'concept') return `Next concept: ${stepLabel(nx)} →`; if (nx.k === 'qtype') return `Next: ${stepLabel(nx)} →`; return 'Next →'; };
+
+function stepOverview(t, d){
+  const n = S.nodes.get(t), rows = topicRows(t), py = rows.filter(r => r.src==='pyq').length, pr = d.practice, hard = pr.filter(p => p.variant==='harder').length;
+  const p = progOf(rows), st = tstat(t), types = typesOf(t), concepts = conceptsOf(t);
+  return `
+    <div><p class="eyebrow" style="color:${color(t)}">Topic</p><h2>${esc(n.label)}</h2></div>
+    <p class="lead">${md(n.summary || '')}</p>
+    <div class="tiles">
+      <div class="tile"><b>${concepts.length}</b><span>concepts</span></div><div class="tile"><b>${types.length}</b><span>question types</span></div>
+      <div class="tile"><b>${py}</b><span>past questions</span></div><div class="tile"><b>${pr.length - hard}</b><span>practice</span></div><div class="tile"><b>${hard}</b><span>harder challenge</span></div>
+      <div class="tile"><b>${st ? st.shifts + '/' + S.stats.papers : '–'}</b><span>shifts it appeared in</span></div>
+    </div>
+    ${askedLine(st, 'This topic')}
+    <p class="mix">${LEVELS.map(l=>`<span>${lvlTag(l)} ${rows.filter(r=>r.level===l).length}</span>`).join('')}</p>
+    <p class="statline">${p.tried ? `You have tried <b>${p.tried}</b> of ${rows.length} questions here, <b>${p.right}</b> right.` : `${rows.length} questions are waiting in the quiz.`}</p>
+    <div class="section"><h3>How this goes</h3>
+      <ol class="variations"><li><b>Concepts</b>: the idea and its formulas, one concept at a time.</li><li><b>Question types</b>: how to spot each one (the cue), the standard, fast and ultra-calc methods, how to eliminate options, the traps and the variations.</li><li><b>Quiz</b>: past questions first, then new practice at the same level, then harder ones. Each answer comes with the solution, the fastest way in and why every wrong option is wrong.</li></ol></div>
+    <div class="section"><h3>The path</h3><div class="cur-list">${concepts.map((c,ci) => `<div class="c"><button type="button" class="chip" data-step="${L.steps.findIndex(s=>s.id===c.id)}"><i style="background:${color(c.id)}"></i>${ci+1}. ${esc(c.label)}</button><div class="chips" style="padding-left:14px">${kidsOf(c.id).filter(x=>x.kind==='qtype').map(q => `<button type="button" class="chip" data-step="${L.steps.findIndex(s=>s.id===q.id)}">${esc(q.short||q.label)} ${likShort(qstat(q.id))}</button>`).join('')}</div></div>`).join('')}</div></div>
+    ${(d.refs||[]).length ? `<p class="note">Outside reading for this topic is listed on the Sources page.</p>` : ''}
+    ${learnNav(nextLabel())}`;
+}
+function stepConcept(t, d, s){
+  const c = S.nodes.get(s.id), ci = conceptsOf(t).findIndex(x => x.id === s.id) + 1, fs = d.formulas.filter(f => f.node === s.id);
+  const types = kidsOf(s.id).filter(x => x.kind === 'qtype');
+  return `
+    ${L.jump ? jumpBanner() : ''}
+    <div><p class="eyebrow" style="color:${color(t)}">Concept ${ci} of ${conceptsOf(t).length}</p><h2>${esc(c.label)}</h2></div>
+    <p class="lead">${md(c.summary || '')}</p>
+    ${fs.length ? `<div class="section"><h3>Formulas to know</h3>${fs.map(formulaHtml).join('')}</div>` : ''}
+    ${types.length ? `<div class="section"><h3>Question types built on this concept</h3><ul class="rows">${types.map(q => `<li><button type="button" class="chip" data-step="${L.steps.findIndex(x=>x.id===q.id)}"><i style="background:${color(q.id)}"></i>${esc(q.label)}</button><span class="ans">${typeTally(t,q.id).py} past · ${typeTally(t,q.id).same + typeTally(t,q.id).hard} practice</span>${likTag(qstat(q.id))}</li>`).join('')}</ul></div>` : ''}
+    ${(c.links||[]).length ? `<div class="section"><h3>Connected topics</h3><div class="chips">${c.links.map(l => chip(l)).join('')}</div></div>` : ''}
+    ${learnNav(nextLabel())}`;
+}
+function jumpBanner(){
+  const q = S.nodes.get(L.jump); if (!q) return '';
+  const idx = L.steps.findIndex(x => x.id === L.jump);
+  return `<div class="banner"><span>You opened this from <b>${esc(q.label)}</b>.</span><button type="button" data-step="${idx}">Skip to that type →</button><button type="button" data-qs="${esc(L.jump)}">Quiz on that type now</button></div>`;
+}
+function stepType(t, d, s){
+  const q = S.nodes.get(s.id), m = d.methods[s.id] || {}, c = S.nodes.get(q.parent), ci = conceptsOf(t).findIndex(x => x.id === c.id) + 1;
+  const sibs = kidsOf(c.id).filter(x => x.kind === 'qtype'), qi = sibs.findIndex(x => x.id === s.id) + 1;
+  const fs = (m.formulas || []).map(fid => d.formulas.find(f => f.id === fid)).filter(Boolean);
+  const tl = typeTally(t, s.id);
+  return `
+    ${L.jump && L.jump !== s.id ? jumpBanner() : ''}
+    <div><p class="eyebrow" style="color:${color(t)}">Concept ${ci} · type ${qi} of ${sibs.length}</p><h2>${esc(q.label)}</h2></div>
+    <p class="lead">${md(q.summary || '')}</p>
+    ${askedLine(qstat(s.id), 'This type')}${mixLine(qstat(s.id))}
+    <div class="capsule">
+      <div><b>Spot it</b>${esc(m.cue || '')}</div>
+      <div><b>Do this</b>${esc(m.fast || '')}</div>
+      <div class="tp"><b>Watch out</b>${esc((m.traps || [])[0] || '')}</div>
+    </div>
+    ${fs.length ? `<div class="section"><h3>Formulas used</h3>${fs.map(formulaHtml).join('')}</div>` : ''}
+    <div class="section"><h3>How to solve it</h3>${methodHtml(m)}</div>
+    <p class="statline">In the quiz: <b>${tl.py}</b> past questions, <b>${tl.same}</b> practice at the same level, <b>${tl.hard}</b> harder.</p>
+    <div class="chips"><button type="button" class="btn ghost" data-qs="${esc(s.id)}">Quiz on this type now</button></div>
+    ${learnNav(nextLabel())}`;
+}
+
+/* quiz inside Learn */
+function quizList(t, scope){
+  const d = S.sd[t], lv = x => LEVELS.indexOf(x.level), cmp = (a,b) => lv(a)-lv(b) || a.id.localeCompare(b.id);
+  if (scope === 'wrong'){
+    const out = [];
+    for (const q of typesOf(t)) [...d.byId.values()].filter(x => x.qtype === q.id && S.prog[x.id] && !S.prog[x.id].r).sort(cmp).forEach(x => out.push({id:x.id, phase: x.src === 'pyq' ? 'Past question' : x.variant === 'harder' ? 'Challenge' : 'Practice'}));
+    return out;
+  }
+  const out = [], types = scope === 'all' ? typesOf(t).map(n => n.id) : [scope];
+  for (const qid of types){
+    d.pyqs.filter(p => p.qtype === qid).sort(cmp).forEach(x => out.push({id:x.id, phase:'Past question'}));
+    const pr = d.practice.filter(p => p.qtype === qid);
+    pr.filter(p => p.variant !== 'harder').sort(cmp).forEach(x => out.push({id:x.id, phase:'Practice'}));
+    pr.filter(p => p.variant === 'harder').sort(cmp).forEach(x => out.push({id:x.id, phase:'Challenge'}));
+  }
+  return out;
+}
+function startQuiz(scope){
+  const t = L.t; const list = quizList(t, scope);
+  if (!list.length) return;
+  L.quiz = {scope, list, pos:0, ans:{}, done:false};
+  const qi = L.steps.findIndex(s => s.k === 'quiz'); L.i = qi; L.max = Math.max(L.max, qi); saveLearnMem(); renderLearn(true);
+}
+function stepQuiz(t, d){
+  const Q = L.quiz;
+  if (!Q) return quizMenu(t, d);
+  if (Q.done) return quizSummary(t, d);
+  const e = Q.list[Q.pos], x = d.byId.get(e.id), chosen = Q.ans[x.id];
+  const qn = S.nodes.get(x.qtype), answered = !!chosen, ok = chosen === x.key;
+  const last = Q.pos === Q.list.length - 1;
+  return `
+    <div class="qhead"><span class="eyebrow">Question ${Q.pos+1} of ${Q.list.length}</span><span class="tag ${e.phase==='Challenge'?'p-high':'bg'}">${esc(e.phase)}</span><button type="button" class="chip" data-step="${L.steps.findIndex(s=>s.id===x.qtype)}" title="Go back to this type's method">${esc(qn.short||qn.label)}</button></div>
+    <div class="qprog"><i style="width:${(Q.pos + (answered?1:0)) / Q.list.length * 100}%"></i></div>
+    <div class="lq" data-id="${esc(x.id)}">
+      <div class="qhead">${headTags(x)}</div>
+      <p class="qtext">${esc(x.text)}</p>
+      <div class="opts">${optBtns(x, answered ? chosen : null)}</div>
+      ${answered ? '' : `<button type="button" class="qbtn" data-reveal>Show answer</button>`}
+      ${answered ? `<div class="rv"><div class="verdict ${chosen==='*'?'':ok?'ok':'no'}">${chosen==='*' ? `The answer is (${x.key}).` : ok ? 'Correct.' : `Not quite. The answer is (${x.key}).`}</div>${revealInner(x)}</div>` : ''}
+    </div>
+    <div class="lnav"><button type="button" class="btn ghost" data-qprev ${Q.pos===0?'disabled':''}>← Previous</button><button type="button" class="btn ghost" data-qend>End quiz</button><button type="button" class="btn" data-qnext ${answered?'':'disabled'}>${last?'See result':'Next question →'}</button></div>`;
+}
+function quizMenu(t, d){
+  const types = typesOf(t), rows = topicRows(t), p = progOf(rows), wrongN = p.wrong;
+  return `
+    <div><p class="eyebrow" style="color:${color(t)}">Quiz</p><h2>${esc(S.nodes.get(t).label)}: the quiz</h2></div>
+    <p class="lead">Each type runs in this order: past questions (easiest first), new practice at the same level, then harder challenge questions. Answer, then read the solution, the fastest way in and why the other options fail. Keys a to d pick an option, Enter goes on.</p>
+    <div class="chips"><button type="button" class="btn" data-qs="all">Start all ${rows.length} questions</button>${wrongN ? `<button type="button" class="btn ghost" data-qs="wrong">Redo my ${wrongN} wrong</button>` : ''}</div>
+    <div class="section"><h3>Or one type at a time</h3>
+      ${types.map(q => { const tl = typeTally(t, q.id), r = rows.filter(x => x.qtype === q.id), pp = progOf(r);
+        return `<div class="qrow"><div><b>${esc(q.label)}</b><div class="statline">${tl.py} past · ${tl.same} practice · ${tl.hard} harder${pp.tried ? ` · tried ${pp.tried}, right ${pp.right}` : ''}</div></div>${likTag(qstat(q.id))}<button type="button" class="qbtn" data-qs="${esc(q.id)}">Start</button></div>`; }).join('')}</div>
+    ${learnNav('')}`;
+}
+function quizSummary(t, d){
+  const Q = L.quiz, items = Q.list.map(e => d.byId.get(e.id));
+  const got = items.filter(x => Q.ans[x.id] === x.key), skipped = items.filter(x => Q.ans[x.id] === '*'), missed = items.filter(x => Q.ans[x.id] && Q.ans[x.id] !== '*' && Q.ans[x.id] !== x.key);
+  const unseen = items.filter(x => !Q.ans[x.id]);
+  const byType = {}; items.forEach(x => { const b = byType[x.qtype] || (byType[x.qtype] = {n:0, r:0, w:0}); if (Q.ans[x.id]){ b.n++; if (Q.ans[x.id] === x.key) b.r++; else b.w++; } });
+  const weak = Object.entries(byType).filter(([,b]) => b.w > 0).sort((a,b) => b[1].w - a[1].w);
+  const answered = got.length + missed.length;
+  return `
+    <div><p class="eyebrow" style="color:${color(t)}">Result</p><div class="score">${got.length} / ${answered}</div></div>
+    <p class="lead">${answered ? `${Math.round(got.length / answered * 100)}% right${skipped.length ? `, ${skipped.length} shown without answering` : ''}${unseen.length ? `, ${unseen.length} not reached` : ''}.` : 'No question was answered.'}</p>
+    <div class="section"><h3>By type</h3><ul class="rows">${Object.entries(byType).map(([q,b]) => `<li><button type="button" class="chip" data-step="${L.steps.findIndex(s=>s.id===q)}">${esc(S.nodes.get(q).label)}</button><span class="ans">${b.r} of ${b.n} right</span></li>`).join('')}</ul></div>
+    ${weak.length ? `<div class="section"><h3>Revise these methods</h3><p class="note">You missed questions of these types. Go back to the method, then redo them.</p><div class="chips">${weak.map(([q,b]) => `<button type="button" class="chip" data-step="${L.steps.findIndex(s=>s.id===q)}">${esc(S.nodes.get(q).short||S.nodes.get(q).label)} · ${b.w} wrong</button>`).join('')}</div></div>` : ''}
+    <div class="chips">${missed.length ? `<button type="button" class="btn" data-qs="wrong">Redo wrong answers</button>` : ''}<button type="button" class="btn ghost" data-qmenu>Back to the quiz menu</button></div>`;
+}
+function answerLearn(x, key){
+  const Q = L.quiz; if (!Q || Q.ans[x.id]) return;
+  if (key === '*'){ Q.ans[x.id] = '*'; }
+  else { Q.ans[x.id] = key; S.prog[x.id] = {r: key === x.key ? 1 : 0}; saveProg(); }
+  renderLearn(false);
+}
+function quizNext(){ const Q = L.quiz; if (!Q) return; if (Q.pos < Q.list.length - 1) Q.pos++; else Q.done = true; renderLearn(true); }
+function learnGo(i){
+  if (i < 0 || i >= L.steps.length) return;
+  L.i = i; L.max = Math.max(L.max, i); if (L.steps[i].k !== 'quiz' && L.quiz && L.quiz.done) L.quiz = null;
+  $('outline').classList.remove('open'); saveLearnMem(); renderLearn(true);
+}
+$('lmain').addEventListener('click', e => {
+  const o = e.target.closest('button.opt'), rv = e.target.closest('[data-reveal]');
+  if (o || rv){ const box = e.target.closest('.lq'); if (!box || !L.quiz) return; const x = S.sd[L.t].byId.get(box.dataset.id); if (o && !o.disabled) answerLearn(x, o.dataset.k); else if (rv) answerLearn(x, '*'); return; }
+  const b = e.target.closest('button'); if (!b || b.disabled) return;
+  if (b.hasAttribute('data-next')) learnGo(L.i + 1);
+  else if (b.hasAttribute('data-prev')) learnGo(L.i - 1);
+  else if (b.dataset.step != null) learnGo(+b.dataset.step);
+  else if (b.dataset.qs != null) startQuiz(b.dataset.qs);
+  else if (b.hasAttribute('data-qnext')) quizNext();
+  else if (b.hasAttribute('data-qprev')){ if (L.quiz && L.quiz.pos > 0){ L.quiz.pos--; renderLearn(true); } }
+  else if (b.hasAttribute('data-qend')){ if (L.quiz){ L.quiz.done = true; renderLearn(true); } }
+  else if (b.hasAttribute('data-qmenu')){ L.quiz = null; renderLearn(true); }
+  else if (b.dataset.go != null){ const id = b.dataset.go; setView('web'); select(id || null); }
+  else if (b.dataset.view){ setView(b.dataset.view); }
+});
+$('lhead').addEventListener('click', e => { const b = e.target.closest('[data-view]'); if (b) setView(b.dataset.view); });
+$('outline').addEventListener('click', e => { const b = e.target.closest('[data-step]'); if (b) learnGo(+b.dataset.step); });
+$('otoggle').addEventListener('click', () => $('outline').classList.toggle('open'));
+document.addEventListener('keydown', e => {
+  if (S.view !== 'learn' || !L.quiz || L.quiz.done || /^(INPUT|SELECT|TEXTAREA)$/.test((e.target||{}).tagName||'') || e.metaKey || e.ctrlKey || e.altKey) return;
+  const d = S.sd[L.t]; if (!d) return; const en = L.quiz.list[L.quiz.pos], x = d.byId.get(en.id), done = !!L.quiz.ans[x.id];
+  if (!done && 'abcd'.includes(e.key) && e.key.length === 1 && x.options['abcd'.indexOf(e.key)] != null) answerLearn(x, e.key);
+  else if (done && (e.key === 'Enter' || e.key === 'ArrowRight')){ e.preventDefault(); quizNext(); }
+});
+
+/* ---------- Sources ---------- */
+const KIND = {'similar-paper':'Similar paper (made by a coaching institute, not the official paper)', official:'Official paper', memory:'Memory-based paper'};
+const pcache = {};
+function renderSources(){
+  if (!S.loaded) { $('sources').innerHTML = '<p class="empty-msg">Loading…</p>'; return; }
+  const ps = [...S.papers].sort((a,b) => (b.date||'').localeCompare(a.date||'') || a.shift - b.shift);
+  const filed = ps.reduce((a,p) => a + p.n, 0), built = ps.reduce((a,p) => a + (p.built||0), 0);
+  const byTopic = {}; (S.refs||[]).forEach(r => (byTopic[r.topic] = byTopic[r.topic] || []).push(r));
+  $('sources').innerHTML = `<div class="srcwrap">
+    <div><p class="eyebrow">Sources</p><h2>Where every question comes from</h2></div>
+    <p class="lead" style="margin:0;font-family:var(--body);font-size:16px;line-height:1.55">${plural(ps.length,'paper')}, ${filed} Quant questions filed, ${built} of them already built into quizzes. Every filed answer was recomputed from the question's own numbers. Practice questions are written fresh, with their answers worked out twice by different methods.</p>
+    <div class="section"><p class="eyebrow">Papers</p>${ps.map(p => `<div class="pcard" data-pid="${esc(p.id)}">
+      <h3>${esc(p.exam)} · ${fmtDate(p.date)} · Shift ${p.shift}</h3>
+      <div class="meta-row"><span>${esc(p.publisher)}</span><span>${esc(KIND[p.kind] || p.kind)}</span><span>Quant ${esc(p.quant)}</span><span>${p.n} filed</span><span>${p.built||0} built into quizzes</span></div>
+      <div class="chips">${Object.entries(p.topics||{}).map(([t,c]) => `<span class="chip" style="cursor:default"><i style="background:${color(t)}"></i>${esc((S.nodes.get(t)||{}).label || t)} <span class="n">${c}</span></span>`).join('')}</div>
+      <div class="chips">${p.link ? `<a class="ext" href="${esc(p.link)}" target="_blank" rel="noopener">Open the paper ↗</a>` : ''}<button type="button" class="btn-link" data-plist="${esc(p.id)}">Show the question list</button></div>
+      <div class="tscroll" data-plist-box hidden></div></div>`).join('')}</div>
+    <div class="section"><p class="eyebrow">Outside reading (links and notes, nothing copied)</p>
+      ${Object.entries(byTopic).map(([t, rs]) => `<div class="pcard"><h3>${esc((S.nodes.get(t)||{}).label || t)}</h3><ul class="rows">${rs.map(r => `<li style="display:block"><a class="ext" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)} ↗</a><div class="note">${esc(r.note)}</div></li>`).join('')}</ul></div>`).join('') || '<p class="empty-msg">None yet.</p>'}</div>
+    <p class="note">The first three papers are similar papers, not official CGL papers, so the counts show that publisher's style. Likelihood stays provisional until official papers are added.</p></div>`;
+}
+$('sources').addEventListener('click', async e => {
+  const b = e.target.closest('[data-plist]'); if (!b) return;
+  const card = b.closest('.pcard'), box = card.querySelector('[data-plist-box]'), id = b.dataset.plist;
+  if (!box.hidden){ box.hidden = true; b.textContent = 'Show the question list'; return; }
+  box.hidden = false; b.textContent = 'Hide the question list';
+  if (!box.dataset.done){
+    box.innerHTML = '<p class="empty-msg">Loading…</p>';
+    try { const d = await (pcache[id] = pcache[id] || get('data/papers/' + id + '.json'));
+      box.innerHTML = `<table class="plist"><thead><tr><th>Q</th><th>Topic</th><th>Answer</th><th>Checked</th></tr></thead><tbody>${d.rows.map(r => `<tr><td>${r.qno}</td><td>${esc((S.nodes.get(r.topic)||{}).label || r.topic)}</td><td>(${esc(r.key)}) ${esc(r.answer)}</td><td>${r.verified ? 'yes' : 'no'}</td></tr>`).join('')}</tbody></table>`; box.dataset.done = '1'; }
+    catch(err){ box.innerHTML = '<p class="empty-msg">Could not load this paper list.</p>'; }
+  }
+});
+
+/* ---------- views and routing ---------- */
 function setView(v){
   S.view = v;
-  $('bank').hidden = v !== 'bank'; document.querySelector('.layout').hidden = v !== 'web';
-  [...$('tabs').querySelectorAll('button')].forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
-  try { history.replaceState(null,'', v==='bank' ? '#bank' : (S.sel ? '#'+S.sel : location.pathname+location.search)); } catch(e){}
-  if (v === 'bank') renderBank(); else { if (!S.fitted) requestAnimationFrame(() => { fit(false); S.fitted = true; }); renderPanel(); }
+  $('bank').hidden = v !== 'bank'; $('learn').hidden = v !== 'learn'; $('sources').hidden = v !== 'sources'; document.querySelector('.layout').hidden = v !== 'web';
+  $('show').hidden = v !== 'web';
+  [...$('tabs').querySelectorAll('button')].forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v || (v === 'learn' && b.dataset.view === 'bank'))));
+  let h = '';
+  if (v === 'bank') h = S.bankTab === 'mixed' ? '#practice' : '#bank';
+  else if (v === 'learn') h = '#learn-' + L.t;
+  else if (v === 'sources') h = '#sources';
+  else if (S.sel) h = '#' + S.sel;
+  try { history.replaceState(null, '', h || location.pathname + location.search); } catch(e){}
+  if (v === 'bank') renderBank();
+  else if (v === 'learn') renderLearn(true);
+  else if (v === 'sources') renderSources();
+  else { if (!S.fitted) requestAnimationFrame(() => { fit(false); S.fitted = true; }); renderPanel(); }
+  if (v !== 'web') window.scrollTo(0, 0);
 }
-$('tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (b) setView(b.dataset.view); });
+$('tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.view === 'bank') S.bankTab = S.bankTab || 'topic'; setView(b.dataset.view); });
+$('btabs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; S.bankTab = b.dataset.bt; setView('bank'); });
 $('filters').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
   if (b.hasAttribute('data-reset')){ S.f = {topic:'', qtype:'', level:new Set(), lik:new Set(), src:'', status:'', tech:'', sort:S.f.sort}; }
@@ -701,7 +1091,7 @@ $('filters').addEventListener('change', e => { const s = e.target.closest('selec
   if (s.dataset.sel === 'qtype' && s.value) S.f.topic = topicOf(s.value) || S.f.topic;
   S.shown = 20; renderBank(); });
 
-/* answering: works the same in the web panel, in search results and in the bank */
+/* answering a card (mixed practice) and the clicks that lead into Learn */
 function onQuizClick(e){
   const card = e.target.closest('.qz'); if (!card) return false;
   const o = e.target.closest('button.opt'), rv = e.target.closest('[data-reveal]');
@@ -721,20 +1111,30 @@ function onQuizClick(e){
   }
   return true;
 }
+/* a question-type node of a built topic goes straight into Learn; everything else selects the node */
+function activate(id){
+  const n = S.nodes.get(id);
+  if (n && n.kind === 'qtype' && isBuiltTopic(topicOf(id))){ openLearn('qtype:' + id); return; }
+  select(id || null);
+}
+document.addEventListener('click', e => {
+  const l = e.target.closest('[data-learn]'); if (l && !e.target.closest('#lmain')){ openLearn(l.getAttribute('data-learn')); return; }
+  const v = e.target.closest('[data-view]'); if (v && !e.target.closest('#lmain') && !e.target.closest('#lhead') && !e.target.closest('#tabs')){ setView(v.dataset.view); return; }
+});
 $('panel').addEventListener('click', e => {
-  if (onQuizClick(e)) return;
+  if (e.target.closest('[data-learn]') || e.target.closest('[data-view]')) return;
   const bk = e.target.closest('[data-bank]'); if (bk){ openBank(bk.getAttribute('data-bank')); return; }
   const b = e.target.closest('[data-go]'); if(!b) return;
   const id = b.getAttribute('data-go');
   if (S.q && id){ S.q=''; $('q').value=''; drawWeb(); }
-  select(id || null);
+  activate(id || null);
   $('panel').scrollTop = 0;
 });
 $('cards').addEventListener('click', e => {
   if (onQuizClick(e)) return;
   if (e.target.closest('[data-more]')){ S.shown += 20; renderBank(); return; }
-  const b = e.target.closest('[data-go]'); if (b){ const id = b.getAttribute('data-go'); setView('web'); select(id || null); }
 });
+$('bytopic').addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b){ setView('web'); select(b.getAttribute('data-go') || null); } });
 
 /* ---------- state changes ---------- */
 function select(id){
@@ -742,8 +1142,14 @@ function select(id){
   try { if (S.sel) history.replaceState(null,'','#'+S.sel); else history.replaceState(null,'',location.pathname+location.search); } catch(e){}
   applyHighlight(); renderPanel();
 }
+function route(h){
+  if (h === 'bank' || h === 'practice'){ S.bankTab = h === 'practice' ? 'mixed' : 'topic'; setView('bank'); return true; }
+  if (h === 'sources'){ setView('sources'); return true; }
+  if (h.startsWith('learn-')){ const t = h.slice(6); if (isBuiltTopic(t)){ openLearn('resume:' + t); return true; } }
+  return false;
+}
 window.addEventListener('hashchange', () => { const h = location.hash.slice(1);
-  if (h === 'bank'){ if (S.view !== 'bank') setView('bank'); return; }
+  if (route(h)) return;
   if (S.view !== 'web') setView('web');
   if (h !== (S.sel||'')) select(h||null); });
 $('show').addEventListener('click', e => { const b = e.target.closest('button'); if(!b) return;
@@ -764,7 +1170,7 @@ function renderHeader(){
 }
 function schedule(){ requestAnimationFrame(() => { derive(); paintJunctions(); renderHeader(); drawWeb();
   const h = location.hash.slice(1);
-  if (h === 'bank'){ setView('bank'); return; }
+  if (route(h)) return;
   if (h && S.nodes.has(h) && !S.sel) { S.sel = h; applyHighlight(); }
   renderPanel(); }); }
 let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (S.view==='web') fit(false); }, 200); });
@@ -774,7 +1180,7 @@ renderHeader(); renderPanel();
   try {
     const c = await get('data/core.json');
     S.nodes = new Map(Object.entries(c.nodes).map(([id,n]) => [id, Object.assign({id}, n)]));
-    S.papers = c.papers; S.stats = c.stats.all || S.stats; S.tmeta = c.topics; S.techniques = c.techniques; S.rubric = c.rubric; S.likNote = c.likelihood;
+    S.papers = c.papers; S.stats = c.stats.all || S.stats; S.tmeta = c.topics; S.techniques = c.techniques; S.rubric = c.rubric; S.likNote = c.likelihood; S.refs = c.refs || [];
     const cols = c.bank.cols; S.rows = c.bank.rows.map(r => Object.fromEntries(cols.map((k,i) => [k, r[i]])));
     S.loaded = true; S.status = 'ok';
     schedule();

@@ -29,7 +29,8 @@ DATA = os.path.join(ROOT, "data")
 
 import bank
 
-METHOD_KEYS = ["formulas", "standard", "fast", "ultra", "eliminate", "traps"]
+METHOD_KEYS = ["formulas", "cue", "standard", "fast", "ultra", "eliminate", "traps"]
+MIN_SAME, MIN_HARDER = 3, 3      # every question type needs at least this many extra practice questions of each kind, one of them Hard
 
 
 def jload(p):
@@ -114,8 +115,11 @@ def build_pyqs(M):
 
 def build_practice(M, pyqs, errs):
     out = []
+    seen_ids = set()
     for n, p in enumerate(M.practice_items(), 1):
-        iid = f"{M.PREFIX}-p{n:02d}"
+        iid = p.get("uid") or f"{M.PREFIX}-p{n:02d}"
+        if iid in seen_ids: errs.append(f"{iid}: duplicate practice id"); continue
+        seen_ids.add(iid)
         if p["qtype"] not in M.NODES or M.NODES[p["qtype"]]["kind"] != "qtype":
             errs.append(f"{iid}: qtype {p['qtype']} is not a question type of this topic"); continue
         if p["check"] is None or F(p["correct"]) != F(p["check"]):
@@ -134,6 +138,11 @@ def build_practice(M, pyqs, errs):
         sc = bank.score(p["steps"], p["concepts"], p["heavy"], True)
         out.append({"id": iid, "qtype": p["qtype"], "variant": p["variant"], "score": sc, "level": bank.level(sc), "tech": p["tech"], "text": p["text"],
                     "options": [shown[j] for j in order], "key": key, "solution": p["why"], "wrong": wrong})
+    for qt in [k for k, n in M.NODES.items() if n["kind"] == "qtype"]:
+        mine = [x for x in out if x["qtype"] == qt]
+        same, harder = sum(x["variant"] == "same" for x in mine), sum(x["variant"] == "harder" for x in mine)
+        if same < MIN_SAME or harder < MIN_HARDER: errs.append(f"{qt}: needs at least {MIN_SAME} same-level and {MIN_HARDER} harder practice questions, has {same} and {harder}")
+        if mine and not any(x["level"] == "Hard" for x in mine): errs.append(f"{qt}: needs at least one practice question that scores Hard")
     return out
 
 

@@ -5,8 +5,9 @@ Every PYQ answer is recomputed from its own numbers; every wrong-option note car
 practice answer is found twice by different methods. tools/build_topic.py enforces all of it.
 """
 from fractions import Fraction as F
+from math import gcd
 
-from bank import bound, inr, mistake, pyq, prac, share
+from bank import bound, inr, mistake, pyq, prac, share, variants
 
 TOPIC = "partnership"      # a topic node in data/tree.json
 PREFIX = "pt"              # practice ids: pt-p01, pt-p02, ... (append new items at the end so old ids never move)
@@ -55,6 +56,7 @@ FORMULAS = [
 # ----------------------------------------------------------------------------------------------
 METHODS = {
     "q-pt-two": {
+        "cue": "Two or three people put in money for stated times and share a profit, or one person's share is given and the total profit is asked.",
         "formulas": ["pt-f1", "pt-f2", "pt-f3"],
         "tech": ["ratio-parts", "cancel-first", "bounds"],
         "standard": "Multiply each partner's capital by his months. Write the ratio, add the parts, take his part ÷ total × profit. For 'find total profit', divide the known share by his fraction.",
@@ -64,6 +66,7 @@ METHODS = {
         "traps": ["Ignoring time and splitting by capital alone.", "Giving the answer for the wrong partner (read who the question asks for).", "In 'find total profit', multiplying by the wrong fraction (use his part, not the other partner's)."],
     },
     "q-pt-late": {
+        "cue": 'Someone joins after some months, withdraws, or adds money part-way through the year.',
         "formulas": ["pt-f1", "pt-f4", "pt-f5"],
         "tech": ["ratio-parts", "bounds"],
         "standard": "Find each partner's months in the business (12 − months before joining). Multiply capital × months, make the ratio, then share the profit.",
@@ -73,6 +76,7 @@ METHODS = {
         "traps": ["Counting months before joining instead of months after (joined at month 5 → he stays 7 months, not 5).", "Forgetting that the founder stays all 12 months.", "Using capitals only."],
     },
     "q-pt-working": {
+        "cue": "One partner also 'works' or 'manages' the business and gets a percentage of the profit extra.",
         "formulas": ["pt-f6", "pt-f2"],
         "tech": ["bounds", "fraction-percent"],
         "standard": "Take the working partner's % off the profit first. Share the balance in the investment ratio. His total = commission + his share of the balance.",
@@ -82,6 +86,7 @@ METHODS = {
         "traps": ["Taking his ratio share of the full profit and then adding the commission (double counting).", "Taking the commission as a % of his own share instead of the whole profit.", "Forgetting to add the commission to his total."],
     },
     "q-pt-pasture": {
+        "cue": "Different animals kept for different months by different people, one rent shared, and an equivalence such as '3 cows = 7 goats'.",
         "formulas": ["pt-f7", "pt-f8", "pt-f1"],
         "tech": ["common-unit", "estimate"],
         "standard": "Pick one animal as the standard. Convert every other animal using the given equivalence. Multiply animals × months for each person, then split the rent in that ratio.",
@@ -193,7 +198,7 @@ TIMEONLY = "Split by time alone and ignored the capital."
 NOTADD = "Ignored the months the late partner was absent."
 
 
-def practice_items():
+def _hand_items():
     out = []
     # ---------------- two partners ----------------
     cm = [60000 * 10, 80000 * 6]
@@ -267,4 +272,136 @@ def practice_items():
                     share([6 * 4 * F(5, 2) + 12 * 3, 20 * 6 * F(3, 4)], 0, 18600),
                     [(share([6 * 4 + 12 * 3, 20 * 6], 0, 18600), "Treated all three animals as the same."), (share([6 * 4 * F(5, 2) + 12 * 3, 20 * 6 * F(4, 3)], 0, 18600), "Used the sheep equivalence upside down: a sheep is 3/4 goat."), (share([6 * 4 * F(5, 2) + 12 * 3, 20 * 6 * F(3, 4)], 1, 18600), OTHER)],
                     "In goats: X = 24 × 2.5 + 36 = 96; Y = 120 × 0.75 = 90. X pays 96/186 of 18,600.", month_sim([[6 * 10 + 12 * 4] * 3 + [6 * 10] * 1, [20 * 3] * 6], 0, 18600), tech=["common-unit"]))
+    return out
+
+
+# ----------------------------------------------------------------------------------------------
+# Generated practice: each template draws clean numbers, builds the question, three named-mistake traps and
+# a second-method check. tools/bank.variants() makes them deterministic and refuses unclean or colliding draws.
+# ----------------------------------------------------------------------------------------------
+def _names(rng, k):
+    return rng.sample(["A", "B", "C", "P", "Q", "R", "X", "Y", "M", "N", "S", "T"], k)
+
+
+def _parts(cm):
+    g = 0
+    for x in cm: g = gcd(g, int(x))
+    return [int(x) // g for x in cm]
+
+
+def _profit(rng, parts_sum, units):
+    """A total that splits into whole rupees for the given ratio parts, and is not tiny."""
+    u = rng.choice(units)
+    return parts_sum * u * max(1, -(-12000 // (parts_sum * u)))
+
+
+def t_two_share(rng):
+    a, b = _names(rng, 2)
+    c1, c2 = rng.choice([20, 25, 30, 40, 45, 50, 60, 75, 80, 90]), rng.choice([20, 25, 30, 40, 45, 50, 60, 75, 80, 90])
+    m1, m2 = rng.randint(3, 12), rng.randint(3, 12)
+    cm = [c1 * m1, c2 * m2]
+    if c1 == c2 or m1 == m2 or cm[0] == cm[1]: return None
+    pr = _parts(cm); profit = _profit(rng, sum(pr), [300, 500, 600, 1000, 1200]); who = rng.randint(0, 1); nm = (a, b)
+    ans = share(cm, who, profit)
+    return prac("q-pt-two", "same", f"{a} invests {inr(c1 * 1000)} for {m1} months and {b} invests {inr(c2 * 1000)} for {m2} months. The profit is {inr(profit)}. Find {nm[who]}'s share.",
+                ans, [(share(cm, 1 - who, profit), "That is the other partner's share. Read who the question asks for."), (share([c1, c2], who, profit), "Split by capital alone and ignored the time."), (share([m1, m2], who, profit), "Split by time alone and ignored the capital.")],
+                f"Capital-months (in thousands): {a} = {c1}×{m1} = {cm[0]}, {b} = {c2}×{m2} = {cm[1]}. Ratio {pr[0]} : {pr[1]}. {nm[who]} gets {pr[who]}/{sum(pr)} of {inr(profit)}.",
+                month_sim([[c1 * 1000] * m1, [c2 * 1000] * m2], who, profit), tech=["ratio-parts", "cancel-first"])
+
+
+def t_two_total(rng):
+    c1, c2, t, d = rng.choice([40, 60, 80, 100, 120]), rng.choice([50, 60, 70, 90, 100]), rng.randint(3, 8), rng.choice([-30, -20, 20, 30, 40])
+    if c1 + d <= 0: return None
+    cmA, cmB = c1 * t + (c1 + d) * (12 - t), c2 * 12
+    pr = _parts([cmA, cmB]); unit = rng.choice([400, 500, 800, 1000]); S, T = pr[1] * unit, sum(pr) * unit
+    verb = "adds" if d > 0 else "withdraws"
+    wrong1 = F(S) * (c1 * 12 + c2 * 12) / (c2 * 12)
+    return prac("q-pt-two", "harder", f"A starts with {inr(c1 * 1000)} and {verb} {inr(abs(d) * 1000)} after {t} months. B keeps {inr(c2 * 1000)} for the whole year. B's share of the year's profit is {inr(S)}. Find the total profit.",
+                F(T), [(wrong1, "Ignored the change in A's capital and used it for all 12 months."), (F(S) * sum(pr) / pr[0], "Used A's fraction instead of B's."), (F(S) * (c1 * (12 - t) + (c1 + d) * t + c2 * 12) / (c2 * 12), f"Swapped the stretches: used the new capital for {t} months and the old for {12 - t}.")],
+                f"A: {c1}×{t} + {c1 + d}×{12 - t} = {cmA} (thousands). B: {c2}×12 = {cmB}. Ratio {pr[0]} : {pr[1]}. B has {pr[1]} of {sum(pr)} parts. Total = {S} × {sum(pr)} ÷ {pr[1]} = {T}.",
+                month_sim_total([[c1 * 1000] * t + [(c1 + d) * 1000] * (12 - t), [c2 * 1000] * 12], 1, S), concepts=2, steps=5, tech=["ratio-parts"])
+
+
+def t_late_share(rng):
+    a, b = _names(rng, 2); c1, c2, m = rng.choice([30, 40, 50, 60, 75, 80]), rng.choice([40, 50, 60, 70, 90, 100]), rng.randint(2, 8)
+    cm = [c1 * 12, c2 * (12 - m)]
+    if cm[0] == cm[1] or c1 == c2: return None
+    pr = _parts(cm); profit = _profit(rng, sum(pr), [500, 600, 1000, 1500]); who = rng.randint(0, 1); nm = (a, b)
+    return prac("q-pt-late", "same", f"{a} starts a business with {inr(c1 * 1000)}. After {m} months {b} joins with {inr(c2 * 1000)}. The profit at the end of the year is {inr(profit)}. Find {nm[who]}'s share.",
+                share(cm, who, profit), [(share(cm, 1 - who, profit), "That is the other partner's share."), (share([c1 * 12, c2 * m], who, profit), f"Gave {b} {m} months instead of {12 - m}."), (share([c1, c2], who, profit), "Split by capital alone.")],
+                f"{a}: {c1}×12 = {cm[0]}. {b}: {c2}×{12 - m} = {cm[1]}. Ratio {pr[0]} : {pr[1]}. {nm[who]} gets {pr[who]}/{sum(pr)} of {inr(profit)}.",
+                month_sim([[c1 * 1000] * 12, [0] * m + [c2 * 1000] * (12 - m)], who, profit), tech=["ratio-parts", "cancel-first"])
+
+
+def t_late_unknown(rng):
+    c1, x, m = rng.choice([40, 60, 80, 100, 120]), rng.choice([30, 40, 50, 60, 80, 90]), rng.randint(2, 8)
+    cm = [c1 * 12, x * (12 - m)]; pr = _parts(cm)
+    if pr[0] == pr[1] or max(pr) > 12: return None
+    ok = month_sim([[c1 * 1000] * 12, [0] * m + [x * 1000] * (12 - m)], 0, 100 * sum(pr)) == F(pr[0]) * 100
+    return prac("q-pt-late", "harder", f"A starts a business with {inr(c1 * 1000)}. After {m} months B joins with some capital. At the end of the year the profit is shared {pr[0]} : {pr[1]} between A and B. Find B's investment.",
+                F(x * 1000), [(F(c1 * 1000 * pr[1], pr[0]), "Ignored the months: treated both as in for the full year."), (F(c1 * 12 * 1000 * pr[1], pr[0] * m), f"Used {m} months for B instead of {12 - m}."), (F(c1 * 12 * 1000 * pr[0], pr[1] * (12 - m)), "Inverted the ratio.")],
+                f"A : B = {c1}×12 : x×{12 - m} = {pr[0]} : {pr[1]}. So x × {12 - m} × {pr[0]} = {c1 * 12} × {pr[1]}. B's months are {12 - m}, not {m}. x = {x} thousand, i.e. {inr(x * 1000)}.",
+                F(x * 1000) if ok else None, concepts=2, steps=5, tech=["ratio-parts"])
+
+
+def t_working_total(rng):
+    r = rng.choice([(2, 3), (3, 5), (1, 3), (2, 7), (3, 4), (4, 5)]); c = rng.choice([5, 10, 12, 15, 20]); k = rng.randint(2, 9)
+    profit = 1000 * sum(r) * k; w = rng.randint(0, 1); nm = rng.sample(["P", "Q", "A", "B", "X", "Y"], 2)
+    comm = F(c, 100) * profit; bal = profit - comm; ans = comm + F(r[w], sum(r)) * bal
+    return prac("q-pt-working", "same", f"{nm[0]} and {nm[1]} invest in the ratio {r[0]} : {r[1]} and earn {inr(profit)}. {nm[w]} works in the business and gets {c}% of the profit extra. Find {nm[w]}'s total.",
+                ans, [(comm + F(r[w], sum(r)) * profit, "Took the ratio share of the full profit and added the commission (double counting)."), (F(r[w], sum(r)) * profit, "Forgot the commission."), (F(r[w], sum(r)) * bal, "Forgot to add the commission to the ratio share of the balance.")],
+                f"Commission = {c}% of {profit} = {int(comm)}. Balance = {int(bal)}. {nm[w]}'s part = {r[w]}/{sum(r)} × {int(bal)} = {int(F(r[w], sum(r)) * bal)}. Total = {int(ans)}.",
+                work_total(profit, {w: F(c, 100)}, list(r), w), tech=["fraction-percent"])
+
+
+def t_working_find(rng):
+    r = rng.choice([(2, 3, 5), (1, 2, 3), (3, 4, 5), (2, 2, 1), (1, 1, 2)]); x = rng.choice([4, 5, 8, 10, 12, 15]); k = rng.randint(3, 9)
+    P = 100 * sum(r) * k * 10; S = F(r[2], sum(r)) * (P - F(x, 100) * P)
+    frac = F(r[2], sum(r))
+    return prac("q-pt-working", "harder", f"A, B and C invest in the ratio {r[0]} : {r[1]} : {r[2]}. A works in the business and gets {x}% of the profit extra. C's share is {inr(S)}. Find the total profit.",
+                F(P), [(S / frac, "Forgot the commission and divided by C's fraction alone."), (S / (frac * (1 + F(x, 100))), "Added the commission instead of taking it off."), (S / frac * (1 - F(x, 100)), "Multiplied by (1 − commission) instead of dividing.")],
+                f"C has {r[2]}/{sum(r)} of the balance. The balance is {100 - x}% of the profit. So C's share = {r[2]}/{sum(r)} × {100 - x}% × profit. Profit = {int(S)} ÷ ({r[2]}/{sum(r)} × {100 - x}/100). That gives {P}.",
+                F(P) if work_total(P, {0: F(x, 100)}, list(r), 2) == S else None, concepts=2, steps=5, tech=["fraction-percent"])
+
+
+_ONE = {"cows": "cow", "goats": "goat", "horses": "horse", "oxen": "ox", "sheep": "sheep", "buffaloes": "buffalo", "camels": "camel"}
+_ANIMALS = [("cows", "goats"), ("horses", "cows"), ("oxen", "sheep"), ("buffaloes", "goats"), ("camels", "horses")]
+
+
+def t_pasture_simple(rng):
+    A, B = rng.choice(_ANIMALS); a, b = rng.choice([(2, 3), (3, 5), (3, 4), (2, 5), (3, 7), (4, 7), (5, 8)])
+    n1, t1, n2, t2 = rng.randint(4, 20), rng.randint(2, 9), rng.randint(6, 30), rng.randint(2, 9)
+    X, Y = n1 * t1 * b, n2 * t2 * a
+    if X == Y: return None
+    pr = _parts([X, Y]); rent = sum(pr) * rng.choice([200, 300, 400, 500]); n1_, n2_ = "X", "Y"
+    return prac("q-pt-pasture", "same", f"X keeps {n1} {A} for {t1} months and Y keeps {n2} {B} for {t2} months in a field. {a} {A} eat as much as {b} {B}. The rent is {inr(rent)}. Find X's share.",
+                share([X, Y], 0, rent), [(share([n1 * t1, n2 * t2], 0, rent), "Treated both animals as the same."), (share([n1 * t1 * a, n2 * t2 * b], 0, rent), "Read the equivalence upside down."), (share([X, Y], 1, rent), "That is Y's share.")],
+                f"{a} {A} = {b} {B}, so use units where 1 {_ONE[A]} = {b} and 1 {_ONE[B]} = {a}. X = {n1}×{t1}×{b} = {X}. Y = {n2}×{t2}×{a} = {Y}. X pays {pr[0]}/{sum(pr)} of {inr(rent)}.",
+                month_sim([[n1 * b] * t1, [n2 * a] * t2], 0, rent), tech=["common-unit", "ratio-parts"])
+
+
+def t_pasture_chain(rng):
+    a, b, c, d = rng.choice([2, 3, 4]), rng.choice([3, 5, 7]), rng.choice([2, 3, 4]), rng.choice([3, 4, 5, 7])
+    n1, t1, n2, t2, n3, t3 = rng.randint(4, 12), rng.randint(2, 6), rng.randint(6, 20), rng.randint(2, 6), rng.randint(10, 30), rng.randint(3, 9)
+    wA, wB, wC = b * d, a * d, a * c                              # a A = b B, c B = d C  ->  units of 1/(ac) of a C
+    X = n1 * t1 * wA + n2 * t2 * wB; Y = n3 * t3 * wC
+    if X == Y or a == b or c == d: return None
+    pr = _parts([X, Y]); rent = sum(pr) * rng.choice([100, 200, 300])
+    mon = lambda lst: [sum(n * w for (n, w, tt) in lst if i < tt) for i in range(max(tt for _, _, tt in lst))]
+    return prac("q-pt-pasture", "harder", f"X keeps {n1} oxen for {t1} months and {n2} goats for {t2} months. Y keeps {n3} sheep for {t3} months. {a} oxen eat as much as {b} goats, and {c} goats as much as {d} sheep. The rent is {inr(rent)}. Find X's share.",
+                share([X, Y], 0, rent), [(share([n1 * t1 + n2 * t2, n3 * t3], 0, rent), "Treated all three animals as the same."), (share([n1 * t1 * wB + n2 * t2 * wC, n3 * t3 * wC], 0, rent), "Used only the second equivalence for the oxen."), (share([X, Y], 1, rent), "That is Y's share.")],
+                f"Units: sheep = {wC}, goat = {wB}, ox = {wA} (from {a} oxen = {b} goats and {c} goats = {d} sheep). X = {n1}×{t1}×{wA} + {n2}×{t2}×{wB} = {X}. Y = {n3}×{t3}×{wC} = {Y}. X pays {pr[0]}/{sum(pr)} of {inr(rent)}.",
+                month_sim([mon([(n1, wA, t1), (n2, wB, t2)]), [n3 * wC] * t3], 0, rent), concepts=2, heavy=True, steps=6, tech=["common-unit", "ratio-parts"])
+
+
+def practice_items():
+    out = _hand_items()
+    out += variants(PREFIX, "two-share", 2, t_two_share)
+    out += variants(PREFIX, "two-total", 3, t_two_total)
+    out += variants(PREFIX, "late-share", 2, t_late_share)
+    out += variants(PREFIX, "late-unknown", 3, t_late_unknown)
+    out += variants(PREFIX, "work-total", 2, t_working_total)
+    out += variants(PREFIX, "work-find", 3, t_working_find)
+    out += variants(PREFIX, "pasture-simple", 2, t_pasture_simple)
+    out += variants(PREFIX, "pasture-chain", 3, t_pasture_chain)
     return out
