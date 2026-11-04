@@ -1,0 +1,65 @@
+{
+  "q-pt-two": {
+    "formulas": [
+      "pt-f1",
+      "pt-f2",
+      "pt-f3"
+    ],
+    "standard": "Multiply each partner's capital by his months. Write the ratio, add the parts, take his part ÷ total × profit. For 'find total profit', divide the known share by his fraction.",
+    "fast": "Cancel common factors before multiplying: 90,000×8 : 1,50,000×5 → 9×8 : 15×5 = 72 : 75 = 24 : 25. Drop zeros and common factors first, then work with the small numbers.",
+    "ultra": "Profit ÷ (sum of parts) first, then multiply by his part: 50,000 ÷ 49 ≈ 1,020 → ×25 ≈ 25,510. If the given share divides exactly by his ratio part (18,900 ÷ 7 = 2,700) your ratio is almost certainly right.",
+    "eliminate": "(1) Compare the capital-months roughly: 7,20,000 against 7,50,000 are close, so Q gets just over half of 50,000 (about 25,000 to 26,000). Only ₹25,510 is that close; ₹32,000 and ₹35,000 are far too big. (2) When the numbers are nice, a share is a whole multiple of profit ÷ sum of parts: 60,000 ÷ 5 = 12,000, so only ₹24,000 can be P's share.",
+    "traps": [
+      "Ignoring time and splitting by capital alone.",
+      "Giving the answer for the wrong partner (read who the question asks for).",
+      "In 'find total profit', multiplying by the wrong fraction (use his part, not the other partner's)."
+    ]
+  },
+  "q-pt-late": {
+    "formulas": [
+      "pt-f1",
+      "pt-f4",
+      "pt-f5"
+    ],
+    "standard": "Find each partner's months in the business (12 − months before joining). Multiply capital × months, make the ratio, then share the profit.",
+    "fast": "Put the capitals in thousands and divide the capital-months by a common factor: 1,200 : 1,050 : 1,000 → ÷50 → 24 : 21 : 20. Tushar = 20 of 65 parts = 4/13.",
+    "ultra": "Reduce the final fraction before multiplying: 20/65 = 4/13, then 1,50,000 ÷ 13 ≈ 11,538 → ×4 = 46,154. Use 1/13 ≈ 0.0769 as a quick check.",
+    "eliminate": "(1) Tushar has the smallest capital-months (1,000 against 1,200 and 1,050), so his share is under one third of 1,50,000, which is ₹50,000. That drops ₹55,000. (2) The three are nearly equal, so he gets about 30%, around ₹45,000. That drops ₹35,500. (3) Between ₹46,154 and ₹45,250: the fraction 4/13 does not divide 1,50,000 evenly, so the exact answer is not a round number, which points to ₹46,154.",
+    "traps": [
+      "Counting months before joining instead of months after (joined at month 5 → he stays 7 months, not 5).",
+      "Forgetting that the founder stays all 12 months.",
+      "Using capitals only."
+    ]
+  },
+  "q-pt-working": {
+    "formulas": [
+      "pt-f6",
+      "pt-f2"
+    ],
+    "standard": "Take the working partner's % off the profit first. Share the balance in the investment ratio. His total = commission + his share of the balance.",
+    "fast": "Total fraction = c% + (1 − c%) × his ratio part. For 15% and 2 : 7 → 0.15 + 0.85 × 2/9 = 0.3389. Then × profit.",
+    "ultra": "Choose the split that divides cleanly: 81,000 is a multiple of 9, so 2/9 of the balance is easy. 68,850 ÷ 9 = 7,650 → ×2 = 15,300; add 12,150 → 27,450.",
+    "eliminate": "Squeeze 2/9 between 1/5 and 1/4. Then M's total is between 15% + 0.85 × 20% = 32% of the profit (₹25,920) and 15% + 0.85 × 25% = 36.25% (₹29,363). Only ₹27,450 fits; ₹24,000, ₹30,000 and ₹33,000 are all outside.",
+    "traps": [
+      "Taking his ratio share of the full profit and then adding the commission (double counting).",
+      "Taking the commission as a % of his own share instead of the whole profit.",
+      "Forgetting to add the commission to his total."
+    ]
+  },
+  "q-pt-pasture": {
+    "formulas": [
+      "pt-f7",
+      "pt-f8",
+      "pt-f1"
+    ],
+    "standard": "Pick one animal as the standard. Convert every other animal using the given equivalence. Multiply animals × months for each person, then split the rent in that ratio.",
+    "fast": "Pick the unit so that every equivalent becomes a whole number. 2 oxen = 5 goats and 3 goats = 4 sheep → in 'thirds of a sheep': ox = 10, goat = 4, sheep = 3. Then no fractions appear anywhere.",
+    "ultra": "After converting, cancel the common factor of the two totals: 1,140 : 1,212 → ÷12 → 95 : 101. Fraction = 95/196. Check the direction first: 3 cows = 7 goats means 1 cow = 7/3 goat, not the other way round.",
+    "eliminate": "Estimate the fraction: X's total ≈ 285, Y's ≈ 303, so X ≈ 285/588 ≈ 0.485, a little under half. Any option above ½ or far below it is out. This leaves 90/196 (0.459) and 95/196 (0.485), and one rough division settles it.",
+    "traps": [
+      "Reading the equivalence upside down (cow worth 3/7 goat instead of 7/3).",
+      "Leaving one animal type out of a person's total.",
+      "Using animals but not months."
+    ]
+  }
+}

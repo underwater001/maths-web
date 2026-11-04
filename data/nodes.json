@@ -62,7 +62,8 @@
       "partnership",
       "percentage",
       "time-work",
-      "tsd"
+      "tsd",
+      "q-pt-pasture"
     ]
   },
   "average": {
@@ -345,5 +346,75 @@
     "links": [
       "average"
     ]
+  },
+  "c-capital-time": {
+    "label": "Profit shares follow capital × time",
+    "kind": "concept",
+    "parent": "partnership",
+    "order": 1,
+    "summary": "The one idea behind almost every partnership question.",
+    "links": []
+  },
+  "c-late-entry": {
+    "label": "Late entry and changing capital",
+    "kind": "concept",
+    "parent": "partnership",
+    "order": 2,
+    "summary": "Partners who join late, leave early or change their capital.",
+    "links": []
+  },
+  "c-working-partner": {
+    "label": "Working partner's extra share",
+    "kind": "concept",
+    "parent": "partnership",
+    "order": 3,
+    "summary": "A commission or salary comes off the top before the ratio split.",
+    "links": []
+  },
+  "c-common-unit": {
+    "label": "Rent shared by animals: one common unit",
+    "kind": "concept",
+    "parent": "partnership",
+    "order": 4,
+    "summary": "Pasture and rent questions are partnership with animals instead of money.",
+    "links": []
+  },
+  "q-pt-two": {
+    "label": "Two partners: share or total profit",
+    "kind": "qtype",
+    "parent": "c-capital-time",
+    "order": 1,
+    "summary": "Capitals and times given; find a share, or find the total profit from a share.",
+    "links": [],
+    "priority": "high"
+  },
+  "q-pt-late": {
+    "label": "Partners join at different times",
+    "kind": "qtype",
+    "parent": "c-late-entry",
+    "order": 1,
+    "summary": "Two or three partners; some join after some months.",
+    "links": [],
+    "priority": "high"
+  },
+  "q-pt-working": {
+    "label": "One partner works for extra %",
+    "kind": "qtype",
+    "parent": "c-working-partner",
+    "order": 1,
+    "summary": "A working partner takes a % of profit first, then shares the rest.",
+    "links": [],
+    "priority": "medium"
+  },
+  "q-pt-pasture": {
+    "label": "Pasture / rent with animal equivalence",
+    "kind": "qtype",
+    "parent": "c-common-unit",
+    "order": 1,
+    "summary": "Different animals for different months; convert to one animal, then split rent.",
+    "links": [
+      "ratio-proportion"
+    ],
+    "priority": "medium"
   }
 }

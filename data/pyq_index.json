@@ -1,0 +1,684 @@
+[
+ {
+  "id": "2025-09-12-S1-Q51",
+  "paper": "2025-09-12-S1",
+  "qno": 51,
+  "topic": "partnership",
+  "key": "d",
+  "answer": "₹25,510",
+  "verified": true,
+  "qtype": "q-pt-two"
+ },
+ {
+  "id": "2025-09-12-S1-Q52",
+  "paper": "2025-09-12-S1",
+  "qno": 52,
+  "topic": "partnership",
+  "key": "b",
+  "answer": "₹46,154",
+  "verified": true,
+  "qtype": "q-pt-late"
+ },
+ {
+  "id": "2025-09-12-S1-Q53",
+  "paper": "2025-09-12-S1",
+  "qno": 53,
+  "topic": "average",
+  "key": "b",
+  "answer": "227.5",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q54",
+  "paper": "2025-09-12-S1",
+  "qno": 54,
+  "topic": "average",
+  "key": "b",
+  "answer": "76",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q55",
+  "paper": "2025-09-12-S1",
+  "qno": 55,
+  "topic": "percentage",
+  "key": "c",
+  "answer": "₹12,500",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q56",
+  "paper": "2025-09-12-S1",
+  "qno": 56,
+  "topic": "data-interpretation",
+  "key": "a",
+  "answer": "13:12",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q57",
+  "paper": "2025-09-12-S1",
+  "qno": 57,
+  "topic": "simplification",
+  "key": "b",
+  "answer": "5/9, 4/7, 3/5, 7/11",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q58",
+  "paper": "2025-09-12-S1",
+  "qno": 58,
+  "topic": "simplification",
+  "key": "c",
+  "answer": "95/24",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q59",
+  "paper": "2025-09-12-S1",
+  "qno": 59,
+  "topic": "algebraic-identities",
+  "key": "c",
+  "answer": "-14933",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q60",
+  "paper": "2025-09-12-S1",
+  "qno": 60,
+  "topic": "si-ci",
+  "key": "a",
+  "answer": "18",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q61",
+  "paper": "2025-09-12-S1",
+  "qno": 61,
+  "topic": "profit-loss",
+  "key": "c",
+  "answer": "28.08% loss",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q62",
+  "paper": "2025-09-12-S1",
+  "qno": 62,
+  "topic": "mixture-alligation",
+  "key": "d",
+  "answer": "20 litres",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q63",
+  "paper": "2025-09-12-S1",
+  "qno": 63,
+  "topic": "mixture-alligation",
+  "key": "b",
+  "answer": "Profit of ₹100",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q64",
+  "paper": "2025-09-12-S1",
+  "qno": 64,
+  "topic": "si-ci",
+  "key": "b",
+  "answer": "₹5,000",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q65",
+  "paper": "2025-09-12-S1",
+  "qno": 65,
+  "topic": "tsd",
+  "key": "a",
+  "answer": "250 km/h",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q66",
+  "paper": "2025-09-12-S1",
+  "qno": 66,
+  "topic": "mensuration-2d",
+  "key": "c",
+  "answer": "492.8 cm²",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q67",
+  "paper": "2025-09-12-S1",
+  "qno": 67,
+  "topic": "tsd",
+  "key": "b",
+  "answer": "64 km/h",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q68",
+  "paper": "2025-09-12-S1",
+  "qno": 68,
+  "topic": "mixture-alligation",
+  "key": "a",
+  "answer": "3:2",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q69",
+  "paper": "2025-09-12-S1",
+  "qno": 69,
+  "topic": "time-work",
+  "key": "c",
+  "answer": "7/12",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q70",
+  "paper": "2025-09-12-S1",
+  "qno": 70,
+  "topic": "time-work",
+  "key": "c",
+  "answer": "47/48 hours",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q71",
+  "paper": "2025-09-12-S1",
+  "qno": 71,
+  "topic": "profit-loss",
+  "key": "b",
+  "answer": "₹34,000",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q72",
+  "paper": "2025-09-12-S1",
+  "qno": 72,
+  "topic": "mensuration-2d",
+  "key": "b",
+  "answer": "5:9",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q73",
+  "paper": "2025-09-12-S1",
+  "qno": 73,
+  "topic": "mensuration-2d",
+  "key": "c",
+  "answer": "50%",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q74",
+  "paper": "2025-09-12-S1",
+  "qno": 74,
+  "topic": "linear-equations",
+  "key": "b",
+  "answer": "3",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S1-Q75",
+  "paper": "2025-09-12-S1",
+  "qno": 75,
+  "topic": "simplification",
+  "key": "b",
+  "answer": "4.3",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q51",
+  "paper": "2025-09-12-S2",
+  "qno": 51,
+  "topic": "surds-indices",
+  "key": "c",
+  "answer": "a < b",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q52",
+  "paper": "2025-09-12-S2",
+  "qno": 52,
+  "topic": "mensuration-2d",
+  "key": "b",
+  "answer": "3 radians",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q53",
+  "paper": "2025-09-12-S2",
+  "qno": 53,
+  "topic": "ratio-proportion",
+  "key": "c",
+  "answer": "1:2",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q54",
+  "paper": "2025-09-12-S2",
+  "qno": 54,
+  "topic": "mensuration-2d",
+  "key": "b",
+  "answer": "302 m²",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q55",
+  "paper": "2025-09-12-S2",
+  "qno": 55,
+  "topic": "trig-ratios",
+  "key": "c",
+  "answer": "270°",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q56",
+  "paper": "2025-09-12-S2",
+  "qno": 56,
+  "topic": "simplification",
+  "key": "a",
+  "answer": "121/35",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q57",
+  "paper": "2025-09-12-S2",
+  "qno": 57,
+  "topic": "partnership",
+  "key": "b",
+  "answer": "₹27,450",
+  "verified": true,
+  "qtype": "q-pt-working"
+ },
+ {
+  "id": "2025-09-12-S2-Q58",
+  "paper": "2025-09-12-S2",
+  "qno": 58,
+  "topic": "ratio-proportion",
+  "key": "b",
+  "answer": "8",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q59",
+  "paper": "2025-09-12-S2",
+  "qno": 59,
+  "topic": "si-ci",
+  "key": "d",
+  "answer": "₹2,837",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q60",
+  "paper": "2025-09-12-S2",
+  "qno": 60,
+  "topic": "mixture-alligation",
+  "key": "a",
+  "answer": "40 litres",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q61",
+  "paper": "2025-09-12-S2",
+  "qno": 61,
+  "topic": "partnership",
+  "key": "c",
+  "answer": "₹24,000",
+  "verified": true,
+  "qtype": "q-pt-two"
+ },
+ {
+  "id": "2025-09-12-S2-Q62",
+  "paper": "2025-09-12-S2",
+  "qno": 62,
+  "topic": "average",
+  "key": "a",
+  "answer": "₹33,000",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q63",
+  "paper": "2025-09-12-S2",
+  "qno": 63,
+  "topic": "time-work",
+  "key": "b",
+  "answer": "15 6 days\n      5",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q64",
+  "paper": "2025-09-12-S2",
+  "qno": 64,
+  "topic": "percentage",
+  "key": "a",
+  "answer": "₹1,224",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q65",
+  "paper": "2025-09-12-S2",
+  "qno": 65,
+  "topic": "trig-ratios",
+  "key": "b",
+  "answer": "2/3",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q66",
+  "paper": "2025-09-12-S2",
+  "qno": 66,
+  "topic": "algebraic-identities",
+  "key": "a",
+  "answer": "11\n      11√11",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q67",
+  "paper": "2025-09-12-S2",
+  "qno": 67,
+  "topic": "mensuration-2d",
+  "key": "b",
+  "answer": "25:64",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q68",
+  "paper": "2025-09-12-S2",
+  "qno": 68,
+  "topic": "time-work",
+  "key": "c",
+  "answer": "24 days",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q69",
+  "paper": "2025-09-12-S2",
+  "qno": 69,
+  "topic": "tsd",
+  "key": "d",
+  "answer": "833.33m",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q70",
+  "paper": "2025-09-12-S2",
+  "qno": 70,
+  "topic": "profit-loss",
+  "key": "c",
+  "answer": "Profit of 29%",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q71",
+  "paper": "2025-09-12-S2",
+  "qno": 71,
+  "topic": "ratio-proportion",
+  "key": "b",
+  "answer": "210",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q72",
+  "paper": "2025-09-12-S2",
+  "qno": 72,
+  "topic": "polygons",
+  "key": "c",
+  "answer": "120°",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q73",
+  "paper": "2025-09-12-S2",
+  "qno": 73,
+  "topic": "surds-indices",
+  "key": "c",
+  "answer": "49 + 26√6",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q74",
+  "paper": "2025-09-12-S2",
+  "qno": 74,
+  "topic": "trig-ratios",
+  "key": "b",
+  "answer": "12/5",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S2-Q75",
+  "paper": "2025-09-12-S2",
+  "qno": 75,
+  "topic": "linear-equations",
+  "key": "a",
+  "answer": "(2, 3)",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q51",
+  "paper": "2025-09-12-S3",
+  "qno": 51,
+  "topic": "profit-loss",
+  "key": "c",
+  "answer": "25.3%",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q52",
+  "paper": "2025-09-12-S3",
+  "qno": 52,
+  "topic": "profit-loss",
+  "key": "d",
+  "answer": "No loss, No profit",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q53",
+  "paper": "2025-09-12-S3",
+  "qno": 53,
+  "topic": "mensuration-3d",
+  "key": "a",
+  "answer": "41 cm",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q54",
+  "paper": "2025-09-12-S3",
+  "qno": 54,
+  "topic": "ratio-proportion",
+  "key": "a",
+  "answer": "5 : 4 : 16",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q55",
+  "paper": "2025-09-12-S3",
+  "qno": 55,
+  "topic": "percentage",
+  "key": "c",
+  "answer": "248.6 km",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q56",
+  "paper": "2025-09-12-S3",
+  "qno": 56,
+  "topic": "percentage",
+  "key": "c",
+  "answer": "₹56,000",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q57",
+  "paper": "2025-09-12-S3",
+  "qno": 57,
+  "topic": "percentage",
+  "key": "c",
+  "answer": "16.64%",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q58",
+  "paper": "2025-09-12-S3",
+  "qno": 58,
+  "topic": "mensuration-3d",
+  "key": "d",
+  "answer": "540 cm³",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q59",
+  "paper": "2025-09-12-S3",
+  "qno": 59,
+  "topic": "mensuration-3d",
+  "key": "c",
+  "answer": "6√2 cm",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q60",
+  "paper": "2025-09-12-S3",
+  "qno": 60,
+  "topic": "tsd",
+  "key": "a",
+  "answer": "162 km",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q61",
+  "paper": "2025-09-12-S3",
+  "qno": 61,
+  "topic": "partnership",
+  "key": "b",
+  "answer": "95/196",
+  "verified": true,
+  "qtype": "q-pt-pasture"
+ },
+ {
+  "id": "2025-09-12-S3-Q62",
+  "paper": "2025-09-12-S3",
+  "qno": 62,
+  "topic": "average",
+  "key": "b",
+  "answer": "20.38",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q63",
+  "paper": "2025-09-12-S3",
+  "qno": 63,
+  "topic": "average",
+  "key": "a",
+  "answer": "81",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q64",
+  "paper": "2025-09-12-S3",
+  "qno": 64,
+  "topic": "average",
+  "key": "a",
+  "answer": "275",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q65",
+  "paper": "2025-09-12-S3",
+  "qno": 65,
+  "topic": "mixture-alligation",
+  "key": "b",
+  "answer": "21.4 kg",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q66",
+  "paper": "2025-09-12-S3",
+  "qno": 66,
+  "topic": "mensuration-2d",
+  "key": "c",
+  "answer": "1.27 : 1",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q67",
+  "paper": "2025-09-12-S3",
+  "qno": 67,
+  "topic": "surds-indices",
+  "key": "a",
+  "answer": "0",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q68",
+  "paper": "2025-09-12-S3",
+  "qno": 68,
+  "topic": "percentage",
+  "key": "b",
+  "answer": "2.4% increase",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q69",
+  "paper": "2025-09-12-S3",
+  "qno": 69,
+  "topic": "partnership",
+  "key": "a",
+  "answer": "₹40,500",
+  "verified": true,
+  "qtype": "q-pt-two"
+ },
+ {
+  "id": "2025-09-12-S3-Q70",
+  "paper": "2025-09-12-S3",
+  "qno": 70,
+  "topic": "profit-loss",
+  "key": "c",
+  "answer": "48.75%",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q71",
+  "paper": "2025-09-12-S3",
+  "qno": 71,
+  "topic": "profit-loss",
+  "key": "a",
+  "answer": "14.4%",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q72",
+  "paper": "2025-09-12-S3",
+  "qno": 72,
+  "topic": "profit-loss",
+  "key": "b",
+  "answer": "₹3,000",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q73",
+  "paper": "2025-09-12-S3",
+  "qno": 73,
+  "topic": "si-ci",
+  "key": "a",
+  "answer": "8%",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q74",
+  "paper": "2025-09-12-S3",
+  "qno": 74,
+  "topic": "mensuration-2d",
+  "key": "b",
+  "answer": "1 : 1",
+  "verified": true
+ },
+ {
+  "id": "2025-09-12-S3-Q75",
+  "paper": "2025-09-12-S3",
+  "qno": 75,
+  "topic": "partnership",
+  "key": "a",
+  "answer": "101/192",
+  "verified": true,
+  "qtype": "q-pt-pasture"
+ }
+]

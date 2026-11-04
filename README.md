@@ -30,3 +30,23 @@ Topic  →  Concept  →  Question type  →  PYQs (year, shift, paper) + practi
 - **Priority** of a question type = how often it repeats across Tier 1 and Tier 2 PYQs (`high` / `medium` / `low`).
 - **No PDFs in the repo** (it is public). Only links.
 - Practice questions are written fresh, not copied from other sites.
+
+## Status
+
+| Done | Where |
+|---|---|
+| Seed topic tree (6 subjects, 28 topics) | `data/nodes.json` |
+| First source: SSC CGL Tier 1, 12 Sep 2025, shifts 1-3 (Adda247 *similar papers*, not official), Quant Q51-Q75 | `data/papers.json` |
+| All 75 Quant questions classified to a topic, answers recomputed in code | `data/pyq_index.json`, `tools/verify_2025-09-12.py` |
+| **Partnership** finished end to end: 4 concepts' worth of formulas, 4 question types, 7 PYQs, 16 verified practice questions | `data/formulas.json`, `methods.json`, `pyqs/partnership.json`, `practice/partnership.json` |
+
+```
+python3 tools/verify_2025-09-12.py     # recompute all 75 PYQ answers
+python3 tools/build_partnership.py     # verify + write the Partnership data
+```
+
+## Notes on the sources
+
+- The 12 Sep 2025 papers are **similar papers** written by a coaching institute, so topic counts reflect that publisher's style (for example no geometry-theorem questions at all), not SSC's. Priorities stay provisional until official papers are added.
+- PYQs are stored as condensed restatements with the original numbers plus the paper and question number. The PDFs themselves are not in the repo; `data/papers.json` links to them.
+- PDF text extraction loses stacked fractions and roots, so every question containing them is read from the page image before it is stored.
