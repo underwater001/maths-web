@@ -18,6 +18,10 @@ Checks, in order. Any failure stops the build before anything is written.
   3. Practice: the main method and a second, different method agree; four distinct options.
   4. Nodes, formulas, methods and techniques all reference things that exist.
   5. The topic's shortcut tests (tools/shortcuts/<topic>.py) pass.
+
+Two tiers (TIER in the module). "full" (default): every type has the whole method and at least 3 same-level and 3 harder
+practice questions, one Hard. "quiz": past questions with checked answers, solutions and a short method per type, so a
+topic can go live the same day its questions arrive; practice and the ultra-calc layer are added when the topic is upgraded.
 """
 import hashlib, importlib, json, os, random, sys, zlib
 from fractions import Fraction as F
@@ -29,7 +33,8 @@ DATA = os.path.join(ROOT, "data")
 
 import bank
 
-METHOD_KEYS = ["formulas", "cue", "standard", "fast", "ultra", "eliminate", "traps"]
+METHOD_KEYS = ["formulas", "cue", "standard", "fast", "ultra", "eliminate", "traps"]       # full tier
+QUIZ_KEYS = ["formulas", "cue", "standard", "fast", "eliminate", "traps"]                    # quiz tier: ultra-calc layer comes later
 MIN_SAME, MIN_HARDER = 3, 3      # every question type needs at least this many extra practice questions of each kind, one of them Hard
 
 
@@ -90,7 +95,8 @@ def check_pyqs(M, errs):
             errs.append(f"{i}: calc() raised {e!r}"); continue
         if abs(got - q["_expect"]) > q["_tol"] + 1e-9:
             errs.append(f"{i}: recomputed {got} but expected {q['_expect']}")
-        vals = [bank.num(o) for o in q["options"]]
+        vals = q["_optvals"] if q["_optvals"] is not None else [bank.num(o) for o in q["options"]]
+        if len(vals) != 4: errs.append(f"{i}: optvals needs four values"); continue
         near = [k for k, v in enumerate(vals) if abs(v - got) <= max(q["_tol"], 1e-9) + 1e-6 * abs(got)]
         if near != ["abcd".index(q["key"])]:
             errs.append(f"{i}: options matching the recomputed answer {got} are {near}, the key is {'abcd'.index(q['key'])}")
@@ -108,7 +114,8 @@ def build_pyqs(M):
         sc = bank.score(q["steps"], q["concepts"], q["heavy"], trap)
         out.append({"id": q["id"], "paper": q["paper"], "qno": q["qno"], "qtype": q["qtype"], "text": q["text"], "options": q["options"],
                     "key": q["key"], "solution": q["solution"], "tech": q["tech"], "trick": q["trick"],
-                    "wrong": {k: {"kind": w["kind"], "note": w["note"]} for k, w in sorted(q["wrong"].items())},
+                    "wrong": {**{k: {"kind": "bound", "note": f"Does not match the worked answer, which is option ({q['key']}) {q['options']['abcd'.index(q['key'])]}."} for k in "abcd" if k != q["key"] and k not in q["wrong"]},
+                              **{k: {"kind": w["kind"], "note": w["note"]} for k, w in q["wrong"].items()}},
                     "score": sc, "level": bank.level(sc), "why": {"steps": q["steps"], "concepts": q["concepts"], "heavy": q["heavy"], "trap": trap}})
     return out
 
@@ -138,7 +145,7 @@ def build_practice(M, pyqs, errs):
         sc = bank.score(p["steps"], p["concepts"], p["heavy"], True)
         out.append({"id": iid, "qtype": p["qtype"], "variant": p["variant"], "score": sc, "level": bank.level(sc), "tech": p["tech"], "text": p["text"],
                     "options": [shown[j] for j in order], "key": key, "solution": p["why"], "wrong": wrong})
-    for qt in [k for k, n in M.NODES.items() if n["kind"] == "qtype"]:
+    for qt in ([k for k, n in M.NODES.items() if n["kind"] == "qtype"] if getattr(M, "TIER", "full") == "full" else []):
         mine = [x for x in out if x["qtype"] == qt]
         same, harder = sum(x["variant"] == "same" for x in mine), sum(x["variant"] == "harder" for x in mine)
         if same < MIN_SAME or harder < MIN_HARDER: errs.append(f"{qt}: needs at least {MIN_SAME} same-level and {MIN_HARDER} harder practice questions, has {same} and {harder}")
@@ -167,7 +174,7 @@ def check_structure(M, tree, errs):
     for k in qtypes:
         m = M.METHODS.get(k)
         if not m: errs.append(f"question type {k} has no method"); continue
-        for key in METHOD_KEYS:
+        for key in (METHOD_KEYS if getattr(M, "TIER", "full") == "full" else QUIZ_KEYS):
             if not m.get(key): errs.append(f"methods {k}: missing {key}")
         for x in m.get("formulas", []):
             if x not in fids: errs.append(f"methods {k}: unknown formula {x}")
@@ -204,7 +211,7 @@ def build(topic, force=False, check_only=False):
     if errs:
         print(f"{topic}: BUILD FAILED"); [print(" -", e) for e in errs]; return False
     indexed = sum(1 for p in papers_index().values() for r in p.values() if r["topic"] == topic)
-    shard = {"topic": topic, "src_hash": h, "nodes": M.NODES, "formulas": M.FORMULAS, "methods": M.METHODS,
+    shard = {"topic": topic, "tier": getattr(M, "TIER", "full"), "src_hash": h, "nodes": M.NODES, "formulas": M.FORMULAS, "methods": M.METHODS,
              "pyqs": pyqs, "practice": practice, "refs": getattr(M, "REFS", [])}
     print(f"{topic}: verified {len(pyqs)} PYQs (of {indexed} indexed), {len(practice)} practice (two methods agree), {nshort} shortcut tests")
     if len(pyqs) < indexed: print(f"  note: {indexed - len(pyqs)} indexed PYQs of this topic are not ported yet")

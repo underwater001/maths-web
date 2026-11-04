@@ -109,6 +109,17 @@ def main():
             rows.append({"id": f"{p['id']}-Q{r['qno']}", "paper": p["id"], "kind": p["kind"], "exam": p["exam"], "topic": r["topic"]})
         tc = Counter(r["topic"] for r in p["rows"])
         papers.append({k: v for k, v in p.items() if k != "rows"} | {"n": len(p["rows"]), "topics": dict(sorted(tc.items()))})
+    # ---- every filed question must be a quiz: the two-way check between the paper files and the shards ----------
+    quizzed = {q["id"] for s in shards.values() for q in s["pyqs"]}
+    gaps = defaultdict(list)
+    for r in rows:
+        if r["id"] not in quizzed: gaps[r["topic"]].append(r["id"].split("-Q")[0][-2:] + "Q" + r["id"].split("-Q")[1])
+    for t, ids in sorted(gaps.items()):
+        errs.append(f"{len(ids)} filed question(s) in {t} have no quiz yet ({', '.join(ids[:6])}{'…' if len(ids) > 6 else ''}). Add them to tools/topics/{BT.mod(t)}.py (TIER = \"quiz\" is enough to go live).")
+    filed = {r["id"] for r in rows}
+    for t, s in shards.items():
+        for q in s["pyqs"]:
+            if q["id"] not in filed: errs.append(f"{q['id']}: quiz exists but the paper file has no such question")
     if errs:
         print("BUILD FAILED"); [print(" -", e) for e in errs]; sys.exit(1)
 
@@ -136,7 +147,7 @@ def main():
     for k, n in nodes.items():
         if n["kind"] == "topic":
             s = shards.get(k)
-            topics_meta[k] = {"indexed": by_topic.get(k, 0), "built": bool(s), "pyqs": len(s["pyqs"]) if s else 0, "practice": len(s["practice"]) if s else 0, **({"v": s["src_hash"]} if s else {})}
+            topics_meta[k] = {"indexed": by_topic.get(k, 0), "built": bool(s), "tier": s["tier"] if s else None, "pyqs": len(s["pyqs"]) if s else 0, "practice": len(s["practice"]) if s else 0, **({"v": s["src_hash"]} if s else {})}
     refs = [{"topic": t, **r} for t, s in shards.items() for r in s.get("refs", [])]
     # how many filed questions of each paper became quizzes
     for p in papers: p["built"] = sum(1 for s in shards.values() for q in s["pyqs"] if q["paper"] == p["id"])

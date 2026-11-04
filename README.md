@@ -18,7 +18,7 @@ A question type is defined by its **solving pattern**: two questions are the sam
 Every time new maths material arrives (PDF, photos, a PDF open in the browser):
 
 1. **Paper file.** Add `data/papers/<id>.json`: the paper's details (`exam`, `kind`, `publisher`, `date`, `shift`, `link`, `quant`) and one row per Quant question (`qno`, `topic`, `key`, `answer`, `verified`). Rows must carry a topic id from `data/tree.json`. Write a verifier in `tools/papers/` that recomputes each answer from the question's own numbers.
-2. **Topic module.** For each topic the paper touches, copy `tools/topics/_template.py` to `tools/topics/<topic_with_underscores>.py` (or extend the existing one): concepts and question types, formulas, one method per type (including its `cue`), the PYQs, wrong-option notes, practice, and web references. Practice is a few hand-written items plus items generated from templates (`variants(...)`), so a type gets its extra and harder questions without hand-writing each. Every type needs at least 3 same-level and 3 harder practice items, one of them scoring Hard; the build fails otherwise.
+2. **Topic module.** Every question you file needs a quiz the same day: the build fails ("N filed question(s) in <topic> have no quiz yet") until it has one. For each topic the paper touches, copy `tools/topics/_template.py` to `tools/topics/<topic_with_underscores>.py` (or extend the existing one): concepts and question types, formulas, one method per type (including its `cue`), the PYQs, wrong-option notes, practice, and web references. Practice is a few hand-written items plus items generated from templates (`variants(...)`), so a type gets its extra and harder questions without hand-writing each. Two tiers, set by `TIER` in the module. **`"quiz"`** is the quick way live: the PYQs with checked answers, solutions, notes and one short method per type (no practice, no `ultra`). **`"full"`** (the default) adds the ultra-calc layer and needs at least 3 same-level and 3 harder practice items per type, one of them Hard. Start every new topic as `quiz` so no filed question waits, then upgrade it. When option text is not a plain number (ratios, mixed numbers) pass `optvals=[...]` to `pyq(...)`; `bank.ratio_val` and `bank.mixed_val` convert "5:9" and "15 5/6 days".
 3. **Run `python3 tools/check.py`.** It rebuilds only the topics whose sources changed, then assembles `data/core.json`. Nothing is added unless it passes.
 4. Commit `data/` and `tools/`. Push; GitHub Pages serves the repo root.
 
@@ -56,7 +56,8 @@ For each question type and topic: in how many of the analysed shifts did it appe
 - **PYQ answers** are recomputed from the question's own numbers and must match the keyed option and no other.
 - **Wrong-option notes**: every note carries a check (the option equals the named mistake's result, or a bound / sign / estimate rules it out). A note that does not hold for its option fails the build.
 - **Practice answers** are found twice by different methods; the build fails if they disagree. The three wrong options are the results of named mistakes and must be distinct. Generated items get the same checks; unclean draws and duplicate texts are rejected, ids are stable (`<prefix>-<template>-NN`).
-- **Coverage**: every question type has enough same-level and harder practice, and a Hard one.
+- **Gap gate**: every question in a paper file must have a quiz, and every quiz must have a paper row.
+- **Coverage** (full tier): every question type has enough same-level and harder practice, and a Hard one.
 - **Shortcuts** are random-tested against the slow method with exact fractions (`tools/shortcuts/<topic>.py`).
 - **Structure**: parents, links (mirrored automatically), formulas, methods and techniques must all exist.
 
@@ -79,12 +80,14 @@ python3 tools/make_artifact.py OUT.html   # one self-contained page with all dat
 
 ## Status
 
-| Topic | PYQs | Practice | Types |
-|---|---|---|---|
-| Partnership | 7 | 36 | two partners, joins late, extra % for work, pasture / rent |
-| Profit, loss & discount | 8 | 46 | markup–discount chain, false weight, free units, rates n for ₹x, equal profit and loss |
+All 75 Quant questions of the first source (three shifts, 12 September 2025) are filed, recomputed and live as quizzes across 18 topics.
 
-All 75 Quant questions of the first source are filed and their answers recomputed (`tools/papers/verify_2025-09-12.py`). The other 26 topics have PYQs filed but are not built yet.
+| Tier | Topics | PYQs | Practice |
+|---|---|---|---|
+| full | Partnership, Profit & loss | 15 | 82 |
+| quiz | Average, Percentage, Ratio & proportion, Mixture & alligation, Simple & compound interest, Time & work, Time-speed-distance, Mensuration 2D and 3D, Simplification, Surds & indices, Algebraic identities, Linear equations, Polygons, Trig ratios, Data interpretation | 60 | none yet |
+
+Next: upgrade quiz-tier topics to full (practice templates and an ultra-calc layer), starting with the most asked: Mensuration 2D, Percentage, Average.
 
 ## Notes on the sources
 

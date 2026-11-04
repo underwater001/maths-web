@@ -6,9 +6,11 @@ wrong-option notes or practice answers cannot be reproduced in code.
 """
 from fractions import Fraction as F
 
-from bank import APPROX, bound, exact2, mistake, pyq, prac, variants   # also: inr, share, fmt_value
+from bank import APPROX, bound, exact2, mistake, pyq, prac, variants   # also: inr, share, fmt_value, ratio_val, mixed_val
+# pyq(..., optvals=[...]) gives the numeric value of each option when the text is a ratio ("5:9") or a mixed number ("15 5/6 days")
 
 TOPIC = "topic-id-from-tree-json"
+TIER = "quiz"   # "quiz": PYQs + short methods only (no practice, no ultra) so every filed question is live today; "full" (default): practice + ultra layer, enforced
 PREFIX = "xx"                                         # hand-written practice ids xx-p01, xx-p02 ... (only ever append); generated ones are xx-<template>-NN
 
 NODES = {   # concepts hang off the topic; question types hang off a concept. Links may point to any node.

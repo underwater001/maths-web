@@ -22,6 +22,14 @@ TECHNIQUES = {
     "common-unit": "One common unit",
     "symmetry": "Symmetry and midpoint",
     "sign-check": "Profit or loss? Check the sign",
+    "identity": "Use an identity",
+    "plug-numbers": "Plug in a convenient number",
+    "units-first": "Convert units first",
+    "rationalise": "Rationalise the denominator",
+    "lcm-units": "Work in LCM units",
+    "relative": "Relative speed",
+    "scaling": "Scale the numbers",
+    "standard-values": "Standard values and triples",
 }
 
 # ----------------------------------------------------------------------------------------------
@@ -78,6 +86,18 @@ def num(text):
     if "loss" in low and v > 0:
         v = -v
     return v
+
+
+def ratio_val(t):
+    """A ratio such as '5 : 4 : 16' as one number, so equal ratios (10:8:32) match and different ones do not."""
+    parts = [F(x) for x in re.findall(r"\d+(?:\.\d+)?", str(t))]
+    return float(sum(p / parts[0] * F(1000) ** i for i, p in enumerate(parts)))
+
+
+def mixed_val(t):
+    """'15 5/6 days' -> 15.833..., '18 days' -> 18, '47/48 hours' -> 0.979."""
+    m = re.search(r"(\d+)\s+(\d+)\s*/\s*(\d+)", str(t))
+    return int(m[1]) + int(m[2]) / int(m[3]) if m else num(t)
 
 
 # ----------------------------------------------------------------------------------------------
@@ -144,11 +164,13 @@ def bound(note, pred):
 #   steps     only if the written solution understates the real work (default: len(solution))
 #   wrong     {letter: mistake(...) | bound(...)} for the non-key options
 #   trick     one line: the fastest way in
+#   optvals   the number each option stands for, when the option text is not a plain number (a ratio 5:9, a mixed number,
+#             an ordering, a relation). Compute it from the option text in code so the check is real.
 # ----------------------------------------------------------------------------------------------
-def pyq(paper, qno, qtype, text, options, key, solution, calc, expect, tol=0, *, tech=(), concepts=1, heavy=False, steps=None, wrong=None, trick=""):
+def pyq(paper, qno, qtype, text, options, key, solution, calc, expect, tol=0, *, tech=(), concepts=1, heavy=False, steps=None, wrong=None, trick="", optvals=None):
     return {"id": f"{paper}-Q{qno}", "paper": paper, "qno": qno, "qtype": qtype, "text": text, "options": options, "key": key,
             "solution": solution, "tech": list(tech), "concepts": concepts, "heavy": heavy, "steps": steps or len(solution),
-            "wrong": wrong or {}, "trick": trick, "_calc": calc, "_expect": expect, "_tol": tol}
+            "wrong": wrong or {}, "trick": trick, "_calc": calc, "_expect": expect, "_tol": tol, "_optvals": optvals}
 
 
 # ----------------------------------------------------------------------------------------------

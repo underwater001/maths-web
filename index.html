@@ -93,6 +93,7 @@ header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:spac
 .crumbs button{font:inherit;color:var(--accent);background:none;border:0;padding:0;cursor:pointer}
 .crumbs button:hover{text-decoration:underline}
 .meta-row{display:flex;flex-wrap:wrap;gap:4px 14px;font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.meta-row .soft{font-style:italic;opacity:.85}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font:inherit;font-size:13px;display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-align:left}
 .chip:hover{border-color:var(--muted)}
@@ -569,7 +570,7 @@ const typesOf = t => conceptsOf(t).flatMap(c => kidsOf(c.id).filter(n => n.kind 
 const methodOf = x => ((S.sd[x.topic] || {methods:{}}).methods || {})[x.qtype] || {};
 function methodHtml(m){
   if (!m) return '';
-  const rows = LAYERS.map(([k,l]) => `<dt>${l}</dt><dd>${esc(m[k])}</dd>`).join('')
+  const rows = LAYERS.filter(([k]) => m[k]).map(([k,l]) => `<dt>${l}</dt><dd>${esc(m[k])}</dd>`).join('')
     + `<dt class="trap">Traps</dt><dd><ul>${(m.traps||[]).map(t=>`<li>${esc(t)}</li>`).join('')}</ul></dd>`
     + ((m.variations||[]).length ? `<dt>Variations</dt><dd><ul>${m.variations.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></dd>` : '')
     + ((m.tech||[]).length ? `<dt>Tricks</dt><dd>${m.tech.map(techTag).join(' ')}</dd>` : '');
@@ -630,14 +631,14 @@ function renderOverview(P){
   P.innerHTML = `
     <p class="eyebrow">SSC CGL Tier 1 and Tier 2 · Quant</p>
     <h2>${S.rows.length} questions in the bank</h2>
-    <div class="meta-row"><span>${plural(built.length,'topic')} built</span><span>${todo.length} more ${todo.length===1?'has':'have'} past questions waiting</span><span>${Object.values(S.tmeta).reduce((a,m)=>a+m.indexed,0)} past questions filed</span></div>
+    <div class="meta-row"><span>${plural(built.length,'topic')} built</span>${todo.length ? `<span>${todo.length} more ${todo.length===1?'has':'have'} past questions waiting</span>` : ''}<span>${Object.values(S.tmeta).reduce((a,m)=>a+m.indexed,0)} past questions filed</span></div>
     <div class="chips"><button type="button" class="btn" data-bank="">Question bank →</button><button type="button" class="btn ghost" data-view="sources">Sources</button></div>
     <p class="lead">Each dot is a topic, a concept or a question type. Tap a question type (an end dot) to learn that topic: the concepts first, then the methods, then the quiz.</p>
     <div class="section"><p class="eyebrow">Most asked question types</p>
       <ul class="rows">${topAsked(6).map(([id,st])=>`<li><button type="button" class="chip" data-go="${esc(id)}"><i style="background:${color(id)}"></i>${esc(S.nodes.get(id).label)}</button><span class="ans">${st.shifts} of ${S.stats.papers} shifts · ${st.n} q</span>${likTag(st)}</li>`).join('')}</ul>
       <p class="note">${esc(S.likNote)} With only ${plural(S.stats.papers,'shift')} analysed, read this as a rough guide.</p></div>
     <div class="section"><p class="eyebrow">Built</p><div class="chips">${built.map(t=>chip(t.id, (tstat(t.id)||{}).n)).join('') || '<p class="empty-msg">Nothing built yet.</p>'}</div></div>
-    <div class="section"><p class="eyebrow">Next, by number of past questions</p><div class="chips">${todo.map(t=>chip(t.id, tstat(t.id).n)).join('')}</div></div>`;
+    ${todo.length ? `<div class="section"><p class="eyebrow">Next, by number of past questions</p><div class="chips">${todo.map(t=>chip(t.id, tstat(t.id).n)).join('')}</div></div>` : ''}`;
 }
 function renderNode(P){
   const id = S.sel, n = S.nodes.get(id); const kids = kidsOf(id);
@@ -713,7 +714,7 @@ function renderByTopic(){
       return `<div class="tcard" style="--c:${color(t.id)}">
         <h3>${esc(t.label)}</h3>
         <p class="sub">${esc(t.summary||'')}</p>
-        <div class="meta-row"><span>${py} past</span><span>${pr} practice</span><span>${types.length} types</span>${st?`<span>${st.shifts} of ${S.stats.papers} shifts</span>`:''}</div>
+        <div class="meta-row"><span>${py} past</span>${pr ? `<span>${pr} practice</span>` : `<span class="soft">practice to come</span>`}<span>${types.length} types</span>${st?`<span>${st.shifts} of ${S.stats.papers} shifts</span>`:''}</div>
         <p class="mix">${mix}</p>
         <div class="bar" title="${p.tried} tried, ${p.right} right"><i class="ok" style="width:${rows.length?p.right/rows.length*100:0}%"></i><i class="no" style="width:${rows.length?p.wrong/rows.length*100:0}%"></i></div>
         <p class="statline">${p.tried ? `You have tried <b>${p.tried}</b> of ${rows.length}, <b>${p.right}</b> right.` : 'You have not tried any question here yet.'}</p>
@@ -830,6 +831,8 @@ function typeTally(t, qid){
   const d = S.sd[t]; const py = d.pyqs.filter(p => p.qtype === qid).length, pr = d.practice.filter(p => p.qtype === qid);
   return {py, same: pr.filter(p => p.variant !== 'harder').length, hard: pr.filter(p => p.variant === 'harder').length};
 }
+/* "3 past · 4 practice", or just "3 past" for a topic that has no practice yet */
+const tallyText = tl => tl.same + tl.hard ? `${tl.py} past · ${tl.same + tl.hard} practice` : `${tl.py} past`;
 function renderLearn(scroll){
   const t = L.t, d = t && S.sd[t];
   if (!t || !S.loaded) return;
@@ -870,14 +873,15 @@ function stepOverview(t, d){
     <p class="lead">${md(n.summary || '')}</p>
     <div class="tiles">
       <div class="tile"><b>${concepts.length}</b><span>concepts</span></div><div class="tile"><b>${types.length}</b><span>question types</span></div>
-      <div class="tile"><b>${py}</b><span>past questions</span></div><div class="tile"><b>${pr.length - hard}</b><span>practice</span></div><div class="tile"><b>${hard}</b><span>harder challenge</span></div>
+      <div class="tile"><b>${py}</b><span>past questions</span></div>${pr.length ? `<div class="tile"><b>${pr.length - hard}</b><span>practice</span></div><div class="tile"><b>${hard}</b><span>harder challenge</span></div>` : ''}
       <div class="tile"><b>${st ? st.shifts + '/' + S.stats.papers : '–'}</b><span>shifts it appeared in</span></div>
     </div>
     ${askedLine(st, 'This topic')}
     <p class="mix">${LEVELS.map(l=>`<span>${lvlTag(l)} ${rows.filter(r=>r.level===l).length}</span>`).join('')}</p>
+    ${pr.length ? '' : `<p class="note">Past questions only for now: every one is in the quiz with its solution, the fastest way in and why the wrong options fail. Extra practice and the harder set come later.</p>`}
     <p class="statline">${p.tried ? `You have tried <b>${p.tried}</b> of ${rows.length} questions here, <b>${p.right}</b> right.` : `${rows.length} questions are waiting in the quiz.`}</p>
     <div class="section"><h3>How this goes</h3>
-      <ol class="variations"><li><b>Concepts</b>: the idea and its formulas, one concept at a time.</li><li><b>Question types</b>: how to spot each one (the cue), the standard, fast and ultra-calc methods, how to eliminate options, the traps and the variations.</li><li><b>Quiz</b>: past questions first, then new practice at the same level, then harder ones. Each answer comes with the solution, the fastest way in and why every wrong option is wrong.</li></ol></div>
+      <ol class="variations"><li><b>Concepts</b>: the idea and its formulas, one concept at a time.</li><li><b>Question types</b>: how to spot each one (the cue), the standard and fast methods (and an ultra-calc trick where there is one), how to eliminate options, the traps and the variations.</li><li><b>Quiz</b>: past questions first, then, where the topic has them, new practice at the same level and harder ones. Each answer comes with the solution, the fastest way in and why every wrong option is wrong.</li></ol></div>
     <div class="section"><h3>The path</h3><div class="cur-list">${concepts.map((c,ci) => `<div class="c"><button type="button" class="chip" data-step="${L.steps.findIndex(s=>s.id===c.id)}"><i style="background:${color(c.id)}"></i>${ci+1}. ${esc(c.label)}</button><div class="chips" style="padding-left:14px">${kidsOf(c.id).filter(x=>x.kind==='qtype').map(q => `<button type="button" class="chip" data-step="${L.steps.findIndex(s=>s.id===q.id)}">${esc(q.short||q.label)} ${likShort(qstat(q.id))}</button>`).join('')}</div></div>`).join('')}</div></div>
     ${(d.refs||[]).length ? `<p class="note">Outside reading for this topic is listed on the Sources page.</p>` : ''}
     ${learnNav(nextLabel())}`;
@@ -890,7 +894,7 @@ function stepConcept(t, d, s){
     <div><p class="eyebrow" style="color:${color(t)}">Concept ${ci} of ${conceptsOf(t).length}</p><h2>${esc(c.label)}</h2></div>
     <p class="lead">${md(c.summary || '')}</p>
     ${fs.length ? `<div class="section"><h3>Formulas to know</h3>${fs.map(formulaHtml).join('')}</div>` : ''}
-    ${types.length ? `<div class="section"><h3>Question types built on this concept</h3><ul class="rows">${types.map(q => `<li><button type="button" class="chip" data-step="${L.steps.findIndex(x=>x.id===q.id)}"><i style="background:${color(q.id)}"></i>${esc(q.label)}</button><span class="ans">${typeTally(t,q.id).py} past · ${typeTally(t,q.id).same + typeTally(t,q.id).hard} practice</span>${likTag(qstat(q.id))}</li>`).join('')}</ul></div>` : ''}
+    ${types.length ? `<div class="section"><h3>Question types built on this concept</h3><ul class="rows">${types.map(q => `<li><button type="button" class="chip" data-step="${L.steps.findIndex(x=>x.id===q.id)}"><i style="background:${color(q.id)}"></i>${esc(q.label)}</button><span class="ans">${tallyText(typeTally(t,q.id))}</span>${likTag(qstat(q.id))}</li>`).join('')}</ul></div>` : ''}
     ${(c.links||[]).length ? `<div class="section"><h3>Connected topics</h3><div class="chips">${c.links.map(l => chip(l)).join('')}</div></div>` : ''}
     ${learnNav(nextLabel())}`;
 }
@@ -916,7 +920,7 @@ function stepType(t, d, s){
     </div>
     ${fs.length ? `<div class="section"><h3>Formulas used</h3>${fs.map(formulaHtml).join('')}</div>` : ''}
     <div class="section"><h3>How to solve it</h3>${methodHtml(m)}</div>
-    <p class="statline">In the quiz: <b>${tl.py}</b> past questions, <b>${tl.same}</b> practice at the same level, <b>${tl.hard}</b> harder.</p>
+    <p class="statline">${tl.same + tl.hard ? `In the quiz: <b>${tl.py}</b> past questions, <b>${tl.same}</b> practice at the same level, <b>${tl.hard}</b> harder.` : `In the quiz: <b>${tl.py}</b> past ${tl.py === 1 ? 'question' : 'questions'}.`}</p>
     <div class="chips"><button type="button" class="btn ghost" data-qs="${esc(s.id)}">Quiz on this type now</button></div>
     ${learnNav(nextLabel())}`;
 }
@@ -971,7 +975,7 @@ function quizMenu(t, d){
     <div class="chips"><button type="button" class="btn" data-qs="all">Start all ${rows.length} questions</button>${wrongN ? `<button type="button" class="btn ghost" data-qs="wrong">Redo my ${wrongN} wrong</button>` : ''}</div>
     <div class="section"><h3>Or one type at a time</h3>
       ${types.map(q => { const tl = typeTally(t, q.id), r = rows.filter(x => x.qtype === q.id), pp = progOf(r);
-        return `<div class="qrow"><div><b>${esc(q.label)}</b><div class="statline">${tl.py} past · ${tl.same} practice · ${tl.hard} harder${pp.tried ? ` · tried ${pp.tried}, right ${pp.right}` : ''}</div></div>${likTag(qstat(q.id))}<button type="button" class="qbtn" data-qs="${esc(q.id)}">Start</button></div>`; }).join('')}</div>
+        return `<div class="qrow"><div><b>${esc(q.label)}</b><div class="statline">${tl.same + tl.hard ? `${tl.py} past · ${tl.same} practice · ${tl.hard} harder` : `${tl.py} past`}${pp.tried ? ` · tried ${pp.tried}, right ${pp.right}` : ''}</div></div>${likTag(qstat(q.id))}<button type="button" class="qbtn" data-qs="${esc(q.id)}">Start</button></div>`; }).join('')}</div>
     ${learnNav('')}`;
 }
 function quizSummary(t, d){
