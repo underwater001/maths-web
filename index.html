@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A growing knowledge web of SSC CGL Quant: topics, concepts and question types, each with formulas, fast methods, past questions and practice.">
+<meta name="description" content="A question bank and knowledge web for SSC CGL Quant: past questions and practice as quizzes, sorted by topic, type, difficulty and how often they are asked, with fast methods, eliminations and traps.">
 <title>Maths Web</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -161,6 +161,53 @@ details[open] summary{margin-bottom:8px}
 .nav{display:flex;gap:14px;margin-top:6px;font:500 13px var(--mono)}
 .nav a{color:var(--accent);text-decoration:none}
 .nav a:hover{text-decoration:underline}
+
+/* question bank */
+.tabs{margin-left:auto}
+.bank{display:grid;grid-template-columns:minmax(230px,290px) minmax(0,1fr);gap:14px;align-items:start;flex:1}
+.bank[hidden],.layout[hidden]{display:none!important}
+.filters{position:sticky;top:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:13px;min-width:0}
+.filters .f{display:flex;flex-direction:column;gap:5px;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);min-width:0}
+.filters select{font:500 14px var(--display);text-transform:none;letter-spacing:0;padding:7px 8px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);width:100%;min-width:0}
+.filters select:focus-visible{outline:2px solid var(--accent)}
+.tg{display:flex;flex-wrap:wrap;gap:5px}
+.tg button{font:500 12.5px var(--display);text-transform:none;letter-spacing:0;padding:5px 9px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.tg button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.tg button:focus-visible{outline:2px solid var(--accent)}
+.fcount{font:500 12.5px var(--mono);color:var(--ink);text-transform:none;letter-spacing:0}
+.cards{display:flex;flex-direction:column;gap:12px;min-width:0}
+.cards .more{align-self:center;font:600 13px var(--display);padding:8px 16px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--accent);cursor:pointer}
+.qhead{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.lvl{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:3px 7px;border-radius:4px;border:1px solid var(--line)}
+.lvl-Easy{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.lvl-Medium{background:var(--new-soft);color:var(--new);border-color:transparent}
+.lvl-Hard{background:var(--hi-soft);color:var(--hi);border-color:transparent}
+.tag.lik-high{background:var(--hi-soft);color:var(--hi)}
+.tag.lik-medium{border:1px solid var(--line);color:var(--ink)}
+.tag.lik-low,.tag.lik-not-seen{color:var(--muted);border:1px dashed var(--line)}
+.tag.tech{border:1px solid var(--line);color:var(--muted);font-weight:400}
+.qbtn{font:600 13px var(--display);align-self:flex-start;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--accent);cursor:pointer}
+.qbtn:focus-visible{outline:2px solid var(--accent)}
+.rv{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:10px}
+.rv[hidden]{display:none!important}
+.verdict{font:600 14px var(--display)}
+.verdict.ok{color:var(--ok)} .verdict.no{color:var(--hi)}
+.rv h4{margin:0 0 4px;font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.rv .sol ol{margin:0;padding-left:1.2rem}
+.rv .trick{font-family:var(--body);font-size:15px;line-height:1.5;background:var(--sunk);border-radius:6px;padding:8px 10px}
+.rv ul.wn{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-family:var(--body);font-size:14.5px;line-height:1.45}
+.rv ul.wn li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 8px}
+.rv ul.wn b{font:500 12.5px var(--mono)}
+.rv ul.wn em{font:500 10.5px var(--mono);font-style:normal;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.rv ul.wn em.mistake{color:var(--hi)}
+.rv .tags{display:flex;flex-wrap:wrap;gap:5px}
+.statline{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.5;margin:0}
+.statline b{color:var(--ink);font-weight:500}
+.mix{display:flex;gap:10px;font:500 12px var(--mono)}
+.btn{font:700 13.5px var(--display);align-self:flex-start;padding:9px 14px;border-radius:8px;border:0;background:var(--accent);color:var(--surface);cursor:pointer}
+.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.variations{margin:0;padding-left:1.1rem;font-family:var(--body);font-size:15px;line-height:1.5;display:flex;flex-direction:column;gap:3px}
+@media (max-width: 900px){ .bank{grid-template-columns:minmax(0,1fr)} .filters{position:static} }
 @media (prefers-reduced-motion: reduce){ *{transition:none!important} }
 </style>
 <style id="jstyles"></style>
@@ -181,6 +228,10 @@ details[open] summary{margin-bottom:8px}
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       <input id="q" type="search" placeholder="Search formulas, tricks, question types, topics" autocomplete="off" aria-label="Search">
     </label>
+    <div class="seg tabs" role="group" aria-label="View" id="tabs">
+      <button type="button" data-view="web" aria-pressed="true">Web</button>
+      <button type="button" data-view="bank" aria-pressed="false">Question bank</button>
+    </div>
     <div class="seg" role="group" aria-label="Show" id="show" title="Which topics to highlight on the web">
       <button type="button" data-v="all" aria-pressed="true">All topics</button>
       <button type="button" data-v="pyq" aria-pressed="false">Has past questions</button>
@@ -205,38 +256,58 @@ details[open] summary{margin-bottom:8px}
     </section>
     <aside class="panel" id="panel" aria-live="polite"></aside>
   </main>
+
+  <section class="bank" id="bank" hidden aria-label="Question bank">
+    <aside class="filters" id="filters"></aside>
+    <div class="cards" id="cards" aria-live="polite"></div>
+  </section>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script>
 (function(){
-const S = { nodes:new Map(), formulas:[], methods:{}, idx:[], pyqs:[], practice:[], papers:[], show:'all', q:'', sel:null, status:'loading', loaded:false, fitted:false,
-            cnt:new Map(), built:new Set() };
+/* State. core.json is loaded at start (nodes, papers, stats, a light list of every question). A topic's shard
+   (formulas, methods, full questions) is fetched only when that topic is opened, so start-up cost stays flat as the bank grows. */
+const S = { nodes:new Map(), papers:[], stats:{papers:0,topics:{},qtypes:{}}, tmeta:{}, rows:[], techniques:{}, rubric:{}, likNote:'',
+            sd:{}, sp:{}, ix:{}, idx:{}, show:'all', q:'', sel:null, view:'web', status:'loading', loaded:false, fitted:false, cnt:new Map(), built:new Set(),
+            f:{topic:'', qtype:'', level:new Set(), lik:new Set(), src:'', status:'', tech:'', sort:'asked'}, shown:20, prog:{} };
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const md = s => esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
 const plural = (n,w) => n + ' ' + w + (n===1?'':(/(ch|sh|s|x)$/.test(w)?'es':'s'));
 const LAYERS = [['standard','Standard'],['fast','Fast'],['ultra','Ultra-calc'],['eliminate','Eliminate']];
+const LEVELS = ['Easy','Medium','Hard'];
+const LIKS = [['high','High'],['medium','Medium'],['low','Low']];
+
+/* ---------- progress (this browser only) ---------- */
+function loadProg(){ try { return JSON.parse(localStorage.getItem('mw-progress')||'{}') || {}; } catch(e){ return {}; } }
+function saveProg(){ try { localStorage.setItem('mw-progress', JSON.stringify(S.prog)); } catch(e){} }
+S.prog = loadProg();
 
 /* ---------- derived data ---------- */
 function parentOf(n){ const p = n && n.parent; return (p && p !== 'hub' && S.nodes.has(p)) ? p : 'hub'; }
 function junctionOf(id){ let cur = S.nodes.get(id), guard = 0; while(cur && parentOf(cur) !== 'hub' && guard++ < 20) cur = S.nodes.get(parentOf(cur)); return cur ? cur.id : null; }
+function topicOf(id){ let cur = S.nodes.get(id), guard = 0; while(cur && cur.kind !== 'topic' && guard++ < 20) cur = S.nodes.get(parentOf(cur)); return cur && cur.kind==='topic' ? cur.id : null; }
 function color(id){ const j = junctionOf(id); return j ? `var(--j-${j})` : 'var(--muted)'; }
 function kidsOf(id){ return [...S.nodes.values()].filter(m => parentOf(m)===id).sort((a,b)=>(a.order??999)-(b.order??999)||a.label.localeCompare(b.label)); }
 function descendants(id){ const out = new Set([id]); let added = true; while(added){ added=false; for(const n of S.nodes.values()){ if(!out.has(n.id) && out.has(parentOf(n))){ out.add(n.id); added=true; } } } return out; }
 function linksOf(id){ const s = new Set(); const n = S.nodes.get(id); (n && n.links || []).forEach(x => S.nodes.has(x) && s.add(x)); for(const m of S.nodes.values()) if((m.links||[]).includes(id)) s.add(m.id); s.delete(id); return s; }
 function paper(id){ return S.papers.find(p => p.id === id); }
 function short(pid){ return 'S' + String(pid).slice(-1); }
+const qstat = id => S.stats.qtypes[id], tstat = id => S.stats.topics[id];
 function derive(){
   S.cnt = new Map();
   for (const n of S.nodes.values()){
     let c = 0;
-    if (n.kind === 'qtype') c = S.pyqs.filter(p => p.qtype === n.id).length;
-    else if (n.kind === 'topic' && !kidsOf(n.id).length) c = S.idx.filter(r => r.topic === n.id).length;
+    if (n.kind === 'qtype') c = (qstat(n.id)||{}).n || 0;
+    else if (n.kind === 'topic' && !kidsOf(n.id).length) c = (tstat(n.id)||{}).n || 0;
     S.cnt.set(n.id, c);
   }
   S.built = new Set();
-  for (const n of S.nodes.values()) if (n.kind === 'qtype'){ let cur = n, g = 0; while (cur && g++ < 20){ S.built.add(cur.id); const p = parentOf(cur); if (p === 'hub') break; cur = S.nodes.get(p); } }
+  for (const [t,m] of Object.entries(S.tmeta)) if (m.built){
+    descendants(t).forEach(x => S.built.add(x));
+    let cur = S.nodes.get(t), g2 = 0; while (cur && g2++ < 20){ S.built.add(cur.id); const p = parentOf(cur); if (p === 'hub') break; cur = S.nodes.get(p); }
+  }
 }
 function subCount(id){ let t = S.cnt.get(id)||0; kidsOf(id).forEach(k => t += subCount(k.id)); return t; }
 function passes(id){ const n = S.nodes.get(id); if (!n || parentOf(n)==='hub') return true;
@@ -244,7 +315,23 @@ function passes(id){ const n = S.nodes.get(id); if (!n || parentOf(n)==='hub') r
 function q(){ return S.q.toLowerCase(); }
 function nodeHit(n){ return S.q && n.label.toLowerCase().includes(q()); }
 
-/* ---------- junction colours (stored hue per subject keeps colours stable as the web grows) ---------- */
+/* ---------- data: lazy shards ---------- */
+const get = async (p, v) => {
+  if (window.__DATA__ && window.__DATA__[p]) return window.__DATA__[p];
+  const r = await fetch(p + '?v=' + (v || Date.now()), {cache: v ? 'default' : 'no-store'}); if (!r.ok) throw new Error(p + ' ' + r.status); return r.json();
+};
+function loadShard(t){
+  if (!t || !(S.tmeta[t] && S.tmeta[t].built)) return Promise.resolve(null);
+  if (!S.sp[t]) S.sp[t] = get('data/shards/' + t + '.json', S.tmeta[t].v).then(d => {
+    d.byId = new Map([...d.pyqs.map(x => [x.id, Object.assign({src:'pyq'}, x)]), ...d.practice.map(x => [x.id, Object.assign({src:'practice'}, x)])]);
+    S.sd[t] = d; return d; });
+  return S.sp[t];
+}
+function loadIndex(t){ if (!S.ix[t]) S.ix[t] = get('data/index/' + t + '.json').then(d => (S.idx[t] = d)).catch(() => (S.idx[t] = [])); return S.ix[t]; }
+const allBuilt = () => Object.keys(S.tmeta).filter(t => S.tmeta[t].built);
+const formulasOf = t => (S.sd[t] ? S.sd[t].formulas : []);
+
+/* ---------- junction colours ---------- */
 function paintJunctions(){
   const js = [...S.nodes.values()].filter(n => parentOf(n)==='hub').sort((a,b)=>(a.order??99)-(b.order??99));
   let light='', dark='';
@@ -329,7 +416,6 @@ function drawWeb(){
     .attr('x', d => (d.x < Math.PI ? -1 : 1) * 16)
     .attr('text-anchor', d => d.x < Math.PI ? 'end' : 'start')
     .text(d => S.nodes.get(d.data.id).short || S.nodes.get(d.data.id).label);
-  // leaf labels run outward; labels of nodes that have children run inward so they never sit on their own branches
   node.filter(d=>d.depth>1).append('text')
     .attr('dy','0.32em')
     .attr('transform', d => { const deg = d.x*180/Math.PI - 90; return d.x < Math.PI ? `rotate(${deg})` : `rotate(${deg+180})`; })
@@ -338,7 +424,7 @@ function drawWeb(){
     .text(d => S.nodes.get(d.data.id).short || S.nodes.get(d.data.id).label);
 
   applyHighlight();
-  if (!S.fitted){ fit(false); S.fitted = true; }
+  if (!S.fitted && S.view==='web'){ fit(false); S.fitted = true; }
 }
 function applyHighlight(){
   const lit = new Set();
@@ -362,35 +448,64 @@ function fit(animate){
   (animate && !reduce ? svg.transition().duration(400) : svg).call(zoom.transform, t);
 }
 
-/* ---------- panel building blocks ---------- */
+/* ---------- building blocks ---------- */
 function chip(id, count, flag){
   const n = S.nodes.get(id); if(!n) return '';
   return `<button type="button" class="chip" data-go="${esc(id)}"><i style="background:${color(id)}"></i>${esc(n.label)}${count!=null?` <span class="n">${count}</span>`:''}${flag?` <span class="nw">${flag}</span>`:''}</button>`;
 }
 function formulaHtml(f){ return `<div class="formula"><span class="tx">${esc(f.text)}</span>${f.note?`<span class="nt">${esc(f.note)}</span>`:''}</div>`; }
-function methodHtml(qid){
-  const m = S.methods[qid]; if (!m) return '';
+function methodHtml(m){
+  if (!m) return '';
   const rows = LAYERS.map(([k,l]) => `<dt>${l}</dt><dd>${esc(m[k])}</dd>`).join('')
-    + `<dt class="trap">Traps</dt><dd><ul>${(m.traps||[]).map(t=>`<li>${esc(t)}</li>`).join('')}</ul></dd>`;
+    + `<dt class="trap">Traps</dt><dd><ul>${(m.traps||[]).map(t=>`<li>${esc(t)}</li>`).join('')}</ul></dd>`
+    + ((m.variations||[]).length ? `<dt>Variations</dt><dd><ul>${m.variations.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></dd>` : '')
+    + ((m.tech||[]).length ? `<dt>Tricks</dt><dd>${m.tech.map(techTag).join(' ')}</dd>` : '');
   return `<dl class="ledger">${rows}</dl>`;
 }
+const techTag = k => `<span class="tag tech">${esc(S.techniques[k] || k)}</span>`;
+const lvlTag = (lv, title) => `<span class="lvl lvl-${esc(lv)}" ${title?`title="${esc(title)}"`:''}>${esc(lv)}</span>`;
+const likKey = l => String(l||'not seen').replace(' ','-');
+const likTag = (st) => { const l = st ? st.lik : 'not seen'; const n = S.stats.papers; return `<span class="tag lik-${likKey(l)}" title="${st ? `Asked in ${st.shifts} of ${n} analysed shifts` : 'Not seen in the papers analysed so far'}">${l==='not seen'?'not seen yet':l+' likelihood'}</span>`; };
 function srcLink(pid, qno){ const p = paper(pid); const t = `${short(pid)} Q${qno}`; return p && p.link ? `<a href="${esc(p.link)}" target="_blank" rel="noopener" title="Open the source paper">${t}</a>` : t; }
-function pyqHtml(x){
-  const opts = x.options.map((o,i)=>`<li><span>(${'abcd'[i]})</span>${esc(o)}</li>`).join('');
-  const steps = x.solution.map(s=>`<li>${esc(s)}</li>`).join('');
-  return `<div class="q"><span class="src">${srcLink(x.paper, x.qno)} · SSC CGL Tier 1 · 12 Sep 2025</span><p>${esc(x.text)}</p><ul class="opts">${opts}</ul>
-    <details><summary>Show solution</summary><div class="sol"><span class="key-a">Answer (${x.key}) ${esc(x.options['abcd'.indexOf(x.key)])}</span><ol>${steps}</ol></div></details></div>`;
+function whyText(w){ if(!w) return ''; const bits=[`${w.steps} step${w.steps===1?'':'s'}`]; if(w.concepts>1) bits.push(`${w.concepts} concepts`); if(w.heavy) bits.push('heavy numbers'); if(w.trap) bits.push('a common-mistake option'); return bits.join(', '); }
+function askedLine(st, label){
+  const n = S.stats.papers;
+  if (!st) return `<p class="statline">${label}: not seen in the ${plural(n,'shift')} analysed so far.</p>`;
+  return `<p class="statline"><b>${label}:</b> asked ${plural(st.n,'time')} in <b>${st.shifts} of ${n}</b> shifts${st.perShift!=null?`, about <b>${st.perShift}</b> per shift`:''} · ${likTag(st)}</p>`;
 }
-function practiceHtml(p){
-  const btn = p.options.map((o,i)=>`<button type="button" class="opt" data-k="${'abcd'[i]}"><span>(${'abcd'[i]})</span>${esc(o)}</button>`).join('');
-  return `<div class="q pq" data-key="${p.key}"><span class="lv ${p.level}">${p.level==='harder'?'One level harder':'Same level'}</span><p>${esc(p.text)}</p><div class="opts">${btn}</div><p class="why" hidden>${esc(p.solution)}</p></div>`;
-}
-function idxRows(rows){
-  return `<ul class="rows">${rows.map(r => `<li><span class="ref">${srcLink(r.paper, r.qno)}</span><span class="ans">answer ${esc(r.answer)}</span>${r.qtype?`<button type="button" class="chip" data-go="${esc(r.qtype)}"><i style="background:${color(r.qtype)}"></i>${esc(S.nodes.get(r.qtype).label)}</button>`:''}</li>`).join('')}</ul>`;
+function mixLine(st){ if(!st || !st.levels) return ''; return `<p class="mix">${LEVELS.map(l=>`<span>${lvlTag(l)} ${st.levels[l]||0}</span>`).join('')}</p>`; }
+
+/* One question as a quiz card. `x` is a PYQ or a practice item from a shard. */
+function cardHtml(x){
+  const isP = x.src === 'pyq';
+  const pr = S.prog[x.id];
+  const head = isP
+    ? `<span class="src">${srcLink(x.paper, x.qno)} · ${esc((paper(x.paper)||{}).exam||'')} · ${esc((paper(x.paper)||{}).date||'')}</span>`
+    : `<span class="src" style="color:var(--muted)">Practice · ${x.variant==='harder'?'one level harder':'same level'}</span>`;
+  const btn = x.options.map((o,i)=>`<button type="button" class="opt" data-k="${'abcd'[i]}"><span>(${'abcd'[i]})</span>${esc(o)}</button>`).join('');
+  const sol = Array.isArray(x.solution) ? `<ol>${x.solution.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>` : `<p style="margin:0">${esc(x.solution)}</p>`;
+  const wr = Object.entries(x.wrong||{}).map(([k,w]) => `<li><b>(${k}) ${esc(x.options['abcd'.indexOf(k)])}</b><span>${esc(w.note)} <em class="${w.kind}">${w.kind==='mistake'?'common mistake':'ruled out'}</em></span></li>`).join('');
+  const st = qstat(x.qtype), qn = S.nodes.get(x.qtype);
+  const t = (x.tech||[]).map(techTag).join('');
+  return `<div class="q qz" data-id="${esc(x.id)}" data-key="${x.key}">
+    <div class="qhead">${head}${lvlTag(x.level, isP ? whyText(x.why) : '')}${likTag(st)}${pr?`<span class="tag ${pr.r?'lik-medium':'lik-high'}">${pr.r?'you got it right':'you got it wrong'}</span>`:''}</div>
+    <p>${esc(x.text)}</p>
+    <div class="opts">${btn}</div>
+    <button type="button" class="qbtn" data-reveal>Show answer</button>
+    <div class="rv" hidden>
+      <div class="verdict"></div>
+      <div class="sol"><h4>Solution</h4>${sol}</div>
+      ${x.trick ? `<div><h4>Fastest way in</h4><div class="trick">${esc(x.trick)}</div></div>` : ''}
+      ${wr ? `<div><h4>Why not the others</h4><ul class="wn">${wr}</ul></div>` : ''}
+      <div class="tags">${t}${qn?`<button type="button" class="chip" data-go="${esc(x.qtype)}"><i style="background:${color(x.qtype)}"></i>${esc(qn.label)}: methods</button>`:''}</div>
+    </div></div>`;
 }
 const kindName = n => parentOf(n)==='hub' ? 'Subject' : ({topic:'Topic', concept:'Concept', qtype:'Question type'}[n.kind] || 'Topic');
+function idxRows(rows){
+  return `<ul class="rows">${rows.map(r => `<li><span class="ref">${srcLink(r.paper, r.qno)}</span><span class="ans">answer ${esc(r.answer)}</span></li>`).join('')}</ul>`;
+}
 
-/* ---------- panel ---------- */
+/* ---------- web panel ---------- */
 function renderPanel(){
   const P = $('panel');
   if (S.status==='none'){ P.innerHTML = `<p class="eyebrow">Couldn't load</p><h2>The data files didn't load</h2><p class="lead">Check your connection and refresh the page.</p>`; return; }
@@ -399,85 +514,226 @@ function renderPanel(){
   if (S.sel && S.nodes.has(S.sel)) return renderNode(P);
   renderOverview(P);
 }
+function topAsked(k){
+  return Object.entries(S.stats.qtypes).sort((a,b)=> b[1].shifts-a[1].shifts || b[1].n-a[1].n || a[0].localeCompare(b[0])).slice(0,k);
+}
 function renderOverview(P){
   const topics = [...S.nodes.values()].filter(n => n.kind==='topic');
   const built = topics.filter(t => S.built.has(t.id));
-  const todo = topics.filter(t => !S.built.has(t.id) && subCount(t.id) > 0).sort((a,b)=>subCount(b.id)-subCount(a.id));
+  const todo = topics.filter(t => !S.built.has(t.id) && (tstat(t.id)||{}).n > 0).sort((a,b)=>tstat(b.id).n-tstat(a.id).n);
+  const nbank = S.rows.length;
   P.innerHTML = `
     <p class="eyebrow">SSC CGL Tier 1 and Tier 2 · Quant</p>
-    <h2>${plural(built.length,'topic')} fully built</h2>
-    <div class="meta-row"><span>${todo.length} more ${todo.length===1?'topic has':'topics have'} past questions waiting</span><span>${S.idx.length} past questions filed</span><span>${S.idx.length} of ${S.idx.length} answers recomputed in code</span></div>
-    <p class="lead">Each dot is a topic, a concept or a question type. Click one to see its formulas, the standard, fast and ultra-calc methods, how to eliminate options, past questions and practice. Dashed lines join related topics.</p>
-    <div class="section"><p class="eyebrow">Built</p><div class="chips">${built.map(t=>chip(t.id, subCount(t.id))).join('') || '<p class="empty-msg">Nothing built yet.</p>'}</div></div>
-    <div class="section"><p class="eyebrow">Next, by number of past questions</p><div class="chips">${todo.map(t=>chip(t.id, subCount(t.id))).join('')}</div></div>
-    <div class="section"><p class="eyebrow">Sources</p><ul class="rows">${S.papers.map(p=>`<li><span class="ref">${p.link?`<a href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.exam)} · ${p.date} · shift ${p.shift}</a>`:esc(p.exam)}</span><span class="ans">${esc(p.publisher)} similar paper · ${esc(p.quant)}</span></li>`).join('')}</ul></div>
-    <p class="note">These first papers are coaching-made similar papers, not the official CGL papers, so the counts show that publisher's style. Priorities stay provisional until official papers are added.</p>`;
+    <h2>${nbank} questions in the bank</h2>
+    <div class="meta-row"><span>${plural(built.length,'topic')} built</span><span>${todo.length} more ${todo.length===1?'has':'have'} past questions waiting</span><span>${Object.values(S.tmeta).reduce((a,m)=>a+m.indexed,0)} past questions filed</span></div>
+    <button type="button" class="btn" data-bank="">Open the question bank →</button>
+    <p class="lead">Each dot is a topic, a concept or a question type. Click one for its formulas, the standard, fast and ultra-calc methods, how to eliminate options, the traps, past questions and practice.</p>
+    <div class="section"><p class="eyebrow">Most asked question types</p>
+      <ul class="rows">${topAsked(6).map(([id,st])=>`<li><button type="button" class="chip" data-go="${esc(id)}"><i style="background:${color(id)}"></i>${esc(S.nodes.get(id).label)}</button><span class="ans">${st.shifts} of ${S.stats.papers} shifts · ${st.n} q</span>${likTag(st)}</li>`).join('')}</ul>
+      <p class="note">${esc(S.likNote)} With only ${plural(S.stats.papers,'shift')} analysed, read this as a rough guide.</p></div>
+    <div class="section"><p class="eyebrow">Built</p><div class="chips">${built.map(t=>chip(t.id, (tstat(t.id)||{}).n)).join('') || '<p class="empty-msg">Nothing built yet.</p>'}</div></div>
+    <div class="section"><p class="eyebrow">Next, by number of past questions</p><div class="chips">${todo.map(t=>chip(t.id, tstat(t.id).n)).join('')}</div></div>
+    <div class="section"><p class="eyebrow">Sources</p><ul class="rows">${S.papers.map(p=>`<li><span class="ref">${p.link?`<a href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.exam)} · ${p.date} · shift ${p.shift}</a>`:esc(p.exam)}</span><span class="ans">${esc(p.publisher)} ${esc(p.kind.replace('-',' '))} · ${esc(p.quant)}</span></li>`).join('')}</ul></div>
+    <p class="note">These first papers are coaching-made similar papers, not the official CGL papers, so the counts show that publisher's style. Likelihood stays provisional until official papers are added.</p>`;
 }
 function renderNode(P){
-  const id = S.sel, n = S.nodes.get(id); const desc = descendants(id); const kids = kidsOf(id);
+  const id = S.sel, n = S.nodes.get(id); const kids = kidsOf(id);
+  const t = topicOf(id), builtT = t && S.tmeta[t] && S.tmeta[t].built;
+  if (builtT && !S.sd[t]){ loadShard(t).then(() => { if (S.sel === id && !S.q && S.view==='web') renderPanel(); }); }
+  const shard = builtT ? S.sd[t] : null;
+  if (t && !builtT && !S.idx[t]) loadIndex(t).then(() => { if (S.sel === id && !S.q) renderPanel(); });
   const crumbs = []; let cur = parentOf(n), guard=0; while(cur!=='hub' && guard++<20){ crumbs.unshift(cur); cur = parentOf(S.nodes.get(cur)); }
   const rel = [...linksOf(id)];
   const total = subCount(id);
   const isBuilt = S.built.has(id);
-  let body = '';
+  const loading = builtT && !shard ? '<p class="empty-msg">Loading this topic…</p>' : '';
+  let body = '', stat = '';
   if (n.kind === 'concept'){
-    const fs = S.formulas.filter(f => f.node === id);
-    body += `<div class="section"><p class="eyebrow">Formulas</p>${fs.map(formulaHtml).join('')}</div>`;
+    const fs = shard ? shard.formulas.filter(f => f.node === id) : [];
+    body += loading || `<div class="section"><p class="eyebrow">Formulas</p>${fs.map(formulaHtml).join('')}</div>`;
   } else if (n.kind === 'qtype'){
-    const m = S.methods[id] || {};
-    const fs = (m.formulas||[]).map(fid => S.formulas.find(f => f.id===fid)).filter(Boolean);
-    const qs = S.pyqs.filter(p => p.qtype===id), ps = S.practice.filter(p => p.qtype===id);
-    body += `<div class="section"><p class="eyebrow">Formulas used</p>${fs.map(formulaHtml).join('')}</div>`;
-    body += `<div class="section"><p class="eyebrow">How to solve</p>${methodHtml(id)}</div>`;
-    body += `<div class="section"><p class="eyebrow">Past questions</p>${qs.map(pyqHtml).join('')}</div>`;
-    body += `<div class="section"><p class="eyebrow">Practice · tap an answer</p>${ps.map(practiceHtml).join('')}</div>`;
+    stat = askedLine(qstat(id), 'This type') + mixLine(qstat(id));
+    if (shard){
+      const m = shard.methods[id] || {};
+      const fs = (m.formulas||[]).map(fid => shard.formulas.find(f => f.id===fid)).filter(Boolean);
+      const qs = shard.pyqs.filter(p => p.qtype===id).map(x => shard.byId.get(x.id)), ps = shard.practice.filter(p => p.qtype===id).map(x => shard.byId.get(x.id));
+      body += `<button type="button" class="btn" data-bank="qtype:${esc(id)}">Practice this type in the bank →</button>`;
+      body += `<div class="section"><p class="eyebrow">Formulas used</p>${fs.map(formulaHtml).join('')}</div>`;
+      body += `<div class="section"><p class="eyebrow">How to solve</p>${methodHtml(m)}</div>`;
+      body += `<div class="section"><p class="eyebrow">Past questions · tap an answer</p>${qs.map(cardHtml).join('')}</div>`;
+      body += `<div class="section"><p class="eyebrow">Practice · tap an answer</p>${ps.map(cardHtml).join('')}</div>`;
+    } else body += loading;
   } else if (n.kind === 'topic'){
-    const fs = S.formulas.filter(f => desc.has(f.node));
-    const rows = S.idx.filter(r => r.topic === id);
-    if (fs.length) body += `<div class="section"><p class="eyebrow">Formulas</p>${fs.map(formulaHtml).join('')}</div>`;
-    if (rows.length) body += `<div class="section"><p class="eyebrow">Past questions filed here</p>${idxRows(rows)}</div>`;
-    if (!isBuilt) body += `<p class="note">Not built yet. ${rows.length ? `${plural(rows.length,'past question')} are filed here and their answers are checked. ` : 'No past question has landed here yet. '}Ask Claude to build this topic and it will get formulas, question types, the four solving layers and practice, the way Partnership has.</p>`;
+    stat = askedLine(tstat(id), 'This topic');
+    const rows = S.idx[id] || [];
+    if (shard){
+      body += `<button type="button" class="btn" data-bank="topic:${esc(id)}">Practice this topic in the bank →</button>`;
+      if (shard.formulas.length) body += `<div class="section"><p class="eyebrow">Formulas</p>${shard.formulas.map(formulaHtml).join('')}</div>`;
+      if ((shard.refs||[]).length) body += `<div class="section"><p class="eyebrow">Read more (outside sources, not copied)</p><ul class="rows">${shard.refs.map(r=>`<li style="display:block"><a href="${esc(r.url)}" target="_blank" rel="noopener" style="color:var(--accent)">${esc(r.title)}</a><div class="note">${esc(r.note)}</div></li>`).join('')}</ul></div>`;
+    } else if (builtT) body += loading;
+    else {
+      if (rows.length) body += `<div class="section"><p class="eyebrow">Past questions filed here</p>${idxRows(rows)}</div>`;
+      body += `<p class="note">Not built yet. ${rows.length ? `${plural(rows.length,'past question')} are filed here and their answers are checked. ` : 'No past question has landed here yet. '}Send material on this topic and it will get formulas, question types, the four solving layers, traps and practice.</p>`;
+    }
   } else {
-    const topics = kids.filter(k => k.kind==='topic');
-    body += `<p class="note">${plural(topics.length,'topic')} in this subject. ${topics.filter(t=>S.built.has(t.id)).length} fully built.</p>`;
+    const tops = kids.filter(k => k.kind==='topic');
+    body += `<p class="note">${plural(tops.length,'topic')} in this subject. ${tops.filter(x=>S.built.has(x.id)).length} fully built.</p>`;
   }
   P.innerHTML = `
     <div class="crumbs"><button type="button" data-go="">Web</button>${crumbs.map(c=>` › <button type="button" data-go="${esc(c)}">${esc(S.nodes.get(c).label)}</button>`).join('')}</div>
     <div><p class="eyebrow" style="color:${color(id)}">${kindName(n)}</p><h2>${esc(n.label)}</h2></div>
     ${n.summary ? `<p class="lead">${md(n.summary)}</p>` : ''}
-    <div class="meta-row"><span>${plural(total,'past question')}</span>${isBuilt?'<span>fully built</span>':''}${n.priority?`<span class="tag p-${esc(n.priority)}" title="Provisional: judged from similar papers only">${esc(n.priority)} priority</span>`:''}</div>
+    <div class="meta-row"><span>${plural(total,'past question')}</span>${isBuilt?'<span>fully built</span>':''}</div>
+    ${stat}
     ${kids.length ? `<div class="section"><p class="eyebrow">${parentOf(n)==='hub'?'Topics':n.kind==='topic'?'Concepts':'Question types'}</p><div class="chips">${kids.map(k=>chip(k.id, subCount(k.id), S.built.has(k.id)&&k.kind==='topic'?'built':'')).join('')}</div></div>` : ''}
     ${rel.length ? `<div class="section"><p class="eyebrow">Connected topics</p><div class="chips">${rel.map(r=>chip(r, subCount(r))).join('')}</div></div>` : ''}
     ${body}
     <button type="button" class="btn-link" data-go="">← Back to overview</button>`;
 }
+let searchToken = 0;
 function renderSearch(P){
   const t = q();
+  const tok = ++searchToken;
+  const bt = allBuilt();
+  const need = bt.filter(x => !S.sd[x]);
+  if (need.length){ P.innerHTML = `<p class="eyebrow">Search</p><p class="empty-msg">Searching every built topic…</p>`; Promise.all(need.map(loadShard)).then(() => { if (tok === searchToken && S.q) renderSearch($('panel')); }); return; }
   const nodes = [...S.nodes.values()].filter(n => n.label.toLowerCase().includes(t) || (n.summary||'').toLowerCase().includes(t));
-  const fs = S.formulas.filter(f => (f.text+' '+(f.note||'')).toLowerCase().includes(t));
-  const ms = Object.entries(S.methods).filter(([id,m]) => LAYERS.some(([k]) => (m[k]||'').toLowerCase().includes(t)) || (m.traps||[]).some(x => x.toLowerCase().includes(t)));
-  const qs = S.pyqs.filter(x => (x.text+' '+x.solution.join(' ')).toLowerCase().includes(t));
+  const fs = [], ms = [], qs = [];
+  for (const b of bt){ const d = S.sd[b];
+    d.formulas.forEach(f => { if ((f.text+' '+(f.note||'')).toLowerCase().includes(t)) fs.push(f); });
+    Object.entries(d.methods).forEach(([id,m]) => { if (LAYERS.some(([k]) => (m[k]||'').toLowerCase().includes(t)) || (m.traps||[]).concat(m.variations||[]).some(x => x.toLowerCase().includes(t))) ms.push(id); });
+    d.pyqs.forEach(x => { if ((x.text+' '+x.solution.join(' ')+' '+(x.trick||'')).toLowerCase().includes(t)) qs.push(d.byId.get(x.id)); });
+  }
   const total = nodes.length + fs.length + ms.length + qs.length;
   P.innerHTML = `
     <p class="eyebrow">Search</p>
     <h2>${plural(total,'match')} for “${esc(S.q)}”</h2>
     ${nodes.length ? `<div class="section"><p class="eyebrow">Topics and types</p><div class="chips">${nodes.slice(0,24).map(n=>chip(n.id, subCount(n.id))).join('')}</div></div>` : ''}
     ${fs.length ? `<div class="section"><p class="eyebrow">Formulas</p>${fs.map(f=>formulaHtml(f)+`<div class="chips">${chip(f.node)}</div>`).join('')}</div>` : ''}
-    ${ms.length ? `<div class="section"><p class="eyebrow">Methods mentioning it</p><div class="chips">${ms.map(([id])=>chip(id)).join('')}</div></div>` : ''}
-    ${qs.length ? `<div class="section"><p class="eyebrow">Past questions</p>${qs.map(pyqHtml).join('')}</div>` : ''}
+    ${ms.length ? `<div class="section"><p class="eyebrow">Methods mentioning it</p><div class="chips">${ms.map(id=>chip(id)).join('')}</div></div>` : ''}
+    ${qs.length ? `<div class="section"><p class="eyebrow">Past questions</p>${qs.slice(0,20).map(cardHtml).join('')}</div>` : ''}
     ${total ? '' : '<p class="empty-msg">Try a shorter word, a formula name, or a number.</p>'}`;
 }
-$('panel').addEventListener('click', e => {
-  const o = e.target.closest('button.opt');
-  if (o){ const card = o.closest('.pq'); if (card && !o.disabled){ const key = card.dataset.key;
+
+/* ---------- question bank ---------- */
+function matchRows(){
+  const f = S.f;
+  const rows = S.rows.filter(r => {
+    if (f.topic && r.topic !== f.topic) return false;
+    if (f.qtype && r.qtype !== f.qtype) return false;
+    if (f.level.size && !f.level.has(r.level)) return false;
+    if (f.lik.size && !f.lik.has((qstat(r.qtype)||{lik:'not seen'}).lik)) return false;
+    if (f.src && r.src !== f.src) return false;
+    if (f.tech && !r.tech.includes(f.tech)) return false;
+    const pr = S.prog[r.id];
+    if (f.status === 'new' && pr) return false;
+    if (f.status === 'wrong' && !(pr && !pr.r)) return false;
+    if (f.status === 'right' && !(pr && pr.r)) return false;
+    return true;
+  });
+  const lv = r => LEVELS.indexOf(r.level), sh = r => (qstat(r.qtype)||{shifts:0}).shifts, nn = r => (qstat(r.qtype)||{n:0}).n;
+  const tie = (a,b) => (a.src===b.src?0:a.src==='pyq'?-1:1) || a.id.localeCompare(b.id);
+  const by = {
+    asked: (a,b) => sh(b)-sh(a) || nn(b)-nn(a) || lv(a)-lv(b) || tie(a,b),
+    easy:  (a,b) => lv(a)-lv(b) || sh(b)-sh(a) || tie(a,b),
+    hard:  (a,b) => lv(b)-lv(a) || sh(b)-sh(a) || tie(a,b),
+    topic: (a,b) => a.topic.localeCompare(b.topic) || a.qtype.localeCompare(b.qtype) || lv(a)-lv(b) || tie(a,b)
+  }[f.sort];
+  return rows.sort(by);
+}
+const tg = (name, val, label, on) => `<button type="button" data-f="${name}" data-v="${esc(val)}" aria-pressed="${on}">${esc(label)}</button>`;
+function renderFilters(n){
+  const f = S.f, tops = allBuilt().sort();
+  const types = Object.values(S.nodes ? Object.fromEntries(S.nodes) : {}).filter(x => x.kind==='qtype' && (!f.topic || topicOf(x.id)===f.topic) && S.tmeta[topicOf(x.id)] && S.tmeta[topicOf(x.id)].built);
+  const techs = Object.entries(S.techniques);
+  $('filters').innerHTML = `
+    <div class="fcount">${n} question${n===1?'':'s'} match</div>
+    <label class="f">Topic<select data-sel="topic"><option value="">All built topics</option>${tops.map(t=>`<option value="${esc(t)}" ${f.topic===t?'selected':''}>${esc(S.nodes.get(t).label)}</option>`).join('')}</select></label>
+    <label class="f">Question type<select data-sel="qtype"><option value="">All types</option>${types.map(x=>`<option value="${esc(x.id)}" ${f.qtype===x.id?'selected':''}>${esc(x.label)}</option>`).join('')}</select></label>
+    <div class="f">Difficulty<div class="tg">${LEVELS.map(l=>tg('level',l,l,f.level.has(l))).join('')}</div></div>
+    <div class="f">Likely to come<div class="tg">${LIKS.map(([k,l])=>tg('lik',k,l,f.lik.has(k))).join('')}</div></div>
+    <div class="f">Source<div class="tg">${tg('src','','Both',!f.src)}${tg('src','pyq','Past questions',f.src==='pyq')}${tg('src','practice','Practice',f.src==='practice')}</div></div>
+    <label class="f">Technique<select data-sel="tech"><option value="">Any</option>${techs.map(([k,l])=>`<option value="${esc(k)}" ${f.tech===k?'selected':''}>${esc(l)}</option>`).join('')}</select></label>
+    <div class="f">Your progress<div class="tg">${tg('status','','All',!f.status)}${tg('status','new','Not tried',f.status==='new')}${tg('status','wrong','Got wrong',f.status==='wrong')}${tg('status','right','Got right',f.status==='right')}</div></div>
+    <label class="f">Sort<select data-sel="sort">${[['asked','Most asked first'],['easy','Easiest first'],['hard','Hardest first'],['topic','By topic and type']].map(([k,l])=>`<option value="${k}" ${f.sort===k?'selected':''}>${l}</option>`).join('')}</select></label>
+    <button type="button" class="qbtn" data-reset>Clear filters</button>
+    <p class="statline">Likelihood is how many of the ${S.stats.papers} analysed shifts had the question type. ${Object.keys(S.prog).length ? `You have tried ${Object.keys(S.prog).length}.` : ''}</p>`;
+}
+let bankToken = 0;
+async function renderBank(){
+  if (!S.loaded) return;
+  const tok = ++bankToken;
+  const rows = matchRows();
+  renderFilters(rows.length);
+  const vis = rows.slice(0, S.shown);
+  const cards = $('cards');
+  if (!rows.length){ cards.innerHTML = '<p class="empty-msg">No question matches these filters. Clear one and try again.</p>'; return; }
+  const topics = [...new Set(vis.map(r => r.topic))];
+  if (topics.some(t => !S.sd[t])) cards.innerHTML = '<p class="empty-msg">Loading questions…</p>';
+  await Promise.all(topics.map(loadShard));
+  if (tok !== bankToken) return;
+  cards.innerHTML = vis.map(r => cardHtml(S.sd[r.topic].byId.get(r.id))).join('') + (rows.length > vis.length ? `<button type="button" class="more" data-more>Show ${Math.min(20, rows.length - vis.length)} more (${rows.length - vis.length} left)</button>` : '');
+}
+function openBank(spec){
+  if (spec !== undefined){
+    S.f = {topic:'', qtype:'', level:new Set(), lik:new Set(), src:'', status:'', tech:'', sort:'asked'}; S.shown = 20;
+    const [k,v] = String(spec).split(':'); if (k === 'topic') S.f.topic = v; if (k === 'qtype'){ S.f.qtype = v; S.f.topic = topicOf(v) || ''; }
+  }
+  setView('bank');
+}
+function setView(v){
+  S.view = v;
+  $('bank').hidden = v !== 'bank'; document.querySelector('.layout').hidden = v !== 'web';
+  [...$('tabs').querySelectorAll('button')].forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
+  try { history.replaceState(null,'', v==='bank' ? '#bank' : (S.sel ? '#'+S.sel : location.pathname+location.search)); } catch(e){}
+  if (v === 'bank') renderBank(); else { if (!S.fitted) requestAnimationFrame(() => { fit(false); S.fitted = true; }); renderPanel(); }
+}
+$('tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (b) setView(b.dataset.view); });
+$('filters').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.hasAttribute('data-reset')){ S.f = {topic:'', qtype:'', level:new Set(), lik:new Set(), src:'', status:'', tech:'', sort:S.f.sort}; }
+  else if (b.dataset.f){ const k = b.dataset.f, v = b.dataset.v;
+    if (S.f[k] instanceof Set){ S.f[k].has(v) ? S.f[k].delete(v) : S.f[k].add(v); } else S.f[k] = v; }
+  S.shown = 20; renderBank();
+});
+$('filters').addEventListener('change', e => { const s = e.target.closest('select'); if (!s) return; S.f[s.dataset.sel] = s.value;
+  if (s.dataset.sel === 'topic') S.f.qtype = '';
+  if (s.dataset.sel === 'qtype' && s.value) S.f.topic = topicOf(s.value) || S.f.topic;
+  S.shown = 20; renderBank(); });
+
+/* answering: works the same in the web panel, in search results and in the bank */
+function onQuizClick(e){
+  const card = e.target.closest('.qz'); if (!card) return false;
+  const o = e.target.closest('button.opt'), rv = e.target.closest('[data-reveal]');
+  if (!o && !rv) return false;
+  const key = card.dataset.key, id = card.dataset.id;
+  const verdict = card.querySelector('.verdict'), box = card.querySelector('.rv');
+  if (o && !o.disabled){
     card.querySelectorAll('button.opt').forEach(x => { x.disabled = true; if (x.dataset.k === key) x.classList.add('right'); });
-    if (o.dataset.k !== key) o.classList.add('wrong');
-    const w = card.querySelector('.why'); if (w) w.hidden = false; } return; }
+    const ok = o.dataset.k === key; if (!ok) o.classList.add('wrong');
+    verdict.className = 'verdict ' + (ok ? 'ok' : 'no');
+    verdict.textContent = ok ? 'Correct.' : `Not quite. The answer is (${key}).`;
+    S.prog[id] = {r: ok ? 1 : 0}; saveProg();
+    box.hidden = false; const rb = card.querySelector('[data-reveal]'); if (rb) rb.hidden = true;
+  } else if (rv){
+    card.querySelectorAll('button.opt').forEach(x => { x.disabled = true; if (x.dataset.k === key) x.classList.add('right'); });
+    verdict.className = 'verdict'; verdict.textContent = `The answer is (${key}).`; box.hidden = false; rv.hidden = true;
+  }
+  return true;
+}
+$('panel').addEventListener('click', e => {
+  if (onQuizClick(e)) return;
+  const bk = e.target.closest('[data-bank]'); if (bk){ openBank(bk.getAttribute('data-bank')); return; }
   const b = e.target.closest('[data-go]'); if(!b) return;
   const id = b.getAttribute('data-go');
   if (S.q && id){ S.q=''; $('q').value=''; drawWeb(); }
   select(id || null);
   $('panel').scrollTop = 0;
+});
+$('cards').addEventListener('click', e => {
+  if (onQuizClick(e)) return;
+  if (e.target.closest('[data-more]')){ S.shown += 20; renderBank(); return; }
+  const b = e.target.closest('[data-go]'); if (b){ const id = b.getAttribute('data-go'); setView('web'); select(id || null); }
 });
 
 /* ---------- state changes ---------- */
@@ -486,45 +742,40 @@ function select(id){
   try { if (S.sel) history.replaceState(null,'','#'+S.sel); else history.replaceState(null,'',location.pathname+location.search); } catch(e){}
   applyHighlight(); renderPanel();
 }
-window.addEventListener('hashchange', () => { const h = location.hash.slice(1); if (h !== (S.sel||'')) select(h||null); });
+window.addEventListener('hashchange', () => { const h = location.hash.slice(1);
+  if (h === 'bank'){ if (S.view !== 'bank') setView('bank'); return; }
+  if (S.view !== 'web') setView('web');
+  if (h !== (S.sel||'')) select(h||null); });
 $('show').addEventListener('click', e => { const b = e.target.closest('button'); if(!b) return;
   S.show = b.dataset.v; [...$('show').querySelectorAll('button')].forEach(x => x.setAttribute('aria-pressed', String(x===b)));
   drawWeb(); });
-let qt; $('q').addEventListener('input', e => { clearTimeout(qt); qt = setTimeout(() => { S.q = e.target.value.trim(); if(S.q) S.sel=null; drawWeb(); renderPanel(); }, 160); });
+let qt; $('q').addEventListener('input', e => { clearTimeout(qt); qt = setTimeout(() => { S.q = e.target.value.trim(); if(S.q){ S.sel=null; if (S.view!=='web') setView('web'); } drawWeb(); renderPanel(); }, 160); });
 
 function renderHeader(){
   const js = [...S.nodes.values()].filter(n=>parentOf(n)==='hub').length;
   const topics = [...S.nodes.values()].filter(n=>n.kind==='topic');
+  const nIdx = Object.values(S.tmeta).reduce((a,m)=>a+m.indexed,0);
   $('sub').textContent = S.status==='none' ? 'Data files did not load' : (S.loaded ? 'SSC CGL Tier 1 and Tier 2 Quant, built from past questions' : 'Loading the web…');
-  $('stats').innerHTML = S.nodes.size ? `<span><b>${js}</b> subjects</span><span><b>${topics.length}</b> topics</span><span><b>${topics.filter(t=>S.built.has(t.id)).length}</b> built</span><span><b>${S.idx.length}</b> past questions</span><span><b>${S.papers.length}</b> papers</span>` : '';
+  $('stats').innerHTML = S.nodes.size ? `<span><b>${js}</b> subjects</span><span><b>${topics.length}</b> topics</span><span><b>${topics.filter(t=>S.built.has(t.id)).length}</b> built</span><span><b>${nIdx}</b> past questions filed</span><span><b>${S.rows.length}</b> in the bank</span><span><b>${S.papers.length}</b> papers</span>` : '';
   const note = $('note');
   if (S.status==='none'){ note.hidden=false; note.textContent='The data files did not load. Refresh to try again.'; }
   else if (!S.loaded){ note.hidden=false; note.textContent='Loading the web…'; }
   else note.hidden = true;
 }
 function schedule(){ requestAnimationFrame(() => { derive(); paintJunctions(); renderHeader(); drawWeb();
-  const h = location.hash.slice(1); if (h && S.nodes.has(h) && !S.sel) { S.sel = h; applyHighlight(); }
+  const h = location.hash.slice(1);
+  if (h === 'bank'){ setView('bank'); return; }
+  if (h && S.nodes.has(h) && !S.sel) { S.sel = h; applyHighlight(); }
   renderPanel(); }); }
-let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => fit(false), 200); });
+let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (S.view==='web') fit(false); }, 200); });
 
 renderHeader(); renderPanel();
-
-/* ---------- data ---------- */
-/* Reads the repo's own data files. data/manifest.json lists the per-topic files (pyqs/, practice/). */
-const get = async p => { const r = await fetch(p + '?v=' + Date.now(), {cache:'no-store'}); if (!r.ok) throw new Error(p + ' ' + r.status); return r.json(); };
-async function loadData(){
-  if (window.__DATA__) return window.__DATA__;
-  const [nodes, formulas, methods, idx, papers, manifest] = await Promise.all(['nodes','formulas','methods','pyq_index','papers','manifest'].map(n => get('data/' + n + '.json')));
-  const topicFiles = Object.values(manifest.topics || {});
-  const pyqs = (await Promise.all(topicFiles.map(t => get('data/' + t.pyqs)))).flat();
-  const practice = (await Promise.all(topicFiles.map(t => get('data/' + t.practice)))).flat();
-  return { nodes, formulas, methods, pyq_index: idx, papers, pyqs, practice };
-}
 (async () => {
   try {
-    const d = await loadData();
-    S.nodes = new Map(Object.entries(d.nodes).map(([id,n]) => [id, Object.assign({id}, n)]));
-    S.formulas = d.formulas; S.methods = d.methods; S.idx = d.pyq_index; S.papers = d.papers; S.pyqs = d.pyqs; S.practice = d.practice;
+    const c = await get('data/core.json');
+    S.nodes = new Map(Object.entries(c.nodes).map(([id,n]) => [id, Object.assign({id}, n)]));
+    S.papers = c.papers; S.stats = c.stats.all || S.stats; S.tmeta = c.topics; S.techniques = c.techniques; S.rubric = c.rubric; S.likNote = c.likelihood;
+    const cols = c.bank.cols; S.rows = c.bank.rows.map(r => Object.fromEntries(cols.map((k,i) => [k, r[i]])));
     S.loaded = true; S.status = 'ok';
     schedule();
   } catch (e) { console.error(e); S.status = 'none'; renderHeader(); renderPanel(); }

@@ -1,0 +1,361 @@
+{
+ "arithmetic": {
+  "label": "Arithmetic",
+  "kind": "junction",
+  "parent": "hub",
+  "order": 1,
+  "summary": "Core arithmetic topics: the largest share of Tier 1 and Tier 2 Quant.",
+  "links": [],
+  "hue": 255,
+  "short": "Arithmetic"
+ },
+ "number-system": {
+  "label": "Number system",
+  "kind": "topic",
+  "parent": "arithmetic",
+  "order": 1,
+  "summary": "Divisibility, remainders, unit digit, factors, number of zeros.",
+  "links": [
+   "hcf-lcm"
+  ]
+ },
+ "simplification": {
+  "label": "Simplification & BODMAS",
+  "kind": "topic",
+  "parent": "arithmetic",
+  "order": 2,
+  "summary": "BODMAS, approximation, fractions and decimals, square and cube roots.",
+  "links": [
+   "surds-indices"
+  ]
+ },
+ "hcf-lcm": {
+  "label": "HCF & LCM",
+  "kind": "topic",
+  "parent": "arithmetic",
+  "order": 3,
+  "summary": "HCF, LCM, their product rule, and word problems on both.",
+  "links": [
+   "number-system"
+  ]
+ },
+ "percentage": {
+  "label": "Percentage",
+  "kind": "topic",
+  "parent": "arithmetic",
+  "order": 4,
+  "summary": "Percentage change, successive change, population and consumption.",
+  "links": [
+   "data-interpretation",
+   "profit-loss",
+   "ratio-proportion",
+   "si-ci"
+  ]
+ },
+ "ratio-proportion": {
+  "label": "Ratio & proportion",
+  "kind": "topic",
+  "parent": "arithmetic",
+  "order": 5,
+  "summary": "Ratio, proportion, variation, and dividing a quantity in a ratio.",
+  "links": [
+   "ages",
+   "mixture-alligation",
+   "partnership",
+   "percentage",
+   "time-work",
+   "tsd"
+  ]
+ },
+ "average": {
+  "label": "Average",
+  "kind": "topic",
+  "parent": "arithmetic",
+  "order": 6,
+  "summary": "Average of groups, change in average, weighted average.",
+  "links": [
+   "ages",
+   "data-interpretation",
+   "statistics"
+  ]
+ },
+ "profit-loss": {
+  "label": "Profit, loss & discount",
+  "kind": "topic",
+  "parent": "arithmetic",
+  "order": 7,
+  "summary": "Profit and loss, marked price, successive discount, false weights.",
+  "links": [
+   "mixture-alligation",
+   "percentage"
+  ]
+ },
+ "si-ci": {
+  "label": "Simple & compound interest",
+  "kind": "topic",
+  "parent": "arithmetic",
+  "order": 8,
+  "summary": "SI, CI, difference between CI and SI, instalments.",
+  "links": [
+   "percentage"
+  ]
+ },
+ "time-work": {
+  "label": "Time & work",
+  "kind": "topic",
+  "parent": "arithmetic",
+  "order": 9,
+  "summary": "Work efficiency, alternate days, wages, pipes and cisterns.",
+  "links": [
+   "ratio-proportion",
+   "tsd"
+  ]
+ },
+ "tsd": {
+  "label": "Time, speed & distance",
+  "kind": "topic",
+  "parent": "arithmetic",
+  "order": 10,
+  "summary": "Average speed, relative speed, trains, boats and streams, races.",
+  "links": [
+   "ratio-proportion",
+   "time-work"
+  ]
+ },
+ "mixture-alligation": {
+  "label": "Mixture & alligation",
+  "kind": "topic",
+  "parent": "arithmetic",
+  "order": 11,
+  "summary": "Alligation rule, replacement of mixture, mean price.",
+  "links": [
+   "profit-loss",
+   "ratio-proportion"
+  ]
+ },
+ "partnership": {
+  "label": "Partnership",
+  "kind": "topic",
+  "parent": "arithmetic",
+  "order": 12,
+  "summary": "Profit sharing by investment and time.",
+  "links": [
+   "ratio-proportion"
+  ]
+ },
+ "ages": {
+  "label": "Ages",
+  "kind": "topic",
+  "parent": "arithmetic",
+  "order": 13,
+  "summary": "Age problems based on ratios and sums.",
+  "links": [
+   "average",
+   "ratio-proportion"
+  ]
+ },
+ "algebra": {
+  "label": "Algebra",
+  "kind": "junction",
+  "parent": "hub",
+  "order": 2,
+  "summary": "Identities, equations, inequalities, surds and indices.",
+  "links": [],
+  "hue": 15,
+  "short": "Algebra"
+ },
+ "algebraic-identities": {
+  "label": "Algebraic identities",
+  "kind": "topic",
+  "parent": "algebra",
+  "order": 1,
+  "summary": "Square and cube identities, x + 1/x type problems.",
+  "links": [
+   "surds-indices"
+  ]
+ },
+ "linear-equations": {
+  "label": "Linear equations",
+  "kind": "topic",
+  "parent": "algebra",
+  "order": 2,
+  "summary": "Pairs of linear equations and their conditions.",
+  "links": []
+ },
+ "quadratic-equations": {
+  "label": "Quadratic equations",
+  "kind": "topic",
+  "parent": "algebra",
+  "order": 3,
+  "summary": "Roots, sum and product of roots, nature of roots.",
+  "links": []
+ },
+ "surds-indices": {
+  "label": "Surds & indices",
+  "kind": "topic",
+  "parent": "algebra",
+  "order": 4,
+  "summary": "Laws of indices, rationalising, comparing surds.",
+  "links": [
+   "algebraic-identities",
+   "simplification"
+  ]
+ },
+ "inequalities": {
+  "label": "Inequalities & maxima/minima",
+  "kind": "topic",
+  "parent": "algebra",
+  "order": 5,
+  "summary": "Basic inequalities and finding least or greatest values.",
+  "links": []
+ },
+ "geometry": {
+  "label": "Geometry",
+  "kind": "junction",
+  "parent": "hub",
+  "order": 3,
+  "summary": "Lines, triangles, circles and polygons: heavy in Tier 1 and Tier 2.",
+  "links": [],
+  "hue": 150,
+  "short": "Geometry"
+ },
+ "lines-angles": {
+  "label": "Lines & angles",
+  "kind": "topic",
+  "parent": "geometry",
+  "order": 1,
+  "summary": "Parallel lines, transversals, angle relations.",
+  "links": [
+   "triangles"
+  ]
+ },
+ "triangles": {
+  "label": "Triangles",
+  "kind": "topic",
+  "parent": "geometry",
+  "order": 2,
+  "summary": "Congruence, similarity, centres of a triangle, theorems.",
+  "links": [
+   "circles",
+   "heights-distances",
+   "lines-angles",
+   "mensuration-2d"
+  ]
+ },
+ "circles": {
+  "label": "Circles",
+  "kind": "topic",
+  "parent": "geometry",
+  "order": 3,
+  "summary": "Chords, tangents, angle properties, common tangents.",
+  "links": [
+   "mensuration-2d",
+   "triangles"
+  ]
+ },
+ "polygons": {
+  "label": "Quadrilaterals & polygons",
+  "kind": "topic",
+  "parent": "geometry",
+  "order": 4,
+  "summary": "Properties of quadrilaterals and regular polygons.",
+  "links": [
+   "mensuration-2d"
+  ]
+ },
+ "mensuration": {
+  "label": "Mensuration",
+  "kind": "junction",
+  "parent": "hub",
+  "order": 4,
+  "summary": "Areas, perimeters, surface areas and volumes.",
+  "links": [],
+  "hue": 75,
+  "short": "Mensuration"
+ },
+ "mensuration-2d": {
+  "label": "Mensuration 2D",
+  "kind": "topic",
+  "parent": "mensuration",
+  "order": 1,
+  "summary": "Area and perimeter of triangles, quadrilaterals and circles.",
+  "links": [
+   "circles",
+   "mensuration-3d",
+   "polygons",
+   "triangles"
+  ]
+ },
+ "mensuration-3d": {
+  "label": "Mensuration 3D",
+  "kind": "topic",
+  "parent": "mensuration",
+  "order": 2,
+  "summary": "Cube, cuboid, cylinder, cone, sphere, frustum.",
+  "links": [
+   "mensuration-2d"
+  ]
+ },
+ "trigonometry": {
+  "label": "Trigonometry",
+  "kind": "junction",
+  "parent": "hub",
+  "order": 5,
+  "summary": "Ratios, identities and heights and distances.",
+  "links": [],
+  "hue": 320,
+  "short": "Trigonometry"
+ },
+ "trig-ratios": {
+  "label": "Ratios & identities",
+  "kind": "topic",
+  "parent": "trigonometry",
+  "order": 1,
+  "summary": "Standard values, identities, simplification.",
+  "links": [
+   "heights-distances"
+  ]
+ },
+ "heights-distances": {
+  "label": "Heights & distances",
+  "kind": "topic",
+  "parent": "trigonometry",
+  "order": 2,
+  "summary": "Angles of elevation and depression.",
+  "links": [
+   "triangles",
+   "trig-ratios"
+  ]
+ },
+ "data": {
+  "label": "Data & statistics",
+  "kind": "junction",
+  "parent": "hub",
+  "order": 6,
+  "summary": "Data interpretation and basic statistics.",
+  "links": [],
+  "hue": 195,
+  "short": "Data"
+ },
+ "data-interpretation": {
+  "label": "Data interpretation",
+  "kind": "topic",
+  "parent": "data",
+  "order": 1,
+  "summary": "Tables, bar graphs, line graphs, pie charts.",
+  "links": [
+   "average",
+   "percentage"
+  ]
+ },
+ "statistics": {
+  "label": "Statistics",
+  "kind": "topic",
+  "parent": "data",
+  "order": 2,
+  "summary": "Mean, median, mode, and Tier 2 statistics topics.",
+  "links": [
+   "average"
+  ]
+ }
+}

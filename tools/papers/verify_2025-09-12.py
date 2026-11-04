@@ -3,7 +3,7 @@
 
     python3 tools/verify_2025-09-12.py
 
-Keys come from data/pyq_index.json; the values below are computed from the questions' own numbers.
+Keys come from data/papers/*.json; the values below are computed from the questions' own numbers.
 
 Each entry: (shift, qno, computed value, [numeric value of option a,b,c,d], tolerance).
 The key letter is read from the parsed PDF. A question PASSES only if the keyed option matches the
@@ -125,9 +125,11 @@ def close(a, b, tol):
     return abs(float(a) - float(b)) <= tol + 1e-12
 
 def main():
-    here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    index = json.load(open(os.path.join(here, "data", "pyq_index.json")))
-    keys = {(r["paper"][-2:], r["qno"]): r["key"] for r in index}
+    here = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    keys = {}
+    for sh in ("S1", "S2", "S3"):
+        paper = json.load(open(os.path.join(here, "data", "papers", f"2025-09-12-{sh}.json")))
+        keys.update({(sh, r["qno"]): r["key"] for r in paper["rows"]})
     rows, fails = [], 0
     for (s, q), (val, opts, tol) in sorted(V.items()):
         key = keys[(s, q)]
