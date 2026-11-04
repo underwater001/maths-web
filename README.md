@@ -6,21 +6,20 @@ A question bank for SSC CGL Tier 1 and Tier 2 Quant. Every past question can be 
 
 ## Using the site
 
-| Tab | What it is for |
+Three places, nothing else:
+
+| Place | What it is |
 |---|---|
-| **Web** | A map of the syllabus: subject → topic → concept → question type. Tap an end dot and that topic opens in Learn. |
-| **Question bank → By topic** | One card per topic: how many past and practice questions, difficulty mix, your progress and the methods you keep getting wrong. |
-| **Question bank → Mixed practice** | Every question as a card. Filter by topic, type, difficulty, likelihood, technique, source and your progress. |
-| **Sources** | Every paper (with its link) and the outside reading. Links appear only here, never on question cards. |
+| **Syllabus** (home) | Every topic, grouped by subject. Each card shows how many question types and questions it has, the difficulty mix, how often the topic repeats and your progress. The question types are listed on the card, so one tap takes you straight to that type. |
+| **Topic page** | The whole topic on one scrolling page (see below). |
+| **Mixed practice** | Every question from every topic, filtered by topic, type, difficulty, how often it repeats, source, technique and your progress. |
+| **Sources** | Every paper with its link and question list, plus the outside reading. Paper links live only here. |
 
-**Learn** takes one topic in order:
+A topic page runs in the order you study in:
 
-1. Overview
-2. Each concept: the idea and its formulas
-3. Each question type under it: how to spot it (the cue), the standard, fast, ultra-calc and elimination methods, the traps
-4. The quiz, one question at a time: past questions (easiest first), then practice at the same level, then harder ones
-
-After each answer you see the solution, the fastest way in and why each wrong option is wrong. The result page lists the methods you missed, and wrong answers can be replayed. Your place and scores are kept in your browser only.
+1. **Study this first** — each concept with its formulas, then every trick and every trap in the topic collected in one place.
+2. **The question types that repeat** — one card per type: the **pattern** that identifies it, the fast method, and the full method, formulas, traps and variations one tap away.
+3. **Questions, easiest first** — filterable by type. Every question carries four tags: **difficulty**, **how often that type repeats**, **most asked** when it is in the top six, and **when it was asked** (paper, date, shift and question number). Pick an option and the solution, the fastest way in, the option elimination, why each wrong option is wrong and the type's traps open underneath. Your answers are remembered in your browser.
 
 ## What is in it now
 
@@ -61,12 +60,18 @@ No questions filed yet (they appear as dim dots on the map): Number system, HCF 
 
 ## Adding material
 
-Send a PDF, photos, or open a PDF in the browser. The routine for each paper:
+Send anything: a question paper, a page of formulas, a sheet of shortcuts, photos, or a PDF open in the browser. Material is sorted by what it actually contains.
+
+**Concepts, formulas, tips or tricks** → each one is checked before it goes in (a formula is re-derived or tested on numbers, a shortcut is random-tested against the slow method in `tools/shortcuts/<topic>.py`), then placed in the topic it belongs to: a concept becomes a node in that topic's module, a formula joins its `FORMULAS`, a shortcut becomes the `fast` or `ultra` line of the question type it serves, a trap joins that type's `traps`. Anything that turns out to be wrong is left out and said so.
+
+**Questions** → filed as a paper and turned into quizzes the same day:
 
 1. **File the paper**: add `data/papers/<id>.json` (details plus one row per Quant question: number, topic, keyed option, answer) and a verifier in `tools/papers/` that recomputes every answer from the question's own numbers.
-2. **Give every question a quiz the same day**: in `tools/topics/<topic_with_underscores>.py` (copy `_template.py` for a new topic) add the concepts, question types, formulas, one method per type and the past questions. The build fails with "N filed question(s) in <topic> have no quiz yet" until this is done.
+2. **Give every question a page to live on**: in `tools/topics/<topic_with_underscores>.py` (copy `_template.py` for a new topic) add the concepts, question types, formulas, one method per type and the questions. The build fails with "N filed question(s) in <topic> have no quiz yet" until this is done.
 3. **Run `python3 tools/check.py --browser`.** It re-verifies everything, rebuilds only what changed and tests the page. Nothing goes live unless it passes.
 4. **Commit and push to `main`**; GitHub Pages serves the repo root.
+
+**The source link** (a Google Drive link or any URL) goes in that paper's `link` field, and shows on the Sources page. Question cards name the paper, date, shift and question number as plain text; the link itself stays on Sources.
 
 A new paper is one file. A new topic is one entry in `data/tree.json` plus one module. Nothing else has to change.
 

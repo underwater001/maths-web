@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
-"""Browser test of the site: loads it from a local server and clicks through the web, Learn, the bank, Sources and search.
+"""Browser test of the site: loads it from a local server and clicks through the syllabus, a topic page,
+mixed practice, Sources and search.
 
     python3 tools/render_test.py [screenshot_dir]
 
-Needs Playwright and Chrome. If the CDN is unreachable (as in the build sandbox) it serves d3 from a local copy
-(set D3_PATH) and blocks the fonts, so three font errors in the console are expected and ignored.
+Needs Playwright and Chrome. The fonts are blocked (the sandbox has no network), which is expected and ignored.
 """
-import functools, http.server, json, os, socketserver, sys, threading
+import http.server, json, os, socketserver, sys, threading
 from playwright.sync_api import sync_playwright
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHOTS = sys.argv[1] if len(sys.argv) > 1 else None
-D3 = open(os.environ.get("D3_PATH", "/opt/npm-tools/node_modules/d3/dist/d3.min.js")).read()
 CHROME = os.environ.get("CHROME_PATH", "/usr/bin/google-chrome")
 
 
@@ -32,8 +31,7 @@ def check(cond, msg):
 
 def route(r):
     u = r.request.url
-    if "cdnjs.cloudflare.com" in u and "d3" in u: r.fulfill(body=D3, content_type="application/javascript")
-    elif "fonts.g" in u: r.abort()
+    if "fonts.g" in u: r.abort()
     else:
         reqs.append(u); r.continue_()
 
@@ -43,201 +41,151 @@ def shard(t): return json.load(open(os.path.join(ROOT, "data", "shards", t + ".j
 
 with sync_playwright() as p:
     b = p.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+
     def page(w, h, scheme="light", hash_=""):
         c = b.new_context(viewport={"width": w, "height": h}, color_scheme=scheme); pg = c.new_page()
-        pg.on("console", lambda m: errs.append(m.text) if m.type == "error" and "ERR_FAILED" not in m.text and "fonts" not in m.text else None)
+        pg.on("console", lambda m: errs.append(m.text) if m.type == "error" and "ERR_" not in m.text and "fonts" not in m.text else None)
         pg.on("pageerror", lambda e: errs.append("PAGEERROR " + str(e)))
         pg.route("**/*", route); pg.goto(f"http://127.0.0.1:{port}/index.html{hash_}")
-        pg.wait_for_selector(".nd", state="attached", timeout=15000); pg.wait_for_timeout(600); return pg
+        pg.wait_for_selector(".tcard, #topic .sect", timeout=15000); pg.wait_for_timeout(500); return pg
+
     core = json.load(open(os.path.join(ROOT, "data", "core.json")))
-    nbank = len(core["bank"]["rows"]); PL = shard("profit-loss"); PT = shard("partnership")
+    nbank = len(core["bank"]["rows"])
+    PL = shard("profit-loss")
+    n_topics = len([n for n in core["nodes"].values() if n.get("kind") == "topic"])
+    n_subjects = len([n for n in core["nodes"].values() if n.get("parent") == "hub" and n.get("kind") != "topic"])
+    built = [t for t, m in core["topics"].items() if m.get("built")]
     pl_rows = [r for r in core["bank"]["rows"] if r[1] == "profit-loss"]
-    chain_n = len([x for x in PL["pyqs"] if x["qtype"] == "q-pl-chain"]) + len([x for x in PL["practice"] if x["qtype"] == "q-pl-chain"])
-    mult_formulas = len([f for f in PL["formulas"] if f["node"] == "c-pl-multiplier"])
+    pl_types = [n for n, v in core["nodes"].items() if v.get("kind") == "qtype" and v.get("parent", "").startswith("c-pl-")]
 
-    # ---------------- web ----------------
-    pg = page(1280, 900)
-    built_n = sum(1 for m in core["topics"].values() if m.get("built"))
-    check(not any("/shards/" in u for u in reqs), "start-up fetches no topic shard (lazy loading)")
-    check(f"{nbank} questions in the bank" in pg.inner_text("#panel h2"), f"overview says {nbank} questions in the bank")
-    nd0 = pg.locator(".nd").count()
-    check(nd0 < 40, f"the overview stays small: hub + subjects + topics only ({nd0} dots)")
-    check(pg.locator('.nd[data-id="q-pl-chain"]').count() == 0, "a question type is not drawn until its topic is opened")
-    check(pg.locator("#webcrumb").is_hidden(), "no back control before anything is zoomed in")
-    check(pg.locator(".ring").count() == built_n, f"every built topic is ringed in the overview ({pg.locator('.ring').count()} of {built_n})")
-    pg.locator('.nd[data-id="profit-loss"]').click(); pg.wait_for_timeout(400)
-    panel = pg.inner_text("#panel")
-    check("This topic" in panel and "of 3 shifts" in panel, "topic panel shows how often it was asked")
-    check(pg.locator("#panel .qz").count() == 0 and pg.locator("#panel .formula").count() == 0, "side panel is slim: no question cards or formula lists")
-    check(pg.locator("#panel a[href]").count() == 0, "side panel has no links to papers")
-    check(pg.locator('#panel [data-learn^="start:"]').count() == 1, "topic panel has 'Start learning'")
-    check(not any("shards/" in u for u in reqs), "browsing the web panel fetches no shard")
-    # clicking the topic zoomed the web into just its own concepts and types
-    check(pg.locator('.nd[data-id="q-pl-chain"]').count() == 1, "opening a topic reveals its question types")
-    check(pg.locator("#webcrumb").is_visible() and "Profit" in pg.inner_text("#webcrumb"), "a back control names the topic once zoomed in")
-    check(pg.locator(".nd").count() < nd0, "the focused view has far fewer dots than the overview")
-    pg.click("#webcrumb [data-zoomout]"); pg.wait_for_timeout(400)
-    check(pg.locator('.nd[data-id="q-pl-chain"]').count() == 0 and pg.locator("#webcrumb").is_hidden(), "the back control returns to the full, uncluttered map")
-    check(pg.locator('.nd[data-id="profit-loss"]').count() == 1 and pg.locator('.nd.sel[data-id="profit-loss"]').count() == 1, "the topic just backed out of stays selected in the overview")
-    pg.locator('.nd[data-id="profit-loss"]').click(); pg.wait_for_timeout(400)
+    # ---------------- the syllabus ----------------
+    pg = page(1280, 1000)
+    check(not any("/shards/" in u for u in reqs), "the syllabus loads no topic shard (nothing fetched until a topic is opened)")
+    check(not any("d3" in u.lower() for u in reqs), "no charting library is loaded at all")
+    check(pg.locator(".tcard").count() == n_topics, f"every one of the {n_topics} topics has a card")
+    check(pg.locator(".subject").count() == n_subjects, f"topics are grouped under the {n_subjects} subjects")
+    check(pg.locator("#syllabus .chip[data-type]").count() >= 5, "the most-asked question types are offered up front")
+    check(pg.locator(".tcard.todo").count() == n_topics - len(built), "topics with no page yet are shown but dimmed")
+    if SHOTS: pg.screenshot(path=os.path.join(SHOTS, "syllabus.png"))
 
-    # ---------------- end node -> Learn at the first concept ----------------
-    pg.locator('.nd[data-id="q-pl-chain"]').click(); pg.wait_for_selector("#lmain h2"); pg.wait_for_timeout(300)
-    check(pg.locator("#learn").is_visible() and not pg.locator(".layout").is_visible(), "clicking an end node opens the topic's Learn view")
-    check(any("shards/profit-loss" in u for u in reqs) and not any("shards/partnership" in u for u in reqs), "Learn fetches only that topic's shard")
-    check("Concept 1 of 4" in pg.locator("#lmain").text_content(), "it starts at the first concept")
-    check(pg.locator("#lmain .formula").count() == mult_formulas, f"first concept lists its {mult_formulas} formulas")
-    check(pg.locator("#lmain .banner").count() == 1 and "Skip to that type" in pg.locator("#lmain .banner").text_content(), "banner offers a jump to the type that was clicked")
-    check(pg.locator("#lmain a[href]").count() == 0 and pg.locator("#learn a[href]").count() == 0, "Learn shows no links to papers")
-    pg.screenshot(path=os.path.join(SHOTS, "learn_concept.png")) if SHOTS else None
-    # walk every step up to the quiz
-    n_steps = pg.locator("#outline button.oi").count()
-    check(n_steps == 1 + 4 + 5 + 1, f"outline: overview + 4 concepts + 5 types + quiz ({n_steps})")
-    pg.click("#lmain [data-next]"); pg.wait_for_timeout(200)
-    t = pg.locator("#lmain").text_content(); m = PL["methods"]["q-pl-chain"]
-    check("Concept 1 · type 1 of 1" in t and m["cue"] in t, "next step is the type, with its cue")
-    check(pg.locator("#lmain .capsule > div").count() == 3, "capsule: spot it, do this, watch out")
-    lab = pg.locator("#lmain dl.ledger dt").all_text_contents()
-    check(all(x in lab for x in ["Standard", "Fast", "Ultra-calc", "Eliminate", "Traps", "Variations"]), f"method layers all shown ({lab})")
-    pg.screenshot(path=os.path.join(SHOTS, "learn_type.png")) if SHOTS else None
-    steps = 3
-    while pg.locator("#lmain [data-next]").count():
-        label = pg.inner_text("#lmain [data-next]"); pg.click("#lmain [data-next]"); pg.wait_for_timeout(60); steps += 1
-    check(steps == n_steps and "Start the quiz" in label, f"Next walks all {n_steps} steps and ends with 'Start the quiz'")
-    check("quiz" in pg.locator("#lmain h2").text_content() and f"Start all {len(pl_rows)} questions" in pg.locator("#lmain").text_content(), f"quiz menu offers all {len(pl_rows)} questions")
+    # ---------------- a topic page ----------------
+    pg.locator('.tcard[data-topic="profit-loss"]').click(); pg.wait_for_timeout(900)
+    check(pg.locator("#topic").is_visible() and "Profit" in pg.inner_text("#topic h2"), "clicking a topic opens its page")
+    check("#t/profit-loss" in pg.evaluate("location.hash"), "the topic page has its own link")
+    check(any("shards/profit-loss" in u for u in reqs) and not any("shards/partnership" in u for u in reqs), "it loads only that topic's data")
+    # study first
+    study = pg.inner_text("#study")
+    check(pg.locator("#study .card").count() >= 4, "study section: one card per concept")
+    check(pg.locator("#study .formula").count() == len(PL["formulas"]), f"all {len(PL['formulas'])} formulas are on the page")
+    check("Tricks that save time" in study and "Traps to avoid" in study, "tricks and traps are collected at the top, before the questions")
+    # then the types, each with its pattern
+    types_txt = pg.inner_text("#types")
+    check(pg.locator("#types .card").count() == len(pl_types), f"a card for each of the {len(pl_types)} question types")
+    check(pg.locator("#types .pattern").count() == len(pl_types), "every type states the pattern that identifies it")
+    check(PL["methods"]["q-pl-chain"]["cue"] in types_txt, "the pattern is the type's own cue")
+    check(pg.locator("#types details.more").count() == len(pl_types), "the full method, formulas and traps sit behind one tap")
+    # then the questions
+    check(pg.locator("#questions").evaluate("e => e.getBoundingClientRect().top") > pg.locator("#study").evaluate("e => e.getBoundingClientRect().top"),
+          "questions come after the study material, not before")
+    check(pg.locator("#topic .q").count() == 20, "questions load 20 at a time")
+    first = pg.locator("#topic .q").first
+    check("Easy" in first.inner_text(), "easiest question first")
+    tags = first.locator(".tags").first.inner_text()
+    check("repeats:" in tags and "asked 12 Sep 2025" in tags, "each question is tagged with how often it repeats and when it was asked")
+    check(first.locator(".rv").is_hidden(), "the answer stays hidden until you try")
+    if SHOTS: pg.screenshot(path=os.path.join(SHOTS, "topic.png"))
 
-    # ---------------- the quiz ----------------
-    pg.click("#lmain [data-qs=all]"); pg.wait_for_timeout(200)
-    check(f"Question 1 of {len(pl_rows)}" in pg.locator("#lmain").text_content(), "quiz starts at question 1")
-    check(pg.locator("#lmain [data-qnext]").is_disabled(), "Next question is locked until you answer")
-    key = pg.locator("#lmain .lq").get_attribute("data-id")
-    x = next(v for v in PL["pyqs"] + PL["practice"] if v["id"] == key)
-    wrong = [k for k in "abcd" if k != x["key"]][0]
-    pg.click(f'#lmain button.opt[data-k="{wrong}"]'); pg.wait_for_timeout(100)
-    rv = pg.locator("#lmain .rv").text_content()
-    check(pg.locator("#lmain button.opt.wrong").count() == 1 and pg.locator("#lmain button.opt.right").count() == 1, "a wrong pick marks both options")
-    check(all(w in rv for w in ["Solution", "Why not the others", "Eliminate using the options", "Traps in this type"]), "answer shows solution, eliminations, why-not and traps")
-    check(not pg.locator("#lmain [data-qnext]").is_disabled(), "answering unlocks Next")
-    pg.screenshot(path=os.path.join(SHOTS, "learn_quiz.png")) if SHOTS else None
-    # play every question by keyboard, recording the order of phases per type
-    seq = []
-    for i in range(len(pl_rows)):
-        ph = pg.locator("#lmain .qhead").first.inner_text().split("\n"); seq.append(" ".join(ph))
-        if i: pg.keyboard.press("b") if False else None
-        if pg.locator("#lmain .rv").count() == 0: pg.keyboard.press("a")
-        pg.keyboard.press("Enter"); pg.wait_for_timeout(30)
-    check("Result" in pg.locator("#lmain").text_content(), "finishing shows the result")
-    order = {"Past question": 0, "Practice": 1, "Challenge": 2}
-    phases, ok = [], True
-    for sline in seq:
-        for k, v in order.items():
-            if k in sline: phases.append(v)
-    check(len(phases) == len(pl_rows), "every quiz question carries a phase label")
-    # within each type, phases never go backwards
-    types = [x["qtype"] for t_ in [t_ for t_ in []] for x in []]
-    ordered = [e for q in ["q-pl-chain", "q-pl-weight", "q-pl-free", "q-pl-rate", "q-pl-equal"] for e in
-               ([0] * len([x for x in PL["pyqs"] if x["qtype"] == q]) + [1] * len([x for x in PL["practice"] if x["qtype"] == q and x["variant"] != "harder"]) + [2] * len([x for x in PL["practice"] if x["qtype"] == q and x["variant"] == "harder"]))]
-    check(phases == ordered, "quiz order per type: past questions, then same-level practice, then harder")
-    check(pg.locator("#lmain .rows li").count() == 5 and pg.locator("#lmain [data-qs=wrong]").count() == 1, "result lists the 5 types and offers 'Redo wrong answers'")
-    pg.screenshot(path=os.path.join(SHOTS, "learn_result.png")) if SHOTS else None
+    # answering
+    key = first.get_attribute("data-key")
+    wrong = [k for k in "abcd" if k != key][0]
+    first.locator(f'button.opt[data-k="{wrong}"]').click(); pg.wait_for_timeout(300)
+    check(first.locator("button.opt.wrong").count() == 1 and first.locator("button.opt.right").count() == 1, "a wrong pick marks both options")
+    rv = first.locator(".rv").inner_text()
+    check(all(w in rv for w in ["SOLUTION", "WHY NOT THE OTHERS", "TRAPS IN THIS TYPE"]), "the answer carries the solution, the eliminations and the traps")
     saved = pg.evaluate("JSON.parse(localStorage.getItem('mw-progress')||'{}')")
-    check(len(saved) == len(pl_rows), f"progress for all {len(pl_rows)} answers is remembered")
-    mem = pg.evaluate("JSON.parse(localStorage.getItem('mw-learn')||'{}')")
-    check(mem.get("profit-loss", {}).get("i") == n_steps - 1, "the last step is remembered for 'Continue'")
-    nwrong = sum(1 for v in saved.values() if v["r"] == 0)
-    pg.click("#lmain [data-qs=wrong]"); pg.wait_for_timeout(200)
-    check(f"Question 1 of {nwrong}" in pg.locator("#lmain").text_content(), f"'Redo wrong answers' replays exactly the {nwrong} wrong ones")
-    # a single type from the type page
-    pg.click("#outline button.oi >> text=Markup"); pg.wait_for_timeout(200)
-    pg.click("#lmain [data-qs=q-pl-chain]"); pg.wait_for_timeout(200)
-    check(f"Question 1 of {chain_n}" in pg.locator("#lmain").text_content(), f"'Quiz on this type' runs the type's {chain_n} questions")
+    check(len(saved) == 1, "the answer is remembered")
 
-    # ---------------- question bank ----------------
-    pg.click("#tabs button[data-view=bank]"); pg.wait_for_timeout(300)
-    built_n = sum(1 for m in core["topics"].values() if m.get("built"))
-    check(all(m.get("built") for m in core["topics"].values() if m.get("indexed")) and built_n >= 18, f"every topic with filed questions is built ({built_n})")
-    check(pg.locator("#bytopic .tcard").count() == built_n, f"bank by topic shows the {built_n} built topics")
-    check(pg.locator("#bytopic .tcard [data-learn^='resume:']").count() == 1 and pg.locator("#bytopic .tcard [data-learn^='start:']").count() == built_n, "a started topic offers Continue and Start over")
-    check(pg.locator("#bytopic .waiting").count() == 0, "no topic is left waiting to be built")
-    check("practice to come" in pg.inner_text("#bytopic"), "quiz-tier topics say that practice is still to come")
-    check("Keeps going wrong" in pg.inner_text("#bytopic"), "topic card names the methods that keep going wrong")
-    check(pg.locator("#bytopic a[href]").count() == 0, "topic cards carry no links to papers")
-    if SHOTS: pg.screenshot(path=os.path.join(SHOTS, "bank_topics.png"))
-    pg.click("#bytopic [data-learn^='start:partnership']"); pg.wait_for_selector("#lmain h2"); pg.wait_for_timeout(200)
-    check("Topic" in pg.locator("#lmain").text_content() and pg.locator("#lmain .tile").count() == 6, "'Start learning' opens the topic overview")
-    # a quiz-tier topic (past questions only) opens, teaches and quizzes without gaps
-    AV = shard("average"); av_n = len(AV["pyqs"])
-    pg.click("#tabs button[data-view=bank]"); pg.wait_for_timeout(200)
-    pg.click("#bytopic [data-learn^='start:average']"); pg.wait_for_selector("#lmain h2"); pg.wait_for_timeout(200)
-    check(pg.locator("#lmain .tile").count() == 4 and "Past questions only" in pg.locator("#lmain").text_content(), "quiz-tier overview: no empty practice tiles, says practice comes later")
-    pg.click("#outline button.oi >> text=Quiz"); pg.wait_for_timeout(200)
-    check(pg.locator("#lmain [data-qs]").count() >= 1, "quiz menu lists the types of a quiz-tier topic")
-    pg.locator("#lmain [data-qs]").first.click(); pg.wait_for_timeout(200)
-    check("Question 1 of" in pg.locator("#lmain").text_content() and pg.locator("#lmain button.opt").count() == 4, "a quiz-tier question shows four options")
-    pg.keyboard.press("a"); pg.wait_for_timeout(150)
-    check(pg.locator("#lmain .rv").count() == 1 and "Ultra" not in pg.locator("#lmain .rv").text_content(), "its reveal shows the solution and no empty Ultra-calc line")
-    pg.click("#tabs button[data-view=bank]"); pg.click("#btabs button[data-bt=mixed]"); pg.wait_for_timeout(500)
-    check(pg.locator("#mixed").is_visible() and int(pg.inner_text("#filters .fcount").split()[0]) == nbank, f"mixed practice lists all {nbank}")
-    check(pg.locator("#cards a[href]").count() == 0 and pg.locator("#cards .src").count() > 0, "cards show where a question came from as plain text, without links")
-    pg.click('#filters button[data-f="src"][data-v="pyq"]'); pg.wait_for_timeout(300)
+    # filter the questions down to one type
+    pg.locator('#questions .chip[data-only="q-pl-weight"]').click(); pg.wait_for_timeout(400)
+    n_weight = len([x for x in PL["pyqs"] + PL["practice"] if x["qtype"] == "q-pl-weight"])
+    check(pg.locator("#topic .q").count() == min(20, n_weight), f"the type filter narrows the list to its {n_weight} questions")
+    pg.locator('#questions .chip[data-only=""]').click(); pg.wait_for_timeout(400)
+    check(pg.locator("#topic .q").count() == 20, "and back to all types")
+    pg.click("#topic [data-moreq]"); pg.wait_for_timeout(400)
+    check(pg.locator("#topic .q").count() == 40, "'show more' adds the next 20")
+
+    # a type link from the syllabus lands on that type
+    pg.click("#topic [data-home]"); pg.wait_for_timeout(400)
+    pg.locator('.tcard[data-topic="profit-loss"] [data-type]').first.click(); pg.wait_for_timeout(800)
+    check(pg.evaluate("location.hash").startswith("#t/profit-loss/"), "a question type on a card opens the topic at that type")
+
+    # a topic with no page yet says so
+    pg.goto(f"http://127.0.0.1:{port}/index.html#t/triangles"); pg.wait_for_timeout(700)
+    check("not built yet" in pg.inner_text("#topic").lower(), "a topic with no page yet explains itself instead of breaking")
+
+    # a quiz-tier topic (past questions, no extra practice) works the same way
+    pg.goto(f"http://127.0.0.1:{port}/index.html#t/average"); pg.wait_for_timeout(900)
+    AV = shard("average")
+    check(pg.locator("#study .card").count() >= 3 and pg.locator("#types .pattern").count() >= 1, "a quiz-tier topic still has concepts and patterns")
+    check(pg.locator("#topic .q").count() == len(AV["pyqs"]), f"all {len(AV['pyqs'])} of its questions are there")
+    check("ULTRA-CALC" not in pg.inner_text("#types"), "no empty ultra-calc line where a topic has none")
+
+    # ---------------- mixed practice ----------------
+    pg.click('#tabs [data-view="practice"]'); pg.wait_for_timeout(900)
+    check(int(pg.inner_text("#filters .fcount").split()[0]) == nbank, f"mixed practice starts with all {nbank} questions")
+    pg.click('#filters [data-f="src"][data-v="pyq"]'); pg.wait_for_timeout(600)
     n_pyq = len([r for r in core["bank"]["rows"] if r[4] == "pyq"])
-    check(int(pg.inner_text("#filters .fcount").split()[0]) == n_pyq, f"source filter: past questions only gives {n_pyq}")
-    pg.click("#filters [data-reset]"); pg.select_option('#filters select[data-sel="sort"]', "hard"); pg.wait_for_timeout(500)
-    check(pg.locator("#cards .lvl").first.inner_text() == "Hard", "sort hardest first puts a Hard question on top")
-    pg.click('#filters button[data-f="lik"][data-v="high"]'); pg.wait_for_timeout(300)
-    check(int(pg.inner_text("#filters .fcount").split()[0]) < nbank, "likelihood filter narrows the list")
-    pg.click("#filters [data-reset]"); pg.select_option('#filters select[data-sel="tech"]', "sign-check"); pg.wait_for_timeout(300)
-    check(pg.locator("#cards .qz").count() > 0, "technique filter finds questions that use the sign check")
-    c0 = pg.locator("#cards .qz").first; c0.locator("[data-reveal]").click()
-    check(c0.locator(".rv").is_visible() and c0.locator("button.opt.right").count() == 1, "'Show answer' reveals without answering")
-    c0.locator("[data-learn]").first.click(); pg.wait_for_selector("#lmain h2"); pg.wait_for_timeout(200)
-    check("type 1 of" in pg.locator("#lmain").text_content() or "Concept 1 of" in pg.locator("#lmain").text_content(), "a card's 'Learn this type' link opens Learn")
+    check(int(pg.inner_text("#filters .fcount").split()[0]) == n_pyq, f"the source filter gives the {n_pyq} past questions")
+    pg.click("#filters [data-reset]"); pg.wait_for_timeout(600)
+    pg.select_option('#filters [data-sel="sort"]', "hard"); pg.wait_for_timeout(700)
+    check("Hard" in pg.locator("#cards .q").first.inner_text(), "sorting hardest first puts a Hard question on top")
+    c0 = pg.locator("#cards .q").first
+    c0.locator("[data-reveal]").click(); pg.wait_for_timeout(300)
+    check(c0.locator(".rv").is_visible() and c0.locator("button.opt.right").count() == 1, "'show the answer' reveals it without guessing")
+    if SHOTS: pg.screenshot(path=os.path.join(SHOTS, "practice.png"))
 
     # ---------------- sources ----------------
-    pg.click("#tabs button[data-view=sources]"); pg.wait_for_timeout(300)
+    pg.click('#tabs [data-view="sources"]'); pg.wait_for_timeout(600)
     check(pg.locator("#sources .pcard[data-pid]").count() == len(core["papers"]), f"Sources lists all {len(core['papers'])} papers")
-    check(pg.locator('#sources a.ext[href*="drive.google.com"]').count() == len(core["papers"]), "each paper has its link, and only here")
-    check(pg.locator('#sources a.ext[href^="http"]').count() == len(core["papers"]) + len(core["refs"]), "outside reading links are listed too")
-    pg.locator("#sources [data-plist]").first.click(); pg.wait_for_timeout(500)
-    check(pg.locator("#sources table.plist tbody tr").count() == core["papers"][0]["n"] or pg.locator("#sources table.plist tbody tr").count() == 25, "the question list of a paper opens")
-    if SHOTS: pg.screenshot(path=os.path.join(SHOTS, "sources.png"), full_page=True)
+    check(pg.locator('#sources a.ext[href*="drive.google.com"]').count() == len(core["papers"]), "each paper keeps its source link, and only here")
+    check(pg.locator("#topic a[href]").count() == 0, "topic pages carry no links to papers")
+    pg.click("#sources [data-plist]"); pg.wait_for_timeout(700)
+    check(pg.locator("#sources table.plist tbody tr").count() > 10, "a paper's question list opens")
 
     # ---------------- search ----------------
-    pg.click("#tabs button[data-view=web]"); pg.fill("#q", "multiplier"); pg.wait_for_timeout(900)
-    check("match" in pg.inner_text("#panel h2") and "0 matches" not in pg.inner_text("#panel h2"), "search finds the multiplier method across topics")
-    check(pg.locator("#panel a[href]").count() == 0 and pg.locator("#panel .qz").count() == 0, "search results have no links and no question cards")
-    pg.fill("#q", ""); pg.wait_for_timeout(300)
+    pg.fill("#q", "discount"); pg.wait_for_timeout(1200)
+    check(pg.locator("#searchres").is_visible() and "match" in pg.inner_text("#searchres h2"), "search shows what it found")
+    check(pg.locator("#searchres .chip[data-topic], #searchres .chip[data-type]").count() > 0, "search offers the topics and types it matched")
+    pg.locator("#searchres .chip[data-topic]").first.click(); pg.wait_for_timeout(900)
+    check(pg.locator("#topic").is_visible(), "a search result opens the topic page")
 
-    # ---------------- deep links ----------------
-    h = page(1280, 900, hash_="#learn-partnership")
-    check(h.locator("#learn").is_visible() and "Partnership" in h.locator("#lhead").text_content(), "#learn-<topic> opens that topic directly")
-    s2 = page(1280, 900, hash_="#sources")
-    check(s2.locator("#sources").is_visible(), "#sources opens the Sources page")
+    # old links still work
+    pg.goto(f"http://127.0.0.1:{port}/index.html#learn-partnership"); pg.wait_for_timeout(900)
+    check("Partnership" in pg.inner_text("#topic h2"), "links from the old version still land on the right topic")
 
-    # ---------------- phone and dark ----------------
+    # ---------------- phone ----------------
     m = page(390, 844)
-    W = lambda: m.evaluate("document.documentElement.scrollWidth")
-    check(W() <= 390, "phone: no sideways scroll on the web view")
-    m.click("#tabs button[data-view=bank]"); m.wait_for_timeout(500)
-    check(W() <= 390, f"phone: no sideways scroll in the bank ({W()})")
-    if SHOTS: m.screenshot(path=os.path.join(SHOTS, "mobile_bank.png"))
-    m.click("#bytopic [data-learn^='start:profit-loss']"); m.wait_for_selector("#lmain h2"); m.wait_for_timeout(300)
-    check(W() <= 390, f"phone: no sideways scroll in Learn ({W()})")
-    check(not m.locator("#outline").is_visible(), "phone: the outline is folded away")
-    m.click("#otoggle"); m.wait_for_timeout(100)
-    check(m.locator("#outline").is_visible(), "phone: the outline button opens it")
-    m.click("#outline button.oi >> nth=1"); m.wait_for_timeout(200)
-    check("Concept 1 of" in m.locator("#lmain").text_content() and not m.locator("#outline").is_visible(), "phone: picking a step closes the outline")
-    m.click("#outline button.oi >> nth=0") if m.locator("#outline").is_visible() else None
-    for _ in range(9): m.click("#lmain [data-next]"); m.wait_for_timeout(40)
-    m.click("#lmain [data-qs=all]"); m.wait_for_timeout(200); m.click("#lmain button.opt >> nth=0"); m.wait_for_timeout(150)
-    check(W() <= 390, f"phone: no sideways scroll in a quiz question ({W()})")
-    if SHOTS: m.screenshot(path=os.path.join(SHOTS, "mobile_quiz.png"))
-    m.click("#tabs button[data-view=sources]"); m.wait_for_timeout(300)
-    check(W() <= 390, f"phone: no sideways scroll on Sources ({W()})")
-    d = page(1280, 900, "dark", "#learn-profit-loss"); d.wait_for_timeout(300)
-    if SHOTS: d.screenshot(path=os.path.join(SHOTS, "dark_learn.png"))
+    check(m.evaluate("document.documentElement.scrollWidth <= window.innerWidth + 1"), "phone: the syllabus does not scroll sideways")
+    m.locator('.tcard[data-topic="profit-loss"]').click(); m.wait_for_timeout(1000)
+    check(m.evaluate("document.documentElement.scrollWidth <= window.innerWidth + 1"), "phone: a topic page does not scroll sideways")
+    check(m.locator("#study .formula").count() > 0 and m.locator("#topic .q").count() > 0, "phone: the study material and the questions are both there")
+    if SHOTS: m.screenshot(path=os.path.join(SHOTS, "mobile_topic.png"))
+    m.click('#tabs [data-view="practice"]'); m.wait_for_timeout(900)
+    check(m.evaluate("document.documentElement.scrollWidth <= window.innerWidth + 1"), "phone: mixed practice does not scroll sideways")
+
+    # dark
+    d = page(1280, 900, "dark", "#t/profit-loss")
+    d.wait_for_timeout(600)
+    check(d.evaluate("getComputedStyle(document.body).backgroundColor") == "rgb(14, 19, 26)", "dark mode paints its own background")
+    if SHOTS: d.screenshot(path=os.path.join(SHOTS, "dark_topic.png"))
+
+    check(not errs, f"no console errors ({errs[:3]})")
     b.close()
-check(not errs, "no console errors" + (f": {errs}" if errs else ""))
-print("\nFAILED: %d" % len(fails) if fails else "\nall checks passed")
-sys.exit(1 if fails else 0)
+
+srv.shutdown()
+print()
+if fails:
+    print(f"FAILED: {len(fails)}")
+    for f in fails: print(" -", f)
+    sys.exit(1)
+print("all checks passed")

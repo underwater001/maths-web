@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A question bank and knowledge web for SSC CGL Quant: past questions and practice as quizzes, sorted by topic, type, difficulty and how often they are asked, with fast methods, eliminations and traps.">
+<meta name="description" content="SSC CGL Quant question bank: every topic on one page — concepts, formulas, tricks and traps first, then the question types that repeat, then past and practice questions from easiest to hardest, each tagged by difficulty, how often it is asked and when it last came.">
 <title>Maths Web</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a radial web (centre → subjects → topics → concepts → question types) beside a reading panel; stacks on phones. */
+/* Three places only: the syllabus (every topic), one page per topic (study then questions), and mixed practice. */
 :root{
   --bg:#f3f5f8; --surface:#ffffff; --sunk:#eaeef3; --ink:#18212c; --muted:#5a6575; --line:#d6dce5;
   --accent:#2448c8; --new:#c97a06; --new-soft:#fbefd9; --hi:#b3261e; --hi-soft:#fde4e1;
@@ -27,280 +27,175 @@
   --accent:#86a2ff; --new:#ffb84a; --new-soft:#3a2b10; --hi:#ff8a80; --hi-soft:#3d1714;
   --ok:#6fd39b; --ok-soft:#143325; color-scheme:dark }
 
-html,body{height:100%}
-body{background:var(--bg);color:var(--ink);font-family:var(--display)}
-.page{padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:14px 20px;display:flex;flex-direction:column;gap:12px;min-height:100%;box-sizing:border-box}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--display);font-size:15px}
+.page{max-width:1100px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:14px 48px;display:flex;flex-direction:column;gap:14px}
 
 header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 20px}
-.brand h1{margin:0;font-size:26px;font-weight:800;letter-spacing:-0.015em;line-height:1.1;text-wrap:balance}
-.brand p{margin:4px 0 0;font-family:var(--mono);font-size:12px;color:var(--muted)}
-.stats{display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.brand h1{margin:0;font-size:24px;font-weight:800;letter-spacing:-0.015em;line-height:1.1}
+.brand p{margin:3px 0 0;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.stats{display:flex;flex-wrap:wrap;gap:4px 14px;font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 .stats b{color:var(--ink);font-weight:500}
 
-.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.search{flex:1 1 260px;min-width:0;position:relative}
-.search input{width:100%;box-sizing:border-box;font:inherit;font-size:15px;padding:9px 12px 9px 34px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;position:sticky;top:0;z-index:20;background:var(--bg);padding-block:6px}
+.search{flex:1 1 240px;min-width:0;position:relative}
+.search input{width:100%;font:inherit;font-size:15px;padding:9px 12px 9px 34px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
 .search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2}
 .search input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
-.seg button{font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.seg button{font:inherit;font-size:13px;font-weight:500;padding:8px 13px;border:0;background:transparent;color:var(--muted);cursor:pointer}
 .seg button+button{border-left:1px solid var(--line)}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
 .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 
-.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,440px);gap:14px;flex:1;min-height:0}
-.web-wrap{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;height:min(80vh,900px);min-height:420px}
-#web{width:100%;height:100%;display:block;cursor:grab;touch-action:none}
-#web:active{cursor:grabbing}
-.web-note{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--muted);font-size:15px;line-height:1.5;pointer-events:none}
-.web-note[hidden]{display:none!important}
-.zoom{position:absolute;right:10px;bottom:10px;display:flex;flex-direction:column;gap:6px}
-.zoom button{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 17px/1 var(--display);cursor:pointer}
-.zoom button:focus-visible{outline:2px solid var(--accent)}
-.key{position:absolute;left:10px;bottom:10px;display:flex;flex-wrap:wrap;gap:4px 12px;font-family:var(--mono);font-size:11px;color:var(--muted);background:color-mix(in srgb, var(--surface) 88%, transparent);padding:6px 8px;border-radius:6px;max-width:calc(100% - 70px)}
-.key span{display:inline-flex;align-items:center;gap:5px}
-.key i{display:inline-block;width:10px;height:10px;border-radius:50%}
-.key .k-new{border:2px solid var(--new);width:8px;height:8px}
-.key .k-link{width:16px;height:0;border-radius:0;border-top:1.5px dashed var(--muted)}
-
-/* SVG */
-.lk{fill:none;stroke-opacity:.42}
-.xlk{fill:none;stroke:var(--muted);stroke-dasharray:3 4;stroke-opacity:.2;stroke-width:1.1}
-.nd{cursor:pointer}
-.nd circle.dot{stroke:var(--surface);stroke-width:1.5;transition:r .25s ease}
-.nd .ring{fill:none;stroke:var(--new);stroke-width:2}
-.nd text{font-family:var(--display);fill:var(--ink);paint-order:stroke;stroke:var(--surface);stroke-width:3px;stroke-linejoin:round}
-.nd.br text{font-size:11.5px;font-weight:500}
-.nd.jn text{font-size:13.5px;font-weight:800;letter-spacing:.01em}
-.nd.hub text{font-size:11px;font-weight:800;fill:var(--surface);stroke:none}
-.nd.root circle.dot{stroke-width:2.5}
-.nd:focus{outline:none}
-.nd:focus-visible circle.dot{stroke:var(--accent);stroke-width:3}
-.nd.empty{opacity:.28}
-.dimmed .nd:not(.lit){opacity:.16}
-.dimmed .lk:not(.lit){stroke-opacity:.08}
-.dimmed .xlk:not(.lit){stroke-opacity:.05}
-.xlk.lit{stroke:var(--accent);stroke-opacity:.9;stroke-dasharray:none;stroke-width:1.6}
-.nd.sel circle.dot{stroke:var(--ink);stroke-width:2.5}
-.nd.hit circle.dot{stroke:var(--accent);stroke-width:3}
-.webcrumb{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;background:color-mix(in srgb, var(--surface) 90%, transparent);padding:6px 10px;border-radius:8px;border:1px solid var(--line);max-width:calc(100% - 20px)}
-.webcrumb button{font:inherit;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;font-weight:700}
-.webcrumb button:hover{text-decoration:underline}
-.webcrumb span{color:var(--muted)}
-.webcrumb b{color:var(--ink);font-weight:700}
-.webcrumb[hidden]{display:none!important}
-.guide-ring{fill:none;stroke:var(--line);stroke-dasharray:2 7}
-
-/* Panel */
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 18px 22px;overflow:auto;height:min(80vh,900px);min-height:420px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;min-width:0}
+h2{margin:0;font-size:23px;font-weight:800;letter-spacing:-0.01em;line-height:1.15;text-wrap:balance}
+h3{margin:0;font-size:16px;font-weight:700}
+h4{margin:0 0 4px;font-size:12px;font-weight:700;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
 .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
-.panel h2{margin:0;font-size:22px;font-weight:800;letter-spacing:-0.01em;line-height:1.15;text-wrap:balance}
-.panel h3{margin:0;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
-.panel p.lead{margin:0;font-family:var(--body);font-size:15.5px;line-height:1.5;color:var(--ink)}
-.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:12.5px;color:var(--muted)}
+p.lead{margin:0;font-family:var(--body);font-size:16px;line-height:1.55}
+.note{margin:0;font-family:var(--body);font-size:14px;line-height:1.5;color:var(--muted)}
+.empty-msg{margin:0;padding:18px;text-align:center;color:var(--muted);font-family:var(--body)}
+.statline{margin:0;font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.statline b{color:var(--ink);font-weight:500}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:5px;font-family:var(--mono);font-size:12px;color:var(--muted)}
 .crumbs button{font:inherit;color:var(--accent);background:none;border:0;padding:0;cursor:pointer}
 .crumbs button:hover{text-decoration:underline}
-.meta-row{display:flex;flex-wrap:wrap;gap:4px 14px;font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
-.meta-row .soft{font-style:italic;opacity:.85}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
+
+.btn{font:inherit;font-size:14px;font-weight:700;padding:9px 15px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
+.btn.ghost{background:var(--surface);color:var(--accent)}
+.btn:focus-visible,.chip:focus-visible,.qbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .chip{font:inherit;font-size:13px;display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-align:left}
 .chip:hover{border-color:var(--muted)}
-.chip:focus-visible{outline:2px solid var(--accent)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
 .chip i{width:8px;height:8px;border-radius:50%;flex:none}
 .chip .n{font-family:var(--mono);font-size:11px;color:var(--muted)}
-.chip .nw{font-family:var(--mono);font-size:10px;color:var(--new);font-weight:500}
-.section{display:flex;flex-direction:column;gap:8px}
-.date-h{font-family:var(--mono);font-size:12px;color:var(--muted);padding-bottom:4px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
-.tag{padding:2px 6px;border-radius:4px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.03em}
-.tag.bg{border:1px dashed var(--line);color:var(--muted)}
-.tag.fresh{background:var(--new-soft);color:var(--new)}
-.tag.p-high{background:var(--hi-soft);color:var(--hi)}
-.tag.p-medium{border:1px solid var(--line);color:var(--ink)}
-.tag.p-low{color:var(--muted);opacity:.8}
-.empty-msg{font-family:var(--body);font-size:15px;color:var(--muted);line-height:1.5;margin:0}
-.btn-link{font:inherit;font-size:13px;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;align-self:flex-start}
-.jgroup{display:flex;flex-direction:column;gap:6px;padding-top:4px}
-.jgroup h3 i{width:10px;height:10px;border-radius:50%}
+.chip[aria-pressed="true"] .n{color:var(--surface);opacity:.8}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.qbtn{font:inherit;font-size:13px;font-weight:500;padding:7px 12px;border-radius:7px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
 
-/* maths content */
-.formula{border:1px solid var(--line);border-radius:6px;padding:9px 11px;display:flex;flex-direction:column;gap:3px;background:var(--sunk)}
-.formula .tx{font:500 13px/1.5 var(--mono);overflow-wrap:anywhere}
-.formula .nt{font-family:var(--body);font-size:14px;color:var(--muted);line-height:1.45}
-.ledger{display:grid;grid-template-columns:5.6rem minmax(0,1fr);gap:10px 12px;margin:0}
-.ledger dt{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);padding-top:3px}
-.ledger dt.trap{color:var(--hi)}
-.ledger dd{margin:0;min-width:0;font-family:var(--body);font-size:15px;line-height:1.5}
-.ledger ul{margin:0;padding-left:1.1rem;display:flex;flex-direction:column;gap:4px}
-.q{border:1px solid var(--line);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:9px}
-.q .src{font:500 12px var(--mono);color:var(--accent)}
-.q .src a{color:inherit}
-.q p{margin:0;font-family:var(--body);font-size:15.5px;line-height:1.5}
-.opts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr));gap:6px}
-.opts li,.opts button.opt{font:500 13px var(--mono);border:1px solid var(--line);border-radius:6px;padding:6px 9px;display:flex;gap:7px;min-width:0;background:var(--surface);color:var(--ink);text-align:left}
-.opts li span,.opts button.opt span{color:var(--muted)}
-.opts button.opt{cursor:pointer}
-.opts button.opt:hover{border-color:var(--muted)}
-.opts button.opt:focus-visible{outline:2px solid var(--accent)}
-.opts button.opt.right{background:var(--ok-soft);border-color:var(--ok)}
-.opts button.opt.wrong{background:var(--hi-soft);border-color:var(--hi)}
-.opts button.opt[disabled]{cursor:default}
-details summary{cursor:pointer;font-size:13px;color:var(--accent);font-weight:600}
-details[open] summary{margin-bottom:8px}
-.sol{display:flex;flex-direction:column;gap:6px;font-family:var(--body);font-size:15px}
-.sol .key-a{font:600 13px var(--mono);color:var(--ok)}
-.sol ol{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:4px}
-.lv{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.lv.harder{color:var(--hi)}
-.why{font-family:var(--body);font-size:14.5px;color:var(--muted);margin:0}
-.rows{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
-.rows li{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--line);font-size:13.5px}
-.rows li:last-child{border-bottom:0}
-.rows .ref{font:500 12px var(--mono);color:var(--accent)}
-.rows .ans{font:500 12.5px var(--mono);color:var(--ink)}
-.rows .ref a{color:inherit}
-.note{font-family:var(--body);font-size:14px;color:var(--muted);border-left:2px solid var(--line);padding-left:10px;margin:0;line-height:1.5}
+/* tags */
+.tag{font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:5px;background:var(--sunk);color:var(--muted);white-space:nowrap}
+.lvl{font-family:var(--mono);font-size:11px;font-weight:500;padding:2px 7px;border-radius:5px}
+.lvl-Easy{background:var(--ok-soft);color:var(--ok)}
+.lvl-Medium{background:var(--new-soft);color:var(--new)}
+.lvl-Hard{background:var(--hi-soft);color:var(--hi)}
+.lik-high{background:var(--hi-soft);color:var(--hi)}
+.lik-medium{background:var(--new-soft);color:var(--new)}
+.lik-low,.lik-not-seen{background:var(--sunk);color:var(--muted)}
+.tag.when{color:var(--accent)}
+.tag.most{background:var(--accent);color:#fff}
+.tags{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
 
-@media (max-width: 900px){
-  .layout{grid-template-columns:minmax(0,1fr)}
-  .web-wrap{height:62vh;min-height:360px}
-  .panel{height:auto;min-height:0;overflow:visible}
-  .brand h1{font-size:22px}
-}
-@media (max-width: 520px){ .ledger{grid-template-columns:1fr;gap:2px} .ledger dd{margin-bottom:8px} }
-.nav{display:flex;gap:14px;margin-top:6px;font:500 13px var(--mono)}
-.nav a{color:var(--accent);text-decoration:none}
-.nav a:hover{text-decoration:underline}
-
-/* question bank */
-.tabs{margin-left:auto}
-.bank{display:grid;grid-template-columns:minmax(230px,290px) minmax(0,1fr);gap:14px;align-items:start;flex:1}
-.bank[hidden],.layout[hidden]{display:none!important}
-.filters{position:sticky;top:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:13px;min-width:0}
-.filters .f{display:flex;flex-direction:column;gap:5px;font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);min-width:0}
-.filters select{font:500 14px var(--display);text-transform:none;letter-spacing:0;padding:7px 8px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);width:100%;min-width:0}
-.filters select:focus-visible{outline:2px solid var(--accent)}
-.tg{display:flex;flex-wrap:wrap;gap:5px}
-.tg button{font:500 12.5px var(--display);text-transform:none;letter-spacing:0;padding:5px 9px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
-.tg button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
-.tg button:focus-visible{outline:2px solid var(--accent)}
-.fcount{font:500 12.5px var(--mono);color:var(--ink);text-transform:none;letter-spacing:0}
-.cards{display:flex;flex-direction:column;gap:12px;min-width:0}
-.cards .more{align-self:center;font:600 13px var(--display);padding:8px 16px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--accent);cursor:pointer}
-.qhead{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
-.lvl{font:600 11px/1 var(--mono);letter-spacing:.04em;padding:3px 7px;border-radius:4px;border:1px solid var(--line)}
-.lvl-Easy{background:var(--ok-soft);color:var(--ok);border-color:transparent}
-.lvl-Medium{background:var(--new-soft);color:var(--new);border-color:transparent}
-.lvl-Hard{background:var(--hi-soft);color:var(--hi);border-color:transparent}
-.tag.lik-high{background:var(--hi-soft);color:var(--hi)}
-.tag.lik-medium{border:1px solid var(--line);color:var(--ink)}
-.tag.lik-low,.tag.lik-not-seen{color:var(--muted);border:1px dashed var(--line)}
-.tag.tech{border:1px solid var(--line);color:var(--muted);font-weight:400}
-.qbtn{font:600 13px var(--display);align-self:flex-start;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--accent);cursor:pointer}
-.qbtn:focus-visible{outline:2px solid var(--accent)}
-.rv{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:10px}
-.rv[hidden]{display:none!important}
-.verdict{font:600 14px var(--display)}
-.verdict.ok{color:var(--ok)} .verdict.no{color:var(--hi)}
-.rv h4{margin:0 0 4px;font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.rv .sol ol{margin:0;padding-left:1.2rem}
-.rv .trick{font-family:var(--body);font-size:15px;line-height:1.5;background:var(--sunk);border-radius:6px;padding:8px 10px}
-.rv ul.wn{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-family:var(--body);font-size:14.5px;line-height:1.45}
-.rv ul.wn li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 8px}
-.rv ul.wn b{font:500 12.5px var(--mono)}
-.rv ul.wn em{font:500 10.5px var(--mono);font-style:normal;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
-.rv ul.wn em.mistake{color:var(--hi)}
-.rv .tags{display:flex;flex-wrap:wrap;gap:5px}
-.statline{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.5;margin:0}
-.statline b{color:var(--ink);font-weight:500}
-.mix{display:flex;gap:10px;font:500 12px var(--mono)}
-.btn{font:700 13.5px var(--display);align-self:flex-start;padding:9px 14px;border-radius:8px;border:0;background:var(--accent);color:var(--surface);cursor:pointer}
-.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-.variations{margin:0;padding-left:1.1rem;font-family:var(--body);font-size:15px;line-height:1.5;display:flex;flex-direction:column;gap:3px}
-@media (max-width: 900px){ .bank{grid-template-columns:minmax(0,1fr)} .filters{position:static} }
-@media (prefers-reduced-motion: reduce){ *{transition:none!important} }
-
-[hidden]{display:none!important}
-/* bank: by topic */
-.bankwrap{display:flex;flex-direction:column;gap:12px;flex:1}
-.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:12px}
-.tcard{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--c,var(--muted));border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.tcard h3{margin:0;font-size:18px;font-weight:800;letter-spacing:-0.01em}
-.tcard .sub{font-family:var(--body);font-size:14.5px;color:var(--muted);margin:0;line-height:1.45}
-.tcard .btns{display:flex;flex-wrap:wrap;gap:8px}
-.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--line)}
-.bar{height:6px;border-radius:3px;background:var(--sunk);overflow:hidden;display:flex}
+/* syllabus */
+.subject{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.subject>.shead{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;border-top:2px solid var(--c,var(--line));padding-top:8px}
+.subject>.shead h3{font-size:17px;letter-spacing:-.01em}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px}
+.tcard{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--c,var(--line));border-radius:10px;padding:13px 14px;display:flex;flex-direction:column;gap:8px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.tcard:hover{border-color:var(--muted);border-left-color:var(--c,var(--muted))}
+.tcard:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tcard .tt{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.tcard h4{margin:0;font-family:var(--display);font-size:15.5px;font-weight:700;text-transform:none;letter-spacing:0;color:var(--ink);line-height:1.25}
+.tcard .sub{margin:0;font-family:var(--body);font-size:13.5px;line-height:1.45;color:var(--muted)}
+.tcard .meta{display:flex;flex-wrap:wrap;gap:3px 10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tcard.todo{opacity:.72}
+.bar{height:5px;border-radius:3px;background:var(--sunk);overflow:hidden;display:flex}
 .bar i{display:block;height:100%}
 .bar .ok{background:var(--ok)} .bar .no{background:var(--hi)}
-.weak{font:500 12px var(--mono);color:var(--hi)}
-.waiting{opacity:.8}
+.tlist{display:flex;flex-wrap:wrap;gap:4px}
+.tlist button{font:inherit;font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:5px;border:1px solid var(--line);background:var(--sunk);color:var(--muted);cursor:pointer}
+.tlist button:hover{color:var(--ink);border-color:var(--muted)}
+
+/* topic page */
+.thead{display:flex;flex-direction:column;gap:8px}
+.jump{display:flex;gap:6px;flex-wrap:wrap;position:sticky;top:52px;z-index:10;background:var(--bg);padding-block:8px;border-bottom:1px solid var(--line)}
+.sect{display:flex;flex-direction:column;gap:12px;padding-top:22px;scroll-margin-top:122px}
+.sect>.hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px}
+.sect>.hd h3{font-size:19px;letter-spacing:-.01em}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:9px}
+.card.lead-c{border-left:3px solid var(--c,var(--line))}
+.formula{background:var(--sunk);border-radius:8px;padding:9px 11px;display:flex;flex-direction:column;gap:3px}
+.formula .tx{font-family:var(--mono);font-size:13px;line-height:1.5;color:var(--ink);overflow-x:auto}
+.formula .nt{font-family:var(--body);font-size:13px;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px}
+ul.plain{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-family:var(--body);font-size:14.5px;line-height:1.5}
+ul.plain li::marker{color:var(--muted)}
+.kv{display:flex;flex-direction:column;gap:8px}
+.kv .row{display:flex;flex-direction:column;gap:2px}
+.kv .row .k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.kv .row .v{font-family:var(--body);font-size:14.5px;line-height:1.5}
+details.more{border-top:1px solid var(--line);padding-top:9px}
+details.more>summary{font-family:var(--mono);font-size:12px;color:var(--accent);cursor:pointer;list-style:none}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::before{content:"▸ ";}
+details.more[open]>summary::before{content:"▾ ";}
+details.more>div{padding-top:10px;display:flex;flex-direction:column;gap:9px}
+.pattern{background:var(--sunk);border-radius:8px;padding:9px 11px;font-family:var(--body);font-size:14.5px;line-height:1.5}
+.pattern b{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:block;margin-bottom:2px;font-weight:500}
+
+/* questions */
+.q{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.q>p{margin:0;font-family:var(--body);font-size:15.5px;line-height:1.55}
+.qnum{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:6px}
+.opt{font:inherit;font-size:14.5px;text-align:left;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer;display:flex;gap:7px;font-family:var(--body)}
+.opt span{font-family:var(--mono);font-size:12px;color:var(--muted);flex:none}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.right span{color:var(--ok)}
+.opt.wrong{border-color:var(--hi);background:var(--hi-soft)}
+.opt.wrong span{color:var(--hi)}
+.rv{display:flex;flex-direction:column;gap:11px;border-top:1px solid var(--line);padding-top:11px}
+.rv h4{margin:0 0 3px}
+.rv ol,.rv ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-family:var(--body);font-size:14.5px;line-height:1.5}
+.verdict{font-family:var(--mono);font-size:12px;font-weight:500}
+.verdict.r{color:var(--ok)} .verdict.w{color:var(--hi)}
+.trick{font-family:var(--body);font-size:14.5px;line-height:1.5;background:var(--sunk);border-radius:7px;padding:8px 10px}
+ul.wn{list-style:none;padding:0}
+ul.wn li{display:flex;flex-direction:column;gap:1px;border-left:2px solid var(--line);padding-left:9px}
+ul.wn b{font-family:var(--mono);font-size:12.5px;font-weight:500}
+ul.wn span{font-family:var(--body);font-size:14px;color:var(--muted)}
+ul.wn em{font-family:var(--mono);font-style:normal;font-size:11px;color:var(--hi)}
+ul.wn em.bound{color:var(--muted)}
+.qlist{display:flex;flex-direction:column;gap:10px}
+.more-btn{font:inherit;font-size:14px;padding:11px;border-radius:9px;border:1px dashed var(--line);background:transparent;color:var(--accent);cursor:pointer;width:100%}
+
+/* practice filters */
+.bank{display:grid;grid-template-columns:260px minmax(0,1fr);gap:14px;align-items:start}
+.filters{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:12px;position:sticky;top:108px}
+.filters .f{display:flex;flex-direction:column;gap:5px;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.filters select{font:inherit;font-size:13px;font-family:var(--display);text-transform:none;letter-spacing:0;padding:7px 8px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink);width:100%}
+.tg{display:flex;flex-wrap:wrap;gap:4px}
+.tg button{font:inherit;font-family:var(--display);font-size:12.5px;text-transform:none;letter-spacing:0;padding:4px 9px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
+.tg button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.fcount{font-family:var(--mono);font-size:12px;color:var(--ink);font-variant-numeric:tabular-nums}
+
 /* sources */
-.srcwrap{display:flex;flex-direction:column;gap:14px;max-width:980px}
-.srcwrap h2{margin:0;font-size:22px;font-weight:800}
-.pcard{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:9px;min-width:0}
-.pcard h3{margin:0;font-size:16px;font-weight:700}
-.plist{width:100%;border-collapse:collapse;font-size:13.5px}
-.plist th,.plist td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
-.plist th{font:500 11px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+a.ext{font-family:var(--mono);font-size:12.5px;color:var(--accent)}
+table.plist{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
+table.plist th,table.plist td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.plist th{color:var(--muted);font-weight:500}
 .tscroll{overflow-x:auto}
-.ext{color:var(--accent);font-weight:600;text-decoration:none}
-.ext:hover{text-decoration:underline}
-/* learn */
-.lhead{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
-.lhead h2{margin:0;font-size:24px;font-weight:800;letter-spacing:-0.01em;text-wrap:balance}
-.lgrid{display:grid;grid-template-columns:minmax(210px,260px) minmax(0,1fr);gap:14px;align-items:start}
-.outline{position:sticky;top:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:2px;max-height:calc(100vh - 24px);overflow:auto;min-width:0}
-.outline button.oi{font:500 13.5px var(--display);text-align:left;background:none;border:0;border-radius:6px;padding:7px 8px;color:var(--ink);cursor:pointer;display:grid;grid-template-columns:1.1rem minmax(0,1fr);gap:6px;align-items:baseline}
-.outline button.oi:hover{background:var(--sunk)}
-.outline button.oi.cur{background:var(--ink);color:var(--surface)}
-.outline button.oi.t2{padding-left:22px;font-size:13px;color:var(--muted)}
-.outline button.oi.t2.cur{color:var(--surface)}
-.outline button.oi:focus-visible{outline:2px solid var(--accent)}
-.outline .mk{font:600 11px var(--mono);color:var(--ok)}
-.otoggle{display:none}
-.lmain{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:16px;min-width:0}
-.lmain h2{margin:0;font-size:23px;font-weight:800;letter-spacing:-0.01em;line-height:1.15;text-wrap:balance}
-.lmain h3{margin:0;font-size:14px;font-weight:700}
-.lmain .lead{margin:0;font-family:var(--body);font-size:16.5px;line-height:1.55}
-.lnav{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;border-top:1px solid var(--line);padding-top:14px}
-.lnav .btn[disabled]{opacity:.4;cursor:default}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr));gap:8px}
-.tile{border:1px solid var(--line);border-radius:8px;padding:9px 11px;background:var(--sunk);display:flex;flex-direction:column;gap:2px}
-.tile b{font:700 22px var(--display)}
-.tile span{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.capsule{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:8px}
-.capsule div{border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;font-family:var(--body);font-size:15px;line-height:1.45;background:var(--sunk)}
-.capsule div b{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.capsule .tp b{color:var(--hi)}
-.banner{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;background:var(--new-soft);border-radius:8px;padding:9px 12px;font-size:14px}
-.banner button{font:600 13px var(--display);color:var(--accent);background:none;border:0;cursor:pointer;padding:0}
-.cur-list{display:flex;flex-direction:column;gap:10px}
-.cur-list .c{display:flex;flex-direction:column;gap:6px}
-.qprog{height:8px;border-radius:4px;background:var(--sunk);overflow:hidden}
-.qprog i{display:block;height:100%;background:var(--accent);transition:width .2s}
-.lq{display:flex;flex-direction:column;gap:12px}
-.lq .qtext{margin:0;font-family:var(--body);font-size:18px;line-height:1.55}
-.lq .opts{grid-template-columns:repeat(auto-fit,minmax(11rem,1fr))}
-.lq .opts button.opt{font-size:14.5px;padding:10px 12px}
-.qrow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px 12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
-.qrow:last-child{border-bottom:0}
-.score{font:800 40px var(--display);letter-spacing:-0.02em}
-@media (max-width: 900px){
-  .lgrid{grid-template-columns:minmax(0,1fr)}
-  .outline{position:static;max-height:none;display:none}
-  .outline.open{display:flex}
-  .otoggle{display:inline-flex;align-self:flex-start;font:600 13px var(--display);padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--accent);cursor:pointer}
-  .lmain{padding:14px}
+
+@media (max-width: 860px){
+  .bank{grid-template-columns:minmax(0,1fr)}
+  .filters{position:static}
+  .jump{top:0;position:static}
+  .controls{position:static}
+  .sect{scroll-margin-top:12px}
 }
 </style>
-<style id="jstyles"></style>
 </head>
 <body>
 <div class="page">
-<header class="top">
+  <header class="top">
     <div class="brand">
       <h1>Maths Web</h1>
-      <p id="sub">Loading the web…</p>
-      <nav class="nav" aria-label="Site"><a href="https://github.com/underwater001/maths-web">GitHub</a></nav>
+      <p id="sub">Loading…</p>
     </div>
     <div class="stats" id="stats"></div>
   </header>
@@ -308,97 +203,62 @@ details[open] summary{margin-bottom:8px}
   <div class="controls">
     <label class="search" for="q">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" type="search" placeholder="Search formulas, tricks, question types, topics" autocomplete="off" aria-label="Search">
+      <input id="q" type="search" placeholder="Search a topic, formula, trick or question" autocomplete="off" aria-label="Search">
     </label>
     <div class="seg tabs" role="group" aria-label="View" id="tabs">
-      <button type="button" data-view="web" aria-pressed="true">Web</button>
-      <button type="button" data-view="bank" aria-pressed="false">Question bank</button>
+      <button type="button" data-view="syllabus" aria-pressed="true">Syllabus</button>
+      <button type="button" data-view="practice" aria-pressed="false">Mixed practice</button>
       <button type="button" data-view="sources" aria-pressed="false">Sources</button>
-    </div>
-    <div class="seg" role="group" aria-label="Show" id="show" title="Which topics to highlight on the web">
-      <button type="button" data-v="all" aria-pressed="true">All topics</button>
-      <button type="button" data-v="pyq" aria-pressed="false">Has past questions</button>
-      <button type="button" data-v="built" aria-pressed="false">Fully built</button>
     </div>
   </div>
 
-  <main class="layout">
-    <section class="web-wrap" aria-label="Knowledge web">
-      <svg id="web" role="img" aria-label="Radial map of maths subjects and topics; tap a topic to open its concepts and question types"></svg>
-      <div class="web-note" id="note">Loading the web…</div>
-      <div class="webcrumb" id="webcrumb" hidden></div>
-      <div class="key" aria-hidden="true">
-        <span><i class="k-new"></i>fully built</span>
-        <span><i class="k-link"></i>related topics</span>
-        <span>dot size = past questions</span>
-        <span>tap a topic to zoom in</span>
-      </div>
-      <div class="zoom">
-        <button type="button" id="zin" aria-label="Zoom in">+</button>
-        <button type="button" id="zout" aria-label="Zoom out">−</button>
-        <button type="button" id="zfit" aria-label="Fit whole web" style="font-size:13px">⤢</button>
+  <main>
+    <section id="syllabus" aria-label="Syllabus"></section>
+    <section id="topic" hidden aria-label="Topic"></section>
+    <section id="practice" hidden aria-label="Mixed practice">
+      <div class="bank">
+        <aside class="filters" id="filters"></aside>
+        <div class="qlist" id="cards"></div>
       </div>
     </section>
-    <aside class="panel" id="panel" aria-live="polite"></aside>
+    <section id="sources" hidden aria-label="Sources"></section>
+    <section id="searchres" hidden aria-label="Search results"></section>
   </main>
-
-  <section class="bankwrap" id="bank" hidden aria-label="Question bank">
-    <div class="seg" role="group" aria-label="Question bank view" id="btabs" style="align-self:flex-start">
-      <button type="button" data-bt="topic" aria-pressed="true">By topic</button>
-      <button type="button" data-bt="mixed" aria-pressed="false">Mixed practice</button>
-    </div>
-    <div id="bytopic"></div>
-    <div class="bank" id="mixed" hidden>
-      <aside class="filters" id="filters"></aside>
-      <div class="cards" id="cards" aria-live="polite"></div>
-    </div>
-  </section>
-
-  <section id="learn" hidden aria-label="Learn a topic">
-    <div class="lhead" id="lhead"></div>
-    <div class="lgrid">
-      <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
-        <button type="button" class="otoggle" id="otoggle">Outline</button>
-        <nav class="outline" id="outline" aria-label="Topic outline"></nav>
-      </div>
-      <article class="lmain" id="lmain" aria-live="polite"></article>
-    </div>
-  </section>
-
-  <section id="sources" hidden aria-label="Sources"></section>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script>
 (function(){
-/* State. core.json is loaded at start (nodes, papers, stats, a light list of every question). A topic's shard
-   (formulas, methods, full questions) is fetched only when that topic is opened, so start-up cost stays flat as the bank grows. */
-const S = { nodes:new Map(), papers:[], stats:{papers:0,topics:{},qtypes:{}}, tmeta:{}, rows:[], techniques:{}, rubric:{}, likNote:'',
-            sd:{}, sp:{}, refs:[], bankTab:'topic', show:'all', q:'', sel:null, view:'web', status:'loading', loaded:false, fittedScope:undefined, webFocus:null, cnt:new Map(), built:new Set(),
-            f:{topic:'', qtype:'', level:new Set(), lik:new Set(), src:'', status:'', tech:'', sort:'asked'}, shown:20, prog:{} };
+"use strict";
+const S = { nodes:new Map(), papers:[], stats:{papers:0,topics:{},qtypes:{}}, tmeta:{}, rows:[], techniques:{}, likNote:'', refs:[],
+            sd:{}, sp:{}, q:'', view:'syllabus', topic:null, typeFilter:'', shownQ:20, shown:20, loaded:false, status:'loading',
+            cnt:new Map(), built:new Set(), mostAsked:new Set(), prog:{},
+            f:{topic:'', qtype:'', level:new Set(), lik:new Set(), src:'', status:'', tech:'', sort:'asked'} };
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const md = s => esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
-const plural = (n,w) => n + ' ' + w + (n===1?'':(/(ch|sh|s|x)$/.test(w)?'es':'s'));
-const LAYERS = [['standard','Standard'],['fast','Fast'],['ultra','Ultra-calc'],['eliminate','Eliminate']];
+const plural = (n, w) => `${n} ${w}${n===1?'':'s'}`;
 const LEVELS = ['Easy','Medium','Hard'];
 const LIKS = [['high','High'],['medium','Medium'],['low','Low']];
+const LAYERS = [['standard','Standard method'],['fast','Fast method'],['ultra','Ultra-calc trick'],['eliminate','Eliminate from the options']];
 
 /* ---------- progress (this browser only) ---------- */
 function loadProg(){ try { return JSON.parse(localStorage.getItem('mw-progress')||'{}') || {}; } catch(e){ return {}; } }
 function saveProg(){ try { localStorage.setItem('mw-progress', JSON.stringify(S.prog)); } catch(e){} }
 S.prog = loadProg();
 
-/* ---------- derived data ---------- */
+/* ---------- the node graph ---------- */
 function parentOf(n){ const p = n && n.parent; return (p && p !== 'hub' && S.nodes.has(p)) ? p : 'hub'; }
 function junctionOf(id){ let cur = S.nodes.get(id), guard = 0; while(cur && parentOf(cur) !== 'hub' && guard++ < 20) cur = S.nodes.get(parentOf(cur)); return cur ? cur.id : null; }
 function topicOf(id){ let cur = S.nodes.get(id), guard = 0; while(cur && cur.kind !== 'topic' && guard++ < 20) cur = S.nodes.get(parentOf(cur)); return cur && cur.kind==='topic' ? cur.id : null; }
 function color(id){ const j = junctionOf(id); return j ? `var(--j-${j})` : 'var(--muted)'; }
 function kidsOf(id){ return [...S.nodes.values()].filter(m => parentOf(m)===id).sort((a,b)=>(a.order??999)-(b.order??999)||a.label.localeCompare(b.label)); }
-function descendants(id){ const out = new Set([id]); let added = true; while(added){ added=false; for(const n of S.nodes.values()){ if(!out.has(n.id) && out.has(parentOf(n))){ out.add(n.id); added=true; } } } return out; }
 function linksOf(id){ const s = new Set(); const n = S.nodes.get(id); (n && n.links || []).forEach(x => S.nodes.has(x) && s.add(x)); for(const m of S.nodes.values()) if((m.links||[]).includes(id)) s.add(m.id); s.delete(id); return s; }
-function paper(id){ return S.papers.find(p => p.id === id); }
+const paper = id => S.papers.find(p => p.id === id);
 const qstat = id => S.stats.qtypes[id], tstat = id => S.stats.topics[id];
+const isBuiltTopic = t => !!(t && S.tmeta[t] && S.tmeta[t].built);
+const conceptsOf = t => kidsOf(t).filter(n => n.kind === 'concept');
+const typesOf = t => conceptsOf(t).flatMap(c => kidsOf(c.id).filter(n => n.kind === 'qtype'));
+function subCount(id){ let t = S.cnt.get(id)||0; kidsOf(id).forEach(k => t += subCount(k.id)); return t; }
 function derive(){
   S.cnt = new Map();
   for (const n of S.nodes.values()){
@@ -407,390 +267,287 @@ function derive(){
     else if (n.kind === 'topic' && !kidsOf(n.id).length) c = (tstat(n.id)||{}).n || 0;
     S.cnt.set(n.id, c);
   }
-  S.built = new Set();
-  for (const [t,m] of Object.entries(S.tmeta)) if (m.built){
-    descendants(t).forEach(x => S.built.add(x));
-    let cur = S.nodes.get(t), g2 = 0; while (cur && g2++ < 20){ S.built.add(cur.id); const p = parentOf(cur); if (p === 'hub') break; cur = S.nodes.get(p); }
-  }
+  S.built = new Set(Object.entries(S.tmeta).filter(([,m]) => m.built).map(([t]) => t));
+  S.mostAsked = new Set(Object.entries(S.stats.qtypes)
+    .sort((a,b)=> b[1].shifts-a[1].shifts || b[1].n-a[1].n || a[0].localeCompare(b[0])).slice(0,6).map(([id])=>id));
 }
-function subCount(id){ let t = S.cnt.get(id)||0; kidsOf(id).forEach(k => t += subCount(k.id)); return t; }
-function passes(id){ const n = S.nodes.get(id); if (!n || parentOf(n)==='hub') return true;
-  if (S.show === 'pyq') return subCount(id) > 0; if (S.show === 'built') return S.built.has(id); return true; }
-function q(){ return S.q.toLowerCase(); }
-function nodeHit(n){ return S.q && n.label.toLowerCase().includes(q()); }
-function nodeOrDescHit(id){ if (nodeHit(S.nodes.get(id))) return true; return kidsOf(id).some(k => nodeOrDescHit(k.id)); }
+/* One hue per subject, spread evenly, so colours stay stable as subjects are added. */
+function paintJunctions(){
+  const js = [...S.nodes.values()].filter(n => parentOf(n)==='hub' && n.kind !== 'topic').sort((a,b)=>(a.order??999)-(b.order??999));
+  let light = '', dark = '';
+  js.forEach((j,i) => { const h = Math.round(((j.hue != null) ? j.hue : (i*360/Math.max(js.length,1) + 18)) % 360);
+    light += `--j-${j.id}:oklch(0.56 0.15 ${h});`; dark += `--j-${j.id}:oklch(0.78 0.12 ${h});`; });
+  const st = document.createElement('style');
+  st.textContent = `:root{${light}}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){${dark}}}:root[data-theme="dark"]{${dark}}`;
+  document.head.appendChild(st);
+}
 
-/* ---------- data: lazy shards ---------- */
+/* ---------- data: core once, one shard per topic on demand ---------- */
 const get = async (p, v) => {
   if (window.__DATA__ && window.__DATA__[p]) return window.__DATA__[p];
   const r = await fetch(p + '?v=' + (v || Date.now()), {cache: v ? 'default' : 'no-store'}); if (!r.ok) throw new Error(p + ' ' + r.status); return r.json();
 };
 function loadShard(t){
-  if (!t || !(S.tmeta[t] && S.tmeta[t].built)) return Promise.resolve(null);
+  if (!t || !isBuiltTopic(t)) return Promise.resolve(null);
   if (!S.sp[t]) S.sp[t] = get('data/shards/' + t + '.json', S.tmeta[t].v).then(d => {
     d.byId = new Map([...d.pyqs.map(x => [x.id, Object.assign({src:'pyq', topic:t}, x)]), ...d.practice.map(x => [x.id, Object.assign({src:'practice', topic:t}, x)])]);
-    S.sd[t] = d; return d; });
+    S.sd[t] = d; return d;
+  }).catch(e => { console.error(e); S.sp[t] = null; return null; });
   return S.sp[t];
 }
-const allBuilt = () => Object.keys(S.tmeta).filter(t => S.tmeta[t].built);
-const formulasOf = t => (S.sd[t] ? S.sd[t].formulas : []);
+const allBuilt = () => [...S.built];
 
-/* ---------- junction colours ---------- */
-function paintJunctions(){
-  const js = [...S.nodes.values()].filter(n => parentOf(n)==='hub').sort((a,b)=>(a.order??99)-(b.order??99));
-  let light='', dark='';
-  js.forEach((j,i) => { const h = Number.isFinite(j.hue) ? j.hue : Math.round((250 + i*360/Math.max(js.length,1))%360);
-    light += `--j-${j.id}:oklch(0.56 0.15 ${h});`; dark += `--j-${j.id}:oklch(0.78 0.12 ${h});`; });
-  $('jstyles').textContent = `:root{${light}} @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){${dark}}} :root[data-theme="dark"]{${dark}}`;
-}
-
-/* ---------- web ---------- */
-const svg = d3.select('#web');
-const g = svg.append('g');
-const zoom = d3.zoom().scaleExtent([0.25,5]).on('zoom', e => g.attr('transform', e.transform));
-svg.call(zoom).on('dblclick.zoom', null);
-const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-$('zin').onclick = () => svg.transition().duration(reduce?0:250).call(zoom.scaleBy, 1.35);
-$('zout').onclick = () => svg.transition().duration(reduce?0:250).call(zoom.scaleBy, 1/1.35);
-$('zfit').onclick = () => fit(true);
-svg.on('click', e => { if (e.target === svg.node()) select(null); });
-
-/* One thread per pair of topics that share a cross-link anywhere in their subtree (the overview's faint constellation). */
-function topicPairLinks(){
-  const pairs = new Map();
-  for (const n of S.nodes.values()){
-    const ta = topicOf(n.id); if (!ta) continue;
-    for (const l of (n.links||[])){
-      const tb = topicOf(l); if (!tb || tb===ta) continue;
-      const k = [ta,tb].sort().join('|');
-      if (!pairs.has(k)) pairs.set(k, {a:ta,b:tb});
-    }
-  }
-  return [...pairs.values()];
-}
-
-let layoutPts = new Map();
-/* scope=null: the whole map, stopped at topic level, so it never gets crowded.
-   scope=a topic id: just that topic's own concepts and question types, as its own small web. */
-function buildHierarchy(scope){
-  const kids = new Map();
-  for (const n of S.nodes.values()){ const p = parentOf(n); if(!kids.has(p)) kids.set(p, []); kids.get(p).push(n); }
-  const sortK = a => a.sort((x,y)=>(x.order??999)-(y.order??999) || String(x.label).localeCompare(String(y.label)));
-  if (scope){
-    const make = id => ({ id, children: sortK(kids.get(id)||[]).map(n => make(n.id)) });
-    return d3.hierarchy(make(scope));
-  }
-  const make = (id, depth) => ({ id, children: depth >= 2 ? [] : sortK(kids.get(id)||[]).map(n => make(n.id, depth+1)) });
-  return d3.hierarchy(make('hub', 0));
-}
-function drawWeb(){
-  g.selectAll('*').remove();
-  if (!S.nodes.size){ return; }
-  if (S.webFocus && !S.nodes.has(S.webFocus)) S.webFocus = null;
-  const scope = S.webFocus;
-  const root = buildHierarchy(scope);
-  const leaves = root.leaves().length;
-  const maxDepth = d3.max(root.descendants(), d => d.depth) || 1;
-  const R = Math.max(400, leaves * 24 / (2*Math.PI));
-  d3.tree().size([2*Math.PI, R]).separation((a,b) => (a.parent===b.parent?1:1.8)/Math.min(Math.max(a.depth,1),2))(root);
-  const r1 = R*0.38;
-  root.each(d => { d.y = d.depth===0 ? 0 : d.depth===1 ? r1 : r1 + (d.depth-1)*((R-r1)/Math.max(maxDepth-1,1)); });
-  const pt = d => [d.y*Math.sin(d.x), -d.y*Math.cos(d.x)];
-  layoutPts = new Map(root.descendants().map(d => [d.data.id, {x:d.x, y:d.y, p:pt(d), depth:d.depth}]));
-
-  const hits = new Set(); if (S.q) for (const d of root.descendants()) if (d.depth>0 && nodeOrDescHit(d.data.id)) hits.add(d.data.id);
-
-  g.append('circle').attr('class','guide-ring').attr('r', r1);
-
-  g.append('g').selectAll('path').data(root.links()).join('path')
-    .attr('class', d => 'lk lk-' + d.target.data.id)
-    .attr('d', d3.linkRadial().angle(d=>d.x).radius(d=>d.y))
-    .attr('stroke', d => d.source.depth===0 ? 'var(--line)' : color(d.target.data.id))
-    .attr('stroke-width', d => d.source.depth===0 ? 2 : 1 + Math.min(4, Math.sqrt(subCount(d.target.data.id))*0.6));
-
-  const xl = scope ? (() => {
-    const out = [], seen = new Set();
-    for (const n of S.nodes.values()) for (const t of (n.links||[])){
-      if (!layoutPts.has(n.id) || !layoutPts.has(t)) continue;
-      const k = [n.id,t].sort().join('|'); if (seen.has(k)) continue; seen.add(k); out.push({a:n.id,b:t});
-    }
-    return out;
-  })() : topicPairLinks().filter(p => layoutPts.has(p.a) && layoutPts.has(p.b));
-  g.append('g').selectAll('path').data(xl).join('path')
-    .attr('class', d => `xlk x-${d.a} x-${d.b}`)
-    .attr('d', d => { const A = layoutPts.get(d.a).p, B = layoutPts.get(d.b).p; const c = [(A[0]+B[0])*0.28, (A[1]+B[1])*0.28]; return `M${A[0]},${A[1]} Q${c[0]},${c[1]} ${B[0]},${B[1]}`; });
-
-  const node = g.append('g').selectAll('g').data(root.descendants()).join('g')
-    .attr('class', d => { const id=d.data.id; const c=['nd'];
-      c.push(d.depth===0 ? (scope?'root':'hub') : d.depth===1 ? 'jn' : 'br');
-      if (d.depth>1 && !passes(id)) c.push('empty'); if (hits.has(id)) c.push('hit'); return c.join(' '); })
-    .attr('data-id', d => d.data.id)
-    .attr('transform', d => { const [x,y] = pt(d); return `translate(${x},${y})`; })
-    .attr('tabindex', d => (d.depth===0 && !scope) ? null : 0)
-    .attr('role', d => (d.depth===0 && !scope) ? null : 'button')
-    .attr('aria-label', d => { if(d.depth===0 && !scope) return null; if (d.depth===0) return `${S.nodes.get(scope).label}, zoom back out to all topics`; const n=S.nodes.get(d.data.id); return `${n.label}, ${plural(subCount(d.data.id),'past question')}`; })
-    .on('click', (e,d) => { e.stopPropagation();
-      if (d.depth===0){ if (scope) zoomOutWeb(); else activate(null); } else activate(d.data.id);
-      if (S.view==='web' && window.innerWidth <= 900) $('panel').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'}); })
-    .on('keydown', (e,d) => { if (e.key==='Enter' || e.key===' '){ e.preventDefault();
-      if (d.depth===0 && scope) zoomOutWeb(); else activate(d.data.id); } });
-
-  const rad = d => d.depth===0 ? 24 : d.depth===1 ? (scope ? Math.min(15, 7+Math.sqrt(subCount(d.data.id))*1.6) : 11) : Math.min(13, 4 + Math.sqrt(subCount(d.data.id))*1.9);
-  node.filter(d => (d.depth>1 || (d.depth===0 && scope)) && S.built.has(d.data.id))
-    .append('circle').attr('class','ring').attr('r', d => rad(d)+3.5);
-  node.append('circle').attr('class','dot').attr('r', rad)
-    .attr('fill', d => d.depth===0 ? (scope ? color(scope) : 'var(--ink)') : color(d.data.id));
-  node.append('title').text(d => d.depth===0 ? (scope ? `${S.nodes.get(scope).label} · tap to zoom out` : 'SSC CGL Quant') : `${S.nodes.get(d.data.id).label} · ${plural(subCount(d.data.id),'past question')}`);
-
-  /* The focused root's own name is already in the breadcrumb and the panel title, so it isn't
-     re-inscribed here (a label above the dot would cross its own spokes); the ring above marks it instead. */
-  node.filter(d=>d.depth===0 && !scope).append('text').attr('text-anchor','middle').attr('dy','0.35em').text('Quant');
-  node.filter(d=>d.depth===1).append('text')
-    .attr('dy','0.35em')
-    .attr('transform', d => { const deg = d.x*180/Math.PI - 90; return d.x < Math.PI ? `rotate(${deg})` : `rotate(${deg+180})`; })
-    .attr('x', d => (d.x < Math.PI ? -1 : 1) * 16)
-    .attr('text-anchor', d => d.x < Math.PI ? 'end' : 'start')
-    .text(d => S.nodes.get(d.data.id).short || S.nodes.get(d.data.id).label);
-  node.filter(d=>d.depth>1).append('text')
-    .attr('dy','0.32em')
-    .attr('transform', d => { const deg = d.x*180/Math.PI - 90; return d.x < Math.PI ? `rotate(${deg})` : `rotate(${deg+180})`; })
-    .attr('x', d => (d.x < Math.PI ? 1 : -1) * (d.children ? -1 : 1) * (rad(d)+5))
-    .attr('text-anchor', d => (d.x < Math.PI) !== !!d.children ? 'start' : 'end')
-    .text(d => S.nodes.get(d.data.id).short || S.nodes.get(d.data.id).label);
-
-  renderWebCrumb(scope);
-  applyHighlight();
-  maybeFit();
-}
-function renderWebCrumb(scope){
-  const el = $('webcrumb');
-  if (!scope){ el.hidden = true; el.innerHTML = ''; return; }
-  el.hidden = false;
-  const j = junctionOf(scope);
-  el.innerHTML = `<button type="button" data-zoomout>← All topics</button>${j?`<span>${esc(S.nodes.get(j).label)} ›</span>`:''}<b>${esc(S.nodes.get(scope).label)}</b>`;
-}
-function applyHighlight(){
-  const lit = new Set();
-  if (S.sel && S.nodes.has(S.sel)){
-    let cur = S.sel, guard=0; while(cur && cur!=='hub' && guard++<20){ lit.add(cur); cur = parentOf(S.nodes.get(cur)); }
-    descendants(S.sel).forEach(x => lit.add(x)); linksOf(S.sel).forEach(x => lit.add(x)); lit.add('hub');
-  } else if (S.q){
-    g.selectAll('.nd.hit').each(function(){ lit.add(this.getAttribute('data-id')); }); lit.add('hub');
-    [...lit].forEach(id => { let cur = S.nodes.get(id), guard=0; while(cur && guard++<20){ lit.add(cur.id); const p = parentOf(cur); if(p==='hub') break; cur = S.nodes.get(p); } });
-  }
-  g.classed('dimmed', lit.size > 0);
-  g.selectAll('.nd').classed('lit', function(){ return lit.has(this.getAttribute('data-id')); }).classed('sel', function(){ return this.getAttribute('data-id')===S.sel; });
-  g.selectAll('.lk').classed('lit', d => lit.has(d.target.data.id) && lit.has(d.source.data.id));
-  g.selectAll('.xlk').classed('lit', d => S.sel && (d.a===S.sel || d.b===S.sel));
-}
-function fit(animate){
-  const el = svg.node(); const b = g.node().getBBox(); const w = el.clientWidth, h = el.clientHeight;
-  if (!b.width || !w || !h) return;
-  const s = Math.min(w/(b.width+30), h/(b.height+30), 2.2);
-  const t = d3.zoomIdentity.translate(w/2 - s*(b.x+b.width/2), h/2 - s*(b.y+b.height/2)).scale(s);
-  (animate && !reduce ? svg.transition().duration(400) : svg).call(zoom.transform, t);
-}
-/* Re-fits only when the zoomed scope actually changed (drilling in or backing out), never while just typing
-   a search or re-selecting something within the same scope, so the view doesn't jump under the person. */
-function maybeFit(){
-  if (S.view !== 'web') return;
-  if (S.fittedScope !== S.webFocus){ fit(S.fittedScope !== undefined); S.fittedScope = S.webFocus; }
-}
-
-/* ---------- building blocks ---------- */
+/* ---------- small pieces ---------- */
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-function fmtDate(d){ const m = /^(\d{4})-(\d\d)-(\d\d)$/.exec(d||''); return m ? `${+m[3]} ${MONTHS[+m[2]-1]} ${m[1]}` : (d||''); }
-function chip(id, count, flag){
-  const n = S.nodes.get(id); if(!n) return '';
-  return `<button type="button" class="chip" data-go="${esc(id)}"><i style="background:${color(id)}"></i>${esc(n.label)}${count!=null?` <span class="n">${count}</span>`:''}${flag?` <span class="nw">${flag}</span>`:''}</button>`;
-}
-function formulaHtml(f){ return `<div class="formula"><span class="tx">${esc(f.text)}</span>${f.note?`<span class="nt">${esc(f.note)}</span>`:''}</div>`; }
-const techTag = k => `<span class="tag tech">${esc(S.techniques[k] || k)}</span>`;
-const lvlTag = (lv, title) => `<span class="lvl lvl-${esc(lv)}" ${title?`title="${esc(title)}"`:''}>${esc(lv)}</span>`;
+const fmtDate = d => { const m = /^(\d{4})-(\d\d)-(\d\d)$/.exec(d||''); return m ? `${+m[3]} ${MONTHS[+m[2]-1]} ${m[1]}` : (d||''); };
+const lvlTag = (lv, title) => `<span class="lvl lvl-${esc(lv)}"${title?` title="${esc(title)}"`:''}>${esc(lv)}</span>`;
 const likKey = l => String(l||'not seen').replace(' ','-');
-const likShort = st => { const l = st ? st.lik : 'not seen'; return `<span class="tag lik-${likKey(l)}">${l==='not seen'?'not seen':l}</span>`; };
-const likTag = st => { const l = st ? st.lik : 'not seen'; const n = S.stats.papers; return `<span class="tag lik-${likKey(l)}" title="${st ? `Asked in ${st.shifts} of ${n} analysed shifts` : 'Not seen in the papers analysed so far'}">${l==='not seen'?'not seen yet':l+' likelihood'}</span>`; };
-function whyText(w){ if(!w) return ''; const bits=[`${w.steps} step${w.steps===1?'':'s'}`]; if(w.concepts>1) bits.push(`${w.concepts} concepts`); if(w.heavy) bits.push('heavy numbers'); if(w.trap) bits.push('a common-mistake option'); return bits.join(', '); }
-function askedLine(st, label){
-  const n = S.stats.papers;
-  if (!st) return `<p class="statline">${label}: not seen in the ${plural(n,'shift')} analysed so far.</p>`;
-  return `<p class="statline"><b>${label}:</b> asked ${plural(st.n,'time')} in <b>${st.shifts} of ${n}</b> shifts${st.perShift!=null?`, about <b>${st.perShift}</b> per shift`:''} · ${likTag(st)}</p>`;
+const likTag = st => { const l = st ? st.lik : 'not seen'; const n = S.stats.papers;
+  return `<span class="tag lik-${likKey(l)}" title="${st ? `Asked in ${st.shifts} of ${n} analysed shifts` : 'Not seen in the papers analysed so far'}">${l==='not seen'?'not seen yet':'repeats: '+l}</span>`; };
+const techTag = k => `<span class="tag">${esc(S.techniques[k] || k)}</span>`;
+const formulaHtml = f => `<div class="formula"><span class="tx">${esc(f.text)}</span>${f.note?`<span class="nt">${esc(f.note)}</span>`:''}</div>`;
+function whyText(w){ if(!w) return ''; const b=[`${w.steps} step${w.steps===1?'':'s'}`]; if(w.concepts>1) b.push(`${w.concepts} concepts`); if(w.heavy) b.push('heavy numbers'); if(w.trap) b.push('a common-mistake option'); return 'Why: '+b.join(', '); }
+/* When it was asked. Plain text; the paper's link lives on the Sources page. */
+function whenTag(x){
+  if (x.src !== 'pyq') return `<span class="tag">${x.variant==='harder'?'extra · one level harder':'extra practice'}</span>`;
+  const p = paper(x.paper) || {};
+  return `<span class="tag when" title="${esc([p.exam, p.publisher].filter(Boolean).join(' · '))}">asked ${fmtDate(p.date)}${p.shift?` S${p.shift}`:''} · Q${x.qno}</span>`;
 }
-function mixLine(st){ if(!st || !st.levels) return ''; return `<p class="mix">${LEVELS.map(l=>`<span>${lvlTag(l)} ${st.levels[l]||0}</span>`).join('')}</p>`; }
-/* Where a past question came from: plain text. The links to the papers live on the Sources page only. */
-function pLabel(x){ const p = paper(x.paper) || {}; return [p.exam, fmtDate(p.date), p.shift ? 'Shift ' + p.shift : '', 'Q' + x.qno].filter(Boolean).join(' · '); }
-const kindName = n => parentOf(n)==='hub' ? 'Subject' : ({topic:'Topic', concept:'Concept', qtype:'Question type'}[n.kind] || 'Topic');
-const isBuiltTopic = t => !!(t && S.tmeta[t] && S.tmeta[t].built);
-const conceptsOf = t => kidsOf(t).filter(n => n.kind === 'concept');
-const typesOf = t => conceptsOf(t).flatMap(c => kidsOf(c.id).filter(n => n.kind === 'qtype'));
+function qTags(x){
+  const st = qstat(x.qtype), qn = S.nodes.get(x.qtype), pr = S.prog[x.id];
+  return `<div class="tags">${lvlTag(x.level, whyText(x.why))}${likTag(st)}${S.mostAsked.has(x.qtype)?`<span class="tag most">most asked</span>`:''}${whenTag(x)}${qn?`<span class="tag">${esc(qn.short||qn.label)}</span>`:''}${pr?`<span class="tag ${pr.r?'lik-medium':'lik-high'}">${pr.r?'you got it right':'you got it wrong'}</span>`:''}</div>`;
+}
 const methodOf = x => ((S.sd[x.topic] || {methods:{}}).methods || {})[x.qtype] || {};
-function methodHtml(m){
-  if (!m) return '';
-  const rows = LAYERS.filter(([k]) => m[k]).map(([k,l]) => `<dt>${l}</dt><dd>${esc(m[k])}</dd>`).join('')
-    + `<dt class="trap">Traps</dt><dd><ul>${(m.traps||[]).map(t=>`<li>${esc(t)}</li>`).join('')}</ul></dd>`
-    + ((m.variations||[]).length ? `<dt>Variations</dt><dd><ul>${m.variations.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></dd>` : '')
-    + ((m.tech||[]).length ? `<dt>Tricks</dt><dd>${m.tech.map(techTag).join(' ')}</dd>` : '');
-  return `<dl class="ledger">${rows}</dl>`;
-}
-
-/* What is shown after an answer: solution, fastest way in, elimination, why each wrong option is wrong, the type's traps. */
+const optBtns = (x, chosen) => x.options.map((o,i)=>{ const k='abcd'[i]; const cls = chosen ? (k===x.key?' right':(k===chosen?' wrong':'')) : '';
+  return `<button type="button" class="opt${cls}" data-k="${k}"${chosen?' disabled':''}><span>(${k})</span>${esc(o)}</button>`; }).join('');
 function revealInner(x){
   const m = methodOf(x);
-  const sol = Array.isArray(x.solution) ? `<ol>${x.solution.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>` : `<p style="margin:0">${esc(x.solution)}</p>`;
+  const sol = Array.isArray(x.solution) ? `<ol>${x.solution.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>` : `<p class="note" style="color:var(--ink)">${esc(x.solution)}</p>`;
   const wr = Object.entries(x.wrong||{}).map(([k,w]) => `<li><b>(${k}) ${esc(x.options['abcd'.indexOf(k)])}</b><span>${esc(w.note)} <em class="${w.kind}">${w.kind==='mistake'?'common mistake':'ruled out'}</em></span></li>`).join('');
   const fast = x.trick || m.fast;
-  return `<div class="sol"><h4>Solution</h4>${sol}</div>
+  return `<div><h4>Solution</h4>${sol}</div>
     ${fast ? `<div><h4>${x.trick?'Fastest way in':'Fast method'}</h4><div class="trick">${esc(fast)}</div></div>` : ''}
     ${m.eliminate ? `<div><h4>Eliminate using the options</h4><div class="trick">${esc(m.eliminate)}</div></div>` : ''}
     ${wr ? `<div><h4>Why not the others</h4><ul class="wn">${wr}</ul></div>` : ''}
-    ${(m.traps||[]).length ? `<details><summary>Traps in this type</summary><ul class="variations">${m.traps.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></details>` : ''}
-    <div class="tags">${(x.tech||[]).map(techTag).join('')}</div>`;
+    ${(m.traps||[]).length ? `<div><h4>Traps in this type</h4><ul class="plain">${m.traps.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>` : ''}
+    ${(x.tech||[]).length ? `<div class="tags">${x.tech.map(techTag).join('')}</div>` : ''}`;
 }
-function headTags(x){
-  const isP = x.src === 'pyq', st = qstat(x.qtype), qn = S.nodes.get(x.qtype);
-  return `${isP ? `<span class="src" style="font:500 12px var(--mono);color:var(--accent)">${esc(pLabel(x))}</span>` : `<span class="src" style="font:500 12px var(--mono);color:var(--muted)">${x.variant==='harder'?'Challenge · one level harder':'Practice · same level'}</span>`}
-    ${lvlTag(x.level, isP ? whyText(x.why) : '')}${likTag(st)}${qn?`<span class="tag tech">${esc(qn.short||qn.label)}</span>`:''}`;
-}
-const optBtns = (x, chosen) => x.options.map((o,i)=>{ const k = 'abcd'[i]; const cls = chosen ? (k===x.key ? ' right' : (k===chosen ? ' wrong' : '')) : ''; return `<button type="button" class="opt${cls}" data-k="${k}" ${chosen?'disabled':''}><span>(${k})</span>${esc(o)}</button>`; }).join('');
-
-/* One question as a card in the mixed-practice list. `x` is a PYQ or a practice item from a shard. */
-function cardHtml(x){
-  const pr = S.prog[x.id], qn = S.nodes.get(x.qtype);
-  return `<div class="q qz" data-id="${esc(x.id)}" data-key="${x.key}">
-    <div class="qhead">${headTags(x)}${pr?`<span class="tag ${pr.r?'lik-medium':'lik-high'}">${pr.r?'you got it right':'you got it wrong'}</span>`:''}</div>
+/* One question. Answer stays hidden until an option is picked or the answer is asked for. */
+function qCard(x, n){
+  const pr = S.prog[x.id];
+  return `<div class="q qz" data-id="${esc(x.id)}" data-topic="${esc(x.topic)}" data-key="${esc(x.key)}">
+    ${n!=null?`<span class="qnum">Question ${n}</span>`:''}
+    ${qTags(x)}
     <p>${esc(x.text)}</p>
     <div class="opts">${optBtns(x)}</div>
-    <button type="button" class="qbtn" data-reveal>Show answer</button>
-    <div class="rv" hidden>
-      <div class="verdict"></div>
-      ${revealInner(x)}
-      ${qn?`<div class="tags"><button type="button" class="chip" data-learn="qtype:${esc(x.qtype)}"><i style="background:${color(x.qtype)}"></i>Learn this type: ${esc(qn.label)}</button></div>`:''}
-    </div></div>`;
+    <div class="chips"><button type="button" class="qbtn" data-reveal>Show the answer</button>${pr?`<button type="button" class="qbtn" data-forget>Clear my answer</button>`:''}</div>
+    <div class="rv" hidden><div class="verdict"></div>${revealInner(x)}</div>
+  </div>`;
+}
+/* Clicks inside any question list: pick an option, or ask for the answer. */
+function onQuestionClick(e){
+  const box = e.target.closest('.qz'); if (!box) return false;
+  const opt = e.target.closest('button.opt'), rev = e.target.closest('[data-reveal]'), forget = e.target.closest('[data-forget]');
+  if (forget){ delete S.prog[box.dataset.id]; saveProg(); rerender(); return true; }
+  if (!opt && !rev) return false;
+  const d = S.sd[box.dataset.topic]; if (!d) return true;
+  const x = d.byId.get(box.dataset.id); if (!x) return true;
+  const rv = box.querySelector('.rv'), v = box.querySelector('.verdict');
+  if (opt && !opt.disabled){
+    const k = opt.dataset.k;
+    S.prog[x.id] = {r: k === x.key ? 1 : 0}; saveProg();
+    box.querySelector('.opts').innerHTML = optBtns(x, k);
+    v.className = 'verdict ' + (k === x.key ? 'r' : 'w');
+    v.textContent = k === x.key ? 'Right.' : `Not this one — the answer is (${x.key}).`;
+  } else if (rev){
+    box.querySelector('.opts').innerHTML = optBtns(x, x.key);
+    v.className = 'verdict'; v.textContent = `The answer is (${x.key}).`;
+  }
+  rv.hidden = false;
+  const btn = box.querySelector('[data-reveal]'); if (btn) btn.remove();
+  return true;
 }
 
-/* ---------- web panel (slim: a short description and the way into Learn) ---------- */
-function renderPanel(){
-  const P = $('panel');
-  if (S.status==='none'){ P.innerHTML = `<p class="eyebrow">Couldn't load</p><h2>The data files didn't load</h2><p class="lead">Check your connection and refresh the page.</p>`; return; }
-  if (!S.loaded){ P.innerHTML = `<p class="eyebrow">Loading</p><p class="empty-msg">Fetching subjects, topics and questions…</p>`; return; }
-  if (S.q) return renderSearch(P);
-  if (S.sel && S.nodes.has(S.sel)) return renderNode(P);
-  renderOverview(P);
-}
-function topAsked(k){
-  return Object.entries(S.stats.qtypes).sort((a,b)=> b[1].shifts-a[1].shifts || b[1].n-a[1].n || a[0].localeCompare(b[0])).slice(0,k);
-}
-function renderOverview(P){
-  const topics = [...S.nodes.values()].filter(n => n.kind==='topic');
-  const built = topics.filter(t => S.built.has(t.id));
-  const todo = topics.filter(t => !S.built.has(t.id) && (tstat(t.id)||{}).n > 0).sort((a,b)=>tstat(b.id).n-tstat(a.id).n);
-  P.innerHTML = `
-    <p class="eyebrow">SSC CGL Tier 1 and Tier 2 · Quant</p>
-    <h2>${S.rows.length} questions in the bank</h2>
-    <div class="meta-row"><span>${plural(built.length,'topic')} built</span>${todo.length ? `<span>${todo.length} more ${todo.length===1?'has':'have'} past questions waiting</span>` : ''}<span>${Object.values(S.tmeta).reduce((a,m)=>a+m.indexed,0)} past questions filed</span></div>
-    <div class="chips"><button type="button" class="btn" data-bank="">Question bank →</button><button type="button" class="btn ghost" data-view="sources">Sources</button></div>
-    <p class="lead">Each dot is a topic, a concept or a question type. Tap a question type (an end dot) to learn that topic: the concepts first, then the methods, then the quiz.</p>
-    <div class="section"><p class="eyebrow">Most asked question types</p>
-      <ul class="rows">${topAsked(6).map(([id,st])=>`<li><button type="button" class="chip" data-go="${esc(id)}"><i style="background:${color(id)}"></i>${esc(S.nodes.get(id).label)}</button><span class="ans">${st.shifts} of ${S.stats.papers} shifts · ${st.n} q</span>${likTag(st)}</li>`).join('')}</ul>
-      <p class="note">${esc(S.likNote)} With only ${plural(S.stats.papers,'shift')} analysed, read this as a rough guide.</p></div>
-    <div class="section"><p class="eyebrow">Built</p><div class="chips">${built.map(t=>chip(t.id, (tstat(t.id)||{}).n)).join('') || '<p class="empty-msg">Nothing built yet.</p>'}</div></div>
-    ${todo.length ? `<div class="section"><p class="eyebrow">Next, by number of past questions</p><div class="chips">${todo.map(t=>chip(t.id, tstat(t.id).n)).join('')}</div></div>` : ''}`;
-}
-function renderNode(P){
-  const id = S.sel, n = S.nodes.get(id); const kids = kidsOf(id);
-  const t = topicOf(id), builtT = isBuiltTopic(t);
-  const crumbs = []; let cur = parentOf(n), guard=0; while(cur!=='hub' && guard++<20){ crumbs.unshift(cur); cur = parentOf(S.nodes.get(cur)); }
-  const rel = [...linksOf(id)];
-  const total = subCount(id);
-  let stat = '', go = '';
-  if (n.kind === 'qtype'){ stat = askedLine(qstat(id), 'This type') + mixLine(qstat(id)); if (builtT) go = `<button type="button" class="btn" data-learn="qtype:${esc(id)}">Learn this topic →</button>`; }
-  else if (n.kind === 'concept'){ if (builtT) go = `<button type="button" class="btn" data-learn="concept:${esc(id)}">Learn this concept →</button>`; }
-  else if (n.kind === 'topic'){
-    stat = askedLine(tstat(id), 'This topic');
-    if (builtT) go = `<button type="button" class="btn" data-learn="start:${esc(id)}">Start learning →</button> <button type="button" class="btn ghost" data-learn="quiz:${esc(id)}">Go to the quiz</button>`;
-  }
-  const rows = (S.tmeta[id]||{}).indexed || 0;
-  const note = n.kind==='topic' && !builtT ? `<p class="note">Not built yet. ${rows ? `${plural(rows,'past question')} are filed here and their answers are checked. ` : 'No past question has landed here yet. '}Send material on this topic and it will get its concepts, question types, solving methods, traps and a quiz.</p>` : '';
-  const tops = kids.filter(k => k.kind==='topic');
-  P.innerHTML = `
-    <div class="crumbs"><button type="button" data-go="">Web</button>${crumbs.map(c=>` › <button type="button" data-go="${esc(c)}">${esc(S.nodes.get(c).label)}</button>`).join('')}</div>
-    <div><p class="eyebrow" style="color:${color(id)}">${kindName(n)}</p><h2>${esc(n.label)}</h2></div>
-    ${n.summary ? `<p class="lead">${md(n.summary)}</p>` : ''}
-    <div class="meta-row"><span>${plural(total,'past question')}</span>${S.built.has(id)?'<span>fully built</span>':''}</div>
-    ${stat}
-    ${go ? `<div class="chips">${go}</div>` : ''}
-    ${note}
-    ${kids.length ? `<div class="section"><p class="eyebrow">${parentOf(n)==='hub'?'Topics':n.kind==='topic'?'Concepts':'Question types'}</p><div class="chips">${kids.map(k=>chip(k.id, subCount(k.id), S.built.has(k.id)&&k.kind==='topic'?'built':'')).join('')}</div></div>` : ''}
-    ${parentOf(n)==='hub' ? `<p class="note">${plural(tops.length,'topic')} in this subject. ${tops.filter(x=>S.built.has(x.id)).length} fully built.</p>` : ''}
-    ${rel.length ? `<div class="section"><p class="eyebrow">Connected topics</p><div class="chips">${rel.map(r=>chip(r, subCount(r))).join('')}</div></div>` : ''}
-    <button type="button" class="btn-link" data-go="">← Back to overview</button>`;
-}
-let searchToken = 0;
-function renderSearch(P){
-  const t = q();
-  const tok = ++searchToken;
-  const bt = allBuilt();
-  const need = bt.filter(x => !S.sd[x]);
-  if (need.length){ P.innerHTML = `<p class="eyebrow">Search</p><p class="empty-msg">Searching every built topic…</p>`; Promise.all(need.map(loadShard)).then(() => { if (tok === searchToken && S.q) renderSearch($('panel')); }); return; }
-  const nodes = [...S.nodes.values()].filter(n => n.label.toLowerCase().includes(t) || (n.summary||'').toLowerCase().includes(t));
-  const fs = [], ms = [], qs = [];
-  for (const b of bt){ const d = S.sd[b];
-    d.formulas.forEach(f => { if ((f.text+' '+(f.note||'')).toLowerCase().includes(t)) fs.push(f); });
-    Object.entries(d.methods).forEach(([id,m]) => { if (LAYERS.some(([k]) => (m[k]||'').toLowerCase().includes(t)) || (m.cue||'').toLowerCase().includes(t) || (m.traps||[]).concat(m.variations||[]).some(x => x.toLowerCase().includes(t))) ms.push(id); });
-    d.pyqs.forEach(x => { if ((x.text+' '+x.solution.join(' ')+' '+(x.trick||'')).toLowerCase().includes(t)) qs.push(d.byId.get(x.id)); });
-  }
-  const total = nodes.length + fs.length + ms.length + qs.length;
-  P.innerHTML = `
-    <p class="eyebrow">Search</p>
-    <h2>${plural(total,'match')} for “${esc(S.q)}”</h2>
-    ${nodes.length ? `<div class="section"><p class="eyebrow">Topics and types</p><div class="chips">${nodes.slice(0,24).map(n=>chip(n.id, subCount(n.id))).join('')}</div></div>` : ''}
-    ${fs.length ? `<div class="section"><p class="eyebrow">Formulas</p>${fs.map(f=>formulaHtml(f)+`<div class="chips">${chip(f.node)}</div>`).join('')}</div>` : ''}
-    ${ms.length ? `<div class="section"><p class="eyebrow">Methods mentioning it</p><div class="chips">${ms.map(id=>chip(id)).join('')}</div></div>` : ''}
-    ${qs.length ? `<div class="section"><p class="eyebrow">Past questions</p><ul class="rows">${qs.slice(0,20).map(x=>`<li style="display:block"><div class="note">${esc(x.text.length>150 ? x.text.slice(0,150)+'…' : x.text)}</div><div class="chips" style="margin-top:6px"><button type="button" class="chip" data-learn="qtype:${esc(x.qtype)}"><i style="background:${color(x.qtype)}"></i>Learn: ${esc(S.nodes.get(x.qtype).label)}</button></div></li>`).join('')}</ul></div>` : ''}
-    ${total ? '' : '<p class="empty-msg">Try a shorter word, a formula name, or a number.</p>'}`;
-}
-
-/* ---------- question bank: by topic ---------- */
-const topicRows = t => S.rows.filter(r => r.topic === t);
+/* ================= 1. SYLLABUS: every topic, grouped by subject ================= */
+function topicRows(t){ return S.rows.filter(r => r.topic === t); }
 function progOf(rows){ let tried=0, right=0; for (const r of rows){ const p = S.prog[r.id]; if (p){ tried++; if (p.r) right++; } } return {tried, right, wrong: tried-right}; }
-function weakTypes(t){
-  const c = {}; for (const r of topicRows(t)){ const p = S.prog[r.id]; if (p && !p.r) c[r.qtype] = (c[r.qtype]||0)+1; }
-  return Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,3);
+function renderSyllabus(){
+  const el = $('syllabus');
+  if (!S.loaded){ el.innerHTML = '<p class="empty-msg">Loading the syllabus…</p>'; return; }
+  const subs = [...S.nodes.values()].filter(n => parentOf(n) === 'hub' && n.kind !== 'topic').sort((a,b)=>(a.order??999)-(b.order??999));
+  const allTopics = [...S.nodes.values()].filter(n => n.kind === 'topic');
+  const builtN = allTopics.filter(t => S.built.has(t.id)).length;
+  const p = progOf(S.rows);
+  el.innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <p class="eyebrow">SSC CGL Tier 1 and Tier 2 · Quant</p>
+      <h2>The whole syllabus, topic by topic</h2>
+      <p class="lead">Open a topic and you get it in one page: the concepts and formulas, the tricks and traps, the question types that keep repeating, then every question from easiest to hardest — each one tagged with how hard it is, how often that type is asked and when it last came.</p>
+      <p class="statline"><b>${builtN}</b> of ${allTopics.length} topics ready · <b>${S.rows.length}</b> questions · <b>${Object.values(S.tmeta).reduce((a,m)=>a+m.indexed,0)}</b> past questions filed${p.tried?` · you have tried <b>${p.tried}</b>, <b>${p.right}</b> right`:''}</p>
+    </div>
+    ${S.mostAsked.size ? `<div class="sect"><div class="hd"><h3>Start here: the most asked question types</h3></div>
+      <div class="chips">${[...S.mostAsked].map(id => { const st = qstat(id), n = S.nodes.get(id); if(!n) return '';
+        return `<button type="button" class="chip" data-type="${esc(id)}"><i style="background:${color(id)}"></i>${esc(n.label)} <span class="n">${st.shifts}/${S.stats.papers} shifts</span></button>`; }).join('')}</div>
+      <p class="note">${esc(S.likNote)}</p></div>` : ''}
+    ${subs.map(j => {
+      const ts = kidsOf(j.id).filter(n => n.kind === 'topic');
+      if (!ts.length) return '';
+      const n = ts.reduce((a,t) => a + ((tstat(t.id)||{}).n || 0), 0);
+      return `<div class="subject" style="--c:${color(j.id)}">
+        <div class="shead"><h3 style="color:${color(j.id)}">${esc(j.label)}</h3><span class="statline">${plural(ts.length,'topic')} · ${plural(n,'past question')}</span></div>
+        <div class="tgrid">${ts.map(topicCard).join('')}</div></div>`;
+    }).join('')}`;
 }
-function renderByTopic(){
-  const topics = [...S.nodes.values()].filter(n => n.kind==='topic');
-  const built = topics.filter(t => isBuiltTopic(t.id)), waiting = topics.filter(t => !isBuiltTopic(t.id) && (S.tmeta[t.id]||{}).indexed > 0).sort((a,b)=>S.tmeta[b.id].indexed-S.tmeta[a.id].indexed);
-  const mem = loadLearnMem();
-  $('bytopic').innerHTML = `
-    <p class="statline" style="margin-bottom:10px">Pick a topic. You learn its concepts and methods first, then the quiz starts: past questions, practice at the same level, then harder ones.</p>
-    <div class="tgrid">${built.map(t => {
-      const rows = topicRows(t.id), py = rows.filter(r=>r.src==='pyq').length, pr = rows.length - py, p = progOf(rows), st = tstat(t.id), types = typesOf(t.id);
-      const mix = LEVELS.map(l => `<span>${lvlTag(l)} ${rows.filter(r=>r.level===l).length}</span>`).join('');
-      const m = mem[t.id], weak = weakTypes(t.id);
-      return `<div class="tcard" style="--c:${color(t.id)}">
-        <h3>${esc(t.label)}</h3>
-        <p class="sub">${esc(t.summary||'')}</p>
-        <div class="meta-row"><span>${py} past</span>${pr ? `<span>${pr} practice</span>` : `<span class="soft">practice to come</span>`}<span>${types.length} types</span>${st?`<span>${st.shifts} of ${S.stats.papers} shifts</span>`:''}</div>
-        <p class="mix">${mix}</p>
-        <div class="bar" title="${p.tried} tried, ${p.right} right"><i class="ok" style="width:${rows.length?p.right/rows.length*100:0}%"></i><i class="no" style="width:${rows.length?p.wrong/rows.length*100:0}%"></i></div>
-        <p class="statline">${p.tried ? `You have tried <b>${p.tried}</b> of ${rows.length}, <b>${p.right}</b> right.` : 'You have not tried any question here yet.'}</p>
-        ${weak.length ? `<p class="weak">Keeps going wrong: ${weak.map(([q,n]) => esc((S.nodes.get(q)||{}).short || q) + ' (' + n + ')').join(', ')}</p>` : ''}
-        <div class="btns">${m && m.i > 0 ? `<button type="button" class="btn" data-learn="resume:${esc(t.id)}">Continue</button><button type="button" class="btn ghost" data-learn="start:${esc(t.id)}">Start over</button>` : `<button type="button" class="btn" data-learn="start:${esc(t.id)}">Start learning</button>`}<button type="button" class="btn ghost" data-learn="quiz:${esc(t.id)}">Go to quiz</button></div>
-        <div class="chips">${types.map(q=>`<button type="button" class="chip" data-learn="qtype:${esc(q.id)}"><i style="background:${color(q.id)}"></i>${esc(q.short||q.label)}${likShort(qstat(q.id))}</button>`).join('')}</div>
-      </div>`; }).join('') || '<p class="empty-msg">No topic is built yet.</p>'}</div>
-    ${waiting.length ? `<div class="section" style="margin-top:14px"><p class="eyebrow">Waiting to be built</p><div class="chips waiting">${waiting.map(t=>chip(t.id, S.tmeta[t.id].indexed)).join('')}</div><p class="note">The number is how many past questions are already filed under the topic. Send material and it gets built.</p></div>` : ''}`;
+function topicCard(t){
+  const built = S.built.has(t.id), st = tstat(t.id), rows = topicRows(t.id), p = progOf(rows), types = typesOf(t.id);
+  const filed = (S.tmeta[t.id]||{}).indexed || 0;
+  const mix = LEVELS.map(l => `${rows.filter(r=>r.level===l).length} ${l.toLowerCase()}`).join(' · ');
+  return `<div class="tcard${built?'':' todo'}" style="--c:${color(t.id)}" data-topic="${esc(t.id)}" role="button" tabindex="0">
+    <div class="tt"><h4>${esc(t.label)}</h4>${st?likTag(st):''}</div>
+    <p class="sub">${esc(t.summary||'')}</p>
+    ${built ? `<div class="meta"><span>${plural(types.length,'question type')}</span><span>${rows.length} questions</span><span>${mix}</span></div>
+      ${p.tried?`<div class="bar" title="${p.tried} tried, ${p.right} right"><i class="ok" style="width:${p.right/rows.length*100}%"></i><i class="no" style="width:${p.wrong/rows.length*100}%"></i></div><span class="meta">tried ${p.tried} of ${rows.length}, ${p.right} right</span>`:''}
+      <div class="tlist">${types.slice(0,6).map(q=>`<button type="button" data-type="${esc(q.id)}">${esc(q.short||q.label)}</button>`).join('')}</div>`
+    : `<div class="meta"><span>${filed ? plural(filed,'past question')+' filed, page coming' : 'nothing filed here yet'}</span></div>`}
+  </div>`;
 }
+$('syllabus').addEventListener('click', e => {
+  const ty = e.target.closest('[data-type]'); if (ty){ openTopic(topicOf(ty.dataset.type), ty.dataset.type); return; }
+  const tc = e.target.closest('[data-topic]'); if (tc) openTopic(tc.dataset.topic);
+});
+$('syllabus').addEventListener('keydown', e => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const card = e.target.closest('.tcard'); if (!card) return;
+  e.preventDefault(); openTopic(card.dataset.topic);
+});
 
-/* ---------- question bank: mixed practice ---------- */
+/* ================= 2. TOPIC PAGE: study first, then the questions ================= */
+async function openTopic(t, focusType){
+  if (!t || !S.nodes.has(t)) return;
+  S.topic = t; S.typeFilter = ''; S.shownQ = 20;
+  setView('topic');
+  try { history.replaceState(null, '', '#t/' + t + (focusType ? '/' + focusType : '')); } catch(e){}
+  if (isBuiltTopic(t)){ renderTopic(); await loadShard(t); if (S.topic !== t) return; }
+  renderTopic();
+  if (focusType){ const el = document.getElementById('ty-' + focusType); if (el) el.scrollIntoView({block:'start'}); }
+  else window.scrollTo(0, 0);
+}
+function renderTopic(){
+  const el = $('topic'), t = S.topic, n = S.nodes.get(t);
+  if (!n) return;
+  const j = junctionOf(t), st = tstat(t), d = S.sd[t];
+  const head = `<div class="thead">
+    <div class="crumbs"><button type="button" data-home>Syllabus</button>${j?` › <span>${esc(S.nodes.get(j).label)}</span>`:''}</div>
+    <h2 style="color:${color(t)}">${esc(n.label)}</h2>
+    <p class="lead">${md(n.summary||'')}</p>
+    ${st ? `<p class="statline"><b>Asked ${plural(st.n,'time')}</b> in ${st.shifts} of ${S.stats.papers} analysed shifts${st.perShift!=null?`, about ${st.perShift} per shift`:''} · ${likTag(st)}</p>` : `<p class="statline">Not seen yet in the ${plural(S.stats.papers,'shift')} analysed.</p>`}
+  </div>`;
+  if (!isBuiltTopic(t)){
+    const filed = (S.tmeta[t]||{}).indexed || 0;
+    el.innerHTML = head + `<div class="sect"><div class="card"><p class="lead">This topic's page is not built yet.</p>
+      <p class="note">${filed ? `${plural(filed,'past question')} are already filed here and their answers are checked — they go live as soon as the topic gets its concepts, question types and methods.` : 'No past question has landed here yet.'} Send material on this topic and it gets built.</p></div></div>`;
+    return;
+  }
+  if (!d){ el.innerHTML = head + '<p class="empty-msg">Loading this topic…</p>'; return; }
+  const concepts = conceptsOf(t), types = typesOf(t), rows = topicRows(t), p = progOf(rows);
+  el.innerHTML = head + `
+    <div class="jump">
+      <button type="button" class="qbtn" data-jump="study">Study</button>
+      <button type="button" class="qbtn" data-jump="types">${plural(types.length,'question type')}</button>
+      <button type="button" class="qbtn" data-jump="questions">${rows.length} questions</button>
+      ${p.tried?`<span class="statline" style="align-self:center;margin-left:4px">tried ${p.tried}, ${p.right} right</span>`:''}
+    </div>
+    ${studySection(t, d, concepts, types)}
+    ${typesSection(t, d, types)}
+    ${questionsSection(t, d, types, rows)}`;
+}
+/* Study: the concepts and their formulas, then every trick and trap in the topic at a glance. */
+function studySection(t, d, concepts, types){
+  const tricks = types.map(q => { const m = d.methods[q.id]||{}; return {q, fast:m.fast, ultra:m.ultra}; }).filter(x => x.fast || x.ultra);
+  const traps = []; types.forEach(q => (d.methods[q.id]||{}).traps?.forEach(x => traps.push({q, t:x})));
+  return `<div class="sect" id="study">
+    <div class="hd"><h3>Study this first</h3><span class="statline">${plural(concepts.length,'concept')} · ${plural(d.formulas.length,'formula')}</span></div>
+    ${concepts.map((c,i) => {
+      const fs = d.formulas.filter(f => f.node === c.id), rel = [...linksOf(c.id)].filter(x => S.nodes.get(x));
+      return `<div class="card lead-c" style="--c:${color(t)}">
+        <h3>${i+1}. ${esc(c.label)}</h3>
+        ${c.summary?`<p class="lead">${md(c.summary)}</p>`:''}
+        ${fs.length?`<div><h4>Formulas</h4><div class="grid2">${fs.map(formulaHtml).join('')}</div></div>`:''}
+        ${rel.length?`<div class="tags"><span class="tag">also used in</span>${rel.map(r=>`<button type="button" class="chip" data-topic="${esc(topicOf(r)||r)}"><i style="background:${color(r)}"></i>${esc(S.nodes.get(r).label)}</button>`).join('')}</div>`:''}
+      </div>`; }).join('')}
+    ${tricks.length?`<div class="card"><h3>Tricks that save time</h3><ul class="plain">${tricks.map(x=>`<li><b>${esc(x.q.short||x.q.label)}:</b> ${esc(x.fast||x.ultra)}${x.fast&&x.ultra?` <em style="color:var(--muted)">Ultra: ${esc(x.ultra)}</em>`:''}</li>`).join('')}</ul></div>`:''}
+    ${traps.length?`<div class="card"><h3>Traps to avoid</h3><ul class="plain">${traps.map(x=>`<li><b>${esc(x.q.short||x.q.label)}:</b> ${esc(x.t)}</li>`).join('')}</ul></div>`:''}
+  </div>`;
+}
+/* Question types: the pattern that identifies each one, then how to solve it. */
+function typesSection(t, d, types){
+  return `<div class="sect" id="types">
+    <div class="hd"><h3>The question types that repeat</h3><span class="statline">spot the pattern, then use its method</span></div>
+    ${types.map((q,i) => {
+      const m = d.methods[q.id]||{}, st = qstat(q.id), fs = (m.formulas||[]).map(f => d.formulas.find(x => x.id===f)).filter(Boolean);
+      const nq = d.pyqs.filter(x=>x.qtype===q.id).length + d.practice.filter(x=>x.qtype===q.id).length;
+      return `<div class="card lead-c" id="ty-${esc(q.id)}" style="--c:${color(t)}">
+        <div class="tt" style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline">
+          <h3>${i+1}. ${esc(q.label)}</h3>
+          <div class="tags">${likTag(st)}${S.mostAsked.has(q.id)?'<span class="tag most">most asked</span>':''}${st?`<span class="tag">${st.n} asked · ${st.shifts}/${S.stats.papers} shifts</span>`:''}</div>
+        </div>
+        ${q.summary?`<p class="note">${md(q.summary)}</p>`:''}
+        ${m.cue?`<div class="pattern"><b>The pattern</b>${esc(m.cue)}</div>`:''}
+        ${m.fast?`<div><h4>Fast method</h4><div class="trick">${esc(m.fast)}</div></div>`:''}
+        <details class="more"><summary>Full method, formulas and traps</summary><div>
+          ${fs.length?`<div><h4>Formulas</h4><div class="grid2">${fs.map(formulaHtml).join('')}</div></div>`:''}
+          <div class="kv">${LAYERS.filter(([k])=>m[k]&&k!=='fast').map(([k,l])=>`<div class="row"><span class="k">${l}</span><span class="v">${esc(m[k])}</span></div>`).join('')}</div>
+          ${(m.traps||[]).length?`<div><h4>Traps</h4><ul class="plain">${m.traps.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}
+          ${(m.variations||[]).length?`<div><h4>Variations you may see</h4><ul class="plain">${m.variations.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}
+          ${(m.tech||[]).length?`<div class="tags">${m.tech.map(techTag).join('')}</div>`:''}
+        </div></details>
+        <div class="chips"><button type="button" class="qbtn" data-only="${esc(q.id)}">Practise these ${nq} questions →</button></div>
+      </div>`; }).join('')}
+  </div>`;
+}
+/* Questions: easiest first, filtered by type if asked for. */
+function orderedQuestions(t, d){
+  const lv = x => LEVELS.indexOf(x.level);
+  const typeOrder = typesOf(t).map(q=>q.id);
+  return [...d.pyqs, ...d.practice].map(x => d.byId.get(x.id))
+    .filter(x => !S.typeFilter || x.qtype === S.typeFilter)
+    .sort((a,b) => lv(a)-lv(b) || (a.src===b.src?0:a.src==='pyq'?-1:1) || typeOrder.indexOf(a.qtype)-typeOrder.indexOf(b.qtype) || a.id.localeCompare(b.id));
+}
+function questionsSection(t, d, types, rows){
+  const list = orderedQuestions(t, d), vis = list.slice(0, S.shownQ);
+  const p = progOf(list.map(x=>({id:x.id})));
+  return `<div class="sect" id="questions">
+    <div class="hd"><h3>Questions, easiest first</h3><span class="statline">${list.length} shown${p.tried?` · tried ${p.tried}, ${p.right} right`:''}</span></div>
+    <div class="chips">
+      <button type="button" class="chip" data-only="" aria-pressed="${!S.typeFilter}">All types <span class="n">${rows.length}</span></button>
+      ${types.map(q => { const c = d.pyqs.filter(x=>x.qtype===q.id).length + d.practice.filter(x=>x.qtype===q.id).length;
+        return `<button type="button" class="chip" data-only="${esc(q.id)}" aria-pressed="${S.typeFilter===q.id}"><i style="background:${color(q.id)}"></i>${esc(q.short||q.label)} <span class="n">${c}</span></button>`; }).join('')}
+    </div>
+    <div class="qlist">${vis.map((x,i)=>qCard(x, i+1)).join('')}</div>
+    ${list.length > vis.length ? `<button type="button" class="more-btn" data-moreq>Show ${Math.min(20, list.length-vis.length)} more (${list.length-vis.length} left)</button>` : ''}
+  </div>`;
+}
+$('topic').addEventListener('click', e => {
+  if (onQuestionClick(e)) return;
+  const home = e.target.closest('[data-home]'); if (home){ setView('syllabus'); return; }
+  const jump = e.target.closest('[data-jump]'); if (jump){ const el = document.getElementById(jump.dataset.jump); if (el) el.scrollIntoView({block:'start'}); return; }
+  const only = e.target.closest('[data-only]');
+  if (only){ S.typeFilter = only.dataset.only; S.shownQ = 20; renderTopic(); const q = document.getElementById('questions'); if (q) q.scrollIntoView({block:'start'}); return; }
+  const moreq = e.target.closest('[data-moreq]'); if (moreq){ S.shownQ += 20; renderTopic(); return; }
+  const tc = e.target.closest('[data-topic]'); if (tc) openTopic(tc.dataset.topic);
+});
+
+/* ================= 3. MIXED PRACTICE: everything, filtered ================= */
 function matchRows(){
   const f = S.f;
   const rows = S.rows.filter(r => {
+    if (!S.built.has(r.topic)) return false;
     if (f.topic && r.topic !== f.topic) return false;
     if (f.qtype && r.qtype !== f.qtype) return false;
     if (f.level.size && !f.level.has(r.level)) return false;
-    if (f.lik.size && !f.lik.has((qstat(r.qtype)||{lik:'not seen'}).lik)) return false;
+    if (f.lik.size){ const st = qstat(r.qtype); if (!st || !f.lik.has(st.lik)) return false; }
     if (f.src && r.src !== f.src) return false;
-    if (f.tech && !r.tech.includes(f.tech)) return false;
+    if (f.tech && !(r.tech||[]).includes(f.tech)) return false;
     const pr = S.prog[r.id];
     if (f.status === 'new' && pr) return false;
     if (f.status === 'wrong' && !(pr && !pr.r)) return false;
@@ -799,472 +556,188 @@ function matchRows(){
   });
   const lv = r => LEVELS.indexOf(r.level), sh = r => (qstat(r.qtype)||{shifts:0}).shifts, nn = r => (qstat(r.qtype)||{n:0}).n;
   const tie = (a,b) => (a.src===b.src?0:a.src==='pyq'?-1:1) || a.id.localeCompare(b.id);
-  const by = {
+  return rows.sort({
     asked: (a,b) => sh(b)-sh(a) || nn(b)-nn(a) || lv(a)-lv(b) || tie(a,b),
     easy:  (a,b) => lv(a)-lv(b) || sh(b)-sh(a) || tie(a,b),
     hard:  (a,b) => lv(b)-lv(a) || sh(b)-sh(a) || tie(a,b),
     topic: (a,b) => a.topic.localeCompare(b.topic) || a.qtype.localeCompare(b.qtype) || lv(a)-lv(b) || tie(a,b)
-  }[f.sort];
-  return rows.sort(by);
+  }[S.f.sort]);
 }
 const tg = (name, val, label, on) => `<button type="button" data-f="${name}" data-v="${esc(val)}" aria-pressed="${on}">${esc(label)}</button>`;
 function renderFilters(n){
-  const f = S.f, tops = allBuilt().sort();
+  const f = S.f, tops = allBuilt().sort((a,b)=>S.nodes.get(a).label.localeCompare(S.nodes.get(b).label));
   const types = [...S.nodes.values()].filter(x => x.kind==='qtype' && (!f.topic || topicOf(x.id)===f.topic) && isBuiltTopic(topicOf(x.id)));
-  const techs = Object.entries(S.techniques);
   $('filters').innerHTML = `
     <div class="fcount">${n} question${n===1?'':'s'} match</div>
-    <label class="f">Topic<select data-sel="topic"><option value="">All built topics</option>${tops.map(t=>`<option value="${esc(t)}" ${f.topic===t?'selected':''}>${esc(S.nodes.get(t).label)}</option>`).join('')}</select></label>
-    <label class="f">Question type<select data-sel="qtype"><option value="">All types</option>${types.map(x=>`<option value="${esc(x.id)}" ${f.qtype===x.id?'selected':''}>${esc(x.label)}</option>`).join('')}</select></label>
+    <label class="f">Topic<select data-sel="topic"><option value="">All topics</option>${tops.map(t=>`<option value="${esc(t)}"${f.topic===t?' selected':''}>${esc(S.nodes.get(t).label)}</option>`).join('')}</select></label>
+    <label class="f">Question type<select data-sel="qtype"><option value="">All types</option>${types.map(x=>`<option value="${esc(x.id)}"${f.qtype===x.id?' selected':''}>${esc(x.label)}</option>`).join('')}</select></label>
     <div class="f">Difficulty<div class="tg">${LEVELS.map(l=>tg('level',l,l,f.level.has(l))).join('')}</div></div>
-    <div class="f">Likely to come<div class="tg">${LIKS.map(([k,l])=>tg('lik',k,l,f.lik.has(k))).join('')}</div></div>
-    <div class="f">Source<div class="tg">${tg('src','','Both',!f.src)}${tg('src','pyq','Past questions',f.src==='pyq')}${tg('src','practice','Practice',f.src==='practice')}</div></div>
-    <label class="f">Technique<select data-sel="tech"><option value="">Any</option>${techs.map(([k,l])=>`<option value="${esc(k)}" ${f.tech===k?'selected':''}>${esc(l)}</option>`).join('')}</select></label>
+    <div class="f">How often it repeats<div class="tg">${LIKS.map(([k,l])=>tg('lik',k,l,f.lik.has(k))).join('')}</div></div>
+    <div class="f">Source<div class="tg">${tg('src','','Both',!f.src)}${tg('src','pyq','Past questions',f.src==='pyq')}${tg('src','practice','Extra practice',f.src==='practice')}</div></div>
+    <label class="f">Technique<select data-sel="tech"><option value="">Any</option>${Object.entries(S.techniques).map(([k,l])=>`<option value="${esc(k)}"${f.tech===k?' selected':''}>${esc(l)}</option>`).join('')}</select></label>
     <div class="f">Your progress<div class="tg">${tg('status','','All',!f.status)}${tg('status','new','Not tried',f.status==='new')}${tg('status','wrong','Got wrong',f.status==='wrong')}${tg('status','right','Got right',f.status==='right')}</div></div>
-    <label class="f">Sort<select data-sel="sort">${[['asked','Most asked first'],['easy','Easiest first'],['hard','Hardest first'],['topic','By topic and type']].map(([k,l])=>`<option value="${k}" ${f.sort===k?'selected':''}>${l}</option>`).join('')}</select></label>
+    <label class="f">Sort<select data-sel="sort">${[['asked','Most asked first'],['easy','Easiest first'],['hard','Hardest first'],['topic','By topic and type']].map(([k,l])=>`<option value="${k}"${f.sort===k?' selected':''}>${l}</option>`).join('')}</select></label>
     <button type="button" class="qbtn" data-reset>Clear filters</button>
-    <p class="statline">Likelihood is how many of the ${S.stats.papers} analysed shifts had the question type. ${Object.keys(S.prog).length ? `You have tried ${Object.keys(S.prog).length}.` : ''}</p>`;
+    <p class="statline">Repeats = how many of the ${S.stats.papers} analysed shifts had that question type.</p>`;
 }
 let bankToken = 0;
-async function renderBank(){
+async function renderPractice(){
   if (!S.loaded) return;
-  [...$('btabs').querySelectorAll('button')].forEach(b => b.setAttribute('aria-pressed', String(b.dataset.bt === S.bankTab)));
-  $('bytopic').hidden = S.bankTab !== 'topic'; $('mixed').hidden = S.bankTab !== 'mixed';
-  if (S.bankTab === 'topic'){ renderByTopic(); return; }
-  const tok = ++bankToken;
-  const rows = matchRows();
+  const tok = ++bankToken, rows = matchRows();
   renderFilters(rows.length);
-  const vis = rows.slice(0, S.shown);
-  const cards = $('cards');
+  const vis = rows.slice(0, S.shown), cards = $('cards');
   if (!rows.length){ cards.innerHTML = '<p class="empty-msg">No question matches these filters. Clear one and try again.</p>'; return; }
   const topics = [...new Set(vis.map(r => r.topic))];
   if (topics.some(t => !S.sd[t])) cards.innerHTML = '<p class="empty-msg">Loading questions…</p>';
   await Promise.all(topics.map(loadShard));
   if (tok !== bankToken) return;
-  cards.innerHTML = vis.map(r => cardHtml(S.sd[r.topic].byId.get(r.id))).join('') + (rows.length > vis.length ? `<button type="button" class="more" data-more>Show ${Math.min(20, rows.length - vis.length)} more (${rows.length - vis.length} left)</button>` : '');
+  cards.innerHTML = vis.map(r => qCard(S.sd[r.topic].byId.get(r.id))).join('')
+    + (rows.length > vis.length ? `<button type="button" class="more-btn" data-more>Show ${Math.min(20, rows.length-vis.length)} more (${rows.length-vis.length} left)</button>` : '');
 }
-function openBank(spec){
-  S.bankTab = 'topic';
-  if (spec){
-    S.f = {topic:'', qtype:'', level:new Set(), lik:new Set(), src:'', status:'', tech:'', sort:'asked'}; S.shown = 20; S.bankTab = 'mixed';
-    const [k,v] = String(spec).split(':'); if (k === 'topic') S.f.topic = v; if (k === 'qtype'){ S.f.qtype = v; S.f.topic = topicOf(v) || ''; }
-  }
-  setView('bank');
-}
-
-/* ---------- Learn: one topic as a guided flow ---------- */
-const L = { t:null, steps:[], i:0, max:0, jump:null, quiz:null };
-function loadLearnMem(){ try { return JSON.parse(localStorage.getItem('mw-learn')||'{}') || {}; } catch(e){ return {}; } }
-function saveLearnMem(){ if (!L.t) return; try { const m = loadLearnMem(); m[L.t] = {i:L.i, max:L.max}; localStorage.setItem('mw-learn', JSON.stringify(m)); } catch(e){} }
-function buildSteps(t){
-  const steps = [{k:'overview'}];
-  for (const c of conceptsOf(t)){ steps.push({k:'concept', id:c.id}); for (const q of kidsOf(c.id).filter(n => n.kind==='qtype')) steps.push({k:'qtype', id:q.id}); }
-  steps.push({k:'quiz'});
-  return steps;
-}
-/* spec: start:<topic> | resume:<topic> | quiz:<topic> | concept:<id> | qtype:<id> (opens at the first concept, with a link down to the type) */
-async function openLearn(spec){
-  const [k, id] = String(spec).split(':');
-  const t = (k === 'qtype' || k === 'concept') ? topicOf(id) : id;
-  if (!isBuiltTopic(t)) return;
-  const same = L.t === t && L.steps.length;
-  L.t = t; L.jump = null; if (!same){ L.steps = []; L.i = 0; L.max = 0; L.quiz = null; }
-  setView('learn');
-  await loadShard(t);
-  if (L.t !== t) return;
-  if (!same) L.steps = buildSteps(t);
-  const mem = loadLearnMem()[t] || {i:0, max:0};
-  const at = (kind, rid) => Math.max(0, L.steps.findIndex(s => s.k === kind && (rid == null || s.id === rid)));
-  if (k === 'start'){ L.i = 0; L.max = 0; }
-  else if (k === 'resume'){ L.i = Math.min(mem.i || 0, L.steps.length - 1); L.max = Math.max(mem.max || 0, L.i); }
-  else if (k === 'quiz'){ L.i = at('quiz'); L.max = Math.max(L.max, L.i); L.quiz = null; }
-  else if (k === 'concept'){ L.i = at('concept', id); L.max = Math.max(L.max, L.i); }
-  else if (k === 'qtype'){ L.i = Math.min(1, L.steps.length - 1); L.max = Math.max(L.max, L.i); L.jump = id; }
-  saveLearnMem(); renderLearn(true);
-}
-const stepLabel = s => s.k === 'overview' ? 'Overview' : s.k === 'quiz' ? 'Quiz' : (S.nodes.get(s.id) || {}).short || (S.nodes.get(s.id) || {}).label;
-function typeTally(t, qid){
-  const d = S.sd[t]; const py = d.pyqs.filter(p => p.qtype === qid).length, pr = d.practice.filter(p => p.qtype === qid);
-  return {py, same: pr.filter(p => p.variant !== 'harder').length, hard: pr.filter(p => p.variant === 'harder').length};
-}
-/* "3 past · 4 practice", or just "3 past" for a topic that has no practice yet */
-const tallyText = tl => tl.same + tl.hard ? `${tl.py} past · ${tl.same + tl.hard} practice` : `${tl.py} past`;
-function renderLearn(scroll){
-  const t = L.t, d = t && S.sd[t];
-  if (!t || !S.loaded) return;
-  if (!d || !L.steps.length){ $('lhead').innerHTML = ''; $('outline').innerHTML = ''; $('lmain').innerHTML = '<p class="empty-msg">Loading this topic…</p>'; return; }
-  const n = S.nodes.get(t), st = L.steps[L.i];
-  const concepts = conceptsOf(t);
-  $('lhead').innerHTML = `
-    <div class="crumbs"><button type="button" data-view="bank">Question bank</button> › <span>${esc(n.label)}</span></div>
-    <h2 style="color:${color(t)}">${esc(n.label)}</h2>
-    <div class="qprog" title="Step ${L.i+1} of ${L.steps.length}"><i style="width:${(L.i+1)/L.steps.length*100}%"></i></div>`;
-  let ol = '';
-  L.steps.forEach((s, i) => {
-    const t2 = s.k === 'qtype';
-    const mk = i < L.max && i !== L.i ? '✓' : '';
-    const cn = s.k === 'concept' ? concepts.findIndex(c => c.id === s.id) + 1 : 0;
-    ol += `<button type="button" class="oi${t2?' t2':''}${i===L.i?' cur':''}" data-step="${i}"><span class="mk">${mk}</span><span>${cn ? cn + '. ' : ''}${esc(stepLabel(s))}${s.k==='quiz' ? ` · ${S.rows.filter(r=>r.topic===t).length}` : ''}</span></button>`;
-  });
-  $('outline').innerHTML = ol;
-  $('otoggle').textContent = `Outline · step ${L.i+1} of ${L.steps.length}`;
-  const main = $('lmain');
-  if (st.k === 'overview') main.innerHTML = stepOverview(t, d);
-  else if (st.k === 'concept') main.innerHTML = stepConcept(t, d, st);
-  else if (st.k === 'qtype') main.innerHTML = stepType(t, d, st);
-  else main.innerHTML = stepQuiz(t, d);
-  if (scroll) { try { $('lhead').scrollIntoView({block:'start', behavior:'auto'}); } catch(e){} }
-}
-function learnNav(label){
-  const first = L.i === 0, last = L.i === L.steps.length - 1;
-  return `<div class="lnav"><button type="button" class="btn ghost" data-prev ${first?'disabled':''}>← Back</button>${last ? '' : `<button type="button" class="btn" data-next>${esc(label)}</button>`}</div>`;
-}
-const nextLabel = () => { const nx = L.steps[L.i + 1]; if (!nx) return ''; if (nx.k === 'quiz') return 'Start the quiz →'; if (nx.k === 'concept') return `Next concept: ${stepLabel(nx)} →`; if (nx.k === 'qtype') return `Next: ${stepLabel(nx)} →`; return 'Next →'; };
-
-function stepOverview(t, d){
-  const n = S.nodes.get(t), rows = topicRows(t), py = rows.filter(r => r.src==='pyq').length, pr = d.practice, hard = pr.filter(p => p.variant==='harder').length;
-  const p = progOf(rows), st = tstat(t), types = typesOf(t), concepts = conceptsOf(t);
-  return `
-    <div><p class="eyebrow" style="color:${color(t)}">Topic</p><h2>${esc(n.label)}</h2></div>
-    <p class="lead">${md(n.summary || '')}</p>
-    <div class="tiles">
-      <div class="tile"><b>${concepts.length}</b><span>concepts</span></div><div class="tile"><b>${types.length}</b><span>question types</span></div>
-      <div class="tile"><b>${py}</b><span>past questions</span></div>${pr.length ? `<div class="tile"><b>${pr.length - hard}</b><span>practice</span></div><div class="tile"><b>${hard}</b><span>harder challenge</span></div>` : ''}
-      <div class="tile"><b>${st ? st.shifts + '/' + S.stats.papers : '–'}</b><span>shifts it appeared in</span></div>
-    </div>
-    ${askedLine(st, 'This topic')}
-    <p class="mix">${LEVELS.map(l=>`<span>${lvlTag(l)} ${rows.filter(r=>r.level===l).length}</span>`).join('')}</p>
-    ${pr.length ? '' : `<p class="note">Past questions only for now: every one is in the quiz with its solution, the fastest way in and why the wrong options fail. Extra practice and the harder set come later.</p>`}
-    <p class="statline">${p.tried ? `You have tried <b>${p.tried}</b> of ${rows.length} questions here, <b>${p.right}</b> right.` : `${rows.length} questions are waiting in the quiz.`}</p>
-    <div class="section"><h3>How this goes</h3>
-      <ol class="variations"><li><b>Concepts</b>: the idea and its formulas, one concept at a time.</li><li><b>Question types</b>: how to spot each one (the cue), the standard and fast methods (and an ultra-calc trick where there is one), how to eliminate options, the traps and the variations.</li><li><b>Quiz</b>: past questions first, then, where the topic has them, new practice at the same level and harder ones. Each answer comes with the solution, the fastest way in and why every wrong option is wrong.</li></ol></div>
-    <div class="section"><h3>The path</h3><div class="cur-list">${concepts.map((c,ci) => `<div class="c"><button type="button" class="chip" data-step="${L.steps.findIndex(s=>s.id===c.id)}"><i style="background:${color(c.id)}"></i>${ci+1}. ${esc(c.label)}</button><div class="chips" style="padding-left:14px">${kidsOf(c.id).filter(x=>x.kind==='qtype').map(q => `<button type="button" class="chip" data-step="${L.steps.findIndex(s=>s.id===q.id)}">${esc(q.short||q.label)} ${likShort(qstat(q.id))}</button>`).join('')}</div></div>`).join('')}</div></div>
-    ${(d.refs||[]).length ? `<p class="note">Outside reading for this topic is listed on the Sources page.</p>` : ''}
-    ${learnNav(nextLabel())}`;
-}
-function stepConcept(t, d, s){
-  const c = S.nodes.get(s.id), ci = conceptsOf(t).findIndex(x => x.id === s.id) + 1, fs = d.formulas.filter(f => f.node === s.id);
-  const types = kidsOf(s.id).filter(x => x.kind === 'qtype');
-  return `
-    ${L.jump ? jumpBanner() : ''}
-    <div><p class="eyebrow" style="color:${color(t)}">Concept ${ci} of ${conceptsOf(t).length}</p><h2>${esc(c.label)}</h2></div>
-    <p class="lead">${md(c.summary || '')}</p>
-    ${fs.length ? `<div class="section"><h3>Formulas to know</h3>${fs.map(formulaHtml).join('')}</div>` : ''}
-    ${types.length ? `<div class="section"><h3>Question types built on this concept</h3><ul class="rows">${types.map(q => `<li><button type="button" class="chip" data-step="${L.steps.findIndex(x=>x.id===q.id)}"><i style="background:${color(q.id)}"></i>${esc(q.label)}</button><span class="ans">${tallyText(typeTally(t,q.id))}</span>${likTag(qstat(q.id))}</li>`).join('')}</ul></div>` : ''}
-    ${(c.links||[]).length ? `<div class="section"><h3>Connected topics</h3><div class="chips">${c.links.map(l => chip(l)).join('')}</div></div>` : ''}
-    ${learnNav(nextLabel())}`;
-}
-function jumpBanner(){
-  const q = S.nodes.get(L.jump); if (!q) return '';
-  const idx = L.steps.findIndex(x => x.id === L.jump);
-  return `<div class="banner"><span>You opened this from <b>${esc(q.label)}</b>.</span><button type="button" data-step="${idx}">Skip to that type →</button><button type="button" data-qs="${esc(L.jump)}">Quiz on that type now</button></div>`;
-}
-function stepType(t, d, s){
-  const q = S.nodes.get(s.id), m = d.methods[s.id] || {}, c = S.nodes.get(q.parent), ci = conceptsOf(t).findIndex(x => x.id === c.id) + 1;
-  const sibs = kidsOf(c.id).filter(x => x.kind === 'qtype'), qi = sibs.findIndex(x => x.id === s.id) + 1;
-  const fs = (m.formulas || []).map(fid => d.formulas.find(f => f.id === fid)).filter(Boolean);
-  const tl = typeTally(t, s.id);
-  return `
-    ${L.jump && L.jump !== s.id ? jumpBanner() : ''}
-    <div><p class="eyebrow" style="color:${color(t)}">Concept ${ci} · type ${qi} of ${sibs.length}</p><h2>${esc(q.label)}</h2></div>
-    <p class="lead">${md(q.summary || '')}</p>
-    ${askedLine(qstat(s.id), 'This type')}${mixLine(qstat(s.id))}
-    <div class="capsule">
-      <div><b>Spot it</b>${esc(m.cue || '')}</div>
-      <div><b>Do this</b>${esc(m.fast || '')}</div>
-      <div class="tp"><b>Watch out</b>${esc((m.traps || [])[0] || '')}</div>
-    </div>
-    ${fs.length ? `<div class="section"><h3>Formulas used</h3>${fs.map(formulaHtml).join('')}</div>` : ''}
-    <div class="section"><h3>How to solve it</h3>${methodHtml(m)}</div>
-    <p class="statline">${tl.same + tl.hard ? `In the quiz: <b>${tl.py}</b> past questions, <b>${tl.same}</b> practice at the same level, <b>${tl.hard}</b> harder.` : `In the quiz: <b>${tl.py}</b> past ${tl.py === 1 ? 'question' : 'questions'}.`}</p>
-    <div class="chips"><button type="button" class="btn ghost" data-qs="${esc(s.id)}">Quiz on this type now</button></div>
-    ${learnNav(nextLabel())}`;
-}
-
-/* quiz inside Learn */
-function quizList(t, scope){
-  const d = S.sd[t], lv = x => LEVELS.indexOf(x.level), cmp = (a,b) => lv(a)-lv(b) || a.id.localeCompare(b.id);
-  if (scope === 'wrong'){
-    const out = [];
-    for (const q of typesOf(t)) [...d.byId.values()].filter(x => x.qtype === q.id && S.prog[x.id] && !S.prog[x.id].r).sort(cmp).forEach(x => out.push({id:x.id, phase: x.src === 'pyq' ? 'Past question' : x.variant === 'harder' ? 'Challenge' : 'Practice'}));
-    return out;
-  }
-  const out = [], types = scope === 'all' ? typesOf(t).map(n => n.id) : [scope];
-  for (const qid of types){
-    d.pyqs.filter(p => p.qtype === qid).sort(cmp).forEach(x => out.push({id:x.id, phase:'Past question'}));
-    const pr = d.practice.filter(p => p.qtype === qid);
-    pr.filter(p => p.variant !== 'harder').sort(cmp).forEach(x => out.push({id:x.id, phase:'Practice'}));
-    pr.filter(p => p.variant === 'harder').sort(cmp).forEach(x => out.push({id:x.id, phase:'Challenge'}));
-  }
-  return out;
-}
-function startQuiz(scope){
-  const t = L.t; const list = quizList(t, scope);
-  if (!list.length) return;
-  L.quiz = {scope, list, pos:0, ans:{}, done:false};
-  const qi = L.steps.findIndex(s => s.k === 'quiz'); L.i = qi; L.max = Math.max(L.max, qi); saveLearnMem(); renderLearn(true);
-}
-function stepQuiz(t, d){
-  const Q = L.quiz;
-  if (!Q) return quizMenu(t, d);
-  if (Q.done) return quizSummary(t, d);
-  const e = Q.list[Q.pos], x = d.byId.get(e.id), chosen = Q.ans[x.id];
-  const qn = S.nodes.get(x.qtype), answered = !!chosen, ok = chosen === x.key;
-  const last = Q.pos === Q.list.length - 1;
-  return `
-    <div class="qhead"><span class="eyebrow">Question ${Q.pos+1} of ${Q.list.length}</span><span class="tag ${e.phase==='Challenge'?'p-high':'bg'}">${esc(e.phase)}</span><button type="button" class="chip" data-step="${L.steps.findIndex(s=>s.id===x.qtype)}" title="Go back to this type's method">${esc(qn.short||qn.label)}</button></div>
-    <div class="qprog"><i style="width:${(Q.pos + (answered?1:0)) / Q.list.length * 100}%"></i></div>
-    <div class="lq" data-id="${esc(x.id)}">
-      <div class="qhead">${headTags(x)}</div>
-      <p class="qtext">${esc(x.text)}</p>
-      <div class="opts">${optBtns(x, answered ? chosen : null)}</div>
-      ${answered ? '' : `<button type="button" class="qbtn" data-reveal>Show answer</button>`}
-      ${answered ? `<div class="rv"><div class="verdict ${chosen==='*'?'':ok?'ok':'no'}">${chosen==='*' ? `The answer is (${x.key}).` : ok ? 'Correct.' : `Not quite. The answer is (${x.key}).`}</div>${revealInner(x)}</div>` : ''}
-    </div>
-    <div class="lnav"><button type="button" class="btn ghost" data-qprev ${Q.pos===0?'disabled':''}>← Previous</button><button type="button" class="btn ghost" data-qend>End quiz</button><button type="button" class="btn" data-qnext ${answered?'':'disabled'}>${last?'See result':'Next question →'}</button></div>`;
-}
-function quizMenu(t, d){
-  const types = typesOf(t), rows = topicRows(t), p = progOf(rows), wrongN = p.wrong;
-  return `
-    <div><p class="eyebrow" style="color:${color(t)}">Quiz</p><h2>${esc(S.nodes.get(t).label)}: the quiz</h2></div>
-    <p class="lead">Each type runs in this order: past questions (easiest first), new practice at the same level, then harder challenge questions. Answer, then read the solution, the fastest way in and why the other options fail. Keys a to d pick an option, Enter goes on.</p>
-    <div class="chips"><button type="button" class="btn" data-qs="all">Start all ${rows.length} questions</button>${wrongN ? `<button type="button" class="btn ghost" data-qs="wrong">Redo my ${wrongN} wrong</button>` : ''}</div>
-    <div class="section"><h3>Or one type at a time</h3>
-      ${types.map(q => { const tl = typeTally(t, q.id), r = rows.filter(x => x.qtype === q.id), pp = progOf(r);
-        return `<div class="qrow"><div><b>${esc(q.label)}</b><div class="statline">${tl.same + tl.hard ? `${tl.py} past · ${tl.same} practice · ${tl.hard} harder` : `${tl.py} past`}${pp.tried ? ` · tried ${pp.tried}, right ${pp.right}` : ''}</div></div>${likTag(qstat(q.id))}<button type="button" class="qbtn" data-qs="${esc(q.id)}">Start</button></div>`; }).join('')}</div>
-    ${learnNav('')}`;
-}
-function quizSummary(t, d){
-  const Q = L.quiz, items = Q.list.map(e => d.byId.get(e.id));
-  const got = items.filter(x => Q.ans[x.id] === x.key), skipped = items.filter(x => Q.ans[x.id] === '*'), missed = items.filter(x => Q.ans[x.id] && Q.ans[x.id] !== '*' && Q.ans[x.id] !== x.key);
-  const unseen = items.filter(x => !Q.ans[x.id]);
-  const byType = {}; items.forEach(x => { const b = byType[x.qtype] || (byType[x.qtype] = {n:0, r:0, w:0}); if (Q.ans[x.id]){ b.n++; if (Q.ans[x.id] === x.key) b.r++; else b.w++; } });
-  const weak = Object.entries(byType).filter(([,b]) => b.w > 0).sort((a,b) => b[1].w - a[1].w);
-  const answered = got.length + missed.length;
-  return `
-    <div><p class="eyebrow" style="color:${color(t)}">Result</p><div class="score">${got.length} / ${answered}</div></div>
-    <p class="lead">${answered ? `${Math.round(got.length / answered * 100)}% right${skipped.length ? `, ${skipped.length} shown without answering` : ''}${unseen.length ? `, ${unseen.length} not reached` : ''}.` : 'No question was answered.'}</p>
-    <div class="section"><h3>By type</h3><ul class="rows">${Object.entries(byType).map(([q,b]) => `<li><button type="button" class="chip" data-step="${L.steps.findIndex(s=>s.id===q)}">${esc(S.nodes.get(q).label)}</button><span class="ans">${b.r} of ${b.n} right</span></li>`).join('')}</ul></div>
-    ${weak.length ? `<div class="section"><h3>Revise these methods</h3><p class="note">You missed questions of these types. Go back to the method, then redo them.</p><div class="chips">${weak.map(([q,b]) => `<button type="button" class="chip" data-step="${L.steps.findIndex(s=>s.id===q)}">${esc(S.nodes.get(q).short||S.nodes.get(q).label)} · ${b.w} wrong</button>`).join('')}</div></div>` : ''}
-    <div class="chips">${missed.length ? `<button type="button" class="btn" data-qs="wrong">Redo wrong answers</button>` : ''}<button type="button" class="btn ghost" data-qmenu>Back to the quiz menu</button></div>`;
-}
-function answerLearn(x, key){
-  const Q = L.quiz; if (!Q || Q.ans[x.id]) return;
-  if (key === '*'){ Q.ans[x.id] = '*'; }
-  else { Q.ans[x.id] = key; S.prog[x.id] = {r: key === x.key ? 1 : 0}; saveProg(); }
-  renderLearn(false);
-}
-function quizNext(){ const Q = L.quiz; if (!Q) return; if (Q.pos < Q.list.length - 1) Q.pos++; else Q.done = true; renderLearn(true); }
-function learnGo(i){
-  if (i < 0 || i >= L.steps.length) return;
-  L.i = i; L.max = Math.max(L.max, i); if (L.steps[i].k !== 'quiz' && L.quiz && L.quiz.done) L.quiz = null;
-  $('outline').classList.remove('open'); saveLearnMem(); renderLearn(true);
-}
-$('lmain').addEventListener('click', e => {
-  const o = e.target.closest('button.opt'), rv = e.target.closest('[data-reveal]');
-  if (o || rv){ const box = e.target.closest('.lq'); if (!box || !L.quiz) return; const x = S.sd[L.t].byId.get(box.dataset.id); if (o && !o.disabled) answerLearn(x, o.dataset.k); else if (rv) answerLearn(x, '*'); return; }
-  const b = e.target.closest('button'); if (!b || b.disabled) return;
-  if (b.hasAttribute('data-next')) learnGo(L.i + 1);
-  else if (b.hasAttribute('data-prev')) learnGo(L.i - 1);
-  else if (b.dataset.step != null) learnGo(+b.dataset.step);
-  else if (b.dataset.qs != null) startQuiz(b.dataset.qs);
-  else if (b.hasAttribute('data-qnext')) quizNext();
-  else if (b.hasAttribute('data-qprev')){ if (L.quiz && L.quiz.pos > 0){ L.quiz.pos--; renderLearn(true); } }
-  else if (b.hasAttribute('data-qend')){ if (L.quiz){ L.quiz.done = true; renderLearn(true); } }
-  else if (b.hasAttribute('data-qmenu')){ L.quiz = null; renderLearn(true); }
-  else if (b.dataset.go != null){ const id = b.dataset.go; setView('web'); select(id || null); }
-  else if (b.dataset.view){ setView(b.dataset.view); }
+$('filters').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.hasAttribute('data-reset')) S.f = {topic:'', qtype:'', level:new Set(), lik:new Set(), src:'', status:'', tech:'', sort:S.f.sort};
+  else if (b.dataset.f){ const k = b.dataset.f, v = b.dataset.v;
+    if (S.f[k] instanceof Set){ S.f[k].has(v) ? S.f[k].delete(v) : S.f[k].add(v); } else S.f[k] = v; }
+  else return;
+  S.shown = 20; renderPractice();
 });
-$('lhead').addEventListener('click', e => { const b = e.target.closest('[data-view]'); if (b) setView(b.dataset.view); });
-$('outline').addEventListener('click', e => { const b = e.target.closest('[data-step]'); if (b) learnGo(+b.dataset.step); });
-$('otoggle').addEventListener('click', () => $('outline').classList.toggle('open'));
-document.addEventListener('keydown', e => {
-  if (S.view !== 'learn' || !L.quiz || L.quiz.done || /^(INPUT|SELECT|TEXTAREA)$/.test((e.target||{}).tagName||'') || e.metaKey || e.ctrlKey || e.altKey) return;
-  const d = S.sd[L.t]; if (!d) return; const en = L.quiz.list[L.quiz.pos], x = d.byId.get(en.id), done = !!L.quiz.ans[x.id];
-  if (!done && 'abcd'.includes(e.key) && e.key.length === 1 && x.options['abcd'.indexOf(e.key)] != null) answerLearn(x, e.key);
-  else if (done && (e.key === 'Enter' || e.key === 'ArrowRight')){ e.preventDefault(); quizNext(); }
+$('filters').addEventListener('change', e => {
+  const s = e.target.closest('[data-sel]'); if (!s) return;
+  S.f[s.dataset.sel] = s.value; if (s.dataset.sel === 'topic') S.f.qtype = '';
+  S.shown = 20; renderPractice();
+});
+$('cards').addEventListener('click', e => {
+  if (onQuestionClick(e)) return;
+  if (e.target.closest('[data-more]')){ S.shown += 20; renderPractice(); }
 });
 
-/* ---------- Sources ---------- */
+/* ================= 4. SOURCES ================= */
 const KIND = {'similar-paper':'Similar paper (made by a coaching institute, not the official paper)', official:'Official paper', memory:'Memory-based paper'};
 const pcache = {};
 function renderSources(){
-  if (!S.loaded) { $('sources').innerHTML = '<p class="empty-msg">Loading…</p>'; return; }
+  if (!S.loaded){ $('sources').innerHTML = '<p class="empty-msg">Loading…</p>'; return; }
   const ps = [...S.papers].sort((a,b) => (b.date||'').localeCompare(a.date||'') || a.shift - b.shift);
   const filed = ps.reduce((a,p) => a + p.n, 0), built = ps.reduce((a,p) => a + (p.built||0), 0);
   const byTopic = {}; (S.refs||[]).forEach(r => (byTopic[r.topic] = byTopic[r.topic] || []).push(r));
-  $('sources').innerHTML = `<div class="srcwrap">
-    <div><p class="eyebrow">Sources</p><h2>Where every question comes from</h2></div>
-    <p class="lead" style="margin:0;font-family:var(--body);font-size:16px;line-height:1.55">${plural(ps.length,'paper')}, ${filed} Quant questions filed, ${built} of them already built into quizzes. Every filed answer was recomputed from the question's own numbers. Practice questions are written fresh, with their answers worked out twice by different methods.</p>
-    <div class="section"><p class="eyebrow">Papers</p>${ps.map(p => `<div class="pcard" data-pid="${esc(p.id)}">
-      <h3>${esc(p.exam)} · ${fmtDate(p.date)} · Shift ${p.shift}</h3>
-      <div class="meta-row"><span>${esc(p.publisher)}</span><span>${esc(KIND[p.kind] || p.kind)}</span><span>Quant ${esc(p.quant)}</span><span>${p.n} filed</span><span>${p.built||0} built into quizzes</span></div>
-      <div class="chips">${Object.entries(p.topics||{}).map(([t,c]) => `<span class="chip" style="cursor:default"><i style="background:${color(t)}"></i>${esc((S.nodes.get(t)||{}).label || t)} <span class="n">${c}</span></span>`).join('')}</div>
-      <div class="chips">${p.link ? `<a class="ext" href="${esc(p.link)}" target="_blank" rel="noopener">Open the paper ↗</a>` : ''}<button type="button" class="btn-link" data-plist="${esc(p.id)}">Show the question list</button></div>
-      <div class="tscroll" data-plist-box hidden></div></div>`).join('')}</div>
-    <div class="section"><p class="eyebrow">Outside reading (links and notes, nothing copied)</p>
-      ${Object.entries(byTopic).map(([t, rs]) => `<div class="pcard"><h3>${esc((S.nodes.get(t)||{}).label || t)}</h3><ul class="rows">${rs.map(r => `<li style="display:block"><a class="ext" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)} ↗</a><div class="note">${esc(r.note)}</div></li>`).join('')}</ul></div>`).join('') || '<p class="empty-msg">None yet.</p>'}</div>
-    <p class="note">The first three papers are similar papers, not official CGL papers, so the counts show that publisher's style. Likelihood stays provisional until official papers are added.</p></div>`;
+  $('sources').innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <p class="eyebrow">Sources</p><h2>Where every question comes from</h2>
+      <p class="lead">${plural(ps.length,'paper')}, ${filed} Quant questions filed, ${built} already built into topic pages. Every filed answer was recomputed from the question's own numbers; extra practice questions are written fresh and answered twice by different methods.</p>
+    </div>
+    <div class="sect"><div class="hd"><h3>Papers</h3></div>
+      ${ps.map(p => `<div class="pcard" data-pid="${esc(p.id)}">
+        <h3>${esc(p.exam)} · ${fmtDate(p.date)} · Shift ${p.shift}</h3>
+        <p class="statline">${esc(p.publisher)} · ${esc(KIND[p.kind]||p.kind)} · Quant ${esc(p.quant)} · ${p.n} filed · ${p.built||0} built</p>
+        <div class="chips">${Object.entries(p.topics||{}).map(([t,c]) => `<span class="chip" style="cursor:default"><i style="background:${color(t)}"></i>${esc((S.nodes.get(t)||{}).label||t)} <span class="n">${c}</span></span>`).join('')}</div>
+        <div class="chips">${p.link?`<a class="ext" href="${esc(p.link)}" target="_blank" rel="noopener">Open the paper ↗</a>`:''}<button type="button" class="qbtn" data-plist="${esc(p.id)}">Show the question list</button></div>
+        <div class="tscroll" data-plist-box hidden></div></div>`).join('')}
+    </div>
+    <div class="sect"><div class="hd"><h3>Outside reading</h3><span class="statline">links and notes, nothing copied</span></div>
+      ${Object.entries(byTopic).map(([t,rs]) => `<div class="pcard"><h3>${esc((S.nodes.get(t)||{}).label||t)}</h3><ul class="plain">${rs.map(r=>`<li><a class="ext" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)} ↗</a><br><span class="note">${esc(r.note)}</span></li>`).join('')}</ul></div>`).join('') || '<p class="empty-msg">None yet.</p>'}
+    </div>
+    <p class="note">The first three papers are similar papers by a coaching institute, not official CGL papers, so the counts carry that publisher's style. How often a type repeats stays provisional until official papers are added.</p>`;
 }
 $('sources').addEventListener('click', async e => {
   const b = e.target.closest('[data-plist]'); if (!b) return;
   const card = b.closest('.pcard'), box = card.querySelector('[data-plist-box]'), id = b.dataset.plist;
   if (!box.hidden){ box.hidden = true; b.textContent = 'Show the question list'; return; }
   box.hidden = false; b.textContent = 'Hide the question list';
-  if (!box.dataset.done){
-    box.innerHTML = '<p class="empty-msg">Loading…</p>';
-    try { const d = await (pcache[id] = pcache[id] || get('data/papers/' + id + '.json'));
-      box.innerHTML = `<table class="plist"><thead><tr><th>Q</th><th>Topic</th><th>Answer</th><th>Checked</th></tr></thead><tbody>${d.rows.map(r => `<tr><td>${r.qno}</td><td>${esc((S.nodes.get(r.topic)||{}).label || r.topic)}</td><td>(${esc(r.key)}) ${esc(r.answer)}</td><td>${r.verified ? 'yes' : 'no'}</td></tr>`).join('')}</tbody></table>`; box.dataset.done = '1'; }
-    catch(err){ box.innerHTML = '<p class="empty-msg">Could not load this paper list.</p>'; }
-  }
+  if (box.dataset.done) return;
+  box.innerHTML = '<p class="empty-msg">Loading…</p>';
+  try { const d = await (pcache[id] = pcache[id] || get('data/papers/' + id + '.json'));
+    box.innerHTML = `<table class="plist"><thead><tr><th>Q</th><th>Topic</th><th>Answer</th><th>Checked</th></tr></thead><tbody>${d.rows.map(r=>`<tr><td>${r.qno}</td><td>${esc((S.nodes.get(r.topic)||{}).label||r.topic)}</td><td>(${esc(r.key)}) ${esc(r.answer)}</td><td>${r.verified?'yes':'no'}</td></tr>`).join('')}</tbody></table>`;
+    box.dataset.done = '1';
+  } catch(err){ box.innerHTML = '<p class="empty-msg">Could not load this paper list.</p>'; }
 });
 
-/* ---------- views and routing ---------- */
+/* ================= 5. SEARCH ================= */
+let searchToken = 0;
+async function renderSearch(){
+  const el = $('searchres'), t = S.q.toLowerCase(), tok = ++searchToken;
+  const need = allBuilt().filter(x => !S.sd[x]);
+  if (need.length){ el.innerHTML = '<p class="empty-msg">Searching every built topic…</p>'; await Promise.all(need.map(loadShard)); if (tok !== searchToken || !S.q) return; }
+  const topics = [...S.nodes.values()].filter(n => n.kind==='topic' && (n.label.toLowerCase().includes(t) || (n.summary||'').toLowerCase().includes(t)));
+  const types = [...S.nodes.values()].filter(n => n.kind==='qtype' && n.label.toLowerCase().includes(t));
+  const fs = [], qs = [];
+  for (const b of allBuilt()){ const d = S.sd[b]; if (!d) continue;
+    d.formulas.forEach(f => { if ((f.text+' '+(f.note||'')).toLowerCase().includes(t)) fs.push(f); });
+    d.pyqs.forEach(x => { if ((x.text+' '+(x.solution||[]).join(' ')+' '+(x.trick||'')).toLowerCase().includes(t)) qs.push(d.byId.get(x.id)); });
+  }
+  const total = topics.length + types.length + fs.length + qs.length;
+  el.innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:8px"><p class="eyebrow">Search</p><h2>${total} ${total===1?'match':'matches'} for “${esc(S.q)}”</h2></div>
+    ${topics.length?`<div class="sect"><div class="hd"><h3>Topics</h3></div><div class="chips">${topics.map(n=>`<button type="button" class="chip" data-topic="${esc(n.id)}"><i style="background:${color(n.id)}"></i>${esc(n.label)}</button>`).join('')}</div></div>`:''}
+    ${types.length?`<div class="sect"><div class="hd"><h3>Question types</h3></div><div class="chips">${types.map(n=>`<button type="button" class="chip" data-type="${esc(n.id)}"><i style="background:${color(n.id)}"></i>${esc(n.label)}</button>`).join('')}</div></div>`:''}
+    ${fs.length?`<div class="sect"><div class="hd"><h3>Formulas</h3></div>${fs.slice(0,12).map(f=>`<div class="card">${formulaHtml(f)}<div class="chips"><button type="button" class="chip" data-topic="${esc(topicOf(f.node)||'')}">${esc((S.nodes.get(f.node)||{}).label||'')}</button></div></div>`).join('')}</div>`:''}
+    ${qs.length?`<div class="sect"><div class="hd"><h3>Past questions</h3></div><div class="qlist">${qs.slice(0,10).map(x=>qCard(x)).join('')}</div></div>`:''}
+    ${total?'':'<p class="empty-msg">Nothing matched. Try a shorter word, a formula name or a number.</p>'}`;
+}
+$('searchres').addEventListener('click', e => {
+  if (onQuestionClick(e)) return;
+  const ty = e.target.closest('[data-type]'); if (ty){ openTopic(topicOf(ty.dataset.type), ty.dataset.type); return; }
+  const tc = e.target.closest('[data-topic]'); if (tc && tc.dataset.topic) openTopic(tc.dataset.topic);
+});
+
+/* ================= views, routing, boot ================= */
+const VIEWS = ['syllabus','topic','practice','sources','searchres'];
 function setView(v){
   S.view = v;
-  $('bank').hidden = v !== 'bank'; $('learn').hidden = v !== 'learn'; $('sources').hidden = v !== 'sources'; document.querySelector('.layout').hidden = v !== 'web';
-  $('show').hidden = v !== 'web';
-  [...$('tabs').querySelectorAll('button')].forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v || (v === 'learn' && b.dataset.view === 'bank'))));
-  let h = '';
-  if (v === 'bank') h = S.bankTab === 'mixed' ? '#practice' : '#bank';
-  else if (v === 'learn') h = '#learn-' + L.t;
-  else if (v === 'sources') h = '#sources';
-  else if (S.sel) h = '#' + S.sel;
-  try { history.replaceState(null, '', h || location.pathname + location.search); } catch(e){}
-  if (v === 'bank') renderBank();
-  else if (v === 'learn') renderLearn(true);
-  else if (v === 'sources') renderSources();
-  else { requestAnimationFrame(maybeFit); renderPanel(); }
-  if (v !== 'web') window.scrollTo(0, 0);
-}
-$('tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.view === 'bank') S.bankTab = S.bankTab || 'topic'; setView(b.dataset.view); });
-$('btabs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; S.bankTab = b.dataset.bt; setView('bank'); });
-$('filters').addEventListener('click', e => {
-  const b = e.target.closest('button'); if (!b) return;
-  if (b.hasAttribute('data-reset')){ S.f = {topic:'', qtype:'', level:new Set(), lik:new Set(), src:'', status:'', tech:'', sort:S.f.sort}; }
-  else if (b.dataset.f){ const k = b.dataset.f, v = b.dataset.v;
-    if (S.f[k] instanceof Set){ S.f[k].has(v) ? S.f[k].delete(v) : S.f[k].add(v); } else S.f[k] = v; }
-  S.shown = 20; renderBank();
-});
-$('filters').addEventListener('change', e => { const s = e.target.closest('select'); if (!s) return; S.f[s.dataset.sel] = s.value;
-  if (s.dataset.sel === 'topic') S.f.qtype = '';
-  if (s.dataset.sel === 'qtype' && s.value) S.f.topic = topicOf(s.value) || S.f.topic;
-  S.shown = 20; renderBank(); });
-
-/* answering a card (mixed practice) and the clicks that lead into Learn */
-function onQuizClick(e){
-  const card = e.target.closest('.qz'); if (!card) return false;
-  const o = e.target.closest('button.opt'), rv = e.target.closest('[data-reveal]');
-  if (!o && !rv) return false;
-  const key = card.dataset.key, id = card.dataset.id;
-  const verdict = card.querySelector('.verdict'), box = card.querySelector('.rv');
-  if (o && !o.disabled){
-    card.querySelectorAll('button.opt').forEach(x => { x.disabled = true; if (x.dataset.k === key) x.classList.add('right'); });
-    const ok = o.dataset.k === key; if (!ok) o.classList.add('wrong');
-    verdict.className = 'verdict ' + (ok ? 'ok' : 'no');
-    verdict.textContent = ok ? 'Correct.' : `Not quite. The answer is (${key}).`;
-    S.prog[id] = {r: ok ? 1 : 0}; saveProg();
-    box.hidden = false; const rb = card.querySelector('[data-reveal]'); if (rb) rb.hidden = true;
-  } else if (rv){
-    card.querySelectorAll('button.opt').forEach(x => { x.disabled = true; if (x.dataset.k === key) x.classList.add('right'); });
-    verdict.className = 'verdict'; verdict.textContent = `The answer is (${key}).`; box.hidden = false; rv.hidden = true;
+  VIEWS.forEach(x => $(x).hidden = x !== v);
+  const tab = v === 'topic' ? 'syllabus' : v === 'searchres' ? '' : v;
+  [...$('tabs').querySelectorAll('button')].forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === tab)));
+  if (v !== 'topic'){
+    let h = v === 'practice' ? '#practice' : v === 'sources' ? '#sources' : '';
+    try { history.replaceState(null, '', h || location.pathname + location.search); } catch(e){}
   }
-  return true;
+  rerender();
+  if (v !== 'topic') window.scrollTo(0, 0);
 }
-/* a question-type node of a built topic goes straight into Learn; everything else selects the node */
-function activate(id){
-  const n = S.nodes.get(id);
-  if (n && n.kind === 'qtype' && isBuiltTopic(topicOf(id))){ openLearn('qtype:' + id); return; }
-  select(id || null);
+function rerender(){
+  if (S.view === 'syllabus') renderSyllabus();
+  else if (S.view === 'topic') renderTopic();
+  else if (S.view === 'practice') renderPractice();
+  else if (S.view === 'sources') renderSources();
+  else if (S.view === 'searchres') renderSearch();
 }
-document.addEventListener('click', e => {
-  const l = e.target.closest('[data-learn]'); if (l && !e.target.closest('#lmain')){ openLearn(l.getAttribute('data-learn')); return; }
-  const v = e.target.closest('[data-view]'); if (v && !e.target.closest('#lmain') && !e.target.closest('#lhead') && !e.target.closest('#tabs')){ setView(v.dataset.view); return; }
-});
-$('panel').addEventListener('click', e => {
-  if (e.target.closest('[data-learn]') || e.target.closest('[data-view]')) return;
-  const bk = e.target.closest('[data-bank]'); if (bk){ openBank(bk.getAttribute('data-bank')); return; }
-  const b = e.target.closest('[data-go]'); if(!b) return;
-  const id = b.getAttribute('data-go');
-  if (S.q && id){ S.q=''; $('q').value=''; drawWeb(); }
-  activate(id || null);
-  $('panel').scrollTop = 0;
-});
-$('cards').addEventListener('click', e => {
-  if (onQuizClick(e)) return;
-  if (e.target.closest('[data-more]')){ S.shown += 20; renderBank(); return; }
-});
-$('bytopic').addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b){ setView('web'); select(b.getAttribute('data-go') || null); } });
-$('webcrumb').addEventListener('click', e => { if (e.target.closest('[data-zoomout]')) zoomOutWeb(); });
+$('tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return;
+  if (S.q){ S.q = ''; $('q').value = ''; } setView(b.dataset.view); });
+let qt; $('q').addEventListener('input', e => { clearTimeout(qt); qt = setTimeout(() => {
+  S.q = e.target.value.trim();
+  if (S.q) setView('searchres'); else setView('syllabus');
+}, 180); });
 
-/* ---------- state changes ---------- */
-/* Keep the web zoomed to the neighbourhood of whatever got selected: a built topic (or anything inside
-   one) pulls the web in to show just its own concepts and types; anything else pulls back to the map. */
-function syncWebFocus(id){
-  const n = id && S.nodes.get(id);
-  let want = null;
-  if (n){
-    if (n.kind === 'topic' && kidsOf(id).length) want = id;
-    else if (n.kind === 'concept' || n.kind === 'qtype'){ const t = topicOf(id); if (t && kidsOf(t).length) want = t; }
-  }
-  if (want !== S.webFocus){ S.webFocus = want; if (S.view === 'web') drawWeb(); }
-}
-function zoomOutWeb(){
-  if (!S.webFocus) return;
-  S.webFocus = null;
-  drawWeb();
-  renderPanel();
-}
-function select(id){
-  S.sel = id && S.nodes.has(id) ? id : null;
-  if (S.sel) syncWebFocus(S.sel);
-  else if (S.webFocus){ S.webFocus = null; if (S.view === 'web') drawWeb(); }
-  try { if (S.sel) history.replaceState(null,'','#'+S.sel); else history.replaceState(null,'',location.pathname+location.search); } catch(e){}
-  applyHighlight(); renderPanel();
-}
-function route(h){
-  if (h === 'bank' || h === 'practice'){ S.bankTab = h === 'practice' ? 'mixed' : 'topic'; setView('bank'); return true; }
+function route(){
+  const h = decodeURIComponent(location.hash.slice(1));
+  if (h.startsWith('t/')){ const [, t, ty] = h.split('/'); if (S.nodes.has(t)){ openTopic(t, ty); return true; } }
+  if (h === 'practice'){ setView('practice'); return true; }
   if (h === 'sources'){ setView('sources'); return true; }
-  if (h.startsWith('learn-')){ const t = h.slice(6); if (isBuiltTopic(t)){ openLearn('resume:' + t); return true; } }
+  if (h.startsWith('learn-') && S.nodes.has(h.slice(6))){ openTopic(h.slice(6)); return true; }   /* old links */
+  if (S.nodes.has(h)){ const t = topicOf(h); if (t){ openTopic(t, S.nodes.get(h).kind === 'qtype' ? h : null); return true; } }
   return false;
 }
-window.addEventListener('hashchange', () => { const h = location.hash.slice(1);
-  if (route(h)) return;
-  if (S.view !== 'web') setView('web');
-  if (h !== (S.sel||'')) select(h||null); });
-$('show').addEventListener('click', e => { const b = e.target.closest('button'); if(!b) return;
-  S.show = b.dataset.v; [...$('show').querySelectorAll('button')].forEach(x => x.setAttribute('aria-pressed', String(x===b)));
-  drawWeb(); });
-let qt; $('q').addEventListener('input', e => { clearTimeout(qt); qt = setTimeout(() => { S.q = e.target.value.trim(); if(S.q){ S.sel=null; if (S.view!=='web') setView('web'); } drawWeb(); renderPanel(); }, 160); });
+window.addEventListener('hashchange', () => { if (!route() && S.view !== 'syllabus') setView('syllabus'); });
 
 function renderHeader(){
-  const js = [...S.nodes.values()].filter(n=>parentOf(n)==='hub').length;
-  const topics = [...S.nodes.values()].filter(n=>n.kind==='topic');
-  const nIdx = Object.values(S.tmeta).reduce((a,m)=>a+m.indexed,0);
-  $('sub').textContent = S.status==='none' ? 'Data files did not load' : (S.loaded ? 'SSC CGL Tier 1 and Tier 2 Quant, built from past questions' : 'Loading the web…');
-  $('stats').innerHTML = S.nodes.size ? `<span><b>${js}</b> subjects</span><span><b>${topics.length}</b> topics</span><span><b>${topics.filter(t=>S.built.has(t.id)).length}</b> built</span><span><b>${nIdx}</b> past questions filed</span><span><b>${S.rows.length}</b> in the bank</span><span><b>${S.papers.length}</b> papers</span>` : '';
-  const note = $('note');
-  if (S.status==='none'){ note.hidden=false; note.textContent='The data files did not load. Refresh to try again.'; }
-  else if (!S.loaded){ note.hidden=false; note.textContent='Loading the web…'; }
-  else note.hidden = true;
+  const topics = [...S.nodes.values()].filter(n => n.kind==='topic');
+  const filed = Object.values(S.tmeta).reduce((a,m)=>a+m.indexed,0);
+  $('sub').textContent = S.status==='none' ? 'The data files did not load — refresh to try again'
+    : S.loaded ? 'SSC CGL Tier 1 and Tier 2 Quant, built from past questions' : 'Loading…';
+  $('stats').innerHTML = S.nodes.size
+    ? `<span><b>${topics.length}</b> topics</span><span><b>${topics.filter(t=>S.built.has(t.id)).length}</b> ready</span><span><b>${filed}</b> past questions</span><span><b>${S.rows.length}</b> in the bank</span><span><b>${S.papers.length}</b> papers</span>` : '';
 }
-function schedule(){ requestAnimationFrame(() => { derive(); paintJunctions(); renderHeader(); drawWeb();
-  const h = location.hash.slice(1);
-  if (route(h)) return;
-  if (h && S.nodes.has(h) && !S.sel) { S.sel = h; applyHighlight(); }
-  renderPanel(); }); }
-let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (S.view==='web') fit(false); }, 200); });
 
-renderHeader(); renderPanel();
+renderHeader(); renderSyllabus();
 (async () => {
   try {
     const c = await get('data/core.json');
     S.nodes = new Map(Object.entries(c.nodes).map(([id,n]) => [id, Object.assign({id}, n)]));
-    S.papers = c.papers; S.stats = c.stats.all || S.stats; S.tmeta = c.topics; S.techniques = c.techniques; S.rubric = c.rubric; S.likNote = c.likelihood; S.refs = c.refs || [];
-    const cols = c.bank.cols; S.rows = c.bank.rows.map(r => Object.fromEntries(cols.map((k,i) => [k, r[i]])));
+    S.papers = c.papers; S.stats = c.stats.all || S.stats; S.tmeta = c.topics; S.techniques = c.techniques; S.likNote = c.likelihood; S.refs = c.refs || [];
+    const cols = c.bank.cols; S.rows = c.bank.rows.map(r => Object.fromEntries(cols.map((k,i)=>[k, r[i]])));
     S.loaded = true; S.status = 'ok';
-    schedule();
-  } catch (e) { console.error(e); S.status = 'none'; renderHeader(); renderPanel(); }
+    derive(); paintJunctions(); renderHeader();
+    if (!route()) renderSyllabus();
+  } catch (e){ console.error(e); S.status = 'none'; renderHeader(); $('syllabus').innerHTML = '<p class="empty-msg">The data files did not load. Refresh to try again.</p>'; }
 })();
 })();
 </script>
