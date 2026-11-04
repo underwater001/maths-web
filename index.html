@@ -65,23 +65,31 @@ header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:spac
 
 /* SVG */
 .lk{fill:none;stroke-opacity:.42}
-.xlk{fill:none;stroke:var(--muted);stroke-dasharray:3 4;stroke-opacity:.55;stroke-width:1.2}
+.xlk{fill:none;stroke:var(--muted);stroke-dasharray:3 4;stroke-opacity:.2;stroke-width:1.1}
 .nd{cursor:pointer}
-.nd circle.dot{stroke:var(--surface);stroke-width:1.5}
+.nd circle.dot{stroke:var(--surface);stroke-width:1.5;transition:r .25s ease}
 .nd .ring{fill:none;stroke:var(--new);stroke-width:2}
 .nd text{font-family:var(--display);fill:var(--ink);paint-order:stroke;stroke:var(--surface);stroke-width:3px;stroke-linejoin:round}
 .nd.br text{font-size:11.5px;font-weight:500}
 .nd.jn text{font-size:13.5px;font-weight:800;letter-spacing:.01em}
 .nd.hub text{font-size:11px;font-weight:800;fill:var(--surface);stroke:none}
+.nd.root circle.dot{stroke-width:2.5}
 .nd:focus{outline:none}
 .nd:focus-visible circle.dot{stroke:var(--accent);stroke-width:3}
 .nd.empty{opacity:.28}
 .dimmed .nd:not(.lit){opacity:.16}
 .dimmed .lk:not(.lit){stroke-opacity:.08}
-.dimmed .xlk:not(.lit){stroke-opacity:.08}
+.dimmed .xlk:not(.lit){stroke-opacity:.05}
 .xlk.lit{stroke:var(--accent);stroke-opacity:.9;stroke-dasharray:none;stroke-width:1.6}
 .nd.sel circle.dot{stroke:var(--ink);stroke-width:2.5}
 .nd.hit circle.dot{stroke:var(--accent);stroke-width:3}
+.webcrumb{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;background:color-mix(in srgb, var(--surface) 90%, transparent);padding:6px 10px;border-radius:8px;border:1px solid var(--line);max-width:calc(100% - 20px)}
+.webcrumb button{font:inherit;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;font-weight:700}
+.webcrumb button:hover{text-decoration:underline}
+.webcrumb span{color:var(--muted)}
+.webcrumb b{color:var(--ink);font-weight:700}
+.webcrumb[hidden]{display:none!important}
+.guide-ring{fill:none;stroke:var(--line);stroke-dasharray:2 7}
 
 /* Panel */
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 18px 22px;overflow:auto;height:min(80vh,900px);min-height:420px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;min-width:0}
@@ -316,12 +324,14 @@ details[open] summary{margin-bottom:8px}
 
   <main class="layout">
     <section class="web-wrap" aria-label="Knowledge web">
-      <svg id="web" role="img" aria-label="Radial web of maths topics, concepts and question types"></svg>
+      <svg id="web" role="img" aria-label="Radial map of maths subjects and topics; tap a topic to open its concepts and question types"></svg>
       <div class="web-note" id="note">Loading the web…</div>
+      <div class="webcrumb" id="webcrumb" hidden></div>
       <div class="key" aria-hidden="true">
         <span><i class="k-new"></i>fully built</span>
         <span><i class="k-link"></i>related topics</span>
         <span>dot size = past questions</span>
+        <span>tap a topic to zoom in</span>
       </div>
       <div class="zoom">
         <button type="button" id="zin" aria-label="Zoom in">+</button>
@@ -364,7 +374,7 @@ details[open] summary{margin-bottom:8px}
 /* State. core.json is loaded at start (nodes, papers, stats, a light list of every question). A topic's shard
    (formulas, methods, full questions) is fetched only when that topic is opened, so start-up cost stays flat as the bank grows. */
 const S = { nodes:new Map(), papers:[], stats:{papers:0,topics:{},qtypes:{}}, tmeta:{}, rows:[], techniques:{}, rubric:{}, likNote:'',
-            sd:{}, sp:{}, refs:[], bankTab:'topic', show:'all', q:'', sel:null, view:'web', status:'loading', loaded:false, fitted:false, cnt:new Map(), built:new Set(),
+            sd:{}, sp:{}, refs:[], bankTab:'topic', show:'all', q:'', sel:null, view:'web', status:'loading', loaded:false, fittedScope:undefined, webFocus:null, cnt:new Map(), built:new Set(),
             f:{topic:'', qtype:'', level:new Set(), lik:new Set(), src:'', status:'', tech:'', sort:'asked'}, shown:20, prog:{} };
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -408,6 +418,7 @@ function passes(id){ const n = S.nodes.get(id); if (!n || parentOf(n)==='hub') r
   if (S.show === 'pyq') return subCount(id) > 0; if (S.show === 'built') return S.built.has(id); return true; }
 function q(){ return S.q.toLowerCase(); }
 function nodeHit(n){ return S.q && n.label.toLowerCase().includes(q()); }
+function nodeOrDescHit(id){ if (nodeHit(S.nodes.get(id))) return true; return kidsOf(id).some(k => nodeOrDescHit(k.id)); }
 
 /* ---------- data: lazy shards ---------- */
 const get = async (p, v) => {
@@ -444,18 +455,40 @@ $('zout').onclick = () => svg.transition().duration(reduce?0:250).call(zoom.scal
 $('zfit').onclick = () => fit(true);
 svg.on('click', e => { if (e.target === svg.node()) select(null); });
 
+/* One thread per pair of topics that share a cross-link anywhere in their subtree (the overview's faint constellation). */
+function topicPairLinks(){
+  const pairs = new Map();
+  for (const n of S.nodes.values()){
+    const ta = topicOf(n.id); if (!ta) continue;
+    for (const l of (n.links||[])){
+      const tb = topicOf(l); if (!tb || tb===ta) continue;
+      const k = [ta,tb].sort().join('|');
+      if (!pairs.has(k)) pairs.set(k, {a:ta,b:tb});
+    }
+  }
+  return [...pairs.values()];
+}
+
 let layoutPts = new Map();
-function buildHierarchy(){
+/* scope=null: the whole map, stopped at topic level, so it never gets crowded.
+   scope=a topic id: just that topic's own concepts and question types, as its own small web. */
+function buildHierarchy(scope){
   const kids = new Map();
   for (const n of S.nodes.values()){ const p = parentOf(n); if(!kids.has(p)) kids.set(p, []); kids.get(p).push(n); }
   const sortK = a => a.sort((x,y)=>(x.order??999)-(y.order??999) || String(x.label).localeCompare(String(y.label)));
-  const make = id => ({ id, children: sortK(kids.get(id)||[]).map(n => make(n.id)) });
-  return d3.hierarchy(make('hub'));
+  if (scope){
+    const make = id => ({ id, children: sortK(kids.get(id)||[]).map(n => make(n.id)) });
+    return d3.hierarchy(make(scope));
+  }
+  const make = (id, depth) => ({ id, children: depth >= 2 ? [] : sortK(kids.get(id)||[]).map(n => make(n.id, depth+1)) });
+  return d3.hierarchy(make('hub', 0));
 }
 function drawWeb(){
   g.selectAll('*').remove();
   if (!S.nodes.size){ return; }
-  const root = buildHierarchy();
+  if (S.webFocus && !S.nodes.has(S.webFocus)) S.webFocus = null;
+  const scope = S.webFocus;
+  const root = buildHierarchy(scope);
   const leaves = root.leaves().length;
   const maxDepth = d3.max(root.descendants(), d => d.depth) || 1;
   const R = Math.max(400, leaves * 24 / (2*Math.PI));
@@ -465,44 +498,53 @@ function drawWeb(){
   const pt = d => [d.y*Math.sin(d.x), -d.y*Math.cos(d.x)];
   layoutPts = new Map(root.descendants().map(d => [d.data.id, {x:d.x, y:d.y, p:pt(d), depth:d.depth}]));
 
-  const sub = new Map(); root.eachAfter(d => { let c = S.cnt.get(d.data.id)||0; (d.children||[]).forEach(k => c += sub.get(k.data.id)); sub.set(d.data.id, c); });
-  const hits = new Set(); if (S.q) for (const n of S.nodes.values()) if (nodeHit(n)) hits.add(n.id);
+  const hits = new Set(); if (S.q) for (const d of root.descendants()) if (d.depth>0 && nodeOrDescHit(d.data.id)) hits.add(d.data.id);
+
+  g.append('circle').attr('class','guide-ring').attr('r', r1);
 
   g.append('g').selectAll('path').data(root.links()).join('path')
     .attr('class', d => 'lk lk-' + d.target.data.id)
     .attr('d', d3.linkRadial().angle(d=>d.x).radius(d=>d.y))
     .attr('stroke', d => d.source.depth===0 ? 'var(--line)' : color(d.target.data.id))
-    .attr('stroke-width', d => d.source.depth===0 ? 2 : 1 + Math.min(4, Math.sqrt(sub.get(d.target.data.id)||0)*0.6));
+    .attr('stroke-width', d => d.source.depth===0 ? 2 : 1 + Math.min(4, Math.sqrt(subCount(d.target.data.id))*0.6));
 
-  const xl = []; const seen = new Set();
-  for (const n of S.nodes.values()) for (const t of (n.links||[])){
-    if (!layoutPts.has(n.id) || !layoutPts.has(t)) continue;
-    const k = [n.id,t].sort().join('|'); if (seen.has(k)) continue; seen.add(k); xl.push({a:n.id,b:t});
-  }
+  const xl = scope ? (() => {
+    const out = [], seen = new Set();
+    for (const n of S.nodes.values()) for (const t of (n.links||[])){
+      if (!layoutPts.has(n.id) || !layoutPts.has(t)) continue;
+      const k = [n.id,t].sort().join('|'); if (seen.has(k)) continue; seen.add(k); out.push({a:n.id,b:t});
+    }
+    return out;
+  })() : topicPairLinks().filter(p => layoutPts.has(p.a) && layoutPts.has(p.b));
   g.append('g').selectAll('path').data(xl).join('path')
     .attr('class', d => `xlk x-${d.a} x-${d.b}`)
     .attr('d', d => { const A = layoutPts.get(d.a).p, B = layoutPts.get(d.b).p; const c = [(A[0]+B[0])*0.28, (A[1]+B[1])*0.28]; return `M${A[0]},${A[1]} Q${c[0]},${c[1]} ${B[0]},${B[1]}`; });
 
   const node = g.append('g').selectAll('g').data(root.descendants()).join('g')
-    .attr('class', d => { const id=d.data.id; const c=['nd', d.depth===0?'hub':d.depth===1?'jn':'br'];
+    .attr('class', d => { const id=d.data.id; const c=['nd'];
+      c.push(d.depth===0 ? (scope?'root':'hub') : d.depth===1 ? 'jn' : 'br');
       if (d.depth>1 && !passes(id)) c.push('empty'); if (hits.has(id)) c.push('hit'); return c.join(' '); })
     .attr('data-id', d => d.data.id)
     .attr('transform', d => { const [x,y] = pt(d); return `translate(${x},${y})`; })
-    .attr('tabindex', d => d.depth===0 ? null : 0)
-    .attr('role', d => d.depth===0 ? null : 'button')
-    .attr('aria-label', d => { if(d.depth===0) return null; const n=S.nodes.get(d.data.id); return `${n.label}, ${plural(sub.get(d.data.id)||0,'past question')}`; })
-    .on('click', (e,d) => { e.stopPropagation(); activate(d.depth===0 ? null : d.data.id);
+    .attr('tabindex', d => (d.depth===0 && !scope) ? null : 0)
+    .attr('role', d => (d.depth===0 && !scope) ? null : 'button')
+    .attr('aria-label', d => { if(d.depth===0 && !scope) return null; if (d.depth===0) return `${S.nodes.get(scope).label}, zoom back out to all topics`; const n=S.nodes.get(d.data.id); return `${n.label}, ${plural(subCount(d.data.id),'past question')}`; })
+    .on('click', (e,d) => { e.stopPropagation();
+      if (d.depth===0){ if (scope) zoomOutWeb(); else activate(null); } else activate(d.data.id);
       if (S.view==='web' && window.innerWidth <= 900) $('panel').scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'}); })
-    .on('keydown', (e,d) => { if (e.key==='Enter' || e.key===' '){ e.preventDefault(); activate(d.data.id); } });
+    .on('keydown', (e,d) => { if (e.key==='Enter' || e.key===' '){ e.preventDefault();
+      if (d.depth===0 && scope) zoomOutWeb(); else activate(d.data.id); } });
 
-  const rad = d => d.depth===0 ? 24 : d.depth===1 ? 11 : Math.min(13, 4 + Math.sqrt(sub.get(d.data.id)||0)*1.9);
-  node.filter(d => d.depth>1 && S.built.has(d.data.id))
+  const rad = d => d.depth===0 ? 24 : d.depth===1 ? (scope ? Math.min(15, 7+Math.sqrt(subCount(d.data.id))*1.6) : 11) : Math.min(13, 4 + Math.sqrt(subCount(d.data.id))*1.9);
+  node.filter(d => (d.depth>1 || (d.depth===0 && scope)) && S.built.has(d.data.id))
     .append('circle').attr('class','ring').attr('r', d => rad(d)+3.5);
   node.append('circle').attr('class','dot').attr('r', rad)
-    .attr('fill', d => d.depth===0 ? 'var(--ink)' : color(d.data.id));
-  node.append('title').text(d => d.depth===0 ? 'SSC CGL Quant' : `${S.nodes.get(d.data.id).label} · ${plural(sub.get(d.data.id)||0,'past question')}`);
+    .attr('fill', d => d.depth===0 ? (scope ? color(scope) : 'var(--ink)') : color(d.data.id));
+  node.append('title').text(d => d.depth===0 ? (scope ? `${S.nodes.get(scope).label} · tap to zoom out` : 'SSC CGL Quant') : `${S.nodes.get(d.data.id).label} · ${plural(subCount(d.data.id),'past question')}`);
 
-  node.filter(d=>d.depth===0).append('text').attr('text-anchor','middle').attr('dy','0.35em').text('Quant');
+  /* The focused root's own name is already in the breadcrumb and the panel title, so it isn't
+     re-inscribed here (a label above the dot would cross its own spokes); the ring above marks it instead. */
+  node.filter(d=>d.depth===0 && !scope).append('text').attr('text-anchor','middle').attr('dy','0.35em').text('Quant');
   node.filter(d=>d.depth===1).append('text')
     .attr('dy','0.35em')
     .attr('transform', d => { const deg = d.x*180/Math.PI - 90; return d.x < Math.PI ? `rotate(${deg})` : `rotate(${deg+180})`; })
@@ -516,8 +558,16 @@ function drawWeb(){
     .attr('text-anchor', d => (d.x < Math.PI) !== !!d.children ? 'start' : 'end')
     .text(d => S.nodes.get(d.data.id).short || S.nodes.get(d.data.id).label);
 
+  renderWebCrumb(scope);
   applyHighlight();
-  if (!S.fitted && S.view==='web'){ fit(false); S.fitted = true; }
+  maybeFit();
+}
+function renderWebCrumb(scope){
+  const el = $('webcrumb');
+  if (!scope){ el.hidden = true; el.innerHTML = ''; return; }
+  el.hidden = false;
+  const j = junctionOf(scope);
+  el.innerHTML = `<button type="button" data-zoomout>← All topics</button>${j?`<span>${esc(S.nodes.get(j).label)} ›</span>`:''}<b>${esc(S.nodes.get(scope).label)}</b>`;
 }
 function applyHighlight(){
   const lit = new Set();
@@ -539,6 +589,12 @@ function fit(animate){
   const s = Math.min(w/(b.width+30), h/(b.height+30), 2.2);
   const t = d3.zoomIdentity.translate(w/2 - s*(b.x+b.width/2), h/2 - s*(b.y+b.height/2)).scale(s);
   (animate && !reduce ? svg.transition().duration(400) : svg).call(zoom.transform, t);
+}
+/* Re-fits only when the zoomed scope actually changed (drilling in or backing out), never while just typing
+   a search or re-selecting something within the same scope, so the view doesn't jump under the person. */
+function maybeFit(){
+  if (S.view !== 'web') return;
+  if (S.fittedScope !== S.webFocus){ fit(S.fittedScope !== undefined); S.fittedScope = S.webFocus; }
 }
 
 /* ---------- building blocks ---------- */
@@ -1078,7 +1134,7 @@ function setView(v){
   if (v === 'bank') renderBank();
   else if (v === 'learn') renderLearn(true);
   else if (v === 'sources') renderSources();
-  else { if (!S.fitted) requestAnimationFrame(() => { fit(false); S.fitted = true; }); renderPanel(); }
+  else { requestAnimationFrame(maybeFit); renderPanel(); }
   if (v !== 'web') window.scrollTo(0, 0);
 }
 $('tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.view === 'bank') S.bankTab = S.bankTab || 'topic'; setView(b.dataset.view); });
@@ -1139,10 +1195,30 @@ $('cards').addEventListener('click', e => {
   if (e.target.closest('[data-more]')){ S.shown += 20; renderBank(); return; }
 });
 $('bytopic').addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b){ setView('web'); select(b.getAttribute('data-go') || null); } });
+$('webcrumb').addEventListener('click', e => { if (e.target.closest('[data-zoomout]')) zoomOutWeb(); });
 
 /* ---------- state changes ---------- */
+/* Keep the web zoomed to the neighbourhood of whatever got selected: a built topic (or anything inside
+   one) pulls the web in to show just its own concepts and types; anything else pulls back to the map. */
+function syncWebFocus(id){
+  const n = id && S.nodes.get(id);
+  let want = null;
+  if (n){
+    if (n.kind === 'topic' && kidsOf(id).length) want = id;
+    else if (n.kind === 'concept' || n.kind === 'qtype'){ const t = topicOf(id); if (t && kidsOf(t).length) want = t; }
+  }
+  if (want !== S.webFocus){ S.webFocus = want; if (S.view === 'web') drawWeb(); }
+}
+function zoomOutWeb(){
+  if (!S.webFocus) return;
+  S.webFocus = null;
+  drawWeb();
+  renderPanel();
+}
 function select(id){
   S.sel = id && S.nodes.has(id) ? id : null;
+  if (S.sel) syncWebFocus(S.sel);
+  else if (S.webFocus){ S.webFocus = null; if (S.view === 'web') drawWeb(); }
   try { if (S.sel) history.replaceState(null,'','#'+S.sel); else history.replaceState(null,'',location.pathname+location.search); } catch(e){}
   applyHighlight(); renderPanel();
 }

@@ -57,16 +57,29 @@ with sync_playwright() as p:
 
     # ---------------- web ----------------
     pg = page(1280, 900)
+    built_n = sum(1 for m in core["topics"].values() if m.get("built"))
     check(not any("/shards/" in u for u in reqs), "start-up fetches no topic shard (lazy loading)")
     check(f"{nbank} questions in the bank" in pg.inner_text("#panel h2"), f"overview says {nbank} questions in the bank")
-    check(pg.locator(".ring").count() >= 9, f"built nodes are ringed ({pg.locator('.ring').count()})")
-    pg.locator('.nd[data-id="profit-loss"]').click(); pg.wait_for_timeout(300)
+    nd0 = pg.locator(".nd").count()
+    check(nd0 < 40, f"the overview stays small: hub + subjects + topics only ({nd0} dots)")
+    check(pg.locator('.nd[data-id="q-pl-chain"]').count() == 0, "a question type is not drawn until its topic is opened")
+    check(pg.locator("#webcrumb").is_hidden(), "no back control before anything is zoomed in")
+    check(pg.locator(".ring").count() == built_n, f"every built topic is ringed in the overview ({pg.locator('.ring').count()} of {built_n})")
+    pg.locator('.nd[data-id="profit-loss"]').click(); pg.wait_for_timeout(400)
     panel = pg.inner_text("#panel")
     check("This topic" in panel and "of 3 shifts" in panel, "topic panel shows how often it was asked")
     check(pg.locator("#panel .qz").count() == 0 and pg.locator("#panel .formula").count() == 0, "side panel is slim: no question cards or formula lists")
     check(pg.locator("#panel a[href]").count() == 0, "side panel has no links to papers")
     check(pg.locator('#panel [data-learn^="start:"]').count() == 1, "topic panel has 'Start learning'")
     check(not any("shards/" in u for u in reqs), "browsing the web panel fetches no shard")
+    # clicking the topic zoomed the web into just its own concepts and types
+    check(pg.locator('.nd[data-id="q-pl-chain"]').count() == 1, "opening a topic reveals its question types")
+    check(pg.locator("#webcrumb").is_visible() and "Profit" in pg.inner_text("#webcrumb"), "a back control names the topic once zoomed in")
+    check(pg.locator(".nd").count() < nd0, "the focused view has far fewer dots than the overview")
+    pg.click("#webcrumb [data-zoomout]"); pg.wait_for_timeout(400)
+    check(pg.locator('.nd[data-id="q-pl-chain"]').count() == 0 and pg.locator("#webcrumb").is_hidden(), "the back control returns to the full, uncluttered map")
+    check(pg.locator('.nd[data-id="profit-loss"]').count() == 1 and pg.locator('.nd.sel[data-id="profit-loss"]').count() == 1, "the topic just backed out of stays selected in the overview")
+    pg.locator('.nd[data-id="profit-loss"]').click(); pg.wait_for_timeout(400)
 
     # ---------------- end node -> Learn at the first concept ----------------
     pg.locator('.nd[data-id="q-pl-chain"]').click(); pg.wait_for_selector("#lmain h2"); pg.wait_for_timeout(300)
