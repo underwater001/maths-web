@@ -43,6 +43,7 @@ Topic  →  Concept  →  Question type  →  PYQs (year, shift, paper) + practi
 ```
 python3 tools/verify_2025-09-12.py     # recompute all 75 PYQ answers
 python3 tools/build_partnership.py     # verify + write the Partnership data
+python3 tools/test_shortcuts.py        # random-test every Partnership shortcut
 ```
 
 ## Notes on the sources
