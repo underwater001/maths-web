@@ -1,0 +1,1640 @@
+{
+ "id": "ry7300-ch07-ratio-proportion",
+ "exam": "Rakesh Yadav 7300+ chapterwise bank",
+ "kind": "chapter-bank",
+ "publisher": "Rakesh Yadav Publications",
+ "chapter": "Chapter 7 · Ratio & Proportion",
+ "test": null,
+ "date": null,
+ "shift": null,
+ "link": "https://drive.google.com/file/d/1NWgOVBZRXngvgt4atvaxHbH-Z6A71APn/view?usp=sharing",
+ "quant": "Q1-Q306 (book numbering)",
+ "note": "A curated selection of 232 of the chapter's 306 questions: every pattern the book uses, with two or three similar questions kept per pattern for practice; figure-based, repeated and badly worded questions left out. The question numbers are the book's own. Every answer was recomputed and compared with the book's printed answer key. The printed key is wrong for two questions, and the filed answer follows the working: Q113 (printed b, but the answer must be a multiple of 29 and 145 satisfies the question, so a) and Q242 (printed d, ₹ 180 is the wheat share; the rice share is ₹ 200, so c). Q128's key is hidden by the book's watermark, so it is taken from the working.",
+ "skipped": {},
+ "rows": [
+  {
+   "qno": 1,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "5 : 9",
+   "verified": true
+  },
+  {
+   "qno": 2,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "1 : 3 : 6",
+   "verified": true
+  },
+  {
+   "qno": 3,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "69",
+   "verified": true
+  },
+  {
+   "qno": 4,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "8",
+   "verified": true
+  },
+  {
+   "qno": 5,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "Rs. 8 and Rs. 4",
+   "verified": true
+  },
+  {
+   "qno": 6,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "120",
+   "verified": true
+  },
+  {
+   "qno": 7,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "C, Rs. 25",
+   "verified": true
+  },
+  {
+   "qno": 8,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "Rs. 200, 900, 150",
+   "verified": true
+  },
+  {
+   "qno": 9,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "2 : 3",
+   "verified": true
+  },
+  {
+   "qno": 11,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "13 : 14",
+   "verified": true
+  },
+  {
+   "qno": 12,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "14",
+   "verified": true
+  },
+  {
+   "qno": 13,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "2 : 1",
+   "verified": true
+  },
+  {
+   "qno": 14,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "11 : 1",
+   "verified": true
+  },
+  {
+   "qno": 15,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "11 : 9",
+   "verified": true
+  },
+  {
+   "qno": 16,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "8 : 4 : 1",
+   "verified": true
+  },
+  {
+   "qno": 17,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 18,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 19,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "Rs. 800",
+   "verified": true
+  },
+  {
+   "qno": 20,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "10 : 21",
+   "verified": true
+  },
+  {
+   "qno": 21,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "10 years",
+   "verified": true
+  },
+  {
+   "qno": 22,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "3 : 5",
+   "verified": true
+  },
+  {
+   "qno": 23,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "36 years and 52 years",
+   "verified": true
+  },
+  {
+   "qno": 24,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "595",
+   "verified": true
+  },
+  {
+   "qno": 25,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "35",
+   "verified": true
+  },
+  {
+   "qno": 26,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "50",
+   "verified": true
+  },
+  {
+   "qno": 27,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "91 : 81",
+   "verified": true
+  },
+  {
+   "qno": 28,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "48",
+   "verified": true
+  },
+  {
+   "qno": 29,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "200",
+   "verified": true
+  },
+  {
+   "qno": 30,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "100",
+   "verified": true
+  },
+  {
+   "qno": 32,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "35 kg",
+   "verified": true
+  },
+  {
+   "qno": 33,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "12 litres",
+   "verified": true
+  },
+  {
+   "qno": 34,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "Rs. 7200",
+   "verified": true
+  },
+  {
+   "qno": 35,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "Rs. 4,000, Rs. 2,400",
+   "verified": true
+  },
+  {
+   "qno": 36,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "Rs. 1,400",
+   "verified": true
+  },
+  {
+   "qno": 37,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "Rs. 360",
+   "verified": true
+  },
+  {
+   "qno": 38,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "Rs. 78",
+   "verified": true
+  },
+  {
+   "qno": 39,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "16 : 24 : 30 : 35",
+   "verified": true
+  },
+  {
+   "qno": 40,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "17/18",
+   "verified": true
+  },
+  {
+   "qno": 41,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "14",
+   "verified": true
+  },
+  {
+   "qno": 42,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "36",
+   "verified": true
+  },
+  {
+   "qno": 43,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "30",
+   "verified": true
+  },
+  {
+   "qno": 44,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "12",
+   "verified": true
+  },
+  {
+   "qno": 45,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "33",
+   "verified": true
+  },
+  {
+   "qno": 46,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "2 : 1",
+   "verified": true
+  },
+  {
+   "qno": 49,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "56 : 99 : 69",
+   "verified": true
+  },
+  {
+   "qno": 51,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "132",
+   "verified": true
+  },
+  {
+   "qno": 52,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "120",
+   "verified": true
+  },
+  {
+   "qno": 53,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "Rs. 2040",
+   "verified": true
+  },
+  {
+   "qno": 54,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "90",
+   "verified": true
+  },
+  {
+   "qno": 55,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "76 1/2",
+   "verified": true
+  },
+  {
+   "qno": 56,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "Rs. 3000, Rs. 2000, Rs. 1200",
+   "verified": true
+  },
+  {
+   "qno": 59,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "Rs. 750",
+   "verified": true
+  },
+  {
+   "qno": 60,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "160",
+   "verified": true
+  },
+  {
+   "qno": 62,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "Information inadequate",
+   "verified": true
+  },
+  {
+   "qno": 64,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "30",
+   "verified": true
+  },
+  {
+   "qno": 65,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "50 : 147",
+   "verified": true
+  },
+  {
+   "qno": 66,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "30 : 19",
+   "verified": true
+  },
+  {
+   "qno": 67,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "a² : c²",
+   "verified": true
+  },
+  {
+   "qno": 68,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "8 : 6 : 10 : 9",
+   "verified": true
+  },
+  {
+   "qno": 69,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "8 : 9 : 24",
+   "verified": true
+  },
+  {
+   "qno": 70,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "1 : 2",
+   "verified": true
+  },
+  {
+   "qno": 72,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "6 years",
+   "verified": true
+  },
+  {
+   "qno": 73,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "45",
+   "verified": true
+  },
+  {
+   "qno": 74,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "30",
+   "verified": true
+  },
+  {
+   "qno": 75,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "72, 96, 108",
+   "verified": true
+  },
+  {
+   "qno": 82,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "Rs. 16000",
+   "verified": true
+  },
+  {
+   "qno": 83,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "Rs. 1,250",
+   "verified": true
+  },
+  {
+   "qno": 85,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "2√7",
+   "verified": true
+  },
+  {
+   "qno": 88,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "1 : 2",
+   "verified": true
+  },
+  {
+   "qno": 90,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "24",
+   "verified": true
+  },
+  {
+   "qno": 92,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "120",
+   "verified": true
+  },
+  {
+   "qno": 93,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "Rs. 75",
+   "verified": true
+  },
+  {
+   "qno": 94,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "12",
+   "verified": true
+  },
+  {
+   "qno": 96,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "1500",
+   "verified": true
+  },
+  {
+   "qno": 97,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "5 : 4",
+   "verified": true
+  },
+  {
+   "qno": 98,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "8 : 12 : 15",
+   "verified": true
+  },
+  {
+   "qno": 99,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "6 : 4 : 3",
+   "verified": true
+  },
+  {
+   "qno": 100,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "2 : 15",
+   "verified": true
+  },
+  {
+   "qno": 101,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "Rs. 14,868",
+   "verified": true
+  },
+  {
+   "qno": 102,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "5 : 3",
+   "verified": true
+  },
+  {
+   "qno": 103,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "12 years",
+   "verified": true
+  },
+  {
+   "qno": 105,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "36",
+   "verified": true
+  },
+  {
+   "qno": 109,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "1,22,100",
+   "verified": true
+  },
+  {
+   "qno": 111,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "961",
+   "verified": true
+  },
+  {
+   "qno": 112,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "171",
+   "verified": true
+  },
+  {
+   "qno": 113,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "145",
+   "verified": true
+  },
+  {
+   "qno": 114,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "2 : 1",
+   "verified": true
+  },
+  {
+   "qno": 115,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "9 : 13",
+   "verified": true
+  },
+  {
+   "qno": 117,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "9 : 8 : 10",
+   "verified": true
+  },
+  {
+   "qno": 125,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "78",
+   "verified": true
+  },
+  {
+   "qno": 127,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "21 : 66 : 92",
+   "verified": true
+  },
+  {
+   "qno": 128,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "9 : 8",
+   "verified": true
+  },
+  {
+   "qno": 129,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "3 : 5",
+   "verified": true
+  },
+  {
+   "qno": 130,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "15 : 8",
+   "verified": true
+  },
+  {
+   "qno": 131,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "20",
+   "verified": true
+  },
+  {
+   "qno": 132,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 133,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "21",
+   "verified": true
+  },
+  {
+   "qno": 134,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 137,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "4 kg",
+   "verified": true
+  },
+  {
+   "qno": 138,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "₹ 100",
+   "verified": true
+  },
+  {
+   "qno": 139,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "₹ 600",
+   "verified": true
+  },
+  {
+   "qno": 140,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "3 : 4",
+   "verified": true
+  },
+  {
+   "qno": 141,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "20 : 12 : 15",
+   "verified": true
+  },
+  {
+   "qno": 142,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "9 : 19",
+   "verified": true
+  },
+  {
+   "qno": 143,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "2 : 1",
+   "verified": true
+  },
+  {
+   "qno": 145,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "1 : 4 : 8",
+   "verified": true
+  },
+  {
+   "qno": 146,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "6 : 4 : 3",
+   "verified": true
+  },
+  {
+   "qno": 147,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "4 : 1",
+   "verified": true
+  },
+  {
+   "qno": 149,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "−5",
+   "verified": true
+  },
+  {
+   "qno": 150,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "60",
+   "verified": true
+  },
+  {
+   "qno": 151,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 152,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "45",
+   "verified": true
+  },
+  {
+   "qno": 154,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "28",
+   "verified": true
+  },
+  {
+   "qno": 155,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "5",
+   "verified": true
+  },
+  {
+   "qno": 156,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "49",
+   "verified": true
+  },
+  {
+   "qno": 157,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "15",
+   "verified": true
+  },
+  {
+   "qno": 159,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "₹ 1,44,000",
+   "verified": true
+  },
+  {
+   "qno": 160,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "₹ 8,250",
+   "verified": true
+  },
+  {
+   "qno": 161,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "960",
+   "verified": true
+  },
+  {
+   "qno": 162,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "15 : 20 : 12",
+   "verified": true
+  },
+  {
+   "qno": 163,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "300",
+   "verified": true
+  },
+  {
+   "qno": 164,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "13 : 15",
+   "verified": true
+  },
+  {
+   "qno": 165,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "7/29",
+   "verified": true
+  },
+  {
+   "qno": 166,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "4 : 9",
+   "verified": true
+  },
+  {
+   "qno": 167,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "30 years",
+   "verified": true
+  },
+  {
+   "qno": 168,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "3 : 5",
+   "verified": true
+  },
+  {
+   "qno": 169,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "2 : 1",
+   "verified": true
+  },
+  {
+   "qno": 170,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "39",
+   "verified": true
+  },
+  {
+   "qno": 181,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "10",
+   "verified": true
+  },
+  {
+   "qno": 182,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "₹ 4,500",
+   "verified": true
+  },
+  {
+   "qno": 183,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "₹ 3,200",
+   "verified": true
+  },
+  {
+   "qno": 184,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "₹ 48,000",
+   "verified": true
+  },
+  {
+   "qno": 185,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "₹ 4,500",
+   "verified": true
+  },
+  {
+   "qno": 187,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "30",
+   "verified": true
+  },
+  {
+   "qno": 188,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "0.05",
+   "verified": true
+  },
+  {
+   "qno": 189,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "2 : 1",
+   "verified": true
+  },
+  {
+   "qno": 190,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "₹ 9",
+   "verified": true
+  },
+  {
+   "qno": 191,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "56 : 3",
+   "verified": true
+  },
+  {
+   "qno": 192,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "19",
+   "verified": true
+  },
+  {
+   "qno": 193,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "144",
+   "verified": true
+  },
+  {
+   "qno": 195,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "3 : 4",
+   "verified": true
+  },
+  {
+   "qno": 196,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "5",
+   "verified": true
+  },
+  {
+   "qno": 197,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "56",
+   "verified": true
+  },
+  {
+   "qno": 198,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "76",
+   "verified": true
+  },
+  {
+   "qno": 199,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "6 : 5",
+   "verified": true
+  },
+  {
+   "qno": 200,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "33, 55",
+   "verified": true
+  },
+  {
+   "qno": 201,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "7 : 5",
+   "verified": true
+  },
+  {
+   "qno": 207,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "₹ 25,000",
+   "verified": true
+  },
+  {
+   "qno": 208,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "₹ 6,000",
+   "verified": true
+  },
+  {
+   "qno": 209,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "₹ 3000",
+   "verified": true
+  },
+  {
+   "qno": 210,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "₹ 13750",
+   "verified": true
+  },
+  {
+   "qno": 211,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "140",
+   "verified": true
+  },
+  {
+   "qno": 212,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "31680 grams",
+   "verified": true
+  },
+  {
+   "qno": 213,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "6, 8",
+   "verified": true
+  },
+  {
+   "qno": 214,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "4 : 6 : 11",
+   "verified": true
+  },
+  {
+   "qno": 215,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "6 : 5",
+   "verified": true
+  },
+  {
+   "qno": 216,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 217,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "13 : 110",
+   "verified": true
+  },
+  {
+   "qno": 218,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "500",
+   "verified": true
+  },
+  {
+   "qno": 219,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "57",
+   "verified": true
+  },
+  {
+   "qno": 220,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "8 : 12 : 15",
+   "verified": true
+  },
+  {
+   "qno": 221,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "25 : 1",
+   "verified": true
+  },
+  {
+   "qno": 222,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "27",
+   "verified": true
+  },
+  {
+   "qno": 223,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "162, 108, 72",
+   "verified": true
+  },
+  {
+   "qno": 224,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "10 : 9",
+   "verified": true
+  },
+  {
+   "qno": 225,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "6 and 18",
+   "verified": true
+  },
+  {
+   "qno": 226,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "1 : 4",
+   "verified": true
+  },
+  {
+   "qno": 227,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "17/18",
+   "verified": true
+  },
+  {
+   "qno": 228,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 229,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "145",
+   "verified": true
+  },
+  {
+   "qno": 230,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "25",
+   "verified": true
+  },
+  {
+   "qno": 231,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "1 : 1",
+   "verified": true
+  },
+  {
+   "qno": 232,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "16, 24 and 32",
+   "verified": true
+  },
+  {
+   "qno": 233,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "5, 10, 15",
+   "verified": true
+  },
+  {
+   "qno": 234,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "30",
+   "verified": true
+  },
+  {
+   "qno": 242,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "₹ 200",
+   "verified": true
+  },
+  {
+   "qno": 243,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "₹ 2200",
+   "verified": true
+  },
+  {
+   "qno": 244,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "150, 180, 150",
+   "verified": true
+  },
+  {
+   "qno": 245,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "132",
+   "verified": true
+  },
+  {
+   "qno": 246,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "64",
+   "verified": true
+  },
+  {
+   "qno": 247,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "₹ 246",
+   "verified": true
+  },
+  {
+   "qno": 248,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "₹ 464",
+   "verified": true
+  },
+  {
+   "qno": 249,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "15 : 12 : 16",
+   "verified": true
+  },
+  {
+   "qno": 250,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "25 : 18 : 10",
+   "verified": true
+  },
+  {
+   "qno": 251,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "160, 240, 300",
+   "verified": true
+  },
+  {
+   "qno": 252,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "₹ 1,200, ₹ 800, ₹ 600",
+   "verified": true
+  },
+  {
+   "qno": 253,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "2 : 3 : 5",
+   "verified": true
+  },
+  {
+   "qno": 254,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "200, 300, 400",
+   "verified": true
+  },
+  {
+   "qno": 255,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "₹ 34.50",
+   "verified": true
+  },
+  {
+   "qno": 256,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "32 : 25 : 19",
+   "verified": true
+  },
+  {
+   "qno": 257,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "₹ 1,050",
+   "verified": true
+  },
+  {
+   "qno": 258,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "12 : 9 :: 16 : 12",
+   "verified": true
+  },
+  {
+   "qno": 259,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "20",
+   "verified": true
+  },
+  {
+   "qno": 260,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "7 : 9 : 15",
+   "verified": true
+  },
+  {
+   "qno": 261,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "100 m",
+   "verified": true
+  },
+  {
+   "qno": 262,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "110",
+   "verified": true
+  },
+  {
+   "qno": 263,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "−9 : 1",
+   "verified": true
+  },
+  {
+   "qno": 264,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 267,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "80",
+   "verified": true
+  },
+  {
+   "qno": 268,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "₹ 72",
+   "verified": true
+  },
+  {
+   "qno": 269,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "16,250",
+   "verified": true
+  },
+  {
+   "qno": 270,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "28 : 25",
+   "verified": true
+  },
+  {
+   "qno": 271,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "20 : 21",
+   "verified": true
+  },
+  {
+   "qno": 272,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "12",
+   "verified": true
+  },
+  {
+   "qno": 273,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "13",
+   "verified": true
+  },
+  {
+   "qno": 275,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "40",
+   "verified": true
+  },
+  {
+   "qno": 276,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "3 : 1",
+   "verified": true
+  },
+  {
+   "qno": 277,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "₹ 8000",
+   "verified": true
+  },
+  {
+   "qno": 278,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "₹ 42,000",
+   "verified": true
+  },
+  {
+   "qno": 279,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "76",
+   "verified": true
+  },
+  {
+   "qno": 280,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "4 : 1",
+   "verified": true
+  },
+  {
+   "qno": 281,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "15 : 16",
+   "verified": true
+  },
+  {
+   "qno": 282,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "108",
+   "verified": true
+  },
+  {
+   "qno": 284,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "144",
+   "verified": true
+  },
+  {
+   "qno": 285,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "17 : 10",
+   "verified": true
+  },
+  {
+   "qno": 287,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "36 cm",
+   "verified": true
+  },
+  {
+   "qno": 288,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "72°",
+   "verified": true
+  },
+  {
+   "qno": 289,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "9 years",
+   "verified": true
+  },
+  {
+   "qno": 290,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "2 : 1 : 6",
+   "verified": true
+  },
+  {
+   "qno": 291,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "80",
+   "verified": true
+  },
+  {
+   "qno": 293,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "2 : 3",
+   "verified": true
+  },
+  {
+   "qno": 294,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "5",
+   "verified": true
+  },
+  {
+   "qno": 295,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "8",
+   "verified": true
+  },
+  {
+   "qno": 296,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "(a + 3c − 5e)/(b + 3d − 5f)",
+   "verified": true
+  },
+  {
+   "qno": 297,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "16 2/3% decrease",
+   "verified": true
+  },
+  {
+   "qno": 298,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "35 years",
+   "verified": true
+  },
+  {
+   "qno": 299,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "a > c > b",
+   "verified": true
+  },
+  {
+   "qno": 300,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "24000",
+   "verified": true
+  },
+  {
+   "qno": 301,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "22 : 20 : 25",
+   "verified": true
+  },
+  {
+   "qno": 303,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "6 : 7",
+   "verified": true
+  },
+  {
+   "qno": 305,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "5 : 4",
+   "verified": true
+  },
+  {
+   "qno": 306,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "50000",
+   "verified": true
+  }
+ ]
+}
