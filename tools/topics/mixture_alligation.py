@@ -1,5 +1,6 @@
 """Mixture and alligation: quiz tier."""
 from bank import bound, mistake, pyq, ratio_val
+from topics._mx_ry import PYQS_RY
 
 TOPIC = "mixture-alligation"
 PREFIX = "mx"
@@ -19,12 +20,21 @@ NODES = {
                     "summary": "Two lots at different costs are combined and sold at one rate.", "links": ["profit-loss"]},
     "q-mx-allig": {"short": "Alligation", "label": "Ratio or quantity from a target gain", "kind": "qtype", "parent": "c-mx-cost", "order": 2,
                    "summary": "A gain % on the mix fixes the mean cost; find the ratio of the two ingredients or how much of one to add.", "links": ["profit-loss"]},
+    "q-mx-basic": {"short": "Parts of a mixture", "label": "How much of one ingredient is in a mixture", "kind": "qtype", "parent": "c-mx-ratio", "order": 3,
+                   "summary": "Percent or ratio of an ingredient is given; find the quantity of the mixture or of the ingredient.", "links": ["percentage"]},
+    "q-mx-repeat": {"short": "Repeated replacement", "label": "Remove and replace more than once", "kind": "qtype", "parent": "c-mx-ratio", "order": 4,
+                    "summary": "The same fraction of the mixture is taken out and replaced again and again; the original liquid is multiplied by (1 − fraction) each time.", "links": []},
+    "q-mx-vessels": {"short": "Mix two mixtures", "label": "Mixing two or more mixtures, vessels or alloys", "kind": "qtype", "parent": "c-mx-cost", "order": 3,
+                     "summary": "Alloys or vessels in given ratios are mixed; find the mixing ratio for a target or the ratio in the final mixture.", "links": ["ratio-proportion"]},
 }
 FORMULAS = [
     {"id": "mx-f1", "node": "c-mx-ratio", "text": "In a ratio a : b of a 𝑇-litre mixture, first liquid = 𝑇a/(a + b), second = 𝑇b/(a + b)", "note": "50 L at 3 : 2 → 30 L juice and 20 L water."},
     {"id": "mx-f2", "node": "c-mx-ratio", "text": "After removing x of T and replacing: the unchanged liquid's amount = original × (1 − x/T)", "note": "Water 10 → 5 means the mixture was thinned to half: (1 − x/80) = 1/2."},
     {"id": "mx-f3", "node": "c-mx-cost", "text": "Cheaper : dearer = (dearer − mean) : (mean − cheaper)", "note": "The mean is the cost price of the mix, not the selling price."},
     {"id": "mx-f4", "node": "c-mx-cost", "text": "Cost of a mix = (q₁c₁ + q₂c₂) ÷ (q₁ + q₂)     Cost price from gain g%: CP = SP ÷ (1 + g/100)", "note": "Selling at ₹54 with 20% gain means CP = ₹45."},
+    {"id": "mx-f5", "node": "c-mx-cost", "text": "Alligation on the share of one ingredient: Mixture 1 : Mixture 2 = (share₂ − target) : (target − share₁)", "note": "Milk shares 4/9 and 5/6, target 5/9 → 5/18 : 1/9 = 5 : 2. Works for prices, percents and carats too."},
+    {"id": "mx-f6", "node": "c-mx-ratio", "text": "Repeated replacement of x from T, n times: left = original × (1 − x/T)ⁿ", "note": "60 kg, replace 6 kg three times: 60 × 0.9³ = 43.74 kg."},
+    {"id": "mx-f7", "node": "c-mx-ratio", "text": "Adding one liquid: the other (unchanged) liquid stays fixed; set it equal to its new share", "note": "40 L at 10% water; 36 L milk must be 80% afterwards: total 45 L, so 5 L water added."},
 ]
 METHODS = {
     "q-mx-add": {
@@ -55,6 +65,27 @@ METHODS = {
         "fast": "Alligation on the mean cost: the gap to the dearer one is the quantity of the cheaper one. Mean 112: gaps 48 (to 160) and 32 (to 80) → 3 : 2.",
         "eliminate": "The mean cost 112 is nearer ₹80 (gap 32) than ₹160 (gap 48), so the cheaper spice is the bigger share and the ratio cheaper : dearer is above 1 : 1. That removes 1 : 2.",
         "traps": ["Using the selling price 140 as the mean (gives 3 : 1).", "Reading the ratio the wrong way round.", "Dropping the gain % and taking the selling price as the cost."]},
+    "q-mx-basic": {
+        "cue": "'12% copper … how much alloy for 69 kg copper', or 'which container has the least milk'.",
+        "formulas": ["mx-f1"], "tech": ["cancel-first", "ratio-parts", "fraction-percent"],
+        "standard": "Quantity = part ÷ share: 69 ÷ 0.12 = 575 kg. For 'more spirit than water' in 3 : 2, the difference is 1 part, so 3 litres = 1 part and spirit = 9 litres.",
+        "fast": "Use the share as a fraction (12% = 3/25: 69 × 25/3 = 575).",
+        "eliminate": "The mixture is always larger than the ingredient, and the ingredient share is only a part of it.",
+        "traps": ["Multiplying instead of dividing.", "Using the total parts instead of the difference of parts."]},
+    "q-mx-repeat": {
+        "cue": "'The process is repeated', 'again one-third of the mixture is extracted'.",
+        "formulas": ["mx-f6"], "tech": ["multiplier", "ratio-parts"],
+        "standard": "12 L of 60 L taken out each time: milk × 4/5 per round. After 2 rounds milk = 60 × 16/25 = 38.4 L and water 21.6 L: 16 : 9.",
+        "fast": "Multiply the fraction left each round and square (or cube) it: (4/5)² = 16/25, so the ratio is 16 : 9.",
+        "eliminate": "After n rounds the original liquid is (1 − f)ⁿ of the total, so test whether an option's share equals a power of a simple fraction.",
+        "traps": ["Taking out 12 L twice as 24 L from the original milk (it ignores the water removed in round 2).", "Adding the fractions instead of multiplying."]},
+    "q-mx-vessels": {
+        "cue": "'In what ratio should the mixtures in two vessels be mixed to get …?' or 'equal quantities of all are mixed'.",
+        "formulas": ["mx-f5", "mx-f1"], "tech": ["ratio-parts", "lcm-units"],
+        "standard": "Convert each ratio to the share of one ingredient and use alligation: A = 4/9 milk, B = 5/6, target 5/9 → A : B = (5/6 − 5/9) : (5/9 − 4/9) = 5 : 2. For equal quantities, pick a common amount (e.g. 120 L of each) and add the parts.",
+        "fast": "Put the shares over one denominator, subtract in the cross pattern and read the ratio off the gaps.",
+        "eliminate": "The target share lies between the two shares, so the nearer vessel gets the larger quantity.",
+        "traps": ["Using the raw ratios (4 : 5, 5 : 1) in the alligation instead of the shares.", "Reading A : B the wrong way round (the nearer one has more).", "Treating 'equal quantities' as equal parts of one ingredient."]},
 }
 OPT68 = ["3:2", "2:1", "1:2", "3:1"]
 PYQS = [
@@ -80,6 +111,8 @@ PYQS = [
         lambda: 150 / 7, 21.4, 0.05, tech=["ratio-parts", "back-substitute"], concepts=2, heavy=True,
         trick="Alligation on 45: the dearer wheat is ₹7 above the mean, the cheaper ₹5 below. Quantities are in the ratio 5 : 7 (dearer : cheaper)… so x = 30 × 5/7 ≈ 21.4."),
 ]
+
+PYQS = PYQS + PYQS_RY
 
 
 def practice_items():
