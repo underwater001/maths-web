@@ -1,6 +1,7 @@
 """Simple and compound interest: quiz tier."""
 import math
 from bank import bound, mistake, pyq
+from topics._si_ry import PYQS_RY
 
 TOPIC = "si-ci"
 PREFIX = "ci"
@@ -20,6 +21,16 @@ NODES = {
                         "summary": "2 years 9 months with annual compounding: compound the whole years, simple interest on the rest.", "links": []},
     "q-si-two": {"short": "Two loans", "label": "Simple interest on two loans at one rate", "kind": "qtype", "parent": "c-si-line", "order": 1,
                  "summary": "Two principals for different times, total interest known; find the rate.", "links": []},
+    "q-si-basic": {"short": "Find P, R or T", "label": "Basic: interest, rate, time or principal", "kind": "qtype", "parent": "c-si-line", "order": 2,
+                   "summary": "Three of P, R, T and the interest are given; find the fourth. Includes day counts, equal-interest pairs and rupee-years.", "links": []},
+    "q-si-multiple": {"short": "Doubles / trebles", "label": "A sum becomes k times itself", "kind": "qtype", "parent": "c-si-line", "order": 3,
+                      "summary": "Doubles in n years; find the rate or the time to become 3, 4 or 5 times. Also interest as a fraction of the sum.", "links": []},
+    "q-si-difference": {"short": "Rate gap", "label": "Extra interest from a higher rate", "kind": "qtype", "parent": "c-si-line", "order": 4,
+                        "summary": "A rate 2% higher (or one more year) gives Rs. X more; the extra interest is a percent of the principal.", "links": []},
+    "q-si-parts": {"short": "Split the money", "label": "Money split into parts at different rates", "kind": "qtype", "parent": "c-si-line", "order": 5,
+                   "summary": "A sum lent in parts at different rates; find a part, a missing rate or the average rate.", "links": ["mixture-alligation"]},
+    "q-si-amounts": {"short": "Two amounts", "label": "Amounts given, find principal or rate", "kind": "qtype", "parent": "c-si-line", "order": 6,
+                     "summary": "The amount after one time and after another (or a ratio of P : A) is given; the gap between them is the interest.", "links": []},
 }
 FORMULAS = [
     {"id": "ci-f1", "node": "c-ci-growth", "text": "A = P(1 + r/100)ⁿ     CI = A − P", "note": "Growth factor per year = 1 + r/100."},
@@ -27,6 +38,12 @@ FORMULAS = [
     {"id": "ci-f3", "node": "c-ci-growth", "text": "r = (A₃ − A₂) ÷ A₂ × 100 for two consecutive years", "note": "The gain in one year on the earlier amount."},
     {"id": "ci-f4", "node": "c-ci-growth", "text": "Part of a year at the end: simple interest on the amount at the end of the whole years", "note": "2 y 9 m: compound 2 years, then SI for 9/12 year on that amount."},
     {"id": "ci-f5", "node": "c-si-line", "text": "Total SI = r × (P₁t₁ + P₂t₂) ÷ 100", "note": "One rate: add the P × t products before dividing."},
+    {"id": "ci-f6", "node": "c-si-line", "text": "SI = P × R × T ÷ 100     A = P + SI = P(1 + RT/100)", "note": "R is a percent per year, T in years (months ÷ 12, days ÷ 365)."},
+    {"id": "ci-f7", "node": "c-si-line", "text": "Interest = P × (R × T)%: treat R × T as the percent of P earned", "note": "6% for 5 years is 30% of P, so SI = 0.3 P."},
+    {"id": "ci-f8", "node": "c-si-line", "text": "Doubles in n years → rate = 100 ÷ n %; becomes k times in (k − 1) × n years", "note": "Doubles in 10 y → trebles in 20 y, 5 times in 40 y."},
+    {"id": "ci-f9", "node": "c-si-line", "text": "Amounts at two times: SI per year = (A₂ − A₁) ÷ (T₂ − T₁); P = A₁ − T₁ × (SI per year)", "note": "720 after 2 y, 1,020 after 7 y: Rs. 60 a year, P = 600."},
+    {"id": "ci-f10", "node": "c-si-line", "text": "Extra rate d% for T years adds (d × T)% of P", "note": "3% more for 2 years gives Rs. 72 more: 6% of P = 72, P = 1,200."},
+    {"id": "ci-f11", "node": "c-si-line", "text": "Equal instalments x for n years at r%: total paid = nx + r% × x × (0 + 1 + … + (n − 1))", "note": "4 years at 5%: 4x + 0.05 × 6x = 4.3x."},
 ]
 METHODS = {
     "q-ci-multiple": {
@@ -57,6 +74,41 @@ METHODS = {
         "fast": "Interest 2,000 on 26,000 'rupee-years' is just under 8%.",
         "eliminate": "Even at 10%, 26,000 'rupee-years' would give ₹2,600. The actual ₹2,000 is lower, so the rate must be below 10%: only 8% fits.",
         "traps": ["Dividing by total principal 10,000 instead of rupee-years (gives 20%).", "Using the years separately instead of P × t."]},
+    "q-si-basic": {
+        "cue": "'Find the rate / time / principal / interest' with plain numbers, or two loans at one rate.",
+        "formulas": ["ci-f6", "ci-f7"], "tech": ["units-first", "cancel-first", "common-unit"],
+        "standard": "Rate = SI × 100 ÷ (P × T). For two deposits add the rupee-years first: 400 × 2 + 550 × 4 + 1,200 × 6 = 10,200, so 1,020 ÷ 10,200 = 10%.",
+        "fast": "Turn R × T into one percent of P and cancel: 30% of 6,000 = 1,800 at once.",
+        "eliminate": "Estimate the answer's size first: interest ÷ principal gives R × T, and the options usually differ by whole steps.",
+        "traps": ["Leaving months or days unconverted (6 years 8 months is 6 2/3 years).", "Counting both end dates in a day-count (the first day is not counted).", "Dividing by the total principal instead of the rupee-years."]},
+    "q-si-multiple": {
+        "cue": "'Doubles / trebles in n years' or 'SI is 1/4 of the sum'.",
+        "formulas": ["ci-f8", "ci-f7"], "tech": ["fraction-percent", "ratio-parts", "standard-values"],
+        "standard": "Trebles in 15 years means interest 2P in 15 years, so P every 7.5 years. 5 times needs 4P: 4 × 7.5 = 30 years.",
+        "fast": "Each 'P of interest' takes the same time. Doubles in n: k times in (k − 1)n.",
+        "eliminate": "Time for k times is (k − 1) multiples of the doubling time, so the answer must be a multiple of it.",
+        "traps": ["Taking trebles as 3 × the time (it is 2 × the doubling time).", "Using the amount, not the interest, as the multiple.", "When SI = P/4 and T = R: r² = 25, so r = 5, not 25."]},
+    "q-si-difference": {
+        "cue": "'Had the rate been x% higher it would have fetched Rs. … more' or 'the difference in interest is …'.",
+        "formulas": ["ci-f10"], "tech": ["units-first"],
+        "standard": "3% extra for 2 years = 6% of P = 72, so P = Rs. 1,200.",
+        "fast": "Multiply the rate gap by the years and read it as a percent of the sum; divide the money gap by it.",
+        "eliminate": "The answer must make the extra percent × P equal the gap exactly, so test one option.",
+        "traps": ["Using the old rate instead of the gap.", "Forgetting to multiply by the years."]},
+    "q-si-parts": {
+        "cue": "'Divided into two parts / lends part at … and rest at …'.",
+        "formulas": ["ci-f6", "ci-f7"], "tech": ["ratio-parts", "common-unit"],
+        "standard": "Equal interest on two parts: P₁ × (R₁T₁) = P₂ × (R₂T₂), so P₁ : P₂ = R₂T₂ : R₁T₁. For 12,000 split at 3 y 12% and 4.5 y 16%: 72 : 36 = 2 : 1, so 8,000 and 4,000.",
+        "fast": "The parts are inversely proportional to rate × time. For an average rate use weights (alligation).",
+        "eliminate": "The larger part belongs to the smaller R × T.",
+        "traps": ["Writing the ratio the wrong way round.", "Forgetting the second part's fraction is of the remainder (50% of the rest)."]},
+    "q-si-amounts": {
+        "cue": "'Amounts to … in … years and … in … years' or 'ratio of principal and amount is …'.",
+        "formulas": ["ci-f9"], "tech": ["units-first", "multiplier"],
+        "standard": "880 after 2 years, 920 after 3: interest per year = 40, P = 880 − 2 × 40 = 800.",
+        "fast": "Subtract the two amounts to get interest per year; take away the earlier years' interest to reach P.",
+        "eliminate": "P is always smaller than the smaller amount by (years × yearly interest).",
+        "traps": ["Taking the later amount as the principal.", "Dividing the gap by the later time instead of the time difference."]},
 }
 PYQS = [
     pyq(S1, 60, "q-ci-multiple", "An amount triples in 6 years at compound interest. How many years will it take to become 27 times its original value?", ["18", "19", "20", "21"], "a",
@@ -78,6 +130,8 @@ PYQS = [
         trick="At 10% the interest would be ₹2,600, more than ₹2,000. So the rate is below 10%.",
         wrong={k: bound(f"At {o} the interest on 26,000 rupee-years would be ₹{int(o[:-1]) * 260:,}, more than ₹2,000.", lambda v: v >= 10) for k, o in (("b", "10%"), ("c", "12%"), ("d", "15%"))}),
 ]
+
+PYQS = PYQS + PYQS_RY
 
 
 def practice_items():
