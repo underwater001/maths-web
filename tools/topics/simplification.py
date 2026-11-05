@@ -1,4 +1,5 @@
 """Simplification and BODMAS: quiz tier."""
+import math
 from fractions import Fraction as F
 from bank import bound, mistake, pyq
 
@@ -6,6 +7,8 @@ TOPIC = "simplification"
 PREFIX = "sm"
 TIER = "quiz"
 S1, S2, S3 = "2025-09-12-S1", "2025-09-12-S2", "2025-09-12-S3"
+K1 = "kiran-ch01-t01"
+KH = sum(1 / j for j in range(1, 26))      # 1 + 1/2 + … + 1/25, for kiran Q41
 
 NODES = {
     "c-sm-compare": {"short": "Compare fractions", "label": "Comparing and ordering fractions", "kind": "concept", "parent": TOPIC, "order": 1,
@@ -18,12 +21,24 @@ NODES = {
                     "summary": "Brackets inside brackets, mixed numbers and a division; or a very plain sum with decimals.", "links": []},
     "q-sm-continued": {"short": "Continued fraction", "label": "Continued fraction", "kind": "qtype", "parent": "c-sm-bodmas", "order": 2,
                        "summary": "3 + 1/(2 + 1/(5 + 1/3)): start from the bottom.", "links": []},
+    "q-sm-decimal": {"short": "Decimals", "label": "Decimal fractions: cancel before you multiply", "kind": "qtype", "parent": "c-sm-bodmas", "order": 3,
+                     "summary": "Products and quotients of decimals, or a series of decimal fractions that all reduce to the same value.", "links": []},
+    "q-sm-roots": {"short": "Roots of decimals", "label": "Square roots of decimal numbers", "kind": "qtype", "parent": "c-sm-bodmas", "order": 4,
+                   "summary": "Sums of √0.49, √59.29 … and statements to be judged true or false.", "links": ["surds-indices"]},
+    "q-sm-harmonic": {"short": "Fraction series", "label": "Series of fractions with a known partial sum", "kind": "qtype", "parent": "c-sm-bodmas", "order": 5,
+                      "summary": "A series like 5/6 + 5/9 + 5/12 + … written in terms of 1 + 1/2 + 1/3 + … = k.", "links": []},
+    "q-sm-root-trick": {"short": "Perfect-square trick", "label": "Expression under a root that is a perfect square", "kind": "qtype", "parent": "c-sm-bodmas", "order": 6,
+                        "summary": "N = a² − a − (a − 1) and √N asked: rewrite as (a − 1)².", "links": ["algebraic-identities"]},
 }
 FORMULAS = [
     {"id": "sm-f1", "node": "c-sm-compare", "text": "a/b < c/d  ⇔  a×d < c×b   (cross-multiply, b and d positive)", "note": "Or compare each fraction with a benchmark such as 1/2 or 0.6."},
     {"id": "sm-f2", "node": "c-sm-compare", "text": "Closer to 1 means a smaller gap: a/b = 1 − (b − a)/b", "note": "5/9 = 1 − 4/9 and 4/7 = 1 − 3/7: compare 4/9 and 3/7."},
     {"id": "sm-f3", "node": "c-sm-bodmas", "text": "Order: Brackets (innermost first), Of, Division, Multiplication, Addition, Subtraction", "note": "Mixed numbers: change 8⅓ to 25/3 before any division."},
     {"id": "sm-f4", "node": "c-sm-bodmas", "text": "a ÷ (b/c) = a × (c/b)", "note": "Dividing by a fraction is multiplying by its flip."},
+    {"id": "sm-f5", "node": "c-sm-bodmas", "text": "Cancel before multiplying: (a × b) ÷ (c × d) → pair numerator and denominator factors that share a factor.", "note": "Decimals: shift the point the same number of places in numerator and denominator."},
+    {"id": "sm-f6", "node": "c-sm-bodmas", "text": "√0.49 = 0.7, √0.0049 = 0.07, √59.29 = 7.7: the root has half as many decimal places.", "note": "Take the root of the digits, then place the point."},
+    {"id": "sm-f7", "node": "c-sm-bodmas", "text": "c/(3 × 2) + c/(3 × 3) + … = (c/3)(1/2 + 1/3 + …)", "note": "Remove the common factor, then match the remaining series with the known one."},
+    {"id": "sm-f8", "node": "c-sm-bodmas", "text": "a² − 2a + 1 = (a − 1)²", "note": "Express the small numbers through the big one (98764 = 98765 − 1)."},
 ]
 METHODS = {
     "q-sm-order": {
@@ -47,6 +62,34 @@ METHODS = {
         "fast": "Estimate: 5.33 → 0.19 → 2.19 → 0.457 → 3.457. Then 121/35 = 3.457 is the match.",
         "eliminate": "The value is a little above 3 (3 + a fraction less than 1/2). Options above 3.5 or below 3 are out.",
         "traps": ["Starting at the top.", "Flipping the wrong layer.", "Adding 1/3 to 5 and forgetting to flip before adding 2."]},
+    "q-sm-decimal": {
+        "cue": "Several decimals multiplied and divided, or a row of decimal fractions that look the same.",
+        "formulas": ["sm-f5"], "tech": ["cancel-first"],
+        "standard": "Remove the decimals (multiply top and bottom by the same power of 10) and cancel before you multiply.",
+        "fast": "A row of fractions where numerator and denominator shrink together: every term has the same value; multiply by the count.",
+        "eliminate": "Estimate each part to one significant figure; options far from that are out.",
+        "traps": ["Misplacing the decimal point after multiplying.", "Adding the terms as if they differed."]},
+    "q-sm-roots": {
+        "cue": "A true/false statement with several square roots of decimals.",
+        "formulas": ["sm-f6"], "tech": ["estimate"],
+        "standard": "Take each root exactly (0.49 → 0.7, 0.0049 → 0.07, 59.29 → 7.7) and add; compare with the right side.",
+        "fast": "Roots of decimals: halve the number of decimal places, then take the integer root.",
+        "eliminate": "Check the last decimal place: the sum of the roots' last digits must match the claimed total.",
+        "traps": ["√0.0049 = 0.07 not 0.7.", "Not testing both statements."]},
+    "q-sm-harmonic": {
+        "cue": "A series whose terms are a constant times 1/2, 1/3, 1/4 … and a known sum k.",
+        "formulas": ["sm-f7"], "tech": ["identity"],
+        "standard": "Factor out the constant; match the remaining series with the known one and remove any missing first term.",
+        "fast": "The first term 1 of 1 + 1/2 + … is not in the new series, so subtract it: k − 1.",
+        "eliminate": "Compare sizes: the new sum has no 1 and a 5/3 multiplier.",
+        "traps": ["Forgetting to remove the first term 1.", "Using 5/6 as the first term of 5/3 × series: 5/6 is 5/3 × 1/2."]},
+    "q-sm-root-trick": {
+        "cue": "A big number squared minus consecutive numbers, with a square root asked.",
+        "formulas": ["sm-f8"], "tech": ["identity"],
+        "standard": "Let a be the big number and rewrite every other number in terms of a.",
+        "fast": "a² − a − (a − 1) = a² − 2a + 1 = (a − 1)².",
+        "eliminate": "√N must be just below the big number, so options near it are the only ones possible.",
+        "traps": ["Computing 98765² directly.", "Taking √N = a instead of a − 1."]},
 }
 _ord = lambda t: sorted(map(F, t.split(", "))) == list(map(F, t.split(", ")))
 OPT57 = ["3/5, 4/7, 5/9, 7/11", "5/9, 4/7, 3/5, 7/11", "3/5, 5/9, 4/7, 7/11", "4/7, 5/9, 7/11, 3/5"]
@@ -71,6 +114,24 @@ PYQS = [
         ["Bottom: 5 + 1/3 = 16/3, so 1/(16/3) = 3/16.", "2 + 3/16 = 35/16, so 1/(35/16) = 16/35.", "x = 3 + 16/35 = 121/35."],
         lambda: float(3 + 1 / (2 + 1 / (5 + F(1, 3)))), 121 / 35, 1e-9, tech=["estimate"], concepts=1,
         trick="x is a bit over 3 (3 + about 0.46). 121/35 = 3.457; 47/16 = 2.94 and 59/19 = 3.1 are far off."),
+    pyq(K1, 21, "q-sm-root-trick", 'If N = (98765)^2 − 98765 − 98764, what is the value of √N?', ['98764', '98762', '98761', '98760'], "a",
+        ['With a = 98765: N = a² − a − (a − 1) = a² − 2a + 1 = (a − 1)².', '√N = a − 1 = 98764.'],
+        lambda: 98765 - 1, 98764, 0, tech=['identity'], trick='Rewrite 98764 as 98765 − 1: the expression is (98765 − 1)².'),
+    pyq(K1, 22, "q-sm-decimal", 'Find the value of 0.05/0.8 + 0.005/0.08 + 0.0005/0.008 + 0.00005/0.0008 + 0.000005/0.00008.', ['0.1250', '0.1875', '0.25', '0.3125'], "d",
+        ['Each fraction equals 0.05 ÷ 0.8 = 1/16 = 0.0625 (numerator and denominator shrink by ten each time).', 'Five equal terms: 5 × 0.0625 = 0.3125.'],
+        lambda: 5 * 0.05 / 0.8, 0.3125, 1e-09, tech=['cancel-first'], trick='Every term is the same 0.05 ÷ 0.8 = 1/16; multiply by 5.'),
+    pyq(K1, 29, "q-sm-decimal", 'What is the value of (0.72 × 4.2) ÷ (2.8 × 0.6) − (0.75 × 1.92) ÷ (1.2 × 1.5)?', ['1', '1.2', '1.4', '1.5'], "a",
+        ['First part: 3.024 ÷ 1.68 = 1.8. Second part: 1.44 ÷ 1.8 = 0.8.', '1.8 − 0.8 = 1.'],
+        lambda: 0.72 * 4.2 / (2.8 * 0.6) - 0.75 * 1.92 / (1.2 * 1.5), 1.0, 1e-09, tech=['cancel-first'], trick='Cancel before multiplying: 0.72 ÷ 0.6 = 1.2 and 4.2 ÷ 2.8 = 1.5 gives 1.8.'),
+    pyq(K1, 40, "q-sm-roots", 'Which statement(s) is/are true?  I. √0.49 + √0.0049 + √0.0121 + √0.0036 = 0.84   II. √59.29 + √10.89 + √1.44 = 11.2', ['Only I', 'Only II', 'Both I and II', 'Neither I nor II'], "d",
+        ['I: 0.7 + 0.07 + 0.11 + 0.06 = 0.94, not 0.84.', 'II: 7.7 + 3.3 + 1.2 = 12.2, not 11.2.', 'Both are false.'],
+        lambda: int(abs(sum(math.sqrt(x) for x in (0.49, 0.0049, 0.0121, 0.0036)) - 0.84) > 1e-9 and abs(sum(math.sqrt(x) for x in (59.29, 10.89, 1.44)) - 11.2) > 1e-9), 1, 0, tech=['estimate'], optvals=[0, 0, 0, 1], trick='Take each root separately (0.7, 0.07, 0.11, 0.06; 7.7, 3.3, 1.2) and add.'),
+    pyq(K1, 41, "q-sm-harmonic", 'If 1 + 1/2 + 1/3 + 1/4 + … + 1/25 = k, what is the value of 5/6 + 5/9 + 5/12 + … + 1/15?', ['(k − 1)/3', '5k/3', '5(k − 1)/3', '5(k − 1)'], "c",
+        ['The terms are 5/(3 × 2), 5/(3 × 3), 5/(3 × 4), …, 5/(3 × 25) = 1/15.', 'Sum = (5/3) × (1/2 + 1/3 + … + 1/25) = (5/3)(k − 1).'],
+        lambda: sum(5 / (3 * j) for j in range(2, 26)), 4.693263629589178, 1e-09, tech=['identity'], optvals=[(KH - 1) / 3, 5 * KH / 3, 5 * (KH - 1) / 3, 5 * (KH - 1)], trick='Pull out 5/3: what is left is the given sum without its first term 1.', concepts=2),
+    pyq(K1, 48, "q-sm-continued", 'If 1 / (1 + 1 / (1 + 1 / (1 + 1 / (1 + 1/x)))) = 23/38, what is the value of x?', ['9', '7', '5', '2'], "b",
+        ['Work from the outside in. 1/(1 + s) = 23/38 gives s = 38/23 − 1 = 15/23. Flip and subtract 1 each time: 23/15 − 1 = 8/15; 15/8 − 1 = 7/8; 8/7 − 1 = 1/7.', 'So 1/x = 1/7 and x = 7.'],
+        lambda: (lambda s: 1 / [s := 1 / s - 1 for _ in range(3)][-1])(1 / F(23, 38) - 1), 7, 1e-09, tech=['cancel-first'], trick='Peel layers from the outside: flip, subtract 1, repeat; 1/x = 1/7.', concepts=2),
 ]
 
 

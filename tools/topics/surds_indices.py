@@ -2,6 +2,8 @@
 import math, re
 from bank import bound, mistake, pyq
 
+K1 = "kiran-ch01-t01"
+
 TOPIC = "surds-indices"
 PREFIX = "sd"
 TIER = "quiz"
@@ -69,6 +71,12 @@ PYQS = [
         trick="The first two fractions together already equal 10/22, which is exactly what is subtracted.",
         wrong={"b": bound("The sum of the two fractions is 10/22 and so is the subtracted term. They cancel to 0, not 1.", lambda v: v != 0),
                "c": bound("The expression cancels completely to 0.", lambda v: v != 0), "d": bound("No root is left once the conjugates are added.", lambda v: v != 0)}),
+    pyq(K1, 33, "q-sd-compare", 'Which of the following is true?', ['24^(1/9) < 6^(1/6) < 2^(1/2)', '6^(1/6) < 2^(1/2) < 24^(1/9)', '2^(1/2) < 24^(1/9) < 6^(1/6)', '2^(1/2) < 6^(1/6) < 24^(1/9)'], "b",
+        ['Bring to a common root index 18: 6^(1/6) = 216^(1/18), 2^(1/2) = 512^(1/18), 24^(1/9) = 576^(1/18).', '216 < 512 < 576, so 6^(1/6) < 2^(1/2) < 24^(1/9).'],
+        lambda: int(6 ** (1 / 6) < 2 ** 0.5 < 24 ** (1 / 9)), 1, 0, tech=['bounds'], optvals=[int(24 ** (1 / 9) < 6 ** (1 / 6) < 2 ** 0.5), int(6 ** (1 / 6) < 2 ** 0.5 < 24 ** (1 / 9)), int(2 ** 0.5 < 24 ** (1 / 9) < 6 ** (1 / 6)), int(2 ** 0.5 < 6 ** (1 / 6) < 24 ** (1 / 9))], trick='Common index 18 (the LCM of 2, 6, 9): compare 216, 512 and 576.'),
+    pyq(K1, 34, "q-sd-compare", 'Which of the following is true?', ['5^(1/2) < 9^(1/3) < 21^(1/4)', '1/21^(1/4) > 1/9^(1/3) > 1/5^(1/2)', '1/9^(1/3) > 1/21^(1/4) > 1/5^(1/2)', '1/9^(1/3) > 1/5^(1/2) > 1/21^(1/4)'], "c",
+        ['Common index 12: 5^(1/2) = 15625^(1/12), 9^(1/3) = 6561^(1/12), 21^(1/4) = 9261^(1/12).', 'So 9^(1/3) < 21^(1/4) < 5^(1/2) (6561 < 9261 < 15625). Reciprocals reverse it: 1/9^(1/3) > 1/21^(1/4) > 1/5^(1/2).'],
+        lambda: int(1 / 9 ** (1 / 3) > 1 / 21 ** 0.25 > 1 / 5 ** 0.5), 1, 0, tech=['bounds'], optvals=[int(5 ** 0.5 < 9 ** (1 / 3) < 21 ** 0.25), int(1 / 21 ** 0.25 > 1 / 9 ** (1 / 3) > 1 / 5 ** 0.5), int(1 / 9 ** (1 / 3) > 1 / 21 ** 0.25 > 1 / 5 ** 0.5), int(1 / 9 ** (1 / 3) > 1 / 5 ** 0.5 > 1 / 21 ** 0.25)], trick='Common index 12 (6561 < 9261 < 15625), then flip the order for reciprocals.'),
 ]
 
 

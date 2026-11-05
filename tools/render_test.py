@@ -147,7 +147,8 @@ with sync_playwright() as p:
     # ---------------- sources ----------------
     pg.click('#tabs [data-view="sources"]'); pg.wait_for_timeout(600)
     check(pg.locator("#sources .pcard[data-pid]").count() == len(core["papers"]), f"Sources lists all {len(core['papers'])} papers")
-    check(pg.locator('#sources a.ext[href*="drive.google.com"]').count() == len(core["papers"]), "each paper keeps its source link, and only here")
+    hrefs = pg.eval_on_selector_all("#sources .pcard[data-pid] a.ext", "els => els.map(e => e.getAttribute('href'))")
+    check(sorted(hrefs) == sorted(p["link"] for p in core["papers"] if p.get("link")), "each paper shows its own source link on Sources")
     check(pg.locator("#topic a[href]").count() == 0, "topic pages carry no links to papers")
     pg.click("#sources [data-plist]"); pg.wait_for_timeout(700)
     check(pg.locator("#sources table.plist tbody tr").count() > 10, "a paper's question list opens")

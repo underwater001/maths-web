@@ -126,9 +126,13 @@ def main():
     # ---- stats: how often each topic and question type appears, per exam and overall ------------
     qtype_of = {q["id"]: q["qtype"] for s in shards.values() for q in s["pyqs"]}
     level_of = {q["id"]: q["level"] for s in shards.values() for q in s["pyqs"]}
-    scopes = {"all": rows}
-    for r in rows: scopes.setdefault(r["exam"], [])
-    for r in rows:
+    # Chapterwise banks (kind "chapter-bank") have no exam date or shift, so they never count as a shift: they are
+    # reported separately (bankQ) and leave the likelihood numbers untouched.
+    shift_rows = [r for r in rows if r["kind"] != "chapter-bank"]
+    bank_q = Counter(qtype_of[r["id"]] for r in rows if r["kind"] == "chapter-bank" and r["id"] in qtype_of)
+    scopes = {"all": shift_rows}
+    for r in shift_rows: scopes.setdefault(r["exam"], [])
+    for r in shift_rows:
         if r["exam"] != "all": scopes[r["exam"]] = scopes.get(r["exam"], []) + [r]
     stats = {}
     for name, rs in scopes.items():
@@ -152,7 +156,7 @@ def main():
     # how many filed questions of each paper became quizzes
     for p in papers: p["built"] = sum(1 for s in shards.values() for q in s["pyqs"] if q["paper"] == p["id"])
 
-    core = {"nodes": nodes, "papers": papers, "stats": stats, "topics": topics_meta, "bank": {"cols": cols, "rows": bank_rows},
+    core = {"nodes": nodes, "papers": papers, "stats": stats, "bankQ": dict(bank_q), "topics": topics_meta, "bank": {"cols": cols, "rows": bank_rows},
             "techniques": bank.TECHNIQUES, "refs": refs,
             "rubric": {"steps": "1–2 steps = 1 point, 3–4 = 2, 5 or more = 3", "concepts": "+1 for each extra concept combined", "heavy": "+1 for big or awkward numbers",
                        "trap": "+1 if a wrong option is the result of a common mistake", "levels": "up to 2 Easy, 3–4 Medium, 5 or more Hard"},

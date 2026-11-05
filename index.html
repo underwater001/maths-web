@@ -229,7 +229,7 @@ table.plist th{color:var(--muted);font-weight:500}
 <script>
 (function(){
 "use strict";
-const S = { nodes:new Map(), papers:[], stats:{papers:0,topics:{},qtypes:{}}, tmeta:{}, rows:[], techniques:{}, likNote:'', refs:[],
+const S = { nodes:new Map(), papers:[], stats:{papers:0,topics:{},qtypes:{}}, bankQ:{}, tmeta:{}, rows:[], techniques:{}, likNote:'', refs:[],
             sd:{}, sp:{}, q:'', view:'syllabus', topic:null, typeFilter:'', shownQ:20, shown:20, loaded:false, status:'loading',
             cnt:new Map(), built:new Set(), mostAsked:new Set(), prog:{},
             f:{topic:'', qtype:'', level:new Set(), lik:new Set(), src:'', status:'', tech:'', sort:'asked'} };
@@ -311,6 +311,7 @@ function whyText(w){ if(!w) return ''; const b=[`${w.steps} step${w.steps===1?''
 function whenTag(x){
   if (x.src !== 'pyq') return `<span class="tag">${x.variant==='harder'?'extra · one level harder':'extra practice'}</span>`;
   const p = paper(x.paper) || {};
+  if (p.kind === 'chapter-bank') return `<span class="tag when" title="${esc([p.publisher, p.chapter, p.test].filter(Boolean).join(' · '))} (no exam date in the source)">${esc(p.publisher)} bank · ${esc((p.chapter||'').replace(/ · .*/,''))} · ${esc((p.test||'').replace(/ \(.*/,''))} · Q${x.qno}</span>`;
   return `<span class="tag when" title="${esc([p.exam, p.publisher].filter(Boolean).join(' · '))}">asked ${fmtDate(p.date)}${p.shift?` S${p.shift}`:''} · Q${x.qno}</span>`;
 }
 function qTags(x){
@@ -489,7 +490,7 @@ function typesSection(t, d, types){
       return `<div class="card lead-c" id="ty-${esc(q.id)}" style="--c:${color(t)}">
         <div class="tt" style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline">
           <h3>${i+1}. ${esc(q.label)}</h3>
-          <div class="tags">${likTag(st)}${S.mostAsked.has(q.id)?'<span class="tag most">most asked</span>':''}${st?`<span class="tag">${st.n} asked · ${st.shifts}/${S.stats.papers} shifts</span>`:''}</div>
+          <div class="tags">${likTag(st)}${S.mostAsked.has(q.id)?'<span class="tag most">most asked</span>':''}${st?`<span class="tag">${st.n} asked · ${st.shifts}/${S.stats.papers} shifts</span>`:''}${S.bankQ[q.id]?`<span class="tag">${S.bankQ[q.id]} in the chapterwise bank</span>`:''}</div>
         </div>
         ${q.summary?`<p class="note">${md(q.summary)}</p>`:''}
         ${m.cue?`<div class="pattern"><b>The pattern</b>${esc(m.cue)}</div>`:''}
@@ -613,11 +614,11 @@ $('cards').addEventListener('click', e => {
 });
 
 /* ================= 4. SOURCES ================= */
-const KIND = {'similar-paper':'Similar paper (made by a coaching institute, not the official paper)', official:'Official paper', memory:'Memory-based paper'};
+const KIND = {'chapter-bank':'Chapterwise question bank (a publisher\'s collection; no exam date or shift per question)','similar-paper':'Similar paper (made by a coaching institute, not the official paper)', official:'Official paper', memory:'Memory-based paper'};
 const pcache = {};
 function renderSources(){
   if (!S.loaded){ $('sources').innerHTML = '<p class="empty-msg">Loading…</p>'; return; }
-  const ps = [...S.papers].sort((a,b) => (b.date||'').localeCompare(a.date||'') || a.shift - b.shift);
+  const ps = [...S.papers].sort((a,b) => (b.date||'').localeCompare(a.date||'') || (a.shift||0) - (b.shift||0));
   const filed = ps.reduce((a,p) => a + p.n, 0), built = ps.reduce((a,p) => a + (p.built||0), 0);
   const byTopic = {}; (S.refs||[]).forEach(r => (byTopic[r.topic] = byTopic[r.topic] || []).push(r));
   $('sources').innerHTML = `
@@ -627,7 +628,7 @@ function renderSources(){
     </div>
     <div class="sect"><div class="hd"><h3>Papers</h3></div>
       ${ps.map(p => `<div class="pcard" data-pid="${esc(p.id)}">
-        <h3>${esc(p.exam)} · ${fmtDate(p.date)} · Shift ${p.shift}</h3>
+        <h3>${p.kind==='chapter-bank' ? `${esc(p.publisher)} · ${esc(p.chapter)} · ${esc(p.test)}` : `${esc(p.exam)} · ${fmtDate(p.date)} · Shift ${p.shift}`}</h3>
         <p class="statline">${esc(p.publisher)} · ${esc(KIND[p.kind]||p.kind)} · Quant ${esc(p.quant)} · ${p.n} filed · ${p.built||0} built</p>
         <div class="chips">${Object.entries(p.topics||{}).map(([t,c]) => `<span class="chip" style="cursor:default"><i style="background:${color(t)}"></i>${esc((S.nodes.get(t)||{}).label||t)} <span class="n">${c}</span></span>`).join('')}</div>
         <div class="chips">${p.link?`<a class="ext" href="${esc(p.link)}" target="_blank" rel="noopener">Open the paper ↗</a>`:''}<button type="button" class="qbtn" data-plist="${esc(p.id)}">Show the question list</button></div>
@@ -636,7 +637,7 @@ function renderSources(){
     <div class="sect"><div class="hd"><h3>Outside reading</h3><span class="statline">links and notes, nothing copied</span></div>
       ${Object.entries(byTopic).map(([t,rs]) => `<div class="pcard"><h3>${esc((S.nodes.get(t)||{}).label||t)}</h3><ul class="plain">${rs.map(r=>`<li><a class="ext" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)} ↗</a><br><span class="note">${esc(r.note)}</span></li>`).join('')}</ul></div>`).join('') || '<p class="empty-msg">None yet.</p>'}
     </div>
-    <p class="note">The first three papers are similar papers by a coaching institute, not official CGL papers, so the counts carry that publisher's style. How often a type repeats stays provisional until official papers are added.</p>`;
+    <p class="note">The 12 Sep 2025 papers are similar papers by a coaching institute, not official CGL papers, so the repeat counts carry that publisher's style and stay provisional until official papers are added. Chapterwise bank questions have no exam date, so they are practice material and do not change the repeat counts.</p>`;
 }
 $('sources').addEventListener('click', async e => {
   const b = e.target.closest('[data-plist]'); if (!b) return;
@@ -732,7 +733,7 @@ renderHeader(); renderSyllabus();
   try {
     const c = await get('data/core.json');
     S.nodes = new Map(Object.entries(c.nodes).map(([id,n]) => [id, Object.assign({id}, n)]));
-    S.papers = c.papers; S.stats = c.stats.all || S.stats; S.tmeta = c.topics; S.techniques = c.techniques; S.likNote = c.likelihood; S.refs = c.refs || [];
+    S.papers = c.papers; S.stats = c.stats.all || S.stats; S.bankQ = c.bankQ || {}; S.tmeta = c.topics; S.techniques = c.techniques; S.likNote = c.likelihood; S.refs = c.refs || [];
     const cols = c.bank.cols; S.rows = c.bank.rows.map(r => Object.fromEntries(cols.map((k,i)=>[k, r[i]])));
     S.loaded = true; S.status = 'ok';
     derive(); paintJunctions(); renderHeader();

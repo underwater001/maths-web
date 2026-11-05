@@ -1,0 +1,382 @@
+{
+ "id": "kiran-ch01-t01",
+ "exam": "Kiran SSC Maths chapterwise PYQ bank",
+ "kind": "chapter-bank",
+ "publisher": "Kiran Publication",
+ "chapter": "Chapter 1 · Number System",
+ "test": "Test-1 (English medium)",
+ "date": null,
+ "shift": null,
+ "link": "https://www.kiranprepare.com/prompt/bookgpt?siteName=kiranprepare&bookId=89710",
+ "quant": "Q1-Q54",
+ "skipped": {
+  "53": "The book's key (64) is wrong: it does not count 0 as an even digit. Counted correctly the answer is 100, which is not an option.",
+  "54": "Repeat of Q1 with the options in a different order."
+ },
+ "rows": [
+  {
+   "qno": 1,
+   "topic": "number-system",
+   "key": "c",
+   "answer": "11/20",
+   "verified": true
+  },
+  {
+   "qno": 2,
+   "topic": "number-system",
+   "key": "d",
+   "answer": "None of these",
+   "verified": true
+  },
+  {
+   "qno": 3,
+   "topic": "number-system",
+   "key": "b",
+   "answer": "37",
+   "verified": true
+  },
+  {
+   "qno": 4,
+   "topic": "number-system",
+   "key": "b",
+   "answer": "700",
+   "verified": true
+  },
+  {
+   "qno": 5,
+   "topic": "number-system",
+   "key": "b",
+   "answer": "7",
+   "verified": true
+  },
+  {
+   "qno": 6,
+   "topic": "number-system",
+   "key": "c",
+   "answer": "7",
+   "verified": true
+  },
+  {
+   "qno": 7,
+   "topic": "number-system",
+   "key": "a",
+   "answer": "10656",
+   "verified": true
+  },
+  {
+   "qno": 8,
+   "topic": "number-system",
+   "key": "d",
+   "answer": "12180",
+   "verified": true
+  },
+  {
+   "qno": 9,
+   "topic": "number-system",
+   "key": "c",
+   "answer": "59",
+   "verified": true
+  },
+  {
+   "qno": 10,
+   "topic": "number-system",
+   "key": "a",
+   "answer": "10, 1, 6",
+   "verified": true
+  },
+  {
+   "qno": 11,
+   "topic": "number-system",
+   "key": "b",
+   "answer": "9",
+   "verified": true
+  },
+  {
+   "qno": 12,
+   "topic": "hcf-lcm",
+   "key": "c",
+   "answer": "1121",
+   "verified": true
+  },
+  {
+   "qno": 13,
+   "topic": "number-system",
+   "key": "d",
+   "answer": "All of these",
+   "verified": true
+  },
+  {
+   "qno": 14,
+   "topic": "number-system",
+   "key": "c",
+   "answer": "1300",
+   "verified": true
+  },
+  {
+   "qno": 15,
+   "topic": "number-system",
+   "key": "a",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 16,
+   "topic": "number-system",
+   "key": "a",
+   "answer": "99",
+   "verified": true
+  },
+  {
+   "qno": 17,
+   "topic": "number-system",
+   "key": "a",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 18,
+   "topic": "number-system",
+   "key": "c",
+   "answer": "22",
+   "verified": true
+  },
+  {
+   "qno": 19,
+   "topic": "number-system",
+   "key": "c",
+   "answer": "110",
+   "verified": true
+  },
+  {
+   "qno": 20,
+   "topic": "number-system",
+   "key": "b",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 21,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "98764",
+   "verified": true
+  },
+  {
+   "qno": 22,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "0.3125",
+   "verified": true
+  },
+  {
+   "qno": 23,
+   "topic": "number-system",
+   "key": "c",
+   "answer": "204",
+   "verified": true
+  },
+  {
+   "qno": 24,
+   "topic": "number-system",
+   "key": "b",
+   "answer": "19",
+   "verified": true
+  },
+  {
+   "qno": 25,
+   "topic": "number-system",
+   "key": "b",
+   "answer": "13",
+   "verified": true
+  },
+  {
+   "qno": 26,
+   "topic": "number-system",
+   "key": "d",
+   "answer": "209",
+   "verified": true
+  },
+  {
+   "qno": 27,
+   "topic": "number-system",
+   "key": "a",
+   "answer": "1",
+   "verified": true
+  },
+  {
+   "qno": 28,
+   "topic": "number-system",
+   "key": "c",
+   "answer": "9 × 10^999",
+   "verified": true
+  },
+  {
+   "qno": 29,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "1",
+   "verified": true
+  },
+  {
+   "qno": 30,
+   "topic": "number-system",
+   "key": "d",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 31,
+   "topic": "number-system",
+   "key": "c",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 32,
+   "topic": "number-system",
+   "key": "a",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 33,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "6^(1/6) < 2^(1/2) < 24^(1/9)",
+   "verified": true
+  },
+  {
+   "qno": 34,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "1/9^(1/3) > 1/21^(1/4) > 1/5^(1/2)",
+   "verified": true
+  },
+  {
+   "qno": 35,
+   "topic": "hcf-lcm",
+   "key": "c",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 36,
+   "topic": "hcf-lcm",
+   "key": "d",
+   "answer": "1",
+   "verified": true
+  },
+  {
+   "qno": 37,
+   "topic": "hcf-lcm",
+   "key": "b",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 38,
+   "topic": "number-system",
+   "key": "a",
+   "answer": "−100",
+   "verified": true
+  },
+  {
+   "qno": 39,
+   "topic": "number-system",
+   "key": "c",
+   "answer": "16",
+   "verified": true
+  },
+  {
+   "qno": 40,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "Neither I nor II",
+   "verified": true
+  },
+  {
+   "qno": 41,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "5(k − 1)/3",
+   "verified": true
+  },
+  {
+   "qno": 42,
+   "topic": "number-system",
+   "key": "d",
+   "answer": "k(k + 2)",
+   "verified": true
+  },
+  {
+   "qno": 43,
+   "topic": "hcf-lcm",
+   "key": "c",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 44,
+   "topic": "hcf-lcm",
+   "key": "b",
+   "answer": "41",
+   "verified": true
+  },
+  {
+   "qno": 45,
+   "topic": "number-system",
+   "key": "b",
+   "answer": "45",
+   "verified": true
+  },
+  {
+   "qno": 46,
+   "topic": "number-system",
+   "key": "d",
+   "answer": "3195",
+   "verified": true
+  },
+  {
+   "qno": 47,
+   "topic": "number-system",
+   "key": "b",
+   "answer": "2222222222",
+   "verified": true
+  },
+  {
+   "qno": 48,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "7",
+   "verified": true
+  },
+  {
+   "qno": 49,
+   "topic": "number-system",
+   "key": "c",
+   "answer": "11",
+   "verified": true
+  },
+  {
+   "qno": 50,
+   "topic": "number-system",
+   "key": "b",
+   "answer": "43",
+   "verified": true
+  },
+  {
+   "qno": 51,
+   "topic": "number-system",
+   "key": "a",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 52,
+   "topic": "number-system",
+   "key": "c",
+   "answer": "183",
+   "verified": true
+  }
+ ]
+}

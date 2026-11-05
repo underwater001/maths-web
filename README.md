@@ -73,6 +73,8 @@ Send anything: a question paper, a page of formulas, a sheet of shortcuts, photo
 
 **The source link** (a Google Drive link or any URL) goes in that paper's `link` field, and shows on the Sources page. Question cards name the paper, date, shift and question number as plain text; the link itself stays on Sources.
 
+**Two kinds of source.** A dated exam paper (`kind` official, memory or similar-paper) has a date and shift, and counts towards how often a question type repeats. A chapterwise bank (`kind: "chapter-bank"`, one file per test, e.g. `kiran-ch01-t01`) has no date or shift, so its questions are practice material: they are tagged with the book, chapter and test, and they never change the repeat numbers. A question whose book key is wrong or that repeats another is left out and listed under `skipped` in its paper file.
+
 A new paper is one file. A new topic is one entry in `data/tree.json` plus one module. Nothing else has to change.
 
 ### Tiers
