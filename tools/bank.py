@@ -94,6 +94,26 @@ def ratio_val(t):
     return float(sum(p / parts[0] * F(1000) ** i for i, p in enumerate(parts)))
 
 
+def opt_val(t):
+    """Value of a typical SSC answer option as one number, for the recompute match in pyq().
+    Handles mixed numbers ('83 1/3 %', '6 1/4 %'), signed changes ('4% decrease', 'increased by 6 1/4 %'),
+    'no change' / 'neither ... nor' (0), and text options such as 'None of these' / 'Data inadequate'
+    (a sentinel that equals no computed answer)."""
+    s = str(t).strip().replace("\u2212", "-").replace("₹", "").replace(",", "")
+    low = s.lower()
+    if re.search(r"no change|neither|unchanged", low):
+        return 0.0
+    if not re.search(r"\d", s):
+        return -1e18
+    if re.search(r"none of|inadequate|cannot be", low):
+        return -1e18
+    m = re.search(r"(\d+)\s+(\d+)\s*/\s*(\d+)", s)
+    v = int(m[1]) + int(m[2]) / int(m[3]) if m else num(s)
+    if re.search(r"decreas|less|reduc|fall|loss|lower|slower", low) and v > 0:
+        v = -v
+    return v
+
+
 def mixed_val(t):
     """'15 5/6 days' -> 15.833..., '18 days' -> 18, '47/48 hours' -> 0.979."""
     m = re.search(r"(\d+)\s+(\d+)\s*/\s*(\d+)", str(t))

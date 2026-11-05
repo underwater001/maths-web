@@ -311,7 +311,7 @@ function whyText(w){ if(!w) return ''; const b=[`${w.steps} step${w.steps===1?''
 function whenTag(x){
   if (x.src !== 'pyq') return `<span class="tag">${x.variant==='harder'?'extra · one level harder':'extra practice'}</span>`;
   const p = paper(x.paper) || {};
-  if (p.kind === 'chapter-bank') return `<span class="tag when" title="${esc([p.publisher, p.chapter, p.test].filter(Boolean).join(' · '))} (no exam date in the source)">${esc(p.publisher)} bank · ${esc((p.chapter||'').replace(/ · .*/,''))} · ${esc((p.test||'').replace(/ \(.*/,''))} · Q${x.qno}</span>`;
+  if (p.kind === 'chapter-bank') return `<span class="tag when" title="${esc([p.publisher, p.chapter, p.test].filter(Boolean).join(' · '))} (no exam date in the source)">${esc([`${p.publisher} bank`, (p.chapter||'').replace(/ · .*/,''), (p.test||'').replace(/ \(.*/,''), `Q${x.qno}`].filter(Boolean).join(' · '))}</span>`;
   return `<span class="tag when" title="${esc([p.exam, p.publisher].filter(Boolean).join(' · '))}">asked ${fmtDate(p.date)}${p.shift?` S${p.shift}`:''} · Q${x.qno}</span>`;
 }
 function qTags(x){
