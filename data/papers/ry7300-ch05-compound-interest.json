@@ -1,0 +1,541 @@
+{
+ "id": "ry7300-ch05-compound-interest",
+ "exam": "Rakesh Yadav 7300+ chapterwise bank",
+ "kind": "chapter-bank",
+ "publisher": "Rakesh Yadav Publications",
+ "chapter": "Chapter 5 · Compound Interest",
+ "test": null,
+ "date": null,
+ "shift": null,
+ "link": "https://drive.google.com/file/d/1NWgOVBZRXngvgt4atvaxHbH-Z6A71APn/view?usp=sharing",
+ "quant": "Q1-Q132 (book numbering)",
+ "note": "A curated selection of 75 of the chapter's 132 questions: every pattern the book uses, with two or three similar questions kept per pattern for practice; figure-based, repeated and badly worded questions left out. The question numbers are the book's own. Every answer was recomputed and compared with the book's printed answer key.",
+ "skipped": {},
+ "rows": [
+  {
+   "qno": 1,
+   "topic": "si-ci",
+   "key": "d",
+   "answer": "Rs. 100",
+   "verified": true
+  },
+  {
+   "qno": 2,
+   "topic": "si-ci",
+   "key": "d",
+   "answer": "Rs. 1000",
+   "verified": true
+  },
+  {
+   "qno": 3,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "45 years",
+   "verified": true
+  },
+  {
+   "qno": 4,
+   "topic": "si-ci",
+   "key": "d",
+   "answer": "50%",
+   "verified": true
+  },
+  {
+   "qno": 5,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "10%",
+   "verified": true
+  },
+  {
+   "qno": 6,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "Rs. 824.32",
+   "verified": true
+  },
+  {
+   "qno": 7,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "2 years",
+   "verified": true
+  },
+  {
+   "qno": 8,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "Rs. 10,000",
+   "verified": true
+  },
+  {
+   "qno": 9,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "Rs. 2.04",
+   "verified": true
+  },
+  {
+   "qno": 10,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "Rs. 1352",
+   "verified": true
+  },
+  {
+   "qno": 11,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 6,000",
+   "verified": true
+  },
+  {
+   "qno": 12,
+   "topic": "si-ci",
+   "key": "d",
+   "answer": "Rs. 4,800",
+   "verified": true
+  },
+  {
+   "qno": 13,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "12 years",
+   "verified": true
+  },
+  {
+   "qno": 14,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "20 years",
+   "verified": true
+  },
+  {
+   "qno": 16,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "5%",
+   "verified": true
+  },
+  {
+   "qno": 17,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 3000",
+   "verified": true
+  },
+  {
+   "qno": 18,
+   "topic": "si-ci",
+   "key": "d",
+   "answer": "Rs. 1,250",
+   "verified": true
+  },
+  {
+   "qno": 19,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "1 1/2 years",
+   "verified": true
+  },
+  {
+   "qno": 20,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 100.00",
+   "verified": true
+  },
+  {
+   "qno": 21,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "Rs. 240",
+   "verified": true
+  },
+  {
+   "qno": 22,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "9%",
+   "verified": true
+  },
+  {
+   "qno": 23,
+   "topic": "si-ci",
+   "key": "d",
+   "answer": "Rs. 4",
+   "verified": true
+  },
+  {
+   "qno": 25,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "625",
+   "verified": true
+  },
+  {
+   "qno": 26,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 625",
+   "verified": true
+  },
+  {
+   "qno": 27,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "3 years",
+   "verified": true
+  },
+  {
+   "qno": 28,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 250",
+   "verified": true
+  },
+  {
+   "qno": 29,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "4 1/6 %",
+   "verified": true
+  },
+  {
+   "qno": 31,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "4% per annum",
+   "verified": true
+  },
+  {
+   "qno": 33,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "10%",
+   "verified": true
+  },
+  {
+   "qno": 35,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "100%",
+   "verified": true
+  },
+  {
+   "qno": 36,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "10%",
+   "verified": true
+  },
+  {
+   "qno": 41,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 2,522",
+   "verified": true
+  },
+  {
+   "qno": 42,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 1,575.20",
+   "verified": true
+  },
+  {
+   "qno": 44,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "Rs. 2,000",
+   "verified": true
+  },
+  {
+   "qno": 46,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "Rs. 232",
+   "verified": true
+  },
+  {
+   "qno": 47,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "Rs. 142.40",
+   "verified": true
+  },
+  {
+   "qno": 48,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "20%",
+   "verified": true
+  },
+  {
+   "qno": 49,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 3,109",
+   "verified": true
+  },
+  {
+   "qno": 50,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 43.41",
+   "verified": true
+  },
+  {
+   "qno": 51,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 330.75",
+   "verified": true
+  },
+  {
+   "qno": 54,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "Rs. 46824",
+   "verified": true
+  },
+  {
+   "qno": 55,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 5,000",
+   "verified": true
+  },
+  {
+   "qno": 56,
+   "topic": "si-ci",
+   "key": "d",
+   "answer": "Rs. 8000",
+   "verified": true
+  },
+  {
+   "qno": 57,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 7,500",
+   "verified": true
+  },
+  {
+   "qno": 58,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "Rs. 5,000",
+   "verified": true
+  },
+  {
+   "qno": 59,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 930",
+   "verified": true
+  },
+  {
+   "qno": 60,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "8%",
+   "verified": true
+  },
+  {
+   "qno": 61,
+   "topic": "si-ci",
+   "key": "d",
+   "answer": "Rs. 81.60",
+   "verified": true
+  },
+  {
+   "qno": 62,
+   "topic": "si-ci",
+   "key": "d",
+   "answer": "Rs. 432",
+   "verified": true
+  },
+  {
+   "qno": 63,
+   "topic": "si-ci",
+   "key": "d",
+   "answer": "Rs. 3750",
+   "verified": true
+  },
+  {
+   "qno": 66,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 4050",
+   "verified": true
+  },
+  {
+   "qno": 68,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "Rs. 6,615",
+   "verified": true
+  },
+  {
+   "qno": 69,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "5%",
+   "verified": true
+  },
+  {
+   "qno": 70,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "1 1/2 years",
+   "verified": true
+  },
+  {
+   "qno": 71,
+   "topic": "si-ci",
+   "key": "d",
+   "answer": "Rs. 6,615",
+   "verified": true
+  },
+  {
+   "qno": 72,
+   "topic": "si-ci",
+   "key": "d",
+   "answer": "Rs. 1,92,000",
+   "verified": true
+  },
+  {
+   "qno": 78,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 8750",
+   "verified": true
+  },
+  {
+   "qno": 83,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "2 years",
+   "verified": true
+  },
+  {
+   "qno": 85,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "Rs. 12,320",
+   "verified": true
+  },
+  {
+   "qno": 87,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "6 years",
+   "verified": true
+  },
+  {
+   "qno": 90,
+   "topic": "si-ci",
+   "key": "d",
+   "answer": "6%",
+   "verified": true
+  },
+  {
+   "qno": 91,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 77.50",
+   "verified": true
+  },
+  {
+   "qno": 95,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "Rs. 1,655",
+   "verified": true
+  },
+  {
+   "qno": 96,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "1/2 year",
+   "verified": true
+  },
+  {
+   "qno": 99,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "Rs. 20,000",
+   "verified": true
+  },
+  {
+   "qno": 101,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 32,000",
+   "verified": true
+  },
+  {
+   "qno": 102,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "50%",
+   "verified": true
+  },
+  {
+   "qno": 103,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "Rs. 4900",
+   "verified": true
+  },
+  {
+   "qno": 106,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "Rs. 57600",
+   "verified": true
+  },
+  {
+   "qno": 112,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "Rs. 2051.20",
+   "verified": true
+  },
+  {
+   "qno": 116,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "10%",
+   "verified": true
+  },
+  {
+   "qno": 118,
+   "topic": "si-ci",
+   "key": "a",
+   "answer": "Rs. 32,800",
+   "verified": true
+  },
+  {
+   "qno": 120,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "Rs. 1200",
+   "verified": true
+  },
+  {
+   "qno": 130,
+   "topic": "si-ci",
+   "key": "b",
+   "answer": "Rs. 7",
+   "verified": true
+  },
+  {
+   "qno": 132,
+   "topic": "si-ci",
+   "key": "c",
+   "answer": "Rs. 306.04",
+   "verified": true
+  }
+ ]
+}

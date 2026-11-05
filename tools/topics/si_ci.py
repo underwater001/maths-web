@@ -2,6 +2,7 @@
 import math
 from bank import bound, mistake, pyq
 from topics._si_ry import PYQS_RY
+from topics._ci_ry import PYQS_RY as PYQS_CI
 
 TOPIC = "si-ci"
 PREFIX = "ci"
@@ -31,6 +32,16 @@ NODES = {
                    "summary": "A sum lent in parts at different rates; find a part, a missing rate or the average rate.", "links": ["mixture-alligation"]},
     "q-si-amounts": {"short": "Two amounts", "label": "Amounts given, find principal or rate", "kind": "qtype", "parent": "c-si-line", "order": 6,
                      "summary": "The amount after one time and after another (or a ratio of P : A) is given; the gap between them is the interest.", "links": []},
+    "q-ci-basic": {"short": "Find CI / amount / sum", "label": "Basic compound interest: amount, interest or sum", "kind": "qtype", "parent": "c-ci-growth", "order": 4,
+                   "summary": "Find the amount, the compound interest or the sum; includes changing rates by year and the matching simple interest.", "links": []},
+    "q-ci-diff": {"short": "CI − SI difference", "label": "Difference between compound and simple interest", "kind": "qtype", "parent": "c-ci-growth", "order": 5,
+                  "summary": "The gap between CI and SI for 2 or 3 years is known; find the sum or the rate. Also with half-yearly compounding.", "links": []},
+    "q-ci-half": {"short": "Half-yearly / quarterly", "label": "Compounded half-yearly or quarterly", "kind": "qtype", "parent": "c-ci-growth", "order": 6,
+                  "summary": "Halve (or quarter) the rate and double (or quadruple) the number of periods; also yearly versus half-yearly and years-and-months.", "links": []},
+    "q-ci-install": {"short": "Equal instalments", "label": "Loans repaid in equal instalments", "kind": "qtype", "parent": "c-ci-growth", "order": 7,
+                     "summary": "A loan repaid in two equal yearly instalments: the instalments, discounted year by year, add up to the loan.", "links": []},
+    "q-ci-growth": {"short": "Growth and depreciation", "label": "Population, price or value growth", "kind": "qtype", "parent": "c-ci-growth", "order": 8,
+                    "summary": "A value grows or falls by a fixed percent each year: multiply by (1 ± r/100) once per year.", "links": ["percentage"]},
 }
 FORMULAS = [
     {"id": "ci-f1", "node": "c-ci-growth", "text": "A = P(1 + r/100)ⁿ     CI = A − P", "note": "Growth factor per year = 1 + r/100."},
@@ -44,6 +55,12 @@ FORMULAS = [
     {"id": "ci-f9", "node": "c-si-line", "text": "Amounts at two times: SI per year = (A₂ − A₁) ÷ (T₂ − T₁); P = A₁ − T₁ × (SI per year)", "note": "720 after 2 y, 1,020 after 7 y: Rs. 60 a year, P = 600."},
     {"id": "ci-f10", "node": "c-si-line", "text": "Extra rate d% for T years adds (d × T)% of P", "note": "3% more for 2 years gives Rs. 72 more: 6% of P = 72, P = 1,200."},
     {"id": "ci-f11", "node": "c-si-line", "text": "Equal instalments x for n years at r%: total paid = nx + r% × x × (0 + 1 + … + (n − 1))", "note": "4 years at 5%: 4x + 0.05 × 6x = 4.3x."},
+    {"id": "ci-f12", "node": "c-ci-growth", "text": "2 years: CI − SI = P (r/100)²     3 years: CI − SI = P (3r² + r³) (r as a decimal)", "note": "5% for 2 years: 0.25% of P. 5% for 3 years: 0.7625% of P."},
+    {"id": "ci-f13", "node": "c-ci-growth", "text": "CI − SI (2 years) = rate × one year's interest", "note": "SI 270 in 2 y → 135 a year; CI − SI = 12.15 → rate = 12.15 ÷ 135 = 9%."},
+    {"id": "ci-f14", "node": "c-ci-growth", "text": "Half-yearly: rate ÷ 2, periods × 2.   Quarterly: rate ÷ 4, periods × 4", "note": "12% half-yearly for 1 year = 6% twice: 1.06² = 1.1236."},
+    {"id": "ci-f15", "node": "c-ci-growth", "text": "Instalments x for n years: loan = x/(1 + r) + x/(1 + r)² + …", "note": "5%, 2 years: 1,859.4 per 1,000 of instalment; x = 12,300 ÷ 1.859 ≈ 6,615."},
+    {"id": "ci-f16", "node": "c-ci-growth", "text": "Changing rates: multiply the yearly factors (1.04 × 1.05 × 1.06 for 4%, 5%, 6%)", "note": "Do not add the rates."},
+    {"id": "ci-f17", "node": "c-ci-growth", "text": "Part of a year at the end: compound whole years, then simple interest on the amount", "note": "2 years 4 months at 15%: ×1.15² then ×(1 + 0.15 × 4/12)."},
 ]
 METHODS = {
     "q-ci-multiple": {
@@ -109,6 +126,41 @@ METHODS = {
         "fast": "Subtract the two amounts to get interest per year; take away the earlier years' interest to reach P.",
         "eliminate": "P is always smaller than the smaller amount by (years × yearly interest).",
         "traps": ["Taking the later amount as the principal.", "Dividing the gap by the later time instead of the time difference."]},
+    "q-ci-basic": {
+        "cue": "'Find the amount / compound interest / sum'; rates that change each year; 'CI is … find the SI'.",
+        "formulas": ["ci-f1", "ci-f16"], "tech": ["multiplier", "standard-values", "back-substitute"],
+        "standard": "Chain the yearly multipliers: 10,000 × 1.04 × 1.05 × 1.06 = 11,575.20, so CI = 1,575.20. CI for 2 years at 5% is 10.25% of P; use it to get P and then the SI.",
+        "fast": "Memorise 1.05² = 1.1025, 1.1² = 1.21, 1.1³ = 1.331, 1.2² = 1.44, 1.05³ = 1.157625. CI ÷ factor gives P, and the SI is just rate × years of P.",
+        "eliminate": "SI for the same sum is always a little less than the CI; the amount is always above the sum, the interest is not.",
+        "traps": ["Giving the amount when the interest is asked (6,655 for 1,655).", "Adding the yearly rates instead of multiplying the factors.", "Using the 2-year factor as 1 + 2r."]},
+    "q-ci-diff": {
+        "cue": "'The difference between compound and simple interest for 2 (or 3) years is Rs. …'.",
+        "formulas": ["ci-f12", "ci-f13"], "tech": ["standard-values", "fraction-percent"],
+        "standard": "2 years at 5%: CI − SI = P × 0.0025 = 15, so P = 6,000. 3 years at 5%: CI − SI = 0.007625 P = 36.60, so P = 4,800.",
+        "fast": "2 years: the difference is the interest on the first year's interest, r% of one year's interest. 3 years at r%: P (3r² + r³).",
+        "eliminate": "Try one option: for 2 years at r% the difference is exactly P × r²/10,000.",
+        "traps": ["Using the 2-year formula for 3 years.", "Writing r as a percent in the formula (use 0.05).", "Mixing the sign: CI is the larger."]},
+    "q-ci-half": {
+        "cue": "'Compounded half-yearly / quarterly / semi-annually', or 'for 1 1/2 years' and '2 years 4 months'.",
+        "formulas": ["ci-f14", "ci-f17"], "tech": ["standard-values", "multiplier"],
+        "standard": "20% quarterly for 9 months: rate 5%, 3 periods. 1.05³ − 1 = 0.157625, so CI = 16,000 × 0.157625 = 2,522. For a time like 2 years 4 months at 15% yearly: 8,000 × 1.15² = 10,580, then × (1 + 0.15 × 4/12).",
+        "fast": "Recognise the factor: 1.157625 = 1.05³ means 3 periods at 5%; the number of periods gives the time.",
+        "eliminate": "Half-yearly gives a slightly larger amount than yearly at the same rate (not smaller).",
+        "traps": ["Halving the rate but not doubling the periods.", "Using the annual rate for each half-year.", "Compounding the leftover months instead of simple interest on them."]},
+    "q-ci-install": {
+        "cue": "'Repaid in two equal annual instalments' at compound interest.",
+        "formulas": ["ci-f15"], "tech": ["back-substitute", "multiplier"],
+        "standard": "Loan = x/1.05 + x/1.05². For x = 17,640: 16,800 + 16,000 = 32,800. To find x: 12,300 = x × 1.859, so x = 6,615.",
+        "fast": "To check an option, divide it by 1.05 once and twice and add. For a loan L: x = L × (1.05)² ÷ (2 + 0.05) = L × 1.1025 ÷ 2.05.",
+        "eliminate": "Two instalments must add to more than the loan but less than loan × 1.1025.",
+        "traps": ["Dividing the loan by 2 (ignores the interest).", "Applying one year's factor to both instalments.", "Using the same factor for the first and second payment."]},
+    "q-ci-growth": {
+        "cue": "'Value depreciates by 4% every year' / 'population increases by …'.",
+        "formulas": ["ci-f1"], "tech": ["multiplier", "cancel-first"],
+        "standard": "Depreciation multiplies by (1 − r/100) each year: 62,500 × 0.96² = 57,600.",
+        "fast": "62,500 × 0.96 = 60,000, then 60,000 × 0.96 = 57,600. Go forward by multiplying, backward by dividing.",
+        "eliminate": "Two falls of 4% take off a little less than 8% in all (7.84%), so the value is just above 92% of 62,500 = 57,500: only 57,600 fits.",
+        "traps": ["Subtracting 8% in one step.", "Using 1.04 instead of 0.96."]},
 }
 PYQS = [
     pyq(S1, 60, "q-ci-multiple", "An amount triples in 6 years at compound interest. How many years will it take to become 27 times its original value?", ["18", "19", "20", "21"], "a",
@@ -131,7 +183,7 @@ PYQS = [
         wrong={k: bound(f"At {o} the interest on 26,000 rupee-years would be ₹{int(o[:-1]) * 260:,}, more than ₹2,000.", lambda v: v >= 10) for k, o in (("b", "10%"), ("c", "12%"), ("d", "15%"))}),
 ]
 
-PYQS = PYQS + PYQS_RY
+PYQS = PYQS + PYQS_RY + PYQS_CI
 
 
 def practice_items():
