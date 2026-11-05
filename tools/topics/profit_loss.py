@@ -8,10 +8,12 @@ from math import gcd
 
 from bank import APPROX, bound, exact2, fmt_value, inr, mistake, pyq, prac, variants
 from topics._pl_ry import PYQS_RY
+from topics._ds_ry import PYQS_RY as PYQS_DS
 
 TOPIC = "profit-loss"      # a topic node in data/tree.json
 QUIZ_TYPES = ("q-pl-basic", "q-pl-swap", "q-pl-ratio", "q-pl-reprice", "q-pl-difference", "q-pl-profit-in-articles", "q-pl-partial",
-              "q-pl-profit-on-sp", "q-pl-sellers", "q-pl-successive", "q-pl-quantity")   # from the Rakesh Yadav book: past questions and a short method, practice comes later
+              "q-pl-profit-on-sp", "q-pl-sellers", "q-pl-successive", "q-pl-quantity",
+              "q-pl-marked", "q-pl-discount-rate", "q-pl-commission", "q-pl-true-discount")   # from the Rakesh Yadav book: past questions and a short method, practice comes later
 PREFIX = "pl"              # practice ids pl-p01, pl-p02, ... (append new items at the end so old ids never move)
 
 NODES = {
@@ -57,6 +59,14 @@ NODES = {
                         "summary": "Two or three discounts one after another, or the single discount that equals them.", "links": []},
     "q-pl-quantity": {"short": "Price and quantity", "label": "Price changes and the quantity bought", "kind": "qtype", "parent": "c-pl-quantity", "order": 3,
                       "summary": "A price changes and the quantity or the spend changes with it; find the new rate or the percent change.", "links": []},
+    "q-pl-marked": {"short": "Marked price", "label": "Find the marked or list price", "kind": "qtype", "parent": "c-pl-multiplier", "order": 3,
+                    "summary": "The selling price, a profit target or a saving is given, and the marked (list) price is asked.", "links": []},
+    "q-pl-discount-rate": {"short": "Rate of discount", "label": "Find the rate of discount", "kind": "qtype", "parent": "c-pl-multiplier", "order": 4,
+                           "summary": "Marked price and selling price (or a profit) are known; find the discount %, or the second of two discounts.", "links": []},
+    "q-pl-commission": {"short": "Commission", "label": "Commission and bonus on sales", "kind": "qtype", "parent": "c-pl-basic", "order": 10,
+                        "summary": "Earnings made of a % commission on sales plus a bonus on part of them.", "links": []},
+    "q-pl-true-discount": {"short": "True & banker's discount", "label": "True discount and banker's discount", "kind": "qtype", "parent": "c-pl-basic", "order": 11,
+                           "summary": "Discount on a sum due after some time at simple interest.", "links": ["si-ci"]},
 }
 
 FORMULAS = [
@@ -100,6 +110,12 @@ FORMULAS = [
      "note": "20% on selling price is 25% on cost. 10% on selling price turns a cost of ₹27 into SP = 27 ÷ 0.9 = ₹30."},
     {"id": "pl-f20", "node": "c-pl-quantity", "text": "If the price rises p %, spending stays the same when consumption falls by p ÷ (100 + p) × 100 %.  If it falls p %, consumption can rise by p ÷ (100 − p) × 100 %",
      "note": "A 20% rise needs a 16⅔% cut in use. Spend = price × quantity, so the two change in opposite ratios."},
+    {"id": "pl-f21", "node": "c-pl-multiplier", "text": "MP = SP ÷ (1 − d).   Discount % = (MP − SP) ÷ MP × 100.   A discount is always on the marked price; a profit is always on the cost",
+     "note": "Sold at 86% of the marked price: MP = SP ÷ 0.86. A second discount is taken on the price already reduced, so the second rate = 1 − final ÷ (price after the first)."},
+    {"id": "pl-f22", "node": "c-pl-basic", "text": "True discount = A × r × t ÷ (100 + r × t);  Banker's discount = A × r × t ÷ 100  (A the sum due, r % a year, t years)",
+     "note": "True discount is interest on the present worth; banker's discount is interest on the sum due, so BD = TD × (1 + rt/100). A sum due in 2 years at 5% has TD = A × 10/110."},
+    {"id": "pl-f23", "node": "c-pl-basic", "text": "Earnings = commission % × all sales + bonus % × (sales over the limit)",
+     "note": "Write earnings as one rate on total sales minus a fixed amount: 5½% on all plus ½% over 10,000 is 6% of S − 50."},
 ]
 
 METHODS = {
@@ -297,6 +313,46 @@ METHODS = {
         "traps": ["Using the same percent both ways (a 10% cut is not undone by a 10% rise).", "Applying the new price to the old quantity."],
         "variations": ["Consumption cut needed to keep spending the same after a rise.", "Price falls and the extra quantity is given in kg.", "Salary or income cut and restored."],
     },
+    "q-pl-marked": {
+        "cue": "'What price should he mark to gain 20% after a 10% discount?', 'sold at ₹387 after 14% off: the marked price?', 'a discount saves ₹150: the marked price?'.",
+        "formulas": ["pl-f21", "pl-f2"],
+        "tech": ["multiplier", "ratio-parts"],
+        "standard": "Find the selling price needed (cost × (1 + profit)) or the price paid. Then marked price = selling price ÷ (1 − discount).",
+        "fast": "One line: cost × 1.2 ÷ 0.9. If a saving is given, the marked price is the saving ÷ the discount rate.",
+        "eliminate": "The marked price is always above the selling price and above the cost. Options below either are out, and so is the selling price itself.",
+        "traps": ["Stopping at the selling price (cost × 1.2) and calling it the marked price.", "Multiplying by 1.1 instead of dividing by 0.9.", "Adding the profit and the discount percentages."],
+        "variations": ["Percent above cost to mark the goods.", "A second (cash) discount on top of the first.", "Sales tax added after the discount.", "A saving equal to the price of another article."],
+    },
+    "q-pl-discount-rate": {
+        "cue": "'Find the rate of discount', 'the second discount', 'what additional discount brings the price to ₹1,104?'.",
+        "formulas": ["pl-f21", "pl-f2"],
+        "tech": ["multiplier", "ratio-parts"],
+        "standard": "Discount % = (marked − selling) ÷ marked × 100. For a second discount, first find the price after the first, then take the second on that price. When a profit is given, the selling price is cost × (1 + profit).",
+        "fast": "Final ÷ price after the first discount, then 1 − that: 550.80 ÷ 648 = 0.85, so 15%.",
+        "eliminate": "The extra discount, taken on the reduced price, is always larger than it would be on the list price: options equal to (list − final) ÷ list are traps.",
+        "traps": ["Dividing the saving by the selling price instead of the marked price.", "Subtracting the first discount from the total saving percent.", "Taking the second discount on the list price."],
+        "variations": ["Equal discounts compared on two articles (ratio of costs).", "Buy 4 get 1 free (1/5 = 20%).", "Mark above cost, then a discount for a target profit.", "Discount on a bundle of several articles."],
+    },
+    "q-pl-commission": {
+        "cue": "'5½% commission on all sales plus ½% bonus on sales over ₹10,000', or 'total commission ₹56,100 and one gets 12% more than the other'.",
+        "formulas": ["pl-f23"],
+        "tech": ["back-substitute", "multiplier"],
+        "standard": "Write the earnings as a rate on all the sales and a rate on the part above the limit. Combine into one equation and solve for the sales.",
+        "fast": "Merge the rates: 6% of S minus 50 = 1,990, so S = 2,040 ÷ 0.06 = 34,000.",
+        "eliminate": "Test each option: 6% of the option minus the bonus adjustment must give the earnings.",
+        "traps": ["Applying the bonus to all sales instead of the part over the limit.", "Splitting the total in the ratio 12 : 100 instead of 112 : 100."],
+        "variations": ["Two people whose commissions differ by a percent.", "Commission slabs with different rates.", "Salary plus commission."],
+    },
+    "q-pl-true-discount": {
+        "cue": "'True discount on a sum due 2 years hence at 5%', 'banker's discount on a bill due 6 months hence'.",
+        "formulas": ["pl-f22"],
+        "tech": ["multiplier", "units-first"],
+        "standard": "True discount = sum × rt ÷ (100 + rt). Banker's discount = sum × rt ÷ 100. Convert the time to years first.",
+        "fast": "TD ÷ sum = rt ÷ (100 + rt): at 5% for 2 years it is 10/110, so sum = 11 × TD. BD ÷ TD = 1 + rt/100.",
+        "eliminate": "Banker's discount is always larger than the true discount; the true discount is always smaller than the sum.",
+        "traps": ["Using the sum due as if it were the present worth.", "Forgetting to convert 6 months to ½ year."],
+        "variations": ["Find the time from the TD and sum.", "Find BD from TD, or TD from BD.", "Find the rate."],
+    },
 }
 
 REFS = [
@@ -410,7 +466,7 @@ PYQS = [
                for k, o, x in (("a", "₹1,800", 1800), ("c", "₹2,200", 2200), ("d", "₹2,400", 2400))}),
 ]
 
-PYQS = PYQS + PYQS_RY
+PYQS = PYQS + PYQS_RY + PYQS_DS
 
 
 # ----------------------------------------------------------------------------------------------
