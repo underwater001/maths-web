@@ -22,6 +22,7 @@ Checks, in order. Any failure stops the build before anything is written.
 Two tiers (TIER in the module). "full" (default): every type has the whole method and at least 3 same-level and 3 harder
 practice questions, one Hard. "quiz": past questions with checked answers, solutions and a short method per type, so a
 topic can go live the same day its questions arrive; practice and the ultra-calc layer are added when the topic is upgraded.
+A full topic may list QUIZ_TYPES (question-type ids) that are held to the quiz standard until they are upgraded.
 """
 import hashlib, importlib, json, os, random, sys, zlib
 from fractions import Fraction as F
@@ -145,7 +146,7 @@ def build_practice(M, pyqs, errs):
         sc = bank.score(p["steps"], p["concepts"], p["heavy"], True)
         out.append({"id": iid, "qtype": p["qtype"], "variant": p["variant"], "score": sc, "level": bank.level(sc), "tech": p["tech"], "text": p["text"],
                     "options": [shown[j] for j in order], "key": key, "solution": p["why"], "wrong": wrong})
-    for qt in ([k for k, n in M.NODES.items() if n["kind"] == "qtype"] if getattr(M, "TIER", "full") == "full" else []):
+    for qt in ([k for k, n in M.NODES.items() if n["kind"] == "qtype" and k not in getattr(M, "QUIZ_TYPES", ())] if getattr(M, "TIER", "full") == "full" else []):
         mine = [x for x in out if x["qtype"] == qt]
         same, harder = sum(x["variant"] == "same" for x in mine), sum(x["variant"] == "harder" for x in mine)
         if same < MIN_SAME or harder < MIN_HARDER: errs.append(f"{qt}: needs at least {MIN_SAME} same-level and {MIN_HARDER} harder practice questions, has {same} and {harder}")
@@ -174,7 +175,7 @@ def check_structure(M, tree, errs):
     for k in qtypes:
         m = M.METHODS.get(k)
         if not m: errs.append(f"question type {k} has no method"); continue
-        for key in (METHOD_KEYS if getattr(M, "TIER", "full") == "full" else QUIZ_KEYS):
+        for key in (METHOD_KEYS if getattr(M, "TIER", "full") == "full" and k not in getattr(M, "QUIZ_TYPES", ()) else QUIZ_KEYS):
             if not m.get(key): errs.append(f"methods {k}: missing {key}")
         for x in m.get("formulas", []):
             if x not in fids: errs.append(f"methods {k}: unknown formula {x}")

@@ -7,8 +7,11 @@ from fractions import Fraction as F
 from math import gcd
 
 from bank import APPROX, bound, exact2, fmt_value, inr, mistake, pyq, prac, variants
+from topics._pl_ry import PYQS_RY
 
 TOPIC = "profit-loss"      # a topic node in data/tree.json
+QUIZ_TYPES = ("q-pl-basic", "q-pl-swap", "q-pl-ratio", "q-pl-reprice", "q-pl-difference", "q-pl-profit-in-articles", "q-pl-partial",
+              "q-pl-profit-on-sp", "q-pl-sellers", "q-pl-successive", "q-pl-quantity")   # from the Rakesh Yadav book: past questions and a short method, practice comes later
 PREFIX = "pl"              # practice ids pl-p01, pl-p02, ... (append new items at the end so old ids never move)
 
 NODES = {
@@ -30,6 +33,30 @@ NODES = {
                   "summary": "Costs and selling price given as 'n for ₹x'; mix several kinds before selling.", "links": []},
     "q-pl-equal": {"short": "Equal P & L", "label": "Same profit and loss at two prices", "kind": "qtype", "parent": "c-pl-symmetry", "order": 1,
                    "summary": "Profit at one price equals loss at another; find cost, or the result at a third price.", "links": []},
+    "c-pl-basic": {"short": "Basic relations", "label": "Cost, selling price and gain: the basic relations", "kind": "concept", "parent": "profit-loss", "order": 5,
+                   "summary": "The one-step and two-step relations every other profit and loss question is built from.", "links": ["percentage"]},
+    "q-pl-basic": {"short": "Basic profit & loss", "label": "Cost, selling price, profit and loss", "kind": "qtype", "parent": "c-pl-basic", "order": 1,
+                   "summary": "Find the cost, selling price, profit % or loss % from the figures given, including overheads and damaged goods.", "links": []},
+    "q-pl-swap": {"short": "CP of n = SP of m", "label": "Cost of n articles equals selling price of m", "kind": "qtype", "parent": "c-pl-basic", "order": 2,
+                  "summary": "Cost of one number of articles equals the selling price of another number.", "links": []},
+    "q-pl-ratio": {"short": "CP : SP ratio", "label": "Ratio of cost to selling price", "kind": "qtype", "parent": "c-pl-basic", "order": 3,
+                   "summary": "CP : SP is given, or SP is a multiple or fraction of CP; find the profit % or the other ratio.", "links": []},
+    "q-pl-reprice": {"short": "New selling price", "label": "Selling price for a new profit or loss", "kind": "qtype", "parent": "c-pl-basic", "order": 4,
+                     "summary": "A profit or loss is given at one price; find the price that gives a different profit.", "links": []},
+    "q-pl-difference": {"short": "Price changes by ₹d", "label": "A change of ₹d moves the result from loss to gain", "kind": "qtype", "parent": "c-pl-basic", "order": 5,
+                        "summary": "Sold for ₹d more, the loss becomes a gain (or the gain gets bigger); find the cost.", "links": []},
+    "q-pl-profit-in-articles": {"short": "Profit = price of n", "label": "Profit or loss equal to the price of some articles", "kind": "qtype", "parent": "c-pl-basic", "order": 6,
+                                "summary": "The profit (or loss) on a lot equals the cost or selling price of a few articles.", "links": []},
+    "q-pl-partial": {"short": "Part at a gain, part at a loss", "label": "Parts of a stock sold at different profits", "kind": "qtype", "parent": "c-pl-basic", "order": 7,
+                     "summary": "A fraction of the stock sold at one rate and the rest at another; find the overall result or the total value.", "links": []},
+    "q-pl-profit-on-sp": {"short": "Profit on SP", "label": "Profit as a percent of the selling price", "kind": "qtype", "parent": "c-pl-basic", "order": 8,
+                          "summary": "Profit is quoted on the selling price, or the cost is given as a fraction of the selling price.", "links": []},
+    "q-pl-sellers": {"short": "Chain of sellers", "label": "Goods passing through several sellers", "kind": "qtype", "parent": "c-pl-basic", "order": 9,
+                     "summary": "A sells to B, B sells to C, each at a profit or loss; find any one price or percent.", "links": []},
+    "q-pl-successive": {"short": "Successive discounts", "label": "Successive discounts and the single equal discount", "kind": "qtype", "parent": "c-pl-multiplier", "order": 2,
+                        "summary": "Two or three discounts one after another, or the single discount that equals them.", "links": []},
+    "q-pl-quantity": {"short": "Price and quantity", "label": "Price changes and the quantity bought", "kind": "qtype", "parent": "c-pl-quantity", "order": 3,
+                      "summary": "A price changes and the quantity or the spend changes with it; find the new rate or the percent change.", "links": []},
 }
 
 FORMULAS = [
@@ -59,6 +86,20 @@ FORMULAS = [
      "note": "20% and 20% gives a 4% loss. It is never a gain and never zero."},
     {"id": "pl-f13", "node": "c-pl-quantity", "text": "Overall profit % = (total money received − total cost) ÷ total cost × 100",
      "note": "Add up what came in and what went out first, then compare. Donated units bring nothing in; free units bring nothing in either."},
+    {"id": "pl-f14", "node": "c-pl-basic", "text": "Cost of n articles = selling price of m articles ⇒ profit % = (n − m) ÷ m × 100  (a loss if n is smaller than m)",
+     "note": "Divide by the number on the SELLING side. SP of 8 = CP of 10 gives 2/8 = 25% profit; SP of 15 = CP of 10 gives a loss of 5/15 = 33⅓%."},
+    {"id": "pl-f15", "node": "c-pl-basic", "text": "CP : SP = a : b ⇒ profit % = (b − a) ÷ a × 100  (loss % = (a − b) ÷ a × 100)",
+     "note": "Put the cost at 100 (or at a) and read the profit off the difference. CP is 80% of SP means CP : SP = 4 : 5, a profit of 25%."},
+    {"id": "pl-f16", "node": "c-pl-basic", "text": "A swing of ₹d between two selling prices that give profits p₁ and p₂ ⇒ CP = d ÷ (p₂ − p₁)  (a loss counts as a negative profit)",
+     "note": "A loss of 20% becoming a gain of 15% is a swing of 35% of the cost. If ₹70 caused it, CP = 70 ÷ 0.35 = ₹200."},
+    {"id": "pl-f17", "node": "c-pl-basic", "text": "Profit on N articles equals the selling price of n of them ⇒ profit % = n ÷ (N − n) × 100.  If it equals the cost of n: profit % = n ÷ N × 100",
+     "note": "Profit on 20 = SP of 5: 5 ÷ 15 = 33⅓%. The same relation with a loss gives loss % = n ÷ (N + n) × 100 when the loss equals the SP of n."},
+    {"id": "pl-f18", "node": "c-pl-basic", "text": "Parts of a stock sold at different rates: total profit = sum of (part × rate); overall % = total profit ÷ total cost × 100",
+     "note": "Use the cost of each part as its weight. A loss part subtracts. Never average the rates unless the parts have the same cost."},
+    {"id": "pl-f19", "node": "c-pl-basic", "text": "Profit of p % on the SELLING price ⇒ CP = SP × (100 − p) ÷ 100, and profit on cost = p ÷ (100 − p) × 100",
+     "note": "20% on selling price is 25% on cost. 10% on selling price turns a cost of ₹27 into SP = 27 ÷ 0.9 = ₹30."},
+    {"id": "pl-f20", "node": "c-pl-quantity", "text": "If the price rises p %, spending stays the same when consumption falls by p ÷ (100 + p) × 100 %.  If it falls p %, consumption can rise by p ÷ (100 − p) × 100 %",
+     "note": "A 20% rise needs a 16⅔% cut in use. Spend = price × quantity, so the two change in opposite ratios."},
 ]
 
 METHODS = {
@@ -145,6 +186,116 @@ METHODS = {
         "variations": ["Same profit at one price and loss at another, then a target profit %.",
                        "Two articles at the same selling price, one at x% profit and one at x% loss.",
                        "Profit % at one price is double the loss % at another."],
+    },
+    "q-pl-basic": {
+        "cue": "Cost, selling price, profit or loss given in rupees or articles, sometimes with overheads, damaged goods or a split of money.",
+        "formulas": ["pl-f1", "pl-f13"],
+        "tech": ["units-first", "estimate", "back-substitute"],
+        "standard": "Add every cost (price, repairs, transport) to get the true cost. Subtract any goods that cannot be sold when working out what comes in. Then profit % = (money in − cost) ÷ cost × 100.",
+        "fast": "Find the multiplier SP ÷ CP once and read the profit from it. When the answer must be a cost, divide the selling price by (1 ± the rate).",
+        "eliminate": "Check the sign first: if the money in is below the cost it is a loss and every 'profit' option is out. Then test the options against the cost, not against the selling price.",
+        "traps": ["Leaving out the repair or transport cost.", "Dividing the profit by the selling price.", "Counting damaged goods as sold.", "Using the dozen price as if it were the price of one."],
+        "variations": ["Best transaction by percentage profit (compare ratios, not rupees).", "Two items with equal profit amounts at different rates.", "Cost shared in a ratio and one price given."],
+    },
+    "q-pl-swap": {
+        "cue": "'The cost price of 15 articles equals the selling price of 10 articles', or 'sells 8 at the price of 10'.",
+        "formulas": ["pl-f14"],
+        "tech": ["ratio-parts", "sign-check"],
+        "standard": "Take the price of one article as 1 on the side given. If the cost of n equals the SP of m, then SP of one = n ÷ m times its cost. Profit % = (n − m) ÷ m × 100.",
+        "fast": "Subtract the two numbers, divide by the number on the selling side: 15 and 10 give 5 ÷ 10 = 50%. Larger number on the cost side means a profit; larger on the selling side means a loss.",
+        "eliminate": "Sign check: the bigger count on the cost side is a profit, otherwise a loss. Then divide by the selling count: options that use the cost count are out.",
+        "traps": ["Dividing by the cost count instead of the selling count (10 and 15 gives 33⅓% instead of 50%).", "Reversing profit and loss.", "Treating the difference in numbers as the profit % directly."],
+        "variations": ["SP of n articles equals CP of m articles (the same relation read the other way).", "Large counts such as 2750 and 2500: cancel the common factor first.", "'Sells x at the cost of y' wording."],
+    },
+    "q-pl-ratio": {
+        "cue": "'CP : SP is 5 : 6', 'SP is 8/5 of CP', 'CP is 80% of SP', or a profit % asked as a ratio of prices.",
+        "formulas": ["pl-f15", "pl-f1"],
+        "tech": ["ratio-parts", "fraction-percent"],
+        "standard": "Write CP and SP as the numbers of the ratio, or as 100 and the multiplier. Profit % = (SP − CP) ÷ CP × 100. To go the other way, turn the profit % into a multiplier and write the ratio.",
+        "fast": "5 : 6 means profit 1 on 5 = 20%. 'CP is 80% of SP' means CP : SP = 4 : 5, a profit of 25%, not 20%.",
+        "eliminate": "A profit % found on the SP is always smaller than the profit on cost, so any option equal to (SP − CP) ÷ SP is a trap.",
+        "traps": ["Dividing by SP (80% gives 20%, but the profit on cost is 25%).", "Reversing the ratio (SP : CP).", "Reading 200% profit as SP = 2 × CP (it is 3 × CP)."],
+        "variations": ["Ratio of two selling prices that give a profit and a loss.", "SP is a multiple of CP.", "Profit given, ratio SP : CP asked."],
+    },
+    "q-pl-reprice": {
+        "cue": "'Sold at a loss of 10% for ₹240; at what price will he gain 20%?' or 'wanted a profit but sold at a loss'.",
+        "formulas": ["pl-f1"],
+        "tech": ["multiplier", "ratio-parts"],
+        "standard": "Find the cost from the given price (price ÷ multiplier). Then the new price = cost × new multiplier.",
+        "fast": "Scale directly: new price = given price × new multiplier ÷ old multiplier = 240 × 1.2 ÷ 0.9 = 320.",
+        "eliminate": "The new price must lie above the given one when the new profit is higher, and below when it is lower. Test only the options on the correct side.",
+        "traps": ["Adding the two percentages to the given price instead of finding the cost first.", "Applying the new % to the given price instead of the cost."],
+        "variations": ["Wanted a profit, sold at an equal loss for ₹x: find the intended price.", "Two prices give a profit % and a loss %: find the cost.", "Selling price for a target profit after an overhead."],
+    },
+    "q-pl-difference": {
+        "cue": "'If sold for ₹10 more, he would gain 10% instead of losing 10%', or 'a gain of 5% instead of a loss of 5% gives ₹5 more'.",
+        "formulas": ["pl-f16"],
+        "tech": ["ratio-parts", "back-substitute"],
+        "standard": "The extra rupees are the swing between the two rates, taken as a percent of the cost. Cost = extra ÷ (swing %).",
+        "fast": "Swing = 10% + 10% = 20% of CP = ₹10, so CP = ₹50. Gain 5% instead of loss 5% is a 10% swing: ₹5 ÷ 0.1 = ₹50.",
+        "eliminate": "Plug each option into the swing: swing % × option must equal the extra rupees. Only one option does.",
+        "traps": ["Using only one of the two rates (loss alone, or gain alone).", "Using the extra amount as a percent of the selling price."],
+        "variations": ["Loss becomes gain after a price rise of ₹d.", "Both prices given as ₹ values and both profits as %.", "Selling price raised by a % instead of ₹."],
+    },
+    "q-pl-profit-in-articles": {
+        "cue": "'The profit on 17 balls equals the cost of 5', 'a profit equal to the selling price of 5 books'.",
+        "formulas": ["pl-f17", "pl-f1"],
+        "tech": ["ratio-parts", "cancel-first"],
+        "standard": "Write the total profit (or loss) in terms of the cost or price of one article, set it equal to the article count in the statement, and solve for the price. Use total SP − total CP = profit.",
+        "fast": "Loss equal to the cost of 5 on 17 balls: the 17 balls sold for the cost of 12, so cost per ball = 720 ÷ 12 = ₹60.",
+        "eliminate": "Divide the total selling price by the number of 'effective' articles: the options far from that quotient are out.",
+        "traps": ["Mixing up cost and selling price in the statement.", "Using all 17 articles as the base instead of the effective 12."],
+        "variations": ["Profit equal to the selling price of n articles.", "Loss equal to the selling price of n articles.", "Find the profit % from the statement alone."],
+    },
+    "q-pl-partial": {
+        "cue": "'One third at 4, half at 5, the rest at cost', or 'two-thirds sold at 5% profit and the rest at 2% loss, total profit ₹400'.",
+        "formulas": ["pl-f18", "pl-f1"],
+        "tech": ["multiplier", "common-unit", "back-substitute"],
+        "standard": "Split the stock into the given parts. Find the profit (or loss) on each part using that part's cost. Add the profits and subtract the losses. Overall % = net ÷ total cost.",
+        "fast": "Take the total cost as 1 (or as a convenient number like 120). Then each part's contribution is part × rate. Two-thirds at +5% and one-third at −2% gives 10/3 − 2/3 = 8/3 = 2.667% of the whole.",
+        "eliminate": "The overall % lies between the smallest and the largest of the part rates. Options outside that band are out.",
+        "traps": ["Averaging the rates without weighting by the part sizes.", "Treating the loss part as a profit.", "Weighting by selling price instead of cost."],
+        "variations": ["Part of the stock goes bad before sale.", "Overall profit given; find the total value or one part's rate.", "Three or more parts with the rest sold at cost."],
+    },
+    "q-pl-profit-on-sp": {
+        "cue": "'Profit of 10% on the selling price', 'cost is 13/15 of the selling price'.",
+        "formulas": ["pl-f19"],
+        "tech": ["fraction-percent", "ratio-parts"],
+        "standard": "Convert to cost basis: if the profit is p % of SP, then CP = SP × (100 − p) ÷ 100 and profit on cost = p ÷ (100 − p) × 100. Then solve as a normal profit question.",
+        "fast": "10% on SP means CP is 90% of SP, so SP = 27 ÷ 0.9 = ₹30.",
+        "eliminate": "Profit quoted on SP is smaller than the same figure on cost, so a profit on cost of 10% gives a smaller price than a profit on SP of 10%: use that to reject the wrong pair.",
+        "traps": ["Treating the 10% as a profit on cost (27 × 1.1 = 29.70).", "Using 110% instead of 90% for the SP."],
+        "variations": ["Cost given as a fraction of SP.", "Profit on SP converted to profit on cost.", "Two selling prices, one quoted on cost and one on SP."],
+    },
+    "q-pl-sellers": {
+        "cue": "'A sells to B at a profit of 10%, B sells to C at a loss of 10%', 'C paid ₹91', or a jewel passing through three hands.",
+        "formulas": ["pl-f1", "pl-f2"],
+        "tech": ["multiplier", "sign-check"],
+        "standard": "Each seller's selling price is the next seller's cost. Multiply the multipliers in order: price paid by C = A's cost × m₁ × m₂. Divide to go backwards.",
+        "fast": "1.10 × 0.90 = 0.99: the first seller ends up 1% better off than the starting price. Use the product, not the sum, of the percentages.",
+        "eliminate": "Equal profit and loss in a chain never cancel: 10% up then 10% down leaves a 1% drop. Any 'no change' option is out unless the multipliers cancel exactly.",
+        "traps": ["Adding and subtracting the percentages (10% − 10% = 0).", "Applying the second % to the original cost instead of to the new price.", "Dividing when the chain asks you to multiply."],
+        "variations": ["Goods rising 65% over three hands with two known profits.", "Buy-back at a loss.", "Final price given; find the first cost."],
+    },
+    "q-pl-successive": {
+        "cue": "'Successive discounts of 10%, 20% and 25%', or 'find the single discount equivalent to…'.",
+        "formulas": ["pl-f4", "pl-f2"],
+        "tech": ["multiplier", "estimate"],
+        "standard": "Convert each discount into a multiplier (90% = 0.9) and multiply: 0.9 × 0.8 × 0.75 = 0.54, so the single discount is 46%.",
+        "fast": "For two discounts: d₁ + d₂ − d₁d₂ ÷ 100. For three, do the first two, then combine that with the third.",
+        "eliminate": "The combined discount is always less than the sum of the discounts and more than the largest one. Both bounds remove options.",
+        "traps": ["Adding the discounts (10 + 20 + 25 = 55%).", "Taking the second discount on the original price instead of the reduced price.", "Using the rate as a multiplier instead of (1 − rate)."],
+        "variations": ["Discount on a bundle given the price of three.", "A discount then a free item.", "Equivalent single discount given and one unknown."],
+    },
+    "q-pl-quantity": {
+        "cue": "'A 20% fall in the price lets him buy 4 kg more for ₹100', 'salary reduced by 10%: how much must it rise to return?'.",
+        "formulas": ["pl-f20", "pl-f1"],
+        "tech": ["multiplier", "fraction-percent", "back-substitute"],
+        "standard": "Spend = price × quantity. Write the price change as a multiplier, the quantity change as its inverse, and equate the spend. Solve for the unknown rate or the percent.",
+        "fast": "A fall of p % in price lets you buy p ÷ (100 − p) more: 20% fall lets you buy 25% more. To undo a 10% cut you need 10 ÷ 90 = 11⅑%.",
+        "eliminate": "The rise needed to undo a fall of p % is always bigger than p %; the cut needed to offset a rise of p % is always smaller. Both remove options.",
+        "traps": ["Using the same percent both ways (a 10% cut is not undone by a 10% rise).", "Applying the new price to the old quantity."],
+        "variations": ["Consumption cut needed to keep spending the same after a rise.", "Price falls and the extra quantity is given in kg.", "Salary or income cut and restored."],
     },
 }
 
@@ -258,6 +409,8 @@ PYQS = [
         wrong={k: bound(f"Substituting {o}: profit = 20% − 12,000 ÷ {x} = {20 - 12000 / x:.2f}%, not 16%.", lambda v: abs((20 - 12000 / v) - 16) > 0.5)
                for k, o, x in (("a", "₹1,800", 1800), ("c", "₹2,200", 2200), ("d", "₹2,400", 2400))}),
 ]
+
+PYQS = PYQS + PYQS_RY
 
 
 # ----------------------------------------------------------------------------------------------

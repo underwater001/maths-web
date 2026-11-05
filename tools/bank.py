@@ -101,7 +101,7 @@ def opt_val(t):
     (a sentinel that equals no computed answer)."""
     s = str(t).strip().replace("\u2212", "-").replace("₹", "").replace(",", "")
     low = s.lower()
-    if re.search(r"no change|neither|unchanged", low):
+    if re.search(r"no change|neither|unchanged|\bnor\b|no (net )?(profit|loss|gain)", low):
         return 0.0
     if not re.search(r"\d", s):
         return -1e18
@@ -109,7 +109,7 @@ def opt_val(t):
         return -1e18
     m = re.search(r"(\d+)\s+(\d+)\s*/\s*(\d+)", s)
     v = int(m[1]) + int(m[2]) / int(m[3]) if m else num(s)
-    if re.search(r"decreas|less|reduc|fall|loss|lower|slower", low) and v > 0:
+    if re.search(r"decreas|less|reduc|fall|loss|lose|lower|slower", low) and v > 0:
         v = -v
     return v
 

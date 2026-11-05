@@ -1,0 +1,2354 @@
+{
+ "id": "ry7300-ch02-profit-loss",
+ "exam": "Rakesh Yadav 7300+ chapterwise bank",
+ "kind": "chapter-bank",
+ "publisher": "Rakesh Yadav Publications",
+ "chapter": "Chapter 2 · Profit & Loss",
+ "test": null,
+ "date": null,
+ "shift": null,
+ "link": "https://drive.google.com/file/d/1NWgOVBZRXngvgt4atvaxHbH-Z6A71APn/view?usp=sharing",
+ "quant": "Q1-Q385 (book numbering)",
+ "note": "A curated selection of 334 of the chapter's 385 questions: every pattern the book uses, with two or three similar questions kept per pattern for practice; figure-based and badly worded questions left out. The question numbers are the book's own. Every answer was recomputed and compared with the book's printed answer key; the key is wrong for Q243 (195 eggs, not 190), Q329 (12% loss) and Q384 (Rs. 288), and the recomputed answer is filed.",
+ "skipped": {},
+ "rows": [
+  {
+   "qno": 1,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "20%",
+   "verified": true
+  },
+  {
+   "qno": 2,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "50%",
+   "verified": true
+  },
+  {
+   "qno": 3,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "40% loss",
+   "verified": true
+  },
+  {
+   "qno": 4,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "33 1/3 %",
+   "verified": true
+  },
+  {
+   "qno": 5,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "25%",
+   "verified": true
+  },
+  {
+   "qno": 9,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "60%",
+   "verified": true
+  },
+  {
+   "qno": 11,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "25",
+   "verified": true
+  },
+  {
+   "qno": 17,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "11 1/9 % loss",
+   "verified": true
+  },
+  {
+   "qno": 19,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "42 6/7 % gain",
+   "verified": true
+  },
+  {
+   "qno": 20,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "10% gain",
+   "verified": true
+  },
+  {
+   "qno": 22,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "37.5",
+   "verified": true
+  },
+  {
+   "qno": 23,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "44 4/9",
+   "verified": true
+  },
+  {
+   "qno": 24,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "30%",
+   "verified": true
+  },
+  {
+   "qno": 27,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "25%",
+   "verified": true
+  },
+  {
+   "qno": 28,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "25",
+   "verified": true
+  },
+  {
+   "qno": 33,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "20",
+   "verified": true
+  },
+  {
+   "qno": 34,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "25",
+   "verified": true
+  },
+  {
+   "qno": 35,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "12 1/2 % gain",
+   "verified": true
+  },
+  {
+   "qno": 39,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "66 2/3 %",
+   "verified": true
+  },
+  {
+   "qno": 41,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "16 2/3 %",
+   "verified": true
+  },
+  {
+   "qno": 7,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "20%",
+   "verified": true
+  },
+  {
+   "qno": 8,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "5%",
+   "verified": true
+  },
+  {
+   "qno": 14,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "20%",
+   "verified": true
+  },
+  {
+   "qno": 15,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "50",
+   "verified": true
+  },
+  {
+   "qno": 32,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "100%",
+   "verified": true
+  },
+  {
+   "qno": 40,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "10%",
+   "verified": true
+  },
+  {
+   "qno": 37,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 13750",
+   "verified": true
+  },
+  {
+   "qno": 38,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 3,000",
+   "verified": true
+  },
+  {
+   "qno": 42,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "1% loss",
+   "verified": true
+  },
+  {
+   "qno": 43,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "loss Rs. 1/12 lakh",
+   "verified": true
+  },
+  {
+   "qno": 45,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Loss, 1%",
+   "verified": true
+  },
+  {
+   "qno": 46,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "loss of Rs. 1",
+   "verified": true
+  },
+  {
+   "qno": 48,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "1",
+   "verified": true
+  },
+  {
+   "qno": 49,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "4% loss",
+   "verified": true
+  },
+  {
+   "qno": 50,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Loss of Rs. 1,000",
+   "verified": true
+  },
+  {
+   "qno": 51,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "0.25% loss",
+   "verified": true
+  },
+  {
+   "qno": 52,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "4% loss",
+   "verified": true
+  },
+  {
+   "qno": 53,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "1% loss",
+   "verified": true
+  },
+  {
+   "qno": 54,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "loss of Rs. 20,000",
+   "verified": true
+  },
+  {
+   "qno": 56,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "16",
+   "verified": true
+  },
+  {
+   "qno": 58,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "6 1/4 % loss",
+   "verified": true
+  },
+  {
+   "qno": 106,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 840 and Rs. 1,080",
+   "verified": true
+  },
+  {
+   "qno": 60,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 320",
+   "verified": true
+  },
+  {
+   "qno": 61,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 720",
+   "verified": true
+  },
+  {
+   "qno": 63,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 84",
+   "verified": true
+  },
+  {
+   "qno": 64,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 150",
+   "verified": true
+  },
+  {
+   "qno": 67,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 73,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 57,500",
+   "verified": true
+  },
+  {
+   "qno": 74,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 10 loss",
+   "verified": true
+  },
+  {
+   "qno": 76,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 222",
+   "verified": true
+  },
+  {
+   "qno": 78,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "16 2/3 %",
+   "verified": true
+  },
+  {
+   "qno": 81,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 1,200",
+   "verified": true
+  },
+  {
+   "qno": 85,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 784",
+   "verified": true
+  },
+  {
+   "qno": 89,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "33 1/3 %",
+   "verified": true
+  },
+  {
+   "qno": 94,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 1300",
+   "verified": true
+  },
+  {
+   "qno": 99,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 2,700",
+   "verified": true
+  },
+  {
+   "qno": 102,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 1,200",
+   "verified": true
+  },
+  {
+   "qno": 110,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 1260",
+   "verified": true
+  },
+  {
+   "qno": 91,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 21",
+   "verified": true
+  },
+  {
+   "qno": 72,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "140",
+   "verified": true
+  },
+  {
+   "qno": 62,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 50",
+   "verified": true
+  },
+  {
+   "qno": 80,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 50",
+   "verified": true
+  },
+  {
+   "qno": 65,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 40",
+   "verified": true
+  },
+  {
+   "qno": 66,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 1,000",
+   "verified": true
+  },
+  {
+   "qno": 68,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 280",
+   "verified": true
+  },
+  {
+   "qno": 69,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 2,000",
+   "verified": true
+  },
+  {
+   "qno": 70,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 400",
+   "verified": true
+  },
+  {
+   "qno": 71,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 700",
+   "verified": true
+  },
+  {
+   "qno": 75,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 40",
+   "verified": true
+  },
+  {
+   "qno": 77,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 52",
+   "verified": true
+  },
+  {
+   "qno": 82,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 150",
+   "verified": true
+  },
+  {
+   "qno": 84,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "20",
+   "verified": true
+  },
+  {
+   "qno": 86,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 40",
+   "verified": true
+  },
+  {
+   "qno": 92,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 500",
+   "verified": true
+  },
+  {
+   "qno": 98,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 1250",
+   "verified": true
+  },
+  {
+   "qno": 104,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 216",
+   "verified": true
+  },
+  {
+   "qno": 107,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 450",
+   "verified": true
+  },
+  {
+   "qno": 109,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 138",
+   "verified": true
+  },
+  {
+   "qno": 95,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 500",
+   "verified": true
+  },
+  {
+   "qno": 100,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 1,000",
+   "verified": true
+  },
+  {
+   "qno": 96,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "1 : 3",
+   "verified": true
+  },
+  {
+   "qno": 97,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "21 : 20",
+   "verified": true
+  },
+  {
+   "qno": 88,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "A makes a profit of 11%",
+   "verified": true
+  },
+  {
+   "qno": 90,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "1% loss",
+   "verified": true
+  },
+  {
+   "qno": 111,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 1125",
+   "verified": true
+  },
+  {
+   "qno": 112,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 800",
+   "verified": true
+  },
+  {
+   "qno": 113,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "240",
+   "verified": true
+  },
+  {
+   "qno": 114,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 540",
+   "verified": true
+  },
+  {
+   "qno": 115,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 160",
+   "verified": true
+  },
+  {
+   "qno": 116,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "540",
+   "verified": true
+  },
+  {
+   "qno": 118,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 150",
+   "verified": true
+  },
+  {
+   "qno": 120,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "600",
+   "verified": true
+  },
+  {
+   "qno": 124,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 2400",
+   "verified": true
+  },
+  {
+   "qno": 126,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 400",
+   "verified": true
+  },
+  {
+   "qno": 127,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 72",
+   "verified": true
+  },
+  {
+   "qno": 128,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 250",
+   "verified": true
+  },
+  {
+   "qno": 129,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "6 : 7",
+   "verified": true
+  },
+  {
+   "qno": 130,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "150%",
+   "verified": true
+  },
+  {
+   "qno": 131,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "20%",
+   "verified": true
+  },
+  {
+   "qno": 133,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 675",
+   "verified": true
+  },
+  {
+   "qno": 134,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 800",
+   "verified": true
+  },
+  {
+   "qno": 135,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Profit 5%",
+   "verified": true
+  },
+  {
+   "qno": 136,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "a loss of 1%",
+   "verified": true
+  },
+  {
+   "qno": 137,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 50000",
+   "verified": true
+  },
+  {
+   "qno": 138,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "45 : 56",
+   "verified": true
+  },
+  {
+   "qno": 139,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "40%",
+   "verified": true
+  },
+  {
+   "qno": 140,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 20,000",
+   "verified": true
+  },
+  {
+   "qno": 141,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "30",
+   "verified": true
+  },
+  {
+   "qno": 142,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 1,000",
+   "verified": true
+  },
+  {
+   "qno": 143,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "800",
+   "verified": true
+  },
+  {
+   "qno": 144,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 250",
+   "verified": true
+  },
+  {
+   "qno": 145,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 120",
+   "verified": true
+  },
+  {
+   "qno": 146,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "20%",
+   "verified": true
+  },
+  {
+   "qno": 147,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "10",
+   "verified": true
+  },
+  {
+   "qno": 148,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "50%",
+   "verified": true
+  },
+  {
+   "qno": 149,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 9,575",
+   "verified": true
+  },
+  {
+   "qno": 150,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "20% gain",
+   "verified": true
+  },
+  {
+   "qno": 151,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "42 6/7 %",
+   "verified": true
+  },
+  {
+   "qno": 152,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "5%",
+   "verified": true
+  },
+  {
+   "qno": 153,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 600",
+   "verified": true
+  },
+  {
+   "qno": 154,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "80",
+   "verified": true
+  },
+  {
+   "qno": 155,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 10,000",
+   "verified": true
+  },
+  {
+   "qno": 157,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "8%",
+   "verified": true
+  },
+  {
+   "qno": 159,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 250",
+   "verified": true
+  },
+  {
+   "qno": 160,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 161,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "30%",
+   "verified": true
+  },
+  {
+   "qno": 162,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 405",
+   "verified": true
+  },
+  {
+   "qno": 163,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "21 7/8 %",
+   "verified": true
+  },
+  {
+   "qno": 164,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 165,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "19.6%",
+   "verified": true
+  },
+  {
+   "qno": 166,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "8%",
+   "verified": true
+  },
+  {
+   "qno": 176,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "30%",
+   "verified": true
+  },
+  {
+   "qno": 177,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 200",
+   "verified": true
+  },
+  {
+   "qno": 178,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "33 1/3 %",
+   "verified": true
+  },
+  {
+   "qno": 170,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 800",
+   "verified": true
+  },
+  {
+   "qno": 175,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "20%",
+   "verified": true
+  },
+  {
+   "qno": 174,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "8.5%",
+   "verified": true
+  },
+  {
+   "qno": 168,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "46%",
+   "verified": true
+  },
+  {
+   "qno": 171,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "28%",
+   "verified": true
+  },
+  {
+   "qno": 172,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "15%",
+   "verified": true
+  },
+  {
+   "qno": 173,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 4,500",
+   "verified": true
+  },
+  {
+   "qno": 167,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 600",
+   "verified": true
+  },
+  {
+   "qno": 169,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 91.08",
+   "verified": true
+  },
+  {
+   "qno": 180,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "400",
+   "verified": true
+  },
+  {
+   "qno": 181,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "30 20/21 %",
+   "verified": true
+  },
+  {
+   "qno": 182,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "12.5%",
+   "verified": true
+  },
+  {
+   "qno": 184,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 1500",
+   "verified": true
+  },
+  {
+   "qno": 185,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "17%",
+   "verified": true
+  },
+  {
+   "qno": 186,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "10%",
+   "verified": true
+  },
+  {
+   "qno": 189,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "14%",
+   "verified": true
+  },
+  {
+   "qno": 190,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 300",
+   "verified": true
+  },
+  {
+   "qno": 191,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 229.50",
+   "verified": true
+  },
+  {
+   "qno": 193,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "40%",
+   "verified": true
+  },
+  {
+   "qno": 194,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 150/-",
+   "verified": true
+  },
+  {
+   "qno": 195,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "X gains Rs. 3,150",
+   "verified": true
+  },
+  {
+   "qno": 196,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 800",
+   "verified": true
+  },
+  {
+   "qno": 199,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 50,000",
+   "verified": true
+  },
+  {
+   "qno": 200,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 2000",
+   "verified": true
+  },
+  {
+   "qno": 201,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 200",
+   "verified": true
+  },
+  {
+   "qno": 202,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "600",
+   "verified": true
+  },
+  {
+   "qno": 203,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "44 4/9 %",
+   "verified": true
+  },
+  {
+   "qno": 204,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 400",
+   "verified": true
+  },
+  {
+   "qno": 205,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "11 1/9 %",
+   "verified": true
+  },
+  {
+   "qno": 206,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "10.25",
+   "verified": true
+  },
+  {
+   "qno": 207,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 50,000",
+   "verified": true
+  },
+  {
+   "qno": 208,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 2838",
+   "verified": true
+  },
+  {
+   "qno": 209,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 20",
+   "verified": true
+  },
+  {
+   "qno": 210,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 26,00",
+   "verified": true
+  },
+  {
+   "qno": 211,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. (10/9) P",
+   "verified": true
+  },
+  {
+   "qno": 212,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 1190",
+   "verified": true
+  },
+  {
+   "qno": 213,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 700",
+   "verified": true
+  },
+  {
+   "qno": 214,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 72.20",
+   "verified": true
+  },
+  {
+   "qno": 215,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 128",
+   "verified": true
+  },
+  {
+   "qno": 216,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 5",
+   "verified": true
+  },
+  {
+   "qno": 217,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "11 1/9 %",
+   "verified": true
+  },
+  {
+   "qno": 218,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "11 1/9 %",
+   "verified": true
+  },
+  {
+   "qno": 219,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 25",
+   "verified": true
+  },
+  {
+   "qno": 220,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 30",
+   "verified": true
+  },
+  {
+   "qno": 221,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "56%",
+   "verified": true
+  },
+  {
+   "qno": 222,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "21",
+   "verified": true
+  },
+  {
+   "qno": 223,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "37.5%",
+   "verified": true
+  },
+  {
+   "qno": 224,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "17 11/17 %",
+   "verified": true
+  },
+  {
+   "qno": 225,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 648",
+   "verified": true
+  },
+  {
+   "qno": 226,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 360",
+   "verified": true
+  },
+  {
+   "qno": 227,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 2550",
+   "verified": true
+  },
+  {
+   "qno": 228,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 11,500 and Rs. 8,000",
+   "verified": true
+  },
+  {
+   "qno": 229,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "16 2/3 %",
+   "verified": true
+  },
+  {
+   "qno": 230,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "810, 1350",
+   "verified": true
+  },
+  {
+   "qno": 231,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "21%",
+   "verified": true
+  },
+  {
+   "qno": 232,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "66 2/3 %",
+   "verified": true
+  },
+  {
+   "qno": 233,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "14 2/7 % profit",
+   "verified": true
+  },
+  {
+   "qno": 234,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "11 1/9 %",
+   "verified": true
+  },
+  {
+   "qno": 235,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "44%",
+   "verified": true
+  },
+  {
+   "qno": 237,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "125%",
+   "verified": true
+  },
+  {
+   "qno": 238,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "60",
+   "verified": true
+  },
+  {
+   "qno": 239,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "loss of 1%",
+   "verified": true
+  },
+  {
+   "qno": 240,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Loss of 4%",
+   "verified": true
+  },
+  {
+   "qno": 241,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "a loss of 10%",
+   "verified": true
+  },
+  {
+   "qno": 242,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "25% gain",
+   "verified": true
+  },
+  {
+   "qno": 243,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "195",
+   "verified": true
+  },
+  {
+   "qno": 244,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "90",
+   "verified": true
+  },
+  {
+   "qno": 245,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "21",
+   "verified": true
+  },
+  {
+   "qno": 246,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "5",
+   "verified": true
+  },
+  {
+   "qno": 247,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Gain 8 1/3 %",
+   "verified": true
+  },
+  {
+   "qno": 248,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "32% profit",
+   "verified": true
+  },
+  {
+   "qno": 249,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "16 2/3 %",
+   "verified": true
+  },
+  {
+   "qno": 250,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 6 loss",
+   "verified": true
+  },
+  {
+   "qno": 251,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "12 per cent",
+   "verified": true
+  },
+  {
+   "qno": 252,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 18 per kg",
+   "verified": true
+  },
+  {
+   "qno": 253,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "5 kg",
+   "verified": true
+  },
+  {
+   "qno": 254,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "7 1/7 %",
+   "verified": true
+  },
+  {
+   "qno": 255,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "3 : 1",
+   "verified": true
+  },
+  {
+   "qno": 256,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 145",
+   "verified": true
+  },
+  {
+   "qno": 257,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "40",
+   "verified": true
+  },
+  {
+   "qno": 259,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 60",
+   "verified": true
+  },
+  {
+   "qno": 260,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 100",
+   "verified": true
+  },
+  {
+   "qno": 261,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "40",
+   "verified": true
+  },
+  {
+   "qno": 262,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "25",
+   "verified": true
+  },
+  {
+   "qno": 263,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "50",
+   "verified": true
+  },
+  {
+   "qno": 264,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "33 1/3 %",
+   "verified": true
+  },
+  {
+   "qno": 265,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "50%",
+   "verified": true
+  },
+  {
+   "qno": 266,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "25",
+   "verified": true
+  },
+  {
+   "qno": 267,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 877.80",
+   "verified": true
+  },
+  {
+   "qno": 268,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "35%",
+   "verified": true
+  },
+  {
+   "qno": 269,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "1 1/5",
+   "verified": true
+  },
+  {
+   "qno": 270,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 50",
+   "verified": true
+  },
+  {
+   "qno": 271,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "44 4/9 %",
+   "verified": true
+  },
+  {
+   "qno": 272,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 30",
+   "verified": true
+  },
+  {
+   "qno": 273,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 80",
+   "verified": true
+  },
+  {
+   "qno": 274,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "8",
+   "verified": true
+  },
+  {
+   "qno": 275,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "29 3/13 %",
+   "verified": true
+  },
+  {
+   "qno": 276,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "33 1/3",
+   "verified": true
+  },
+  {
+   "qno": 277,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 15,000",
+   "verified": true
+  },
+  {
+   "qno": 278,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 2,16,000",
+   "verified": true
+  },
+  {
+   "qno": 279,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "15",
+   "verified": true
+  },
+  {
+   "qno": 280,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "50",
+   "verified": true
+  },
+  {
+   "qno": 281,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "33 1/3",
+   "verified": true
+  },
+  {
+   "qno": 282,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "16 2/3",
+   "verified": true
+  },
+  {
+   "qno": 283,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "5% profit",
+   "verified": true
+  },
+  {
+   "qno": 284,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 3.60",
+   "verified": true
+  },
+  {
+   "qno": 285,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 24",
+   "verified": true
+  },
+  {
+   "qno": 286,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "20%",
+   "verified": true
+  },
+  {
+   "qno": 287,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "50",
+   "verified": true
+  },
+  {
+   "qno": 288,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 200",
+   "verified": true
+  },
+  {
+   "qno": 289,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 1,050",
+   "verified": true
+  },
+  {
+   "qno": 290,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 150",
+   "verified": true
+  },
+  {
+   "qno": 291,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "125",
+   "verified": true
+  },
+  {
+   "qno": 292,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "5.26",
+   "verified": true
+  },
+  {
+   "qno": 293,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "11 1/9",
+   "verified": true
+  },
+  {
+   "qno": 294,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "10% decrease",
+   "verified": true
+  },
+  {
+   "qno": 295,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "18",
+   "verified": true
+  },
+  {
+   "qno": 296,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 1,300",
+   "verified": true
+  },
+  {
+   "qno": 297,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 500",
+   "verified": true
+  },
+  {
+   "qno": 298,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "14",
+   "verified": true
+  },
+  {
+   "qno": 299,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 3,000, Rs. 2,000",
+   "verified": true
+  },
+  {
+   "qno": 300,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "20 2/3",
+   "verified": true
+  },
+  {
+   "qno": 301,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "60%",
+   "verified": true
+  },
+  {
+   "qno": 302,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "20%",
+   "verified": true
+  },
+  {
+   "qno": 303,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 300",
+   "verified": true
+  },
+  {
+   "qno": 304,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "4% decrease",
+   "verified": true
+  },
+  {
+   "qno": 305,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "25%",
+   "verified": true
+  },
+  {
+   "qno": 306,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 180",
+   "verified": true
+  },
+  {
+   "qno": 307,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 57",
+   "verified": true
+  },
+  {
+   "qno": 308,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 309,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "12",
+   "verified": true
+  },
+  {
+   "qno": 310,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "28%",
+   "verified": true
+  },
+  {
+   "qno": 311,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "32",
+   "verified": true
+  },
+  {
+   "qno": 312,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "36",
+   "verified": true
+  },
+  {
+   "qno": 313,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "12 1/2 %",
+   "verified": true
+  },
+  {
+   "qno": 314,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "25%",
+   "verified": true
+  },
+  {
+   "qno": 315,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "10%",
+   "verified": true
+  },
+  {
+   "qno": 316,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 317,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "1% loss",
+   "verified": true
+  },
+  {
+   "qno": 318,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 350",
+   "verified": true
+  },
+  {
+   "qno": 320,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "25",
+   "verified": true
+  },
+  {
+   "qno": 321,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "49.5",
+   "verified": true
+  },
+  {
+   "qno": 322,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 120/-",
+   "verified": true
+  },
+  {
+   "qno": 323,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "10",
+   "verified": true
+  },
+  {
+   "qno": 324,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 14",
+   "verified": true
+  },
+  {
+   "qno": 325,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "IV",
+   "verified": true
+  },
+  {
+   "qno": 326,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "20%",
+   "verified": true
+  },
+  {
+   "qno": 327,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "37.5 %",
+   "verified": true
+  },
+  {
+   "qno": 328,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "10%",
+   "verified": true
+  },
+  {
+   "qno": 329,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "12",
+   "verified": true
+  },
+  {
+   "qno": 330,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 12",
+   "verified": true
+  },
+  {
+   "qno": 331,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 2,00,000",
+   "verified": true
+  },
+  {
+   "qno": 332,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "50/3 %",
+   "verified": true
+  },
+  {
+   "qno": 333,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 2,000",
+   "verified": true
+  },
+  {
+   "qno": 334,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 9,800",
+   "verified": true
+  },
+  {
+   "qno": 335,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "24",
+   "verified": true
+  },
+  {
+   "qno": 336,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "70",
+   "verified": true
+  },
+  {
+   "qno": 337,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "10% gain",
+   "verified": true
+  },
+  {
+   "qno": 338,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "25",
+   "verified": true
+  },
+  {
+   "qno": 339,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 91,000",
+   "verified": true
+  },
+  {
+   "qno": 340,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 80,000",
+   "verified": true
+  },
+  {
+   "qno": 341,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "25",
+   "verified": true
+  },
+  {
+   "qno": 342,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Loss of 7 1/7 %",
+   "verified": true
+  },
+  {
+   "qno": 344,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "17 1/2 %",
+   "verified": true
+  },
+  {
+   "qno": 345,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 110",
+   "verified": true
+  },
+  {
+   "qno": 346,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 550",
+   "verified": true
+  },
+  {
+   "qno": 347,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "400%",
+   "verified": true
+  },
+  {
+   "qno": 348,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 724.50",
+   "verified": true
+  },
+  {
+   "qno": 349,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Gain Rs. 362.50",
+   "verified": true
+  },
+  {
+   "qno": 350,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 35",
+   "verified": true
+  },
+  {
+   "qno": 351,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 16000",
+   "verified": true
+  },
+  {
+   "qno": 352,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 50",
+   "verified": true
+  },
+  {
+   "qno": 353,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 12,000",
+   "verified": true
+  },
+  {
+   "qno": 354,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "5%",
+   "verified": true
+  },
+  {
+   "qno": 355,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 8",
+   "verified": true
+  },
+  {
+   "qno": 356,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 500",
+   "verified": true
+  },
+  {
+   "qno": 358,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "14 2/7 %",
+   "verified": true
+  },
+  {
+   "qno": 359,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "400 kg",
+   "verified": true
+  },
+  {
+   "qno": 360,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "8%",
+   "verified": true
+  },
+  {
+   "qno": 361,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "20% profit",
+   "verified": true
+  },
+  {
+   "qno": 362,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 1,600",
+   "verified": true
+  },
+  {
+   "qno": 363,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 83.33",
+   "verified": true
+  },
+  {
+   "qno": 364,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "8",
+   "verified": true
+  },
+  {
+   "qno": 366,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "87%",
+   "verified": true
+  },
+  {
+   "qno": 367,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "28%",
+   "verified": true
+  },
+  {
+   "qno": 368,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 200",
+   "verified": true
+  },
+  {
+   "qno": 369,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "16.66%",
+   "verified": true
+  },
+  {
+   "qno": 370,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "Rs. 80",
+   "verified": true
+  },
+  {
+   "qno": 371,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "13 1/3 %",
+   "verified": true
+  },
+  {
+   "qno": 372,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "Rs. 7,500",
+   "verified": true
+  },
+  {
+   "qno": 373,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 10625",
+   "verified": true
+  },
+  {
+   "qno": 376,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 52.80",
+   "verified": true
+  },
+  {
+   "qno": 377,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "25%",
+   "verified": true
+  },
+  {
+   "qno": 378,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "4% loss",
+   "verified": true
+  },
+  {
+   "qno": 379,
+   "topic": "profit-loss",
+   "key": "d",
+   "answer": "33.3%",
+   "verified": true
+  },
+  {
+   "qno": 380,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "7.7% loss",
+   "verified": true
+  },
+  {
+   "qno": 381,
+   "topic": "profit-loss",
+   "key": "c",
+   "answer": "37.5%",
+   "verified": true
+  },
+  {
+   "qno": 382,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "Rs. 183.3",
+   "verified": true
+  },
+  {
+   "qno": 384,
+   "topic": "profit-loss",
+   "key": "a",
+   "answer": "Rs. 288",
+   "verified": true
+  },
+  {
+   "qno": 385,
+   "topic": "profit-loss",
+   "key": "b",
+   "answer": "20%",
+   "verified": true
+  }
+ ]
+}
