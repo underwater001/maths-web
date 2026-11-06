@@ -1,5 +1,6 @@
 """Time, Speed and Distance: quiz tier."""
 from bank import bound, mistake, pyq
+from topics._tsd_ry import PYQS_RY
 
 TOPIC = "tsd"
 PREFIX = "sd"
@@ -21,12 +22,53 @@ NODES = {
                   "summary": "Two meeting times give two equations: sum and difference of speeds.", "links": ["linear-equations"]},
     "q-sd-overtake": {"short": "Overtaking on a track", "label": "First overtake on a circular track", "kind": "qtype", "parent": "c-sd-circular", "order": 1,
                       "summary": "Gap ÷ relative speed gives the time; times the faster speed gives the distance.", "links": []},
+    "c-sd-train": {"short": "Trains", "label": "Trains: crossing poles, platforms and each other", "kind": "concept", "parent": TOPIC, "order": 4,
+                   "summary": "A train crossing something covers its own length plus that object's length at its speed; two trains use the relative speed.", "links": []},
+    "c-sd-avg": {"short": "Average speed", "label": "Average speed = total distance ÷ total time", "kind": "concept", "parent": TOPIC, "order": 5,
+                 "summary": "Never average the speeds. Add the distances, add the times, divide.", "links": ["average"]},
+    "c-sd-late": {"short": "Early and late", "label": "Changing the speed: arriving early or late", "kind": "concept", "parent": TOPIC, "order": 6,
+                  "summary": "Speed and time are inverse; the gap between two journey times (early + late) fixes the distance.", "links": ["ratio-proportion"]},
+    "c-sd-race": {"short": "Races and starts", "label": "Races: beats by, starts and ratios of speeds", "kind": "concept", "parent": TOPIC, "order": 7,
+                  "summary": "Convert 'beats by 100 m' into the ratio of distances run in the same time, then chain the ratios.", "links": ["ratio-proportion"]},
+    "q-sd-basic": {"short": "Plain speed-distance-time", "label": "Distance, speed and time, with units and fractions", "kind": "qtype", "parent": "c-sd-basic", "order": 3,
+                   "summary": "One formula; turn minutes into hours, fractions of a journey into km, and keep clock times honest.", "links": []},
+    "q-sd-ms": {"short": "km/h and m/s", "label": "Converting km/h to m/s and back", "kind": "qtype", "parent": "c-sd-basic", "order": 4,
+                "summary": "km/h × 5/18 = m/s; m/s × 18/5 = km/h.", "links": []},
+    "q-sd-wheel": {"short": "Wheels", "label": "Wheel turns, circumference and speed", "kind": "qtype", "parent": "c-sd-basic", "order": 5,
+                   "summary": "One turn covers the circumference π d; distance = turns × π d.", "links": ["mensuration-2d"]},
+    "q-sd-ratio": {"short": "Speed and time ratios", "label": "Ratios of speeds, times and distances", "kind": "qtype", "parent": "c-sd-basic", "order": 6,
+                   "summary": "Speed ∝ distance ÷ time: divide the distance ratio by the time ratio.", "links": ["ratio-proportion"]},
+    "q-sd-angle": {"short": "Right-angle paths", "label": "Two walkers at right angles", "kind": "qtype", "parent": "c-sd-basic", "order": 7,
+                   "summary": "Distances travelled are the two legs of a right triangle; use Pythagoras or the 3-4-5, 5-12-13 triples.", "links": []},
+    "q-sd-chase": {"short": "Chase", "label": "Policeman and thief, one overtakes the other", "kind": "qtype", "parent": "c-sd-relative", "order": 2,
+                   "summary": "Head start ÷ (faster − slower) is the time to catch up.", "links": []},
+    "q-sd-relative": {"short": "Train and a man", "label": "A train passing a man or vehicle that is moving", "kind": "qtype", "parent": "c-sd-relative", "order": 3,
+                      "summary": "Same direction: subtract the speeds; opposite: add. The train's length is covered at that speed.", "links": []},
+    "q-sd-lap": {"short": "Meeting at the start", "label": "Runners on a track meet again at the start", "kind": "qtype", "parent": "c-sd-circular", "order": 2,
+                 "summary": "They are together again at the start after the LCM of the lap times.", "links": ["hcf-lcm"]},
+    "q-sd-pole": {"short": "Train and pole", "label": "A train crossing a pole or a man standing", "kind": "qtype", "parent": "c-sd-train", "order": 1,
+                  "summary": "Distance covered = the train's own length.", "links": []},
+    "q-sd-platform": {"short": "Platform or bridge", "label": "A train crossing a platform, bridge or standing train", "kind": "qtype", "parent": "c-sd-train", "order": 2,
+                      "summary": "Distance = train + platform; the extra time over a pole crossing is the platform's time.", "links": []},
+    "q-sd-trains": {"short": "Two trains", "label": "Two trains crossing each other", "kind": "qtype", "parent": "c-sd-train", "order": 3,
+                    "summary": "Opposite: add the speeds; same direction: subtract; the distance is the sum of the lengths.", "links": []},
+    "q-sd-average": {"short": "Average speed", "label": "Average speed over unequal stretches", "kind": "qtype", "parent": "c-sd-avg", "order": 1,
+                     "summary": "Total distance ÷ total time; 2uv/(u + v) for equal distances.", "links": []},
+    "q-sd-late": {"short": "Early or late", "label": "A change of speed makes him early or late", "kind": "qtype", "parent": "c-sd-late", "order": 1,
+                  "summary": "D/v1 − D/v2 = the total time gap (late + early). Test the options.", "links": []},
+    "q-sd-race": {"short": "Races", "label": "A beats B by, start and finishing ratios", "kind": "qtype", "parent": "c-sd-race", "order": 1,
+                  "summary": "Distances run in the same time give the ratio of speeds; chain A : B and B : C.", "links": []},
 }
 FORMULAS = [
     {"id": "sd-f1", "node": "c-sd-basic", "text": "Distance = speed × time     1 km/h = 5/18 m/s", "note": "Put minutes and hours in one unit first."},
     {"id": "sd-f2", "node": "c-sd-basic", "text": "Same time: speed ∝ distance     Same distance: speed ∝ 1 ÷ time", "note": "25% more distance in the same time needs 25% more speed."},
     {"id": "sd-f3", "node": "c-sd-relative", "text": "Opposite: relative speed = u + v     Same direction: = u − v", "note": "Meeting time = gap ÷ relative speed."},
     {"id": "sd-f4", "node": "c-sd-circular", "text": "First overtake: time = gap ÷ (u − v); distance by the faster = u × time", "note": "The track length matters only if the gap is more than one lap."},
+    {"id": "sd-f5", "node": "c-sd-train", "text": "Train crossing: pole = own length; platform or another train = both lengths; at speed (own or relative)", "note": "Opposite: u + v. Same direction: u − v."},
+    {"id": "sd-f6", "node": "c-sd-avg", "text": "Average speed = total distance ÷ total time. Equal distances: 2uv ÷ (u + v)", "note": "40 and 60 km/h over equal distances average 48, not 50."},
+    {"id": "sd-f7", "node": "c-sd-late", "text": "D/v1 − D/v2 = time gap; D = (v1 v2 ÷ (v2 − v1)) × time gap", "note": "Late by 6 min then early by 6 min means a 12-minute gap."},
+    {"id": "sd-f8", "node": "c-sd-race", "text": "'A beats B by d in a race of L' means A : B = L : (L − d) as distances in the same time", "note": "Chain the ratios: A : C = (A : B) × (B : C)."},
+    {"id": "sd-f9", "node": "c-sd-train", "text": "After two bodies meet and reach each other's start in t1 and t2: speed ratio = √(t2 : t1)", "note": "Trains from A and B that reach B and A 4 h and 9 h after meeting: ratio √(9/4) = 3 : 2."},
 ]
 METHODS = {
     "q-sd-convert": {
@@ -45,7 +87,7 @@ METHODS = {
         "traps": ["Reading 2 h 15 min as 2.15 hours.", "Treating 1.2 km as 1.2 km/h without the minute."]},
     "q-sd-meet": {
         "cue": "Two bodies start a fixed distance apart; one meeting time towards each other and another in the same direction.",
-        "formulas": ["sd-f3"], "tech": ["relative", "back-substitute"],
+        "formulas": ["sd-f3", "sd-f9"], "tech": ["relative", "back-substitute"],
         "standard": "Towards: u + v = 480 ÷ 5 = 96. Same direction: u − v = 480 ÷ 15 = 32. So u = (96 + 32) ÷ 2 = 64.",
         "fast": "The faster speed is the average of the sum and the difference: (96 + 32)/2.",
         "eliminate": "The faster speed must exceed half the sum (48) and be less than the sum (96). Test each option: v = 96 − u must be below u and u − v must equal 32.",
@@ -57,6 +99,104 @@ METHODS = {
         "fast": "Distance = gap × u ÷ (u − v) = 500 × 20/12 = 833.33.",
         "eliminate": "The motorcycle covers more than the 500 m gap (it must close it at 12 of its 20 m/s), so it travels about 500 × 20/12 ≈ 833 m. 800 m is too short and 1,800 m is far too long.",
         "traps": ["Giving the truck's distance (333.33 m) rather than the motorcycle's.", "Adding the speeds, as if they met head on.", "Using the track length of 2.2 km, which is irrelevant here."]},
+    "q-sd-basic": {
+        "cue": "'He walks 5 km/h for 15 minutes; how far?' or 'a journey in several parts, find the missing speed'.",
+        "formulas": ["sd-f1", "sd-f2"], "tech": ["units-first", "fraction-percent"],
+        "standard": "Distance = speed × time with minutes turned into hours; for 'the rest of the journey' work out the part left and the time left.",
+        "fast": "Use the unit that makes the numbers whole (m/s for seconds, km/h for hours).",
+        "eliminate": "Check the answer's size: a man cannot walk more than about 6 km in an hour, and 5 km/h for 15 minutes is a little over 1 km.",
+        "traps": ["Mixing minutes with hours.", "Using the whole journey instead of the part remaining."]},
+    "q-sd-ms": {
+        "cue": "'A car goes 10 m in a second. Its speed in km/h?'",
+        "formulas": ["sd-f1"], "tech": ["units-first"],
+        "standard": "m/s × 18/5 = km/h: 10 × 18/5 = 36.",
+        "fast": "Multiply m/s by 3.6, or divide km/h by 3.6.",
+        "eliminate": "km/h is always the larger number: if your answer is smaller than the m/s you started with, you converted the wrong way.",
+        "traps": ["Using 5/18 in the wrong direction.", "Converting only part of the data."]},
+    "q-sd-wheel": {
+        "cue": "'A wheel of diameter 70 cm turns 400 times a minute. Speed of the car in km/h?'",
+        "formulas": ["sd-f1"], "tech": ["units-first"],
+        "standard": "Circumference = π d = 22/7 × 70 = 220 cm; distance per minute = 400 × 220 cm; convert to km an hour.",
+        "fast": "Pick the π value so that the diameter cancels (22/7 with a multiple of 7).",
+        "eliminate": "52.8 km/h is the only reasonable speed for a car; 528 and 0.528 are off by powers of ten.",
+        "traps": ["Using the radius as the diameter.", "Powers of ten when moving from cm to km."]},
+    "q-sd-ratio": {
+        "cue": "'A truck covers 550 m a minute, a bus 33 km in 45 minutes. Ratio of speeds?'",
+        "formulas": ["sd-f2"], "tech": ["ratio-parts", "units-first"],
+        "standard": "Put both in km/h (33 and 44), then reduce 33 : 44 = 3 : 4. For times: time ∝ length ÷ speed.",
+        "fast": "Speed ratio = distance ratio ÷ time ratio, term by term.",
+        "eliminate": "The ratio must come out in the order asked (first to second): an inverted ratio is the usual wrong option.",
+        "traps": ["Giving the time ratio when the speed ratio is asked.", "Comparing speeds in different units."]},
+    "q-sd-angle": {
+        "cue": "'Two cars leave a point at right angles at 36 and 48 km/h. Distance after 15 seconds?'",
+        "formulas": ["sd-f1"], "tech": ["standard-values"],
+        "standard": "Legs 150 m and 200 m; distance = √(150² + 200²) = 250 m.",
+        "fast": "Spot the 3-4-5 triple scaled by 50.",
+        "eliminate": "The hypotenuse is longer than either leg and shorter than their sum (350): strike 400 and 150.",
+        "traps": ["Adding the legs (350).", "Forgetting to convert km/h to m/s."]},
+    "q-sd-chase": {
+        "cue": "'A policeman is 200 m behind a thief; he runs 11 km/h, the thief 10 km/h.'",
+        "formulas": ["sd-f3"], "tech": ["relative"],
+        "standard": "Gain per hour = 11 − 10 = 1 km; in 6 minutes he gains 100 m; 100 m remain.",
+        "fast": "Time to catch = head start ÷ (faster − slower); distance run = time × speed.",
+        "eliminate": "The gap shrinks but does not vanish unless the time is long enough: compare the time with head start ÷ speed difference.",
+        "traps": ["Adding the speeds.", "Answering the time when the distance covered is asked (or the reverse)."]},
+    "q-sd-relative": {
+        "cue": "'A 500 m train at 63 km/h passes a man walking at 3 km/h in the same direction.'",
+        "formulas": ["sd-f3", "sd-f5"], "tech": ["relative", "units-first"],
+        "standard": "Relative speed = 63 − 3 = 60 km/h = 50/3 m/s; time = 500 ÷ 50/3 = 30 s.",
+        "fast": "Subtract for the same direction, add for the opposite direction; length ÷ relative speed.",
+        "eliminate": "Passing a man moving the same way takes longer than passing a standing man: the time must exceed length ÷ train speed.",
+        "traps": ["Adding when the directions are the same.", "Forgetting to convert km/h to m/s before dividing metres."]},
+    "q-sd-lap": {
+        "cue": "'Four runners take 40, 50, 60 and 30 minutes a round. When do they meet again at the start?'",
+        "formulas": ["sd-f4"], "tech": ["lcm-units"],
+        "standard": "LCM of the lap times = 600 minutes = 10 hours; add to the start time.",
+        "fast": "LCM first, then convert to clock time.",
+        "eliminate": "The answer is a multiple of every lap time: strike any time that is not.",
+        "traps": ["Taking the HCF.", "Adding the start time in the wrong unit."]},
+    "q-sd-pole": {
+        "cue": "'A 100 m train at 30 km/h passes a man standing near the line. Time?'",
+        "formulas": ["sd-f1", "sd-f5"], "tech": ["units-first"],
+        "standard": "Convert 30 km/h = 25/3 m/s; time = 100 ÷ 25/3 = 12 s.",
+        "fast": "Length ÷ speed in m/s; or speed 12 m/s = 120 ÷ 10 when seconds are given.",
+        "eliminate": "30 km/h is about 8 m/s, so 100 m takes about 12 s: strike 10 and 15 on a quick estimate.",
+        "traps": ["Leaving the speed in km/h.", "Adding a platform length that is not there."]},
+    "q-sd-platform": {
+        "cue": "'A train passes a 50 m platform in 14 s and a man standing on it in 10 s. Its speed?'",
+        "formulas": ["sd-f5"], "tech": ["relative", "units-first"],
+        "standard": "The extra 4 s cover the platform's 50 m: speed = 12.5 m/s = 45 km/h.",
+        "fast": "Platform length ÷ difference of the two times is the speed; speed × time for a pole is the train's length.",
+        "eliminate": "For bridge or platform questions the distance is always train + platform, never one alone.",
+        "traps": ["Using only the platform length.", "Forgetting the train's own length.", "Not converting at the end."]},
+    "q-sd-trains": {
+        "cue": "'Two trains, 160 m and 140 m, run in opposite directions at 77 and 67 km/h. Time to cross?'",
+        "formulas": ["sd-f5", "sd-f3"], "tech": ["relative", "units-first"],
+        "standard": "Relative speed 77 + 67 = 144 km/h = 40 m/s; distance 160 + 140 = 300 m; time 7.5 s.",
+        "fast": "Sum of lengths ÷ relative speed; with equal lengths and pole times t1, t2 the crossing time is 2 t1 t2 ÷ (t1 + t2).",
+        "eliminate": "Opposite directions give a shorter time than either train passing a standing object of the other's length would.",
+        "traps": ["Subtracting the speeds when the trains run opposite ways.", "Using one length only."]},
+    "q-sd-average": {
+        "cue": "'He goes at 12 km/h and returns at 4 km/h. Average speed?' or 'thirds of a journey at different speeds'.",
+        "formulas": ["sd-f6"], "tech": ["lcm-units", "identity"],
+        "standard": "Total distance ÷ total time; for equal distances 2 × 12 × 4 ÷ 16 = 6 km/h.",
+        "fast": "Equal distances: 2uv/(u + v). Equal times: simple average.",
+        "eliminate": "The average lies between the two speeds and is closer to the slower: strike the arithmetic mean (8).",
+        "traps": ["Taking the simple average of unequal-distance speeds.", "Using the harmonic formula when the TIMES are equal."]},
+    "q-sd-late": {
+        "cue": "'At 5 km/h he is 6 minutes late, at 6 km/h 5 minutes early. Distance?'",
+        "formulas": ["sd-f7"], "tech": ["back-substitute", "lcm-units"],
+        "standard": "Time gap = 6 + 5 = 11 minutes; D/5 − D/6 = 11/60, so D = 5.5 km.",
+        "fast": "D = (v1 × v2 ÷ speed gap) × time gap in hours; or test the options.",
+        "eliminate": "Late plus early minutes are ADDED: strike answers made with their difference.",
+        "traps": ["Subtracting the early minutes.", "Mixing minutes with hours."]},
+    "q-sd-race": {
+        "cue": "'In a 1,000 m race A beats B by 100 m; in 400 m B beats C by 40 m. In 500 m A beats C by?'",
+        "formulas": ["sd-f8"], "tech": ["ratio-parts", "multiplier"],
+        "standard": "A : B = 10 : 9 and B : C = 10 : 9 so A : C = 100 : 81. In 500 m C runs 405, so A wins by 95 m.",
+        "fast": "Chain the fractions 0.9 × 0.9 and apply to the distance.",
+        "eliminate": "A is faster than C by more than the A-B margin, so the answer exceeds 50 m: strike smaller options.",
+        "traps": ["Adding the margins (140 m) without scaling.", "Using the wrong race length for the second ratio."]},
 }
 PYQS = [
     pyq(S1, 65, "q-sd-convert", "An express train covers a fixed distance in 40 minutes at an average speed of 200 km/h. The route is diverted, increasing the distance by 25%. If the train must still arrive in 40 minutes, what should its new average speed be?", ["250 km/h", "260 km/h", "270 km/h", "280 km/h"], "a",
@@ -74,6 +214,8 @@ PYQS = [
         ["2 h 15 min = 135 minutes.", "Distance = 1.2 × 135 = 162 km."], lambda: 1.2 * 135, 162, 1e-9, tech=["units-first", "multiplier"],
         trick="1.2 × 135 = 120 + 42.", wrong={"b": mistake("1.2 × 130, losing 5 minutes.", 156, 0)}),
 ]
+
+PYQS = PYQS + PYQS_RY
 
 
 def practice_items():
