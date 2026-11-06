@@ -1,6 +1,7 @@
 """Time, Speed and Distance: quiz tier."""
 from bank import bound, mistake, pyq
 from topics._tsd_ry import PYQS_RY
+from topics._bs_ry import PYQS_RY as PYQS_BS
 
 TOPIC = "tsd"
 PREFIX = "sd"
@@ -58,6 +59,22 @@ NODES = {
                   "summary": "D/v1 − D/v2 = the total time gap (late + early). Test the options.", "links": []},
     "q-sd-race": {"short": "Races", "label": "A beats B by, start and finishing ratios", "kind": "qtype", "parent": "c-sd-race", "order": 1,
                   "summary": "Distances run in the same time give the ratio of speeds; chain A : B and B : C.", "links": []},
+    "c-sd-boat": {"short": "Boat and stream", "label": "Boat and stream: downstream and upstream", "kind": "concept", "parent": TOPIC, "order": 8,
+                  "summary": "With the stream the speeds add, against it they subtract; the boat and the stream are the half-sum and half-difference.", "links": ["ratio-proportion", "linear-equations"]},
+    "q-bs-speeds": {"short": "Boat or stream speed", "label": "Find the boat or the stream from down and up data", "kind": "qtype", "parent": "c-sd-boat", "order": 1,
+                    "summary": "Downstream speed D, upstream speed U: boat = (D + U)/2, stream = (D − U)/2.", "links": []},
+    "q-bs-time": {"short": "Time for a distance", "label": "Time taken for a given distance", "kind": "qtype", "parent": "c-sd-boat", "order": 2,
+                  "summary": "Find the right speed (down, up or still water), then time = distance ÷ speed.", "links": []},
+    "q-bs-return": {"short": "Go and return", "label": "Round trip, total time, find the distance or the boat", "kind": "qtype", "parent": "c-sd-boat", "order": 3,
+                    "summary": "D/(x + y) + D/(x − y) = total time; test the options when the boat is wanted.", "links": []},
+    "q-bs-ratio": {"short": "Ratios", "label": "Time and speed ratios: twice as long, thrice as long", "kind": "qtype", "parent": "c-sd-boat", "order": 4,
+                   "summary": "Times are inverse to speeds: a 2 : 1 time ratio makes down : up = 2 : 1, boat 3 parts, stream 1 part.", "links": ["ratio-proportion"]},
+    "q-bs-pairs": {"short": "Two journeys", "label": "Two journeys with different mixes of up and down", "kind": "qtype", "parent": "c-sd-boat", "order": 5,
+                   "summary": "Use hours per km for up and down; add and subtract the two equations.", "links": ["linear-equations"]},
+    "q-bs-same": {"short": "Same time, different distance", "label": "5 km with the stream = 4 km against it", "kind": "qtype", "parent": "c-sd-boat", "order": 6,
+                  "summary": "Same time means the speeds are in the ratio of the distances.", "links": ["ratio-proportion"]},
+    "q-bs-flow": {"short": "Meeting, drift and flow", "label": "Meeting of two boats, drift and volume of flow", "kind": "qtype", "parent": "c-sd-boat", "order": 7,
+                  "summary": "The stream cancels when the boats go opposite ways; the volume of flow is cross-section × length moved.", "links": ["mensuration-3d"]},
 }
 FORMULAS = [
     {"id": "sd-f1", "node": "c-sd-basic", "text": "Distance = speed × time     1 km/h = 5/18 m/s", "note": "Put minutes and hours in one unit first."},
@@ -69,6 +86,10 @@ FORMULAS = [
     {"id": "sd-f7", "node": "c-sd-late", "text": "D/v1 − D/v2 = time gap; D = (v1 v2 ÷ (v2 − v1)) × time gap", "note": "Late by 6 min then early by 6 min means a 12-minute gap."},
     {"id": "sd-f8", "node": "c-sd-race", "text": "'A beats B by d in a race of L' means A : B = L : (L − d) as distances in the same time", "note": "Chain the ratios: A : C = (A : B) × (B : C)."},
     {"id": "sd-f9", "node": "c-sd-train", "text": "After two bodies meet and reach each other's start in t1 and t2: speed ratio = √(t2 : t1)", "note": "Trains from A and B that reach B and A 4 h and 9 h after meeting: ratio √(9/4) = 3 : 2."},
+    {"id": "sd-f10", "node": "c-sd-boat", "text": "Downstream D = x + y, upstream U = x − y. Boat x = (D + U)/2, stream y = (D − U)/2", "note": "x = boat in still water, y = stream."},
+    {"id": "sd-f11", "node": "c-sd-boat", "text": "Round trip over distance d: time = d/(x + y) + d/(x − y); distance = time × (D × U) ÷ (D + U)", "note": "Test the options: the right boat speed gives the given total time."},
+    {"id": "sd-f12", "node": "c-sd-boat", "text": "Same distance: speed ∝ 1/time. Down : up = 2 : 1 gives boat : stream = 3 : 1", "note": "Same time: speeds are in the ratio of the distances."},
+    {"id": "sd-f13", "node": "c-sd-boat", "text": "Volume of flow = width × depth × (speed × time)", "note": "Change km/h and minutes to metres first."},
 ]
 METHODS = {
     "q-sd-convert": {
@@ -197,6 +218,55 @@ METHODS = {
         "fast": "Chain the fractions 0.9 × 0.9 and apply to the distance.",
         "eliminate": "A is faster than C by more than the A-B margin, so the answer exceeds 50 m: strike smaller options.",
         "traps": ["Adding the margins (140 m) without scaling.", "Using the wrong race length for the second ratio."]},
+    "q-bs-speeds": {
+        "cue": "'A man rows 18 km in 4 hours downstream and returns in 12 hours. Speed of the stream?'",
+        "formulas": ["sd-f10"], "tech": ["identity", "units-first"],
+        "standard": "Downstream = 18 ÷ 4 = 4.5, upstream = 18 ÷ 12 = 1.5. Stream = (4.5 − 1.5)/2 = 1.5 km/h.",
+        "fast": "Write D and U first, then half the sum for the boat and half the difference for the stream.",
+        "eliminate": "The boat is between U and D and the stream is smaller than the boat: strike options outside those limits.",
+        "traps": ["Giving the difference D − U instead of half of it.", "Mixing minutes with hours before finding the speeds."]},
+    "q-bs-time": {
+        "cue": "'Boat 36 km/h in still water; 56 km upstream takes 1 h 45 min. Time for the same distance downstream?'",
+        "formulas": ["sd-f10"], "tech": ["units-first", "identity"],
+        "standard": "Find the stream from the given trip, then the speed for the trip asked, then time = distance ÷ speed.",
+        "fast": "Upstream 32, boat 36, so downstream = 40: 56 ÷ 40 = 1.4 h.",
+        "eliminate": "Downstream is faster, so the downstream time must be shorter than the upstream time given.",
+        "traps": ["Using the still-water speed for a trip with the stream.", "Reading 1.4 hours as 1 hour 40 minutes."]},
+    "q-bs-return": {
+        "cue": "'He goes to a place and back in 5 hours; boat 10, stream 4. How far?' or 'find the boat speed from the total time'.",
+        "formulas": ["sd-f10", "sd-f11"], "tech": ["back-substitute", "lcm-units"],
+        "standard": "d/(x + y) + d/(x − y) = T. For the distance use D = T × (down × up)/(down + up); for the boat test each option.",
+        "fast": "Test the options: the correct boat speed makes d/(x + y) + d/(x − y) equal the total time exactly.",
+        "eliminate": "The boat must be faster than the stream, otherwise it cannot go upstream: strike the options that are not.",
+        "traps": ["Using x instead of x ± y.", "Forgetting that the total time covers both ways."]},
+    "q-bs-ratio": {
+        "cue": "'It takes twice as long to row up as down.' or 'the speed of the boat to that of the current is 36 : 5'.",
+        "formulas": ["sd-f12"], "tech": ["ratio-parts"],
+        "standard": "Time ratio up : down = 2 : 1 means speed ratio down : up = 2 : 1; boat = 3 parts, stream = 1 part.",
+        "fast": "Boat = 3 parts, stream = 1 part: the stream is the boat's speed divided by 3.",
+        "eliminate": "Times and speeds are inverse: the faster trip (downstream) has the smaller time.",
+        "traps": ["Using the time ratio as the speed ratio.", "Taking boat : stream as 2 : 1 instead of 3 : 1."]},
+    "q-bs-pairs": {
+        "cue": "'24 km up and 36 km down in 6 h; 36 km up and 24 km down in 6.5 h. Speed of the current?'",
+        "formulas": ["sd-f10"], "tech": ["scaling", "symmetry"],
+        "standard": "Let a, b be hours per km upstream and downstream. Two equations in a and b; add and subtract.",
+        "fast": "The coefficients swap places: adding gives a + b, subtracting gives a − b.",
+        "eliminate": "The stream is smaller than both speeds: after finding up and down speeds, test the options with half the difference.",
+        "traps": ["Solving for speeds instead of hours per km, which makes the equations awkward.", "Subtracting the two journeys' times without matching the distances."]},
+    "q-bs-same": {
+        "cue": "'He can row 5 km with the stream in the same time as 4 km against it.'",
+        "formulas": ["sd-f12", "sd-f10"], "tech": ["ratio-parts"],
+        "standard": "Down : up = 5 : 4 = 5k : 4k. Put in the round-trip time, solve for k, then stream = (5k − 4k)/2.",
+        "fast": "Stream = k/2 and boat = 4.5k: only k is unknown.",
+        "eliminate": "The stream is half of one ratio unit, so small answers like 0.75 and 1 are likely: test with the total time.",
+        "traps": ["Taking the ratio 5 : 4 as the boat and stream speeds.", "Forgetting to halve the difference."]},
+    "q-bs-flow": {
+        "cue": "'Two boats start towards each other, one going down and the other up' or 'a river 8 m wide, 4 m deep at 4 km/h: water in 15 min?'",
+        "formulas": ["sd-f10", "sd-f13"], "tech": ["relative", "units-first"],
+        "standard": "Opposite directions: the stream adds to one and subtracts from the other, so the closing speed is the sum of the still-water speeds. For volume: length moved × width × depth.",
+        "fast": "Meeting time = distance ÷ (x + z); flow = (speed in m/min × minutes) × width × depth.",
+        "eliminate": "Check units: m³ for volume, so km/h must be changed to m before multiplying.",
+        "traps": ["Using the stream speed in the meeting problem.", "Forgetting to change 15 minutes into hours."]},
 }
 PYQS = [
     pyq(S1, 65, "q-sd-convert", "An express train covers a fixed distance in 40 minutes at an average speed of 200 km/h. The route is diverted, increasing the distance by 25%. If the train must still arrive in 40 minutes, what should its new average speed be?", ["250 km/h", "260 km/h", "270 km/h", "280 km/h"], "a",
@@ -215,7 +285,7 @@ PYQS = [
         trick="1.2 × 135 = 120 + 42.", wrong={"b": mistake("1.2 × 130, losing 5 minutes.", 156, 0)}),
 ]
 
-PYQS = PYQS + PYQS_RY
+PYQS = PYQS + PYQS_RY + PYQS_BS
 
 
 def practice_items():
