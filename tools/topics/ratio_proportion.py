@@ -1,6 +1,7 @@
 """Ratio and proportion: quiz tier."""
 from bank import bound, mistake, pyq, ratio_val
 from topics._rp_ry import PYQS_RY
+from topics._ms_ry import PYQS_RY as PYQS_MS
 
 TOPIC = "ratio-proportion"
 PREFIX = "rp"
@@ -34,6 +35,16 @@ NODES = {
                   "summary": "A proportion a : b :: c : d means ad = bc; continued proportion a, b, c means b² = ac.", "links": []},
     "q-rp-prop": {"short": "Proportionals", "label": "Fourth, third, mean proportionals and tests", "kind": "qtype", "parent": "c-rp-prop", "order": 1,
                   "summary": "Find the missing term, check whether four numbers form a proportion, or the number added to make them proportional.", "links": []},
+    "c-ms-misc": {"short": "Mixed word problems", "label": "Sets, clocks, calendars and everyday proportion", "kind": "concept", "parent": TOPIC, "order": 6,
+                  "summary": "Short everyday problems: union and overlap of two sets, clock hands and strikes, calendar days, and anything that scales in proportion (shadows, rates, units).", "links": ["tsd", "percentage"]},
+    "q-ms-sets": {"short": "Sets", "label": "Union, overlap and complement", "kind": "qtype", "parent": "c-ms-misc", "order": 1,
+                  "summary": "n(A ∪ B) = n(A) + n(B) − n(A ∩ B); students who play neither; complement of a set in a universal set.", "links": []},
+    "q-ms-clock": {"short": "Clocks", "label": "Clock hands, strikes and clocks that gain or lose", "kind": "qtype", "parent": "c-ms-misc", "order": 2,
+                   "summary": "Area or arc swept by the minute hand, strikes in a day, and two clocks drifting apart.", "links": []},
+    "q-ms-prop": {"short": "Proportion in daily life", "label": "Rates, shadows and units that scale", "kind": "qtype", "parent": "c-ms-misc", "order": 3,
+                  "summary": "Temperature at a constant rate, a short ruler, a shadow, power for several machines, walk and ride times.", "links": []},
+    "q-ms-count": {"short": "Counting and calendar", "label": "Counting integers and calendar days", "kind": "qtype", "parent": "c-ms-misc", "order": 4,
+                   "summary": "Integers between 200 and 400 that start or end in 3; the day on which the 15th falls.", "links": []},
 }
 FORMULAS = [
     {"id": "rp-f1", "node": "c-rp-change", "text": "Quantities a : b : c = ak : bk : ck. After adding x to one quantity, form the new ratio and cross-multiply.", "note": "One equation in k, then the rest follows."},
@@ -46,6 +57,10 @@ FORMULAS = [
     {"id": "rp-f8", "node": "c-rp-share", "text": "Incomes a x and b x, expenditures c y and d y, equal savings S: a x − c y = S and b x − d y = S. Solve the pair or test the options.", "note": "Savings = income − expenditure, never the ratio terms themselves."},
     {"id": "rp-f9", "node": "c-rp-prop", "text": "a : b :: c : d ⇔ ad = bc. Fourth proportional = bc/a, third proportional of a and b = b²/a, mean proportional = √(ab). Continued proportion a, b, c: b² = ac.", "note": "Cross-multiply to test or to solve for the missing term."},
     {"id": "rp-f10", "node": "c-rp-change", "text": "Ages a : b now; after t years the ratio is c : d: (ak + t)/(bk + t) = c/d. The difference of the two ages never changes.", "note": "Add or subtract t from each real age, not from the ratio terms."},
+    {"id": "ms-f1", "node": "c-ms-misc", "text": "n(A ∪ B) = n(A) + n(B) − n(A ∩ B);  Aᶜ = U − A", "note": "Neither = total − n(A ∪ B)."},
+    {"id": "ms-f2", "node": "c-ms-misc", "text": "Minute hand of length r: area in t minutes = (t/60) × πr²; tip travels (t/60) × 2πr", "note": "In 30 minutes the hand sweeps a half circle."},
+    {"id": "ms-f3", "node": "c-ms-misc", "text": "A clock striking the hour: 1 + 2 + … + 12 = 78 strikes in 12 hours, 156 in a day", "note": "Two clocks drifting apart: gap grows by (gain + loss) per period; they agree again at a 12-hour gap."},
+    {"id": "ms-f4", "node": "c-ms-misc", "text": "If A ∝ B (same rate): A₁/B₁ = A₂/B₂", "note": "Height and shadow: 169/130 = pole/420."},
 ]
 METHODS = {
     "q-rp-add": {
@@ -104,6 +119,34 @@ METHODS = {
         "fast": "For 'add a number' questions: test the small option in the cross-product (6 + x)(38 + x) = (14 + x)(18 + x), or just try each option once.",
         "eliminate": "Products of extremes and of means must agree; check the units digits of both products to reject an option quickly.",
         "traps": ["Third proportional of a and b is b²/a, not a²/b.", "Mixing mean proportional (√(ab)) with the fourth proportional.", "Equal ratios written in the wrong order (a : b :: c : d means ad = bc)."]},
+    "q-ms-sets": {
+        "cue": "Two groups with some overlap, or 'neither', or a complement of a set.",
+        "formulas": ["ms-f1"], "tech": ["identity"],
+        "standard": "n(F ∪ C) = 450 − 50 = 400. Then 400 = 325 + 175 − n(F ∩ C), so n(F ∩ C) = 100.",
+        "fast": "Add the two groups (500) and subtract the head count of those who play at least one (400): the overlap is 100.",
+        "eliminate": "The overlap cannot exceed the smaller group, and 'both' must be at least n(A) + n(B) − total.",
+        "traps": ["Forgetting to remove the 'neither' students first.", "Adding n(A) + n(B) as the union."]},
+    "q-ms-clock": {
+        "cue": "A minute hand of length r, a clock that strikes, or two clocks gaining and losing.",
+        "formulas": ["ms-f2", "ms-f3"], "tech": ["scaling", "relative"],
+        "standard": "Hand of 7 cm in 30 minutes: half a circle, ½ × 22/7 × 49 = 77. Strikes: 2 × (1 + … + 12) = 156.",
+        "fast": "Use the fraction of the circle: t/60 of the full area or circumference.",
+        "eliminate": "Area in half an hour is half the full circle area (154), so 77.",
+        "traps": ["Using the circumference formula for an area.", "Counting one round of 12 hours instead of a full day.", "Dividing the day into 24 hours of strikes of 1 to 24."]},
+    "q-ms-prop": {
+        "cue": "A quantity that changes at a constant rate or in proportion to another.",
+        "formulas": ["ms-f4"], "tech": ["scaling", "plug-numbers", "common-unit"],
+        "standard": "Constant rate: 15°C in 5 hours is 3°C an hour, so 3 hours after 9 AM is 21 + 9 = 30°C. Shadows: pole/420 = 169/130.",
+        "fast": "For expressions in k and t, plug k = 10, t = 2 and test the options.",
+        "eliminate": "Check the size: the noon temperature must lie between 21 and 36, near the middle.",
+        "traps": ["Counting the hours from the wrong start time.", "Treating a ruler that is short as one that is long.", "Mixing up walk time and ride time."]},
+    "q-ms-count": {
+        "cue": "'Integers between … that begin or end with …', or a calendar question on Sundays.",
+        "formulas": ["ms-f1"], "tech": ["bounds", "divisibility"],
+        "standard": "Begin with 3: 300 to 399 gives 100. End in 3 in the 200s: 10 more. Total 110. Calendar: Sundays are 7 days apart, so their dates alternate odd and even.",
+        "fast": "List the cases and add, taking care not to count 303, 313 … twice.",
+        "eliminate": "The answer must exceed 100 because 300 to 399 alone gives 100.",
+        "traps": ["Counting numbers that both begin and end with 3 twice.", "Counting 200 and 400 themselves (the question says between)."]}
 }
 OPT54 = ["5 : 4 : 16", "4 : 5 : 16", "2 : 5 : 8", "4 : 5 : 8"]
 PYQS = [
@@ -133,7 +176,7 @@ PYQS = [
         wrong={"b": mistake("Took P : Q from 40 : 50 = 4 : 5, the percentages themselves instead of their reciprocals.", ratio_val("4:5:16"), 1e-9)}),
 ]
 
-PYQS = PYQS + PYQS_RY
+PYQS = PYQS + PYQS_RY + PYQS_MS
 
 
 def practice_items():

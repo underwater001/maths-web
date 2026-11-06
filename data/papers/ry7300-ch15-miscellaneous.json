@@ -1,0 +1,114 @@
+{
+ "id": "ry7300-ch15-miscellaneous",
+ "exam": "Rakesh Yadav 7300+ chapterwise bank",
+ "kind": "chapter-bank",
+ "publisher": "Rakesh Yadav Publications",
+ "chapter": "Chapter 15 · Miscellaneous",
+ "test": null,
+ "date": null,
+ "shift": null,
+ "link": "https://drive.google.com/file/d/1NWgOVBZRXngvgt4atvaxHbH-Z6A71APn/view?usp=sharing",
+ "quant": "Q1-Q15 (book numbering)",
+ "note": "A curated selection of 14 of the chapter's 15 questions: every pattern the book uses, with two or three similar questions kept per pattern for practice; figure-based, repeated and badly worded questions left out. The question numbers are the book's own. Every answer was recomputed and compared with the book's printed answer key. Q2 (the wall clock that takes 9 seconds to ring 9) is left out: the key counts 9 gaps (10.8 s), while the usual reading counts 8 gaps and gives 11.25 s, so the question depends on an assumption it does not state.",
+ "skipped": {},
+ "rows": [
+  {
+   "qno": 1,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "100",
+   "verified": true
+  },
+  {
+   "qno": 3,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "110",
+   "verified": true
+  },
+  {
+   "qno": 4,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "Saturday",
+   "verified": true
+  },
+  {
+   "qno": 5,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "12 noon, after 135 days",
+   "verified": true
+  },
+  {
+   "qno": 6,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "30°C",
+   "verified": true
+  },
+  {
+   "qno": 7,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "77 sq. cm",
+   "verified": true
+  },
+  {
+   "qno": 8,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "1.1 cm",
+   "verified": true
+  },
+  {
+   "qno": 9,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "156",
+   "verified": true
+  },
+  {
+   "qno": 10,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "6k/t",
+   "verified": true
+  },
+  {
+   "qno": 11,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "19 minutes",
+   "verified": true
+  },
+  {
+   "qno": 12,
+   "topic": "ratio-proportion",
+   "key": "c",
+   "answer": "50",
+   "verified": true
+  },
+  {
+   "qno": 13,
+   "topic": "ratio-proportion",
+   "key": "a",
+   "answer": "{5, 6, 7, 8}",
+   "verified": true
+  },
+  {
+   "qno": 14,
+   "topic": "ratio-proportion",
+   "key": "b",
+   "answer": "9,900",
+   "verified": true
+  },
+  {
+   "qno": 15,
+   "topic": "ratio-proportion",
+   "key": "d",
+   "answer": "546 cm",
+   "verified": true
+  }
+ ]
+}
