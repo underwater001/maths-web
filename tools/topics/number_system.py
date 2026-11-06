@@ -2,6 +2,7 @@
 import math
 from fractions import Fraction as F
 from bank import bound, mistake, pyq
+from topics._ns_ry import PYQS_RY
 
 TOPIC = "number-system"
 PREFIX = "ns"
@@ -45,6 +46,12 @@ NODES = {
                           "summary": "xy ÷ ab = 0.xyxy…, or digits of a product that follow a rule.", "links": []},
     "q-ns-series": {"short": "Sum of a series", "label": "Sum of a series or of the digits of a sum", "kind": "qtype", "parent": "c-ns-series", "order": 1,
                     "summary": "Alternating pairs, two interleaved APs, 5 + 55 + 555…, a sum of cubes, a geometric-looking decimal series.", "links": []},
+    "c-ns-frac": {"short": "Fractions & parts", "label": "Fractions, decimals and parts of a number", "kind": "concept", "parent": TOPIC, "order": 7,
+                  "summary": "Compare fractions, take a part of a number, and handle 'exceeds by' and 'mistaken for' problems with one equation.", "links": ["simplification", "percentage"]},
+    "q-ns-fraction": {"short": "Comparing and simplifying fractions", "label": "Compare, order and simplify fractions and decimals", "kind": "qtype", "parent": "c-ns-frac", "order": 1,
+                      "summary": "Cross-multiply or use decimals to compare; 'of' means multiply; decimals shift with powers of ten.", "links": ["simplification"]},
+    "q-ns-parts": {"short": "Part of a number", "label": "Part of a number: exceeds by, mistaken for, whole from a part", "kind": "qtype", "parent": "c-ns-frac", "order": 2,
+                   "summary": "Turn the story into x × (fraction − fraction) = difference, then solve for x.", "links": ["percentage"]},
 }
 FORMULAS = [
     {"id": "ns-f1", "node": "c-ns-unit", "text": "Unit-digit cycles:  2 → 2, 4, 8, 6   3 → 3, 9, 7, 1   7 → 7, 9, 3, 1   8 → 8, 4, 2, 6   4 and 9 → 2 values   0, 1, 5, 6 → fixed", "note": "Exponent mod 4 (use 4 when the remainder is 0)."},
@@ -56,6 +63,8 @@ FORMULAS = [
     {"id": "ns-f7", "node": "c-ns-series", "text": "1 + 2 + … + n = n(n + 1)/2    1³ + 2³ + … + n³ = (n(n + 1)/2)²    AP: S = n/2 × (2a + (n − 1)d)", "note": "1 + 11 + 111 + … (n terms) is a string of 1s added in columns."},
     {"id": "ns-f9", "node": "c-ns-rem", "text": "Nearest multiple of d to N: remainder r = N mod d. Down: N − r. Up: N + (d − r). Choose the smaller shift.", "note": "r < d ÷ 2 means go down. Least n-digit number: start from 10^(n−1) and go up."},
     {"id": "ns-f8", "node": "c-ns-word", "text": "x² − y² = (x + y)(x − y).   0.̅a̅b̅ (repeating block) = ab ÷ 99", "note": "Sum and the difference of squares give the difference in one division."},
+    {"id": "ns-f10", "node": "c-ns-frac", "text": "'x exceeds its p/q part by d': x(1 − p/q) = d.   Mistake: divided by p/q instead of multiplying: x(q/p − p/q) = difference", "note": "Put every fraction over the common denominator first."},
+    {"id": "ns-f11", "node": "c-ns-frac", "text": "Recurring decimal = (all digits − non-repeating digits) ÷ (9s for each repeating digit, then 0s for each non-repeating digit)", "note": "0.3(47) = (347 − 3)/990.   1/(n(n + k)) = (1/k)(1/n − 1/(n + k)) telescopes."},
 ]
 METHODS = {
     "q-ns-unit-pow": {
@@ -142,6 +151,20 @@ METHODS = {
         "fast": "5 + 55 + … = 5 × (1 + 11 + 111 + …); nine terms give 123456789.",
         "eliminate": "Check the sign and the size of the first few terms to remove options.",
         "traps": ["Misjudging the number of pairs.", "Forgetting to remove 1³ when the sum starts at 2."]},
+    "q-ns-fraction": {
+        "cue": "'Which fraction is the smallest?', 'a fraction between', or a decimal sum with powers of ten.",
+        "formulas": ["ns-f10", "ns-f11"], "tech": ["estimate", "cancel-first"],
+        "standard": "Change fractions to decimals or to a common denominator; for decimals, count the places and shift the point.",
+        "fast": "For n/(n + 1) the larger n is closer to 1. Estimate first, then check only the close options.",
+        "eliminate": "A fraction above 1 or below 1/2 can be struck at once when the others lie on the other side.",
+        "traps": ["Comparing numerators only.", "Misplacing the decimal point when the divisor has more zeros."]},
+    "q-ns-parts": {
+        "cue": "'3/4 of a number is 7 more than 1/6 of it', 'by mistake he found 5/4 of it, answer is 25 more'.",
+        "formulas": ["ns-f10"], "tech": ["fraction-percent", "back-substitute"],
+        "standard": "Write the whole as x, form x × (difference of the two fractions) = the given amount, and solve.",
+        "fast": "x = difference ÷ (fraction − fraction). For 'mistaken for': (q/p − p/q) × x = difference.",
+        "eliminate": "The answer is a multiple of the common denominator of the fractions: strike options that are not.",
+        "traps": ["Taking the mistaken fraction as the correct one.", "Reading 'exceeds' as 'is equal to'."]},
 }
 REFS = []
 PYQS = [
@@ -260,6 +283,8 @@ PYQS = [
         ['19² = 361 > 360 and 18² = 324 < 360, so the first natural number above √360 is 19.', '201² = 40401 < 40405 and 202² = 40804 > 40405, so the last is 201.', 'Count = 201 − 19 + 1 = 183.'],
         lambda: 201 - 19 + 1, 183, 0, tech=['bounds', 'estimate'], trick='Find the nearest perfect squares: √360 is just under 19, √40405 just over 201.'),
 ]
+
+PYQS = PYQS + PYQS_RY
 
 
 def practice_items():
