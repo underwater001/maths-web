@@ -2,6 +2,7 @@
 from fractions import Fraction as F
 from bank import bound, mistake, pyq, mixed_val
 from topics._tw_ry import PYQS_RY
+from topics._pcs_ry import PYQS_RY as PYQS_PC
 
 TOPIC = "time-work"
 PREFIX = "tw"
@@ -51,6 +52,26 @@ NODES = {
                   "summary": "Total man-days stay fixed: n × d = (n + k)(d − e).", "links": []},
     "q-tw-wage": {"short": "Wages by work", "label": "Share a payment between workers", "kind": "qtype", "parent": "c-tw-wage", "order": 1,
                   "summary": "Shares are in the ratio of work done: rate × days worked for each.", "links": []},
+    "c-tw-pipe": {"short": "Pipes and cisterns", "label": "Pipes and cisterns: filling and emptying", "kind": "concept", "parent": TOPIC, "order": 6,
+                  "summary": "A filling pipe is a positive rate, an emptying pipe or a leak is a negative rate. Add the signed rates, then divide the work by the net rate.", "links": ["ratio-proportion"]},
+    "q-pc-together": {"short": "Filling together", "label": "Two or three filling pipes together", "kind": "qtype", "parent": "c-tw-pipe", "order": 1,
+                      "summary": "Add the rates; or use product ÷ sum for two pipes.", "links": []},
+    "q-pc-three": {"short": "Fillers and a drain", "label": "Filling pipes and an emptying pipe, all open", "kind": "qtype", "parent": "c-tw-pipe", "order": 2,
+                   "summary": "Net rate = fillers − drain. Check the sign: a negative net means the tank empties.", "links": []},
+    "q-pc-leak": {"short": "Leak", "label": "A leak makes the filling slower", "kind": "qtype", "parent": "c-tw-pipe", "order": 3,
+                  "summary": "Leak rate = normal rate − rate with the leak; it empties a full tank in 1 ÷ that.", "links": []},
+    "q-pc-closed": {"short": "Opened or closed midway", "label": "A pipe is opened or closed after some time", "kind": "qtype", "parent": "c-tw-pipe", "order": 4,
+                    "summary": "Work out the part filled in each stretch, subtract from the whole, and finish at the new rate (add clock times at the end).", "links": []},
+    "q-pc-alt": {"short": "Alternate minutes", "label": "Pipes opened alternately", "kind": "qtype", "parent": "c-tw-pipe", "order": 5,
+                 "summary": "Net work of one pair of minutes, count whole pairs, and check whether the last minute is a filling one.", "links": []},
+    "q-pc-diameter": {"short": "Pipe size", "label": "Pipes of different diameters", "kind": "qtype", "parent": "c-tw-pipe", "order": 6,
+                      "summary": "Flow is proportional to the cross-section area, so to the square of the diameter.", "links": []},
+    "q-pc-volume": {"short": "Litres and fractions", "label": "Capacity in litres, drops and fractions of a tank", "kind": "qtype", "parent": "c-tw-pipe", "order": 7,
+                    "summary": "Turn the given litres into a fraction of the tank (or the reverse); keep every rate in one unit.", "links": []},
+    "q-pc-pumps": {"short": "Pumps, hours, days", "label": "Number of pumps against time", "kind": "qtype", "parent": "c-tw-pipe", "order": 8,
+                   "summary": "Pumps × hours × days is fixed for the same job.", "links": []},
+    "q-pc-general": {"short": "Formula and speed", "label": "General formulas and 'faster by' questions", "kind": "qtype", "parent": "c-tw-pipe", "order": 9,
+                     "summary": "xy ÷ (y − x) for a filler and a drain; test options for 'takes d hours less' questions.", "links": []},
 }
 FORMULAS = [
     {"id": "tw-f1", "node": "c-tw-rate", "text": "Rate = 1 ÷ days. Together: 1/a + 1/b + 1/c per day", "note": "Time together = 1 ÷ (sum of rates)."},
@@ -61,6 +82,10 @@ FORMULAS = [
     {"id": "tw-f6", "node": "c-tw-manday", "text": "Work = men × days × hours, so M1 D1 H1 ÷ W1 = M2 D2 H2 ÷ W2", "note": "Men and days are inverse; work is direct."},
     {"id": "tw-f7", "node": "c-tw-wage", "text": "Share of money = share of work = rate × days worked", "note": "Wages per day are equal only if the workers are equally efficient."},
     {"id": "tw-f8", "node": "c-tw-rate", "text": "A takes k times as long as the others together: A's rate = total rate ÷ (k + 1)", "note": "Two or three such statements fix every rate."},
+    {"id": "tw-f9", "node": "c-tw-pipe", "text": "Net rate = (sum of filling rates) − (sum of emptying rates); time = 1 ÷ net rate", "note": "A negative net rate means the tank empties."},
+    {"id": "tw-f10", "node": "c-tw-pipe", "text": "Filler x hours, drain y hours (y > x): time to fill = xy ÷ (y − x)", "note": "Fill 8 h, drain 16 h: 8 × 16 ÷ 8 = 16 h."},
+    {"id": "tw-f11", "node": "c-tw-pipe", "text": "Leak: with-leak time t2 > normal time t1, the leak empties in t1 t2 ÷ (t2 − t1)", "note": "9 h normal, 10 h with the leak: 9 × 10 ÷ 1 = 90 h."},
+    {"id": "tw-f12", "node": "c-tw-pipe", "text": "Flow ∝ number of pipes × diameter²", "note": "Double the diameter and the flow becomes 4 times."},
 ]
 METHODS = {
     "q-tw-together": {
@@ -175,6 +200,69 @@ METHODS = {
         "fast": "Share ∝ rate, and rate ∝ 1/days: the ratio of shares is the reverse of the days ratio, 10 : 15 = 2 : 3.",
         "eliminate": "A is the slower worker, so A gets less than half: strike any option above half the total.",
         "traps": ["Sharing in the ratio of the days (15 : 10) instead of the reverse.", "Ignoring a helper's work when three workers are involved."]},
+    "q-pc-together": {
+        "cue": "'Pipes A and B fill a tank in 20 and 30 minutes. Opened together?'",
+        "formulas": ["tw-f1", "tw-f9"], "tech": ["lcm-units", "ratio-parts"],
+        "standard": "1/20 + 1/30 = 1/12 per minute: 12 minutes.",
+        "fast": "Two pipes: 20 × 30 ÷ (20 + 30) = 12. If one pipe is k times as fast, together they have (k + 1) parts.",
+        "eliminate": "Together they must beat the faster pipe alone: under 20 minutes; and they cannot do better than half of it (10 minutes).",
+        "traps": ["Adding the times (50).", "Averaging the times (25).", "Mixing hours and minutes in the same sum."]},
+    "q-pc-three": {
+        "cue": "'Two pipes fill in 3 and 4 hours, a waste pipe empties in 2 hours. All three open?'",
+        "formulas": ["tw-f9"], "tech": ["lcm-units", "sign-check"],
+        "standard": "LCM 12: fillers 4 + 3, drain 6, so the net is +1 unit an hour: 12 hours.",
+        "fast": "LCM of all the times; fillers positive, drain negative; total ÷ net.",
+        "eliminate": "If the drain is faster than the fillers together the tank never fills; otherwise the time is longer than the faster filler alone.",
+        "traps": ["Adding the drain's rate instead of subtracting it.", "Ignoring the sign and getting a negative time."]},
+    "q-pc-leak": {
+        "cue": "'A pipe fills a tank in 9 hours; with a leak it takes 10. The leak empties it in?'",
+        "formulas": ["tw-f9", "tw-f11"], "tech": ["lcm-units"],
+        "standard": "Leak rate = 1/9 − 1/10 = 1/90: 90 hours.",
+        "fast": "t1 × t2 ÷ (t2 − t1) = 9 × 10 ÷ 1 = 90.",
+        "eliminate": "The leak must be much slower than the pipe, since it only adds one hour of delay: strike answers near 10.",
+        "traps": ["Answering 1 hour (the extra time).", "Dividing by the sum instead of the difference."]},
+    "q-pc-closed": {
+        "cue": "'Both pipes opened; after 7 minutes a third pipe opened (or one closed). Total time?'",
+        "formulas": ["tw-f9"], "tech": ["lcm-units", "fraction-percent"],
+        "standard": "LCM units; work done in the first stretch; remaining ÷ the new net rate; add the stretches.",
+        "fast": "For a pipe that runs the whole time, its share is time ÷ its own time; the other pipe fills the rest.",
+        "eliminate": "Check the final total exceeds the time already run; for clock-time answers add to the start time at the end.",
+        "traps": ["Giving the extra time when the total is asked (or the reverse).", "Letting the closed pipe keep running."]},
+    "q-pc-alt": {
+        "cue": "'A fills in 20 minutes, B empties in 30. Opened for one minute each in turn.'",
+        "formulas": ["tw-f9"], "tech": ["lcm-units"],
+        "standard": "LCM 60: A +3, B −2, a pair nets 1. After 57 pairs 57 units; the next filling minute adds 3 and finishes: 115 minutes.",
+        "fast": "Do not wait for the last pair: stop at the filling minute that completes the job.",
+        "eliminate": "The answer is a little under (net per pair) × (number of pairs) ÷ 1: the full-pairs figure (120 minutes) is too long, because the finishing minute is a filling one.",
+        "traps": ["Using the pair rate all the way (120 minutes).", "Forgetting which pipe starts."]},
+    "q-pc-diameter": {
+        "cue": "'A pipe of diameter d empties a tank in 40 minutes. A pipe of 2d?'",
+        "formulas": ["tw-f12"], "tech": ["scaling"],
+        "standard": "Area ∝ d²: the 2d pipe has 4 times the flow, so 40 ÷ 4 = 10 minutes.",
+        "fast": "Square the ratio of the diameters and divide the time by it.",
+        "eliminate": "Doubling the size cannot just halve the time: strike the 20-minute answer.",
+        "traps": ["Taking flow ∝ diameter.", "Multiplying the time instead of dividing."]},
+    "q-pc-volume": {
+        "cue": "'3/4 of the tank is full; 30 litres taken out empties it. Capacity?'",
+        "formulas": ["tw-f9"], "tech": ["fraction-percent", "units-first"],
+        "standard": "Convert the given litres into a fraction of the tank, then scale up; keep litres, minutes and hours in one unit.",
+        "fast": "3 parts = 30, so 4 parts = 40.",
+        "eliminate": "The capacity must exceed the water in the tank: strike options below it.",
+        "traps": ["Dividing by 3/4 the wrong way round.", "Mixing litres with ml or cm³."]},
+    "q-pc-pumps": {
+        "cue": "'12 pumps working 6 hours a day empty a reservoir in 15 days. How many pumps at 9 hours a day in 12 days?'",
+        "formulas": ["tw-f6"], "tech": ["scaling"],
+        "standard": "Pumps × hours × days = 12 × 6 × 15 = 1,080; pumps = 1,080 ÷ (9 × 12) = 10.",
+        "fast": "More hours and fewer days: 12 × (6/9) × (15/12) = 10.",
+        "eliminate": "More hours a day need fewer pumps, but fewer days need more: check the two effects cancel in the right direction.",
+        "traps": ["Setting up a direct instead of an inverse proportion."]},
+    "q-pc-general": {
+        "cue": "'A pipe fills in x hours, another empties in y hours (y > x). Both open?' or 'the faster takes 10 hours less'.",
+        "formulas": ["tw-f10"], "tech": ["plug-numbers", "back-substitute"],
+        "standard": "1/x − 1/y = (y − x)/xy, so the time is xy ÷ (y − x).",
+        "fast": "Plug x = 2, y = 3: the answer must be 6.",
+        "eliminate": "The answer must be positive when y > x: strike (x − y).",
+        "traps": ["Swapping x and y in the denominator."]},
 }
 PYQS = [
     pyq(S1, 69, "q-tw-together", "X is able to complete a task in 12 days, while Y takes 18 days to finish the same task. If they work together for 3 days, what fraction of the work will still remain?", ["1/3", "5/12", "7/12", "9/12"], "c",
@@ -196,7 +284,7 @@ PYQS = [
         trick="B is slower, so 18 × 4/3 = 24.", wrong={"a": mistake("Not the inverse: B is only 3/4 as fast as A.", 20, 0)}),
 ]
 
-PYQS = PYQS + PYQS_RY
+PYQS = PYQS + PYQS_RY + PYQS_PC
 
 
 def practice_items():
