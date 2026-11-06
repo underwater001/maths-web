@@ -1,0 +1,1486 @@
+{
+ "id": "ry7300-ch14-simplification",
+ "exam": "Rakesh Yadav 7300+ chapterwise bank",
+ "kind": "chapter-bank",
+ "publisher": "Rakesh Yadav Publications",
+ "chapter": "Chapter 14 · Simplification",
+ "test": null,
+ "date": null,
+ "shift": null,
+ "link": "https://drive.google.com/file/d/1NWgOVBZRXngvgt4atvaxHbH-Z6A71APn/view?usp=sharing",
+ "quant": "Q1-Q274 (book numbering)",
+ "note": "A curated selection of 210 of the chapter's 274 questions: every pattern the book uses, with two or three similar questions kept per pattern for practice; figure-based, repeated and badly worded questions left out. The question numbers are the book's own. Every answer was recomputed and compared with the book's printed answer key. Q274 is left out: the printed key is d (8), but 252¹²⁶ + 244¹⁵² ends in 4 + 6 = 10, so the remainder is 0 (option c), and options a and d are both printed as 8. Q18 is left out too: the key counts the negative root (-10 to 10), which the question does not ask for.",
+ "skipped": {},
+ "rows": [
+  {
+   "qno": 1,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "1 11/17",
+   "verified": true
+  },
+  {
+   "qno": 2,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "7/4",
+   "verified": true
+  },
+  {
+   "qno": 3,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "−16/19",
+   "verified": true
+  },
+  {
+   "qno": 4,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "10",
+   "verified": true
+  },
+  {
+   "qno": 7,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "−4",
+   "verified": true
+  },
+  {
+   "qno": 8,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "37.304",
+   "verified": true
+  },
+  {
+   "qno": 9,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "5",
+   "verified": true
+  },
+  {
+   "qno": 10,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "6.91",
+   "verified": true
+  },
+  {
+   "qno": 11,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "0.04",
+   "verified": true
+  },
+  {
+   "qno": 12,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "0.3",
+   "verified": true
+  },
+  {
+   "qno": 13,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 14,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "2 9/10",
+   "verified": true
+  },
+  {
+   "qno": 15,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "0.1764",
+   "verified": true
+  },
+  {
+   "qno": 16,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 17,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "0.0029",
+   "verified": true
+  },
+  {
+   "qno": 19,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 21,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "7",
+   "verified": true
+  },
+  {
+   "qno": 22,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "2984",
+   "verified": true
+  },
+  {
+   "qno": 23,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "1.6",
+   "verified": true
+  },
+  {
+   "qno": 24,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "5 1/10",
+   "verified": true
+  },
+  {
+   "qno": 25,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "√6/2",
+   "verified": true
+  },
+  {
+   "qno": 26,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "1 1/3",
+   "verified": true
+  },
+  {
+   "qno": 27,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "240",
+   "verified": true
+  },
+  {
+   "qno": 28,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 30,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "None of the above",
+   "verified": true
+  },
+  {
+   "qno": 31,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "7",
+   "verified": true
+  },
+  {
+   "qno": 32,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "5.625",
+   "verified": true
+  },
+  {
+   "qno": 33,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "75.25",
+   "verified": true
+  },
+  {
+   "qno": 34,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "64",
+   "verified": true
+  },
+  {
+   "qno": 35,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 36,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "1",
+   "verified": true
+  },
+  {
+   "qno": 37,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "5",
+   "verified": true
+  },
+  {
+   "qno": 38,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "38/43",
+   "verified": true
+  },
+  {
+   "qno": 40,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "25",
+   "verified": true
+  },
+  {
+   "qno": 41,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "0.012",
+   "verified": true
+  },
+  {
+   "qno": 43,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "1/2",
+   "verified": true
+  },
+  {
+   "qno": 44,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "23.75",
+   "verified": true
+  },
+  {
+   "qno": 46,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "5/2",
+   "verified": true
+  },
+  {
+   "qno": 50,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "63",
+   "verified": true
+  },
+  {
+   "qno": 51,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "10",
+   "verified": true
+  },
+  {
+   "qno": 52,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "10",
+   "verified": true
+  },
+  {
+   "qno": 53,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "2.13",
+   "verified": true
+  },
+  {
+   "qno": 54,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "10",
+   "verified": true
+  },
+  {
+   "qno": 55,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "0.021",
+   "verified": true
+  },
+  {
+   "qno": 56,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "0.84",
+   "verified": true
+  },
+  {
+   "qno": 57,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "2000",
+   "verified": true
+  },
+  {
+   "qno": 58,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "0.0246",
+   "verified": true
+  },
+  {
+   "qno": 59,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "50",
+   "verified": true
+  },
+  {
+   "qno": 61,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "11.322",
+   "verified": true
+  },
+  {
+   "qno": 62,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "7.11",
+   "verified": true
+  },
+  {
+   "qno": 63,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "14.5",
+   "verified": true
+  },
+  {
+   "qno": 64,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "18",
+   "verified": true
+  },
+  {
+   "qno": 65,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 66,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "6.216",
+   "verified": true
+  },
+  {
+   "qno": 67,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "5/12",
+   "verified": true
+  },
+  {
+   "qno": 68,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "21/17",
+   "verified": true
+  },
+  {
+   "qno": 70,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 72,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "196",
+   "verified": true
+  },
+  {
+   "qno": 75,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "0.6",
+   "verified": true
+  },
+  {
+   "qno": 76,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "6/55",
+   "verified": true
+  },
+  {
+   "qno": 78,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "5/8",
+   "verified": true
+  },
+  {
+   "qno": 87,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "19",
+   "verified": true
+  },
+  {
+   "qno": 88,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "5/3",
+   "verified": true
+  },
+  {
+   "qno": 89,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "4 5/12",
+   "verified": true
+  },
+  {
+   "qno": 90,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "0.143",
+   "verified": true
+  },
+  {
+   "qno": 91,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 92,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "0.092",
+   "verified": true
+  },
+  {
+   "qno": 93,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 94,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "131.6",
+   "verified": true
+  },
+  {
+   "qno": 95,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "0.8",
+   "verified": true
+  },
+  {
+   "qno": 96,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "0.0069",
+   "verified": true
+  },
+  {
+   "qno": 97,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "0.172",
+   "verified": true
+  },
+  {
+   "qno": 98,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "35/73",
+   "verified": true
+  },
+  {
+   "qno": 100,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 102,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 103,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "0.000002",
+   "verified": true
+  },
+  {
+   "qno": 104,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "1/5",
+   "verified": true
+  },
+  {
+   "qno": 105,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 106,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "300",
+   "verified": true
+  },
+  {
+   "qno": 110,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "4.5",
+   "verified": true
+  },
+  {
+   "qno": 111,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 115,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 117,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "8 1/3",
+   "verified": true
+  },
+  {
+   "qno": 118,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "0.6̄",
+   "verified": true
+  },
+  {
+   "qno": 119,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "1.414",
+   "verified": true
+  },
+  {
+   "qno": 120,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 121,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "20.202",
+   "verified": true
+  },
+  {
+   "qno": 122,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "1.732",
+   "verified": true
+  },
+  {
+   "qno": 123,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "12 16/17",
+   "verified": true
+  },
+  {
+   "qno": 124,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "45.09",
+   "verified": true
+  },
+  {
+   "qno": 125,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "19",
+   "verified": true
+  },
+  {
+   "qno": 126,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "6930",
+   "verified": true
+  },
+  {
+   "qno": 127,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 128,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 129,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 130,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "0.125",
+   "verified": true
+  },
+  {
+   "qno": 132,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "4 1/2",
+   "verified": true
+  },
+  {
+   "qno": 133,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 134,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "2496",
+   "verified": true
+  },
+  {
+   "qno": 135,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "0.225",
+   "verified": true
+  },
+  {
+   "qno": 136,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "0.5",
+   "verified": true
+  },
+  {
+   "qno": 137,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "5 5/12",
+   "verified": true
+  },
+  {
+   "qno": 138,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 139,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 140,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 141,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "780",
+   "verified": true
+  },
+  {
+   "qno": 142,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "160",
+   "verified": true
+  },
+  {
+   "qno": 143,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "14",
+   "verified": true
+  },
+  {
+   "qno": 144,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "19",
+   "verified": true
+  },
+  {
+   "qno": 145,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "1/(3 + 1/(1 + 1/(2 + 1/4)))",
+   "verified": true
+  },
+  {
+   "qno": 147,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "1.26",
+   "verified": true
+  },
+  {
+   "qno": 148,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "24",
+   "verified": true
+  },
+  {
+   "qno": 149,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "1",
+   "verified": true
+  },
+  {
+   "qno": 151,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "2/15",
+   "verified": true
+  },
+  {
+   "qno": 152,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "10600",
+   "verified": true
+  },
+  {
+   "qno": 153,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 154,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "67",
+   "verified": true
+  },
+  {
+   "qno": 155,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "1.633",
+   "verified": true
+  },
+  {
+   "qno": 156,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "14",
+   "verified": true
+  },
+  {
+   "qno": 157,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "5",
+   "verified": true
+  },
+  {
+   "qno": 158,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 159,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "10",
+   "verified": true
+  },
+  {
+   "qno": 160,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "1331",
+   "verified": true
+  },
+  {
+   "qno": 161,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 162,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 163,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 164,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "0.8",
+   "verified": true
+  },
+  {
+   "qno": 165,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "8.5",
+   "verified": true
+  },
+  {
+   "qno": 166,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 167,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "0.99",
+   "verified": true
+  },
+  {
+   "qno": 169,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "99856",
+   "verified": true
+  },
+  {
+   "qno": 170,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "60",
+   "verified": true
+  },
+  {
+   "qno": 172,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "0.00196",
+   "verified": true
+  },
+  {
+   "qno": 174,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "39",
+   "verified": true
+  },
+  {
+   "qno": 175,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "1",
+   "verified": true
+  },
+  {
+   "qno": 176,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "100",
+   "verified": true
+  },
+  {
+   "qno": 177,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "10",
+   "verified": true
+  },
+  {
+   "qno": 178,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "100",
+   "verified": true
+  },
+  {
+   "qno": 179,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "5",
+   "verified": true
+  },
+  {
+   "qno": 181,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 182,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "0.73",
+   "verified": true
+  },
+  {
+   "qno": 183,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "36",
+   "verified": true
+  },
+  {
+   "qno": 184,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "24/25",
+   "verified": true
+  },
+  {
+   "qno": 185,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 186,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 187,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "10.5",
+   "verified": true
+  },
+  {
+   "qno": 188,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "1024",
+   "verified": true
+  },
+  {
+   "qno": 189,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "7",
+   "verified": true
+  },
+  {
+   "qno": 190,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "9",
+   "verified": true
+  },
+  {
+   "qno": 191,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "49",
+   "verified": true
+  },
+  {
+   "qno": 192,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "0.2",
+   "verified": true
+  },
+  {
+   "qno": 193,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "25",
+   "verified": true
+  },
+  {
+   "qno": 195,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "9.7",
+   "verified": true
+  },
+  {
+   "qno": 196,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "5",
+   "verified": true
+  },
+  {
+   "qno": 197,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "8",
+   "verified": true
+  },
+  {
+   "qno": 198,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "50",
+   "verified": true
+  },
+  {
+   "qno": 199,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "34/21",
+   "verified": true
+  },
+  {
+   "qno": 203,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 206,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "33",
+   "verified": true
+  },
+  {
+   "qno": 207,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 208,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "15",
+   "verified": true
+  },
+  {
+   "qno": 209,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "106",
+   "verified": true
+  },
+  {
+   "qno": 210,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "1 − 1/7",
+   "verified": true
+  },
+  {
+   "qno": 211,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "4.5",
+   "verified": true
+  },
+  {
+   "qno": 212,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "920",
+   "verified": true
+  },
+  {
+   "qno": 213,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "x/10",
+   "verified": true
+  },
+  {
+   "qno": 214,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "0.024",
+   "verified": true
+  },
+  {
+   "qno": 216,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "149.985",
+   "verified": true
+  },
+  {
+   "qno": 217,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "4 8/13",
+   "verified": true
+  },
+  {
+   "qno": 218,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "11.01",
+   "verified": true
+  },
+  {
+   "qno": 219,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 220,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 221,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "9",
+   "verified": true
+  },
+  {
+   "qno": 225,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "48/29",
+   "verified": true
+  },
+  {
+   "qno": 226,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "1",
+   "verified": true
+  },
+  {
+   "qno": 228,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "16",
+   "verified": true
+  },
+  {
+   "qno": 229,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "n/2",
+   "verified": true
+  },
+  {
+   "qno": 231,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 234,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 235,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 237,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "±(2√7 − √5)",
+   "verified": true
+  },
+  {
+   "qno": 238,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "12.4",
+   "verified": true
+  },
+  {
+   "qno": 239,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "70",
+   "verified": true
+  },
+  {
+   "qno": 240,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "9801",
+   "verified": true
+  },
+  {
+   "qno": 241,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "9/4",
+   "verified": true
+  },
+  {
+   "qno": 242,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "4913",
+   "verified": true
+  },
+  {
+   "qno": 243,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "1.6",
+   "verified": true
+  },
+  {
+   "qno": 245,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "36",
+   "verified": true
+  },
+  {
+   "qno": 246,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "2^(1/2)",
+   "verified": true
+  },
+  {
+   "qno": 247,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "253",
+   "verified": true
+  },
+  {
+   "qno": 248,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "19 days",
+   "verified": true
+  },
+  {
+   "qno": 249,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "0.0005",
+   "verified": true
+  },
+  {
+   "qno": 252,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "0.025",
+   "verified": true
+  },
+  {
+   "qno": 253,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "37",
+   "verified": true
+  },
+  {
+   "qno": 254,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "√5 + √3 > √6 + √2",
+   "verified": true
+  },
+  {
+   "qno": 256,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "22√2",
+   "verified": true
+  },
+  {
+   "qno": 257,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "1003003001",
+   "verified": true
+  },
+  {
+   "qno": 258,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "5",
+   "verified": true
+  },
+  {
+   "qno": 260,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 261,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "53 1/3",
+   "verified": true
+  },
+  {
+   "qno": 263,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "17",
+   "verified": true
+  },
+  {
+   "qno": 264,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 265,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 266,
+   "topic": "simplification",
+   "key": "c",
+   "answer": "2 2/3",
+   "verified": true
+  },
+  {
+   "qno": 268,
+   "topic": "simplification",
+   "key": "b",
+   "answer": "2870",
+   "verified": true
+  },
+  {
+   "qno": 269,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "0.25",
+   "verified": true
+  },
+  {
+   "qno": 270,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "12",
+   "verified": true
+  },
+  {
+   "qno": 271,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "969",
+   "verified": true
+  },
+  {
+   "qno": 272,
+   "topic": "simplification",
+   "key": "a",
+   "answer": "3 − √5",
+   "verified": true
+  },
+  {
+   "qno": 273,
+   "topic": "simplification",
+   "key": "d",
+   "answer": "17",
+   "verified": true
+  }
+ ]
+}
