@@ -1,0 +1,1017 @@
+{
+ "id": "ry7300-ch13-power-indices-surds",
+ "exam": "Rakesh Yadav 7300+ chapterwise bank",
+ "kind": "chapter-bank",
+ "publisher": "Rakesh Yadav Publications",
+ "chapter": "Chapter 13 · Power, Indices & Surds",
+ "test": null,
+ "date": null,
+ "shift": null,
+ "link": "https://drive.google.com/file/d/1NWgOVBZRXngvgt4atvaxHbH-Z6A71APn/view?usp=sharing",
+ "quant": "Q1-Q213 (book numbering)",
+ "note": "A curated selection of 143 of the chapter's 213 questions: every pattern the book uses, with two or three similar questions kept per pattern for practice; figure-based, repeated and badly worded questions left out. The question numbers are the book's own. Every answer was recomputed and compared with the book's printed answer key.",
+ "skipped": {},
+ "rows": [
+  {
+   "qno": 1,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "√3 + 2√2",
+   "verified": true
+  },
+  {
+   "qno": 2,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "2√2",
+   "verified": true
+  },
+  {
+   "qno": 3,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "12",
+   "verified": true
+  },
+  {
+   "qno": 5,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "1",
+   "verified": true
+  },
+  {
+   "qno": 6,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 7,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 8,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "0.01",
+   "verified": true
+  },
+  {
+   "qno": 10,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "10",
+   "verified": true
+  },
+  {
+   "qno": 12,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "∛4",
+   "verified": true
+  },
+  {
+   "qno": 14,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 15,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "1",
+   "verified": true
+  },
+  {
+   "qno": 16,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "√2 − 2",
+   "verified": true
+  },
+  {
+   "qno": 17,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 18,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "4097/64",
+   "verified": true
+  },
+  {
+   "qno": 19,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "8",
+   "verified": true
+  },
+  {
+   "qno": 21,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 22,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "1",
+   "verified": true
+  },
+  {
+   "qno": 23,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "√5 − √6",
+   "verified": true
+  },
+  {
+   "qno": 24,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "16 − √3",
+   "verified": true
+  },
+  {
+   "qno": 25,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "62",
+   "verified": true
+  },
+  {
+   "qno": 26,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "9",
+   "verified": true
+  },
+  {
+   "qno": 27,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "100",
+   "verified": true
+  },
+  {
+   "qno": 28,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "∛6",
+   "verified": true
+  },
+  {
+   "qno": 29,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "625/16",
+   "verified": true
+  },
+  {
+   "qno": 30,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 31,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "√6 − 2",
+   "verified": true
+  },
+  {
+   "qno": 32,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 33,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 34,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "2√5",
+   "verified": true
+  },
+  {
+   "qno": 35,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "10",
+   "verified": true
+  },
+  {
+   "qno": 36,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "1.4 (4 recurring)",
+   "verified": true
+  },
+  {
+   "qno": 37,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "1.1",
+   "verified": true
+  },
+  {
+   "qno": 38,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "∛0.008",
+   "verified": true
+  },
+  {
+   "qno": 40,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "1 + 0.5/(1 − 1/2)",
+   "verified": true
+  },
+  {
+   "qno": 41,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "⁴√5",
+   "verified": true
+  },
+  {
+   "qno": 42,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "1",
+   "verified": true
+  },
+  {
+   "qno": 43,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "3/7",
+   "verified": true
+  },
+  {
+   "qno": 44,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 46,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "1.0606",
+   "verified": true
+  },
+  {
+   "qno": 47,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "1.3",
+   "verified": true
+  },
+  {
+   "qno": 49,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "∛3",
+   "verified": true
+  },
+  {
+   "qno": 50,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "8.484",
+   "verified": true
+  },
+  {
+   "qno": 51,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "1.293 (3 recurring)",
+   "verified": true
+  },
+  {
+   "qno": 53,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 55,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 56,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "198",
+   "verified": true
+  },
+  {
+   "qno": 57,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 58,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "1.00",
+   "verified": true
+  },
+  {
+   "qno": 59,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "−2",
+   "verified": true
+  },
+  {
+   "qno": 61,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "2.00",
+   "verified": true
+  },
+  {
+   "qno": 62,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "125",
+   "verified": true
+  },
+  {
+   "qno": 63,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "0.86",
+   "verified": true
+  },
+  {
+   "qno": 65,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "{(1/√2)(√7 + 1)}²",
+   "verified": true
+  },
+  {
+   "qno": 66,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 68,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "3 − √3",
+   "verified": true
+  },
+  {
+   "qno": 69,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 70,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "11",
+   "verified": true
+  },
+  {
+   "qno": 71,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "1/√2",
+   "verified": true
+  },
+  {
+   "qno": 73,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "16",
+   "verified": true
+  },
+  {
+   "qno": 74,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "1",
+   "verified": true
+  },
+  {
+   "qno": 79,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "1/7",
+   "verified": true
+  },
+  {
+   "qno": 81,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "√11 + √2",
+   "verified": true
+  },
+  {
+   "qno": 82,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "∛3",
+   "verified": true
+  },
+  {
+   "qno": 83,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "√5 − √3",
+   "verified": true
+  },
+  {
+   "qno": 84,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "√3",
+   "verified": true
+  },
+  {
+   "qno": 86,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "8",
+   "verified": true
+  },
+  {
+   "qno": 87,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "173/100",
+   "verified": true
+  },
+  {
+   "qno": 89,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "√4",
+   "verified": true
+  },
+  {
+   "qno": 92,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "√5 − √3",
+   "verified": true
+  },
+  {
+   "qno": 94,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 95,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "5/16",
+   "verified": true
+  },
+  {
+   "qno": 96,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "1/4",
+   "verified": true
+  },
+  {
+   "qno": 98,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "√5 − √3",
+   "verified": true
+  },
+  {
+   "qno": 99,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "∛9",
+   "verified": true
+  },
+  {
+   "qno": 100,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "√8",
+   "verified": true
+  },
+  {
+   "qno": 101,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "1.732",
+   "verified": true
+  },
+  {
+   "qno": 102,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "0.252",
+   "verified": true
+  },
+  {
+   "qno": 104,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 106,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "4/3",
+   "verified": true
+  },
+  {
+   "qno": 108,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "18",
+   "verified": true
+  },
+  {
+   "qno": 111,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "5",
+   "verified": true
+  },
+  {
+   "qno": 112,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "√5",
+   "verified": true
+  },
+  {
+   "qno": 113,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "√2",
+   "verified": true
+  },
+  {
+   "qno": 115,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "10",
+   "verified": true
+  },
+  {
+   "qno": 117,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "0.414",
+   "verified": true
+  },
+  {
+   "qno": 118,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "13.928",
+   "verified": true
+  },
+  {
+   "qno": 120,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "−2",
+   "verified": true
+  },
+  {
+   "qno": 121,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "1000",
+   "verified": true
+  },
+  {
+   "qno": 124,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 127,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "5 + 2√6",
+   "verified": true
+  },
+  {
+   "qno": 131,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "12",
+   "verified": true
+  },
+  {
+   "qno": 132,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "2√7",
+   "verified": true
+  },
+  {
+   "qno": 134,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "400",
+   "verified": true
+  },
+  {
+   "qno": 135,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "100",
+   "verified": true
+  },
+  {
+   "qno": 137,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "0.3",
+   "verified": true
+  },
+  {
+   "qno": 138,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "0.1",
+   "verified": true
+  },
+  {
+   "qno": 139,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "3^48",
+   "verified": true
+  },
+  {
+   "qno": 143,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 144,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "√6",
+   "verified": true
+  },
+  {
+   "qno": 146,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "3 + √5",
+   "verified": true
+  },
+  {
+   "qno": 147,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 148,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "9",
+   "verified": true
+  },
+  {
+   "qno": 149,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "100",
+   "verified": true
+  },
+  {
+   "qno": 150,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "⁴√4",
+   "verified": true
+  },
+  {
+   "qno": 151,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "∛9",
+   "verified": true
+  },
+  {
+   "qno": 154,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "3/5",
+   "verified": true
+  },
+  {
+   "qno": 155,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "√0.16",
+   "verified": true
+  },
+  {
+   "qno": 157,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "2.8284",
+   "verified": true
+  },
+  {
+   "qno": 158,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "√3 + √2",
+   "verified": true
+  },
+  {
+   "qno": 159,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "1",
+   "verified": true
+  },
+  {
+   "qno": 160,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 162,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "1/2",
+   "verified": true
+  },
+  {
+   "qno": 163,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 164,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "0.05",
+   "verified": true
+  },
+  {
+   "qno": 165,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "4.5",
+   "verified": true
+  },
+  {
+   "qno": 166,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "7",
+   "verified": true
+  },
+  {
+   "qno": 167,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "5",
+   "verified": true
+  },
+  {
+   "qno": 170,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "1, 2",
+   "verified": true
+  },
+  {
+   "qno": 172,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "55/28",
+   "verified": true
+  },
+  {
+   "qno": 175,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "9.898",
+   "verified": true
+  },
+  {
+   "qno": 177,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "5^100",
+   "verified": true
+  },
+  {
+   "qno": 178,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "√3",
+   "verified": true
+  },
+  {
+   "qno": 179,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "36",
+   "verified": true
+  },
+  {
+   "qno": 180,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "1221",
+   "verified": true
+  },
+  {
+   "qno": 181,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 183,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 185,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "9",
+   "verified": true
+  },
+  {
+   "qno": 186,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "176",
+   "verified": true
+  },
+  {
+   "qno": 191,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "17",
+   "verified": true
+  },
+  {
+   "qno": 192,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "4",
+   "verified": true
+  },
+  {
+   "qno": 194,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "6",
+   "verified": true
+  },
+  {
+   "qno": 198,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "2",
+   "verified": true
+  },
+  {
+   "qno": 201,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "330",
+   "verified": true
+  },
+  {
+   "qno": 202,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "25",
+   "verified": true
+  },
+  {
+   "qno": 204,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "9",
+   "verified": true
+  },
+  {
+   "qno": 205,
+   "topic": "surds-indices",
+   "key": "a",
+   "answer": "0.5223",
+   "verified": true
+  },
+  {
+   "qno": 206,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "6^(1/4)",
+   "verified": true
+  },
+  {
+   "qno": 208,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "3",
+   "verified": true
+  },
+  {
+   "qno": 209,
+   "topic": "surds-indices",
+   "key": "b",
+   "answer": "0",
+   "verified": true
+  },
+  {
+   "qno": 210,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "168",
+   "verified": true
+  },
+  {
+   "qno": 211,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "7",
+   "verified": true
+  },
+  {
+   "qno": 212,
+   "topic": "surds-indices",
+   "key": "d",
+   "answer": "17/15",
+   "verified": true
+  },
+  {
+   "qno": 213,
+   "topic": "surds-indices",
+   "key": "c",
+   "answer": "7",
+   "verified": true
+  }
+ ]
+}
