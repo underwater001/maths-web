@@ -120,7 +120,7 @@ with sync_playwright() as p:
     check(pg.evaluate("location.hash").startswith("#t/profit-loss/"), "a question type on a card opens the topic at that type")
 
     # a topic with no page yet says so
-    pg.goto(f"http://127.0.0.1:{port}/index.html#t/triangles"); pg.wait_for_timeout(700)
+    pg.goto(f"http://127.0.0.1:{port}/index.html#t/statistics"); pg.wait_for_timeout(700)
     check("not built yet" in pg.inner_text("#topic").lower(), "a topic with no page yet explains itself instead of breaking")
 
     # a quiz-tier topic (past questions, no extra practice) works the same way
