@@ -2,6 +2,7 @@
 from bank import bound, mistake, pyq, ratio_val
 from topics._rp_ry import PYQS_RY
 from topics._ms_ry import PYQS_RY as PYQS_MS
+from topics._ch16r_ry import PYQS_RY as PYQS_C16R
 
 TOPIC = "ratio-proportion"
 PREFIX = "rp"
@@ -176,7 +177,7 @@ PYQS = [
         wrong={"b": mistake("Took P : Q from 40 : 50 = 4 : 5, the percentages themselves instead of their reciprocals.", ratio_val("4:5:16"), 1e-9)}),
 ]
 
-PYQS = PYQS + PYQS_RY + PYQS_MS
+PYQS = PYQS + PYQS_RY + PYQS_MS + PYQS_C16R
 
 
 def practice_items():
