@@ -127,6 +127,8 @@ with sync_playwright() as p:
     pg.goto(f"http://127.0.0.1:{port}/index.html#t/average"); pg.wait_for_timeout(900)
     AV = shard("average")
     check(pg.locator("#study .card").count() >= 3 and pg.locator("#types .pattern").count() >= 1, "a quiz-tier topic still has concepts and patterns")
+    while pg.locator("#topic .q").count() < len(AV["pyqs"]) and pg.locator("#topic [data-moreq]").count() > 0:
+        pg.click("#topic [data-moreq]"); pg.wait_for_timeout(400)
     check(pg.locator("#topic .q").count() == len(AV["pyqs"]), f"all {len(AV['pyqs'])} of its questions are there")
     check("ULTRA-CALC" not in pg.inner_text("#types"), "no empty ultra-calc line where a topic has none")
 
