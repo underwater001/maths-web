@@ -1,0 +1,314 @@
+{
+  "id": "ry7300-ch23-mensuration-3d",
+  "exam": "Rakesh Yadav 7300+ Maths",
+  "kind": "similar-paper",
+  "publisher": "Rakesh Yadav Readers Publication",
+  "date": "",
+  "shift": "Chapter 23: Mensuration (3D questions)",
+  "link": "",
+  "quant": 711,
+  "note": "Chapter 23 (book pp.728-838, PDF pp.731-841) has 711 questions in total, the largest chapter in the book; the 2D portion (squares, circles, triangles, quadrilaterals - Types A-F) is filed separately as ry7300-ch23-mensuration-2d. This file covers the 3D-solids portion, which the book turns to only from roughly Q361 onward (no separate 'Type' letter was found for it in the questions-with-options pages, but the worked-solutions section shows it running at least to Q711, the chapter's last question). 43 of the roughly 350 3D questions were kept, heavily trimmed given extreme formulaic redundancy (dozens of near-identical melt-and-recast or ratio-of-similar-solids questions), but spanning every distinct technique found: cube/cuboid diagonal and identities (Euler's formula, the v^2=xyz face-area identity, cutting into equal smaller cubes, ratio-of-edges problems, four-walls-of-a-room, tank/water-level), melting and recasting one or more solids into another, pipe/river flow-rate and rainfall collection, weight-from-density, sphere facts (including the hemisphere-recast-into-a-cone identity H=2R), a sheet folded into a box or a cone, a cone cut parallel to its base (frustum ratios), volume-to-surface-area scaling between similar solids, cone/hemisphere/cylinder sharing a base and height (the classic 1:2:3 fact), percentage change in volume or surface area, the regular tetrahedron, right pyramids, prisms with a triangular or quadrilateral base, and a sphere nested between two cubes. The book gives no single compact answer-key table for the early pages of this chapter (solutions are worked individually); every answer here was verified by independent recomputation from the question's own numbers, matching exactly one of the four printed options.",
+  "rows": [
+    {
+      "qno": 361,
+      "topic": "mensuration-3d",
+      "key": "a",
+      "answer": "8",
+      "verified": true
+    },
+    {
+      "qno": 363,
+      "topic": "mensuration-3d",
+      "key": "c",
+      "answer": "64",
+      "verified": true
+    },
+    {
+      "qno": 368,
+      "topic": "mensuration-3d",
+      "key": "c",
+      "answer": "24",
+      "verified": true
+    },
+    {
+      "qno": 370,
+      "topic": "mensuration-3d",
+      "key": "a",
+      "answer": "v²=xyz",
+      "verified": true
+    },
+    {
+      "qno": 373,
+      "topic": "mensuration-3d",
+      "key": "a",
+      "answer": "896 cm³",
+      "verified": true
+    },
+    {
+      "qno": 378,
+      "topic": "mensuration-3d",
+      "key": "c",
+      "answer": "200",
+      "verified": true
+    },
+    {
+      "qno": 383,
+      "topic": "mensuration-3d",
+      "key": "b",
+      "answer": "10 m",
+      "verified": true
+    },
+    {
+      "qno": 385,
+      "topic": "mensuration-3d",
+      "key": "c",
+      "answer": "√14 cm",
+      "verified": true
+    },
+    {
+      "qno": 389,
+      "topic": "mensuration-3d",
+      "key": "d",
+      "answer": "34 m²",
+      "verified": true
+    },
+    {
+      "qno": 391,
+      "topic": "mensuration-3d",
+      "key": "a",
+      "answer": "294",
+      "verified": true
+    },
+    {
+      "qno": 392,
+      "topic": "mensuration-3d",
+      "key": "b",
+      "answer": "12 metre",
+      "verified": true
+    },
+    {
+      "qno": 399,
+      "topic": "mensuration-3d",
+      "key": "d",
+      "answer": "2",
+      "verified": true
+    },
+    {
+      "qno": 401,
+      "topic": "mensuration-3d",
+      "key": "c",
+      "answer": "0.20 meter",
+      "verified": true
+    },
+    {
+      "qno": 402,
+      "topic": "mensuration-3d",
+      "key": "d",
+      "answer": "8",
+      "verified": true
+    },
+    {
+      "qno": 403,
+      "topic": "mensuration-3d",
+      "key": "a",
+      "answer": "H = 2R",
+      "verified": true
+    },
+    {
+      "qno": 412,
+      "topic": "mensuration-3d",
+      "key": "d",
+      "answer": "6 cm",
+      "verified": true
+    },
+    {
+      "qno": 417,
+      "topic": "mensuration-3d",
+      "key": "c",
+      "answer": "2/3 cm",
+      "verified": true
+    },
+    {
+      "qno": 419,
+      "topic": "mensuration-3d",
+      "key": "b",
+      "answer": "550 cm²",
+      "verified": true
+    },
+    {
+      "qno": 421,
+      "topic": "mensuration-3d",
+      "key": "b",
+      "answer": "8 cm",
+      "verified": true
+    },
+    {
+      "qno": 446,
+      "topic": "mensuration-3d",
+      "key": "d",
+      "answer": "20 cm",
+      "verified": true
+    },
+    {
+      "qno": 454,
+      "topic": "mensuration-3d",
+      "key": "a",
+      "answer": "1663.2",
+      "verified": true
+    },
+    {
+      "qno": 469,
+      "topic": "mensuration-3d",
+      "key": "b",
+      "answer": "12 cm",
+      "verified": true
+    },
+    {
+      "qno": 556,
+      "topic": "mensuration-3d",
+      "key": "b",
+      "answer": "750",
+      "verified": true
+    },
+    {
+      "qno": 557,
+      "topic": "mensuration-3d",
+      "key": "b",
+      "answer": "40,00,000",
+      "verified": true
+    },
+    {
+      "qno": 561,
+      "topic": "mensuration-3d",
+      "key": "d",
+      "answer": "75",
+      "verified": true
+    },
+    {
+      "qno": 565,
+      "topic": "mensuration-3d",
+      "key": "a",
+      "answer": "48 cm³",
+      "verified": true
+    },
+    {
+      "qno": 566,
+      "topic": "mensuration-3d",
+      "key": "a",
+      "answer": "4:9",
+      "verified": true
+    },
+    {
+      "qno": 571,
+      "topic": "mensuration-3d",
+      "key": "b",
+      "answer": "√2:1",
+      "verified": true
+    },
+    {
+      "qno": 583,
+      "topic": "mensuration-3d",
+      "key": "a",
+      "answer": "1:2:3",
+      "verified": true
+    },
+    {
+      "qno": 595,
+      "topic": "mensuration-3d",
+      "key": "b",
+      "answer": "22:7",
+      "verified": true
+    },
+    {
+      "qno": 619,
+      "topic": "mensuration-3d",
+      "key": "c",
+      "answer": "62.5%",
+      "verified": true
+    },
+    {
+      "qno": 624,
+      "topic": "mensuration-3d",
+      "key": "d",
+      "answer": "eight times that of the original",
+      "verified": true
+    },
+    {
+      "qno": 634,
+      "topic": "mensuration-3d",
+      "key": "d",
+      "answer": "125%",
+      "verified": true
+    },
+    {
+      "qno": 637,
+      "topic": "mensuration-3d",
+      "key": "a",
+      "answer": "144√2 cu. cm",
+      "verified": true
+    },
+    {
+      "qno": 640,
+      "topic": "mensuration-3d",
+      "key": "c",
+      "answer": "15 cm",
+      "verified": true
+    },
+    {
+      "qno": 643,
+      "topic": "mensuration-3d",
+      "key": "d",
+      "answer": "12 cm",
+      "verified": true
+    },
+    {
+      "qno": 644,
+      "topic": "mensuration-3d",
+      "key": "c",
+      "answer": "288 cm²",
+      "verified": true
+    },
+    {
+      "qno": 652,
+      "topic": "mensuration-3d",
+      "key": "d",
+      "answer": "144√3",
+      "verified": true
+    },
+    {
+      "qno": 666,
+      "topic": "mensuration-3d",
+      "key": "a",
+      "answer": "720 cm²",
+      "verified": true
+    },
+    {
+      "qno": 673,
+      "topic": "mensuration-3d",
+      "key": "c",
+      "answer": "5",
+      "verified": true
+    },
+    {
+      "qno": 678,
+      "topic": "mensuration-3d",
+      "key": "c",
+      "answer": "27000",
+      "verified": true
+    },
+    {
+      "qno": 685,
+      "topic": "mensuration-3d",
+      "key": "d",
+      "answer": "360 square cm",
+      "verified": true
+    },
+    {
+      "qno": 688,
+      "topic": "mensuration-3d",
+      "key": "a",
+      "answer": "1:3√3",
+      "verified": true
+    }
+  ]
+}
