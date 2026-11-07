@@ -1,0 +1,286 @@
+{
+  "id": "ry7300-ch23-mensuration-2d",
+  "exam": "Rakesh Yadav 7300+ Maths",
+  "kind": "similar-paper",
+  "publisher": "Rakesh Yadav Readers Publication",
+  "date": "",
+  "shift": "Chapter 23: Mensuration (2D questions)",
+  "link": "",
+  "quant": 711,
+  "note": "Chapter 23 (book pp.728-771, PDF pp.731-774) has 711 questions, by far the largest chapter in the book, organised into lettered sub-sections (Type A squares/rectangles, Type B circles+triangles, Type C quadrilaterals, Type D cost-rate, Type E ratio-of-areas, Type F percentage-change, then Type G onward which turns to 3D solids - see ry7300-ch23-mensuration-3d). This file covers only the 2D portion. Given the extreme internal redundancy (the same formula re-applied to different numbers over and over), a heavily trimmed selection was kept: 39 of the roughly 360 2D questions (Types A-F plus a handful of 2D stragglers in the real-exam-dated SSC CPO 2016 tail), spanning every distinct 2D technique found - squares/rectangles (diagonal-area, scaling, combining, wire-bending), wheels and meshed gears, circles (touching circles, radius-vs-area growth), triangles (Heron's formula, equilateral incircle/circumcircle, centroid/medians, medial triangle), quadrilaterals (rhombus, hexagon, parallelogram, trapezium), percentage change in area or perimeter, cost of flooring a path, and regular-polygon diagonals. The book gives no single compact answer-key table for the 2D section's early pages (solutions are worked individually); every answer here was verified by independent recomputation from the question's own numbers, matching exactly one of the four printed options.",
+  "rows": [
+    {
+      "qno": 1,
+      "topic": "mensuration-2d",
+      "key": "b",
+      "answer": "13.52 sq.cm",
+      "verified": true
+    },
+    {
+      "qno": 3,
+      "topic": "mensuration-2d",
+      "key": "a",
+      "answer": "8 metres",
+      "verified": true
+    },
+    {
+      "qno": 6,
+      "topic": "mensuration-2d",
+      "key": "b",
+      "answer": "3025",
+      "verified": true
+    },
+    {
+      "qno": 9,
+      "topic": "mensuration-2d",
+      "key": "d",
+      "answer": "8 cm",
+      "verified": true
+    },
+    {
+      "qno": 14,
+      "topic": "mensuration-2d",
+      "key": "b",
+      "answer": "40",
+      "verified": true
+    },
+    {
+      "qno": 15,
+      "topic": "mensuration-2d",
+      "key": "d",
+      "answer": "616 cm²",
+      "verified": true
+    },
+    {
+      "qno": 56,
+      "topic": "mensuration-2d",
+      "key": "b",
+      "answer": "8.75 cm²",
+      "verified": true
+    },
+    {
+      "qno": 58,
+      "topic": "mensuration-2d",
+      "key": "d",
+      "answer": "700",
+      "verified": true
+    },
+    {
+      "qno": 65,
+      "topic": "mensuration-2d",
+      "key": "b",
+      "answer": "24 cm",
+      "verified": true
+    },
+    {
+      "qno": 66,
+      "topic": "mensuration-2d",
+      "key": "c",
+      "answer": "3/2",
+      "verified": true
+    },
+    {
+      "qno": 67,
+      "topic": "mensuration-2d",
+      "key": "a",
+      "answer": "1.975 cm²",
+      "verified": true
+    },
+    {
+      "qno": 74,
+      "topic": "mensuration-2d",
+      "key": "b",
+      "answer": "20 minutes",
+      "verified": true
+    },
+    {
+      "qno": 84,
+      "topic": "mensuration-2d",
+      "key": "b",
+      "answer": "462 cm²",
+      "verified": true
+    },
+    {
+      "qno": 92,
+      "topic": "mensuration-2d",
+      "key": "a",
+      "answer": "(16/3)π cm²",
+      "verified": true
+    },
+    {
+      "qno": 97,
+      "topic": "mensuration-2d",
+      "key": "c",
+      "answer": "3 cm",
+      "verified": true
+    },
+    {
+      "qno": 100,
+      "topic": "mensuration-2d",
+      "key": "c",
+      "answer": "30 m",
+      "verified": true
+    },
+    {
+      "qno": 129,
+      "topic": "mensuration-2d",
+      "key": "b",
+      "answer": "30 cm²",
+      "verified": true
+    },
+    {
+      "qno": 138,
+      "topic": "mensuration-2d",
+      "key": "c",
+      "answer": "10√7/3",
+      "verified": true
+    },
+    {
+      "qno": 146,
+      "topic": "mensuration-2d",
+      "key": "c",
+      "answer": "30√2 cm²",
+      "verified": true
+    },
+    {
+      "qno": 159,
+      "topic": "mensuration-2d",
+      "key": "a",
+      "answer": "28",
+      "verified": true
+    },
+    {
+      "qno": 182,
+      "topic": "mensuration-2d",
+      "key": "b",
+      "answer": "9 cm",
+      "verified": true
+    },
+    {
+      "qno": 187,
+      "topic": "mensuration-2d",
+      "key": "c",
+      "answer": "3 cm",
+      "verified": true
+    },
+    {
+      "qno": 234,
+      "topic": "mensuration-2d",
+      "key": "a",
+      "answer": "80 cm",
+      "verified": true
+    },
+    {
+      "qno": 240,
+      "topic": "mensuration-2d",
+      "key": "a",
+      "answer": "18√3 cm²",
+      "verified": true
+    },
+    {
+      "qno": 249,
+      "topic": "mensuration-2d",
+      "key": "b",
+      "answer": "10 cm",
+      "verified": true
+    },
+    {
+      "qno": 270,
+      "topic": "mensuration-2d",
+      "key": "a",
+      "answer": "28 cm²",
+      "verified": true
+    },
+    {
+      "qno": 280,
+      "topic": "mensuration-2d",
+      "key": "c",
+      "answer": "Rs 9047.50",
+      "verified": true
+    },
+    {
+      "qno": 289,
+      "topic": "mensuration-2d",
+      "key": "a",
+      "answer": "75 m",
+      "verified": true
+    },
+    {
+      "qno": 296,
+      "topic": "mensuration-2d",
+      "key": "d",
+      "answer": "4:√3",
+      "verified": true
+    },
+    {
+      "qno": 318,
+      "topic": "mensuration-2d",
+      "key": "a",
+      "answer": "2:√7",
+      "verified": true
+    },
+    {
+      "qno": 336,
+      "topic": "mensuration-2d",
+      "key": "b",
+      "answer": "1%",
+      "verified": true
+    },
+    {
+      "qno": 342,
+      "topic": "mensuration-2d",
+      "key": "b",
+      "answer": "125%",
+      "verified": true
+    },
+    {
+      "qno": 346,
+      "topic": "mensuration-2d",
+      "key": "b",
+      "answer": "33⅓%",
+      "verified": true
+    },
+    {
+      "qno": 355,
+      "topic": "mensuration-2d",
+      "key": "d",
+      "answer": "56%",
+      "verified": true
+    },
+    {
+      "qno": 694,
+      "topic": "mensuration-2d",
+      "key": "c",
+      "answer": "7000",
+      "verified": true
+    },
+    {
+      "qno": 700,
+      "topic": "mensuration-2d",
+      "key": "a",
+      "answer": "600 sq cm",
+      "verified": true
+    },
+    {
+      "qno": 705,
+      "topic": "mensuration-2d",
+      "key": "b",
+      "answer": "9:49",
+      "verified": true
+    },
+    {
+      "qno": 706,
+      "topic": "mensuration-2d",
+      "key": "c",
+      "answer": "35",
+      "verified": true
+    },
+    {
+      "qno": 710,
+      "topic": "mensuration-2d",
+      "key": "a",
+      "answer": "24 cm²",
+      "verified": true
+    }
+  ]
+}
