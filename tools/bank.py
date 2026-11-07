@@ -30,6 +30,8 @@ TECHNIQUES = {
     "relative": "Relative speed",
     "scaling": "Scale the numbers",
     "standard-values": "Standard values and triples",
+    "hcf-lcm-product": "HCF × LCM = product of the numbers",
+    "hcf-units": "Work in HCF units",
 }
 
 # ----------------------------------------------------------------------------------------------
