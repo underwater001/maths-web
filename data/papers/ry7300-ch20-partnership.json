@@ -1,0 +1,33 @@
+{
+  "id": "ry7300-ch20-partnership",
+  "exam": "Rakesh Yadav 7300+ Maths",
+  "kind": "similar-paper",
+  "publisher": "Rakesh Yadav Readers Publication",
+  "date": "",
+  "shift": "Chapter 20: Partnership",
+  "link": "",
+  "quant": 25,
+  "note": "Chapter 20 (Partnership) runs from book p.661 to p.662 (25 questions). 20 were kept and filed into the existing partnership.py topic: new PYQs for the four existing qtypes (q-pt-two, q-pt-late, q-pt-working, q-pt-pasture), plus two new qtypes (q-pt-find-time: the profit ratio is given and an unknown time must be solved for; q-pt-split-rule: part of the profit is removed - as tax, or as an equal share - before the rest is split by ratio). Q5 was dropped (the English and Hindi text of a multi-step capital-change problem disagree and neither reading was confirmed against the options). Q9 and Q14 were dropped as plain 'divide a sum by stated relations' algebra problems with no capital/time context, better suited to a ratio or linear-equations topic than partnership. Q24 was dropped as a near-exact duplicate of Q11 (same ratio, same withdrawal month, same profit ratio, just a reshuffled option list) - Q11 and Q23 already cover that pattern twice with genuinely different numbers. As with Chapters 17-19, no compact printed answer-key table was located for this range, so every answer was verified the primary way only: independently recomputed from the question's own numbers and checked to match exactly one printed option.",
+  "rows": [
+    {"qno": 1, "topic": "partnership", "key": "a", "answer": "₹2000, ₹3500", "verified": true},
+    {"qno": 13, "topic": "partnership", "key": "c", "answer": "₹1000", "verified": true},
+    {"qno": 15, "topic": "partnership", "key": "a", "answer": "5 : 4", "verified": true},
+    {"qno": 18, "topic": "partnership", "key": "b", "answer": "₹16,400", "verified": true},
+    {"qno": 19, "topic": "partnership", "key": "d", "answer": "₹1,17,000", "verified": true},
+    {"qno": 20, "topic": "partnership", "key": "d", "answer": "₹16,000", "verified": true},
+    {"qno": 2, "topic": "partnership", "key": "d", "answer": "None of these", "verified": true},
+    {"qno": 3, "topic": "partnership", "key": "b", "answer": "₹42,000", "verified": true},
+    {"qno": 4, "topic": "partnership", "key": "a", "answer": "3", "verified": true},
+    {"qno": 10, "topic": "partnership", "key": "c", "answer": "3 months", "verified": true},
+    {"qno": 21, "topic": "partnership", "key": "c", "answer": "₹17,250", "verified": true},
+    {"qno": 22, "topic": "partnership", "key": "b", "answer": "₹1,10,000", "verified": true},
+    {"qno": 6, "topic": "partnership", "key": "a", "answer": "₹20,000", "verified": true},
+    {"qno": 7, "topic": "partnership", "key": "c", "answer": "₹48,000", "verified": true},
+    {"qno": 12, "topic": "partnership", "key": "d", "answer": "₹5400", "verified": true},
+    {"qno": 11, "topic": "partnership", "key": "a", "answer": "12 months", "verified": true},
+    {"qno": 23, "topic": "partnership", "key": "c", "answer": "7 months", "verified": true},
+    {"qno": 17, "topic": "partnership", "key": "a", "answer": "5", "verified": true},
+    {"qno": 8, "topic": "partnership", "key": "d", "answer": "₹1,60,000; ₹2,40,000; ₹3,20,000", "verified": true},
+    {"qno": 25, "topic": "partnership", "key": "b", "answer": "₹3937.50", "verified": true}
+  ]
+}

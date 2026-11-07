@@ -7,7 +7,8 @@ practice answer is found twice by different methods. tools/build_topic.py enforc
 from fractions import Fraction as F
 from math import gcd
 
-from bank import bound, inr, mistake, pyq, prac, share, variants
+from bank import bound, inr, mistake, opt_val, pyq, prac, ratio_val, share, variants
+from topics._ch20pt_ry import PYQS_RY as PYQS_C20PT
 
 TOPIC = "partnership"      # a topic node in data/tree.json
 PREFIX = "pt"              # practice ids: pt-p01, pt-p02, ... (append new items at the end so old ids never move)
@@ -25,8 +26,12 @@ NODES = {
                  "summary": "Capitals and times given; find a share, or find the total profit from a share.", "links": []},
     "q-pt-late": {"short": "Joins late", "label": "Partners join at different times", "kind": "qtype", "parent": "c-late-entry", "order": 1,
                   "summary": "Two or three partners; some join after some months.", "links": []},
+    "q-pt-find-time": {"short": "Solve for the time", "label": "The profit ratio is given; find the unknown time", "kind": "qtype", "parent": "c-late-entry", "order": 2,
+                       "summary": "Run the usual capital-months method backwards: the profit ratio is known, and a joining month or investment duration is the unknown.", "links": []},
     "q-pt-working": {"short": "Extra % for work", "label": "One partner works for extra %", "kind": "qtype", "parent": "c-working-partner", "order": 1,
                      "summary": "A working partner takes a % of profit first, then shares the rest.", "links": []},
+    "q-pt-split-rule": {"short": "Deduct, then split by ratio", "label": "Part of the profit is removed before the ratio split", "kind": "qtype", "parent": "c-working-partner", "order": 2,
+                        "summary": "Tax, or an equal share for everyone, is taken off the top (with nobody getting it back); only the remainder is split by the capital ratio.", "links": []},
     "q-pt-pasture": {"short": "Pasture / rent", "label": "Pasture / rent with animal equivalence", "kind": "qtype", "parent": "c-common-unit", "order": 1,
                      "summary": "Different animals for different months; convert to one animal, then split rent.", "links": ["ratio-proportion"]},
 }
@@ -49,6 +54,10 @@ FORMULAS = [
     {"id": "pt-f7", "node": "c-common-unit", "text": "If a animals of type A eat as much as b animals of type B, then 1 A = (b/a) B",
      "note": "3 cows = 7 goats means a cow counts as 7/3 goat (a cow is the bigger eater)."},
     {"id": "pt-f8", "node": "c-common-unit", "text": "Rent share ∝ (number of animals × months), after converting every animal to one common unit"},
+    {"id": "pt-f9", "node": "c-late-entry", "text": "If the profit ratio (or an 'equal share') is known, set the capital-months expressions equal to that ratio and solve for the unknown time.",
+     "note": "Exactly the forward method, just run backwards."},
+    {"id": "pt-f10", "node": "c-working-partner", "text": "If a % is removed with nobody getting it back (tax, or a flat equal share for everyone), split only the remainder by the capital ratio.",
+     "note": "Different from a working partner's commission, which that partner gets back on top of his ratio share."},
 ]
 
 # ----------------------------------------------------------------------------------------------
@@ -94,6 +103,26 @@ METHODS = {
         "ultra": "After converting, cancel the common factor of the two totals: 1,140 : 1,212 → ÷12 → 95 : 101. Fraction = 95/196. Check the direction first: 3 cows = 7 goats means 1 cow = 7/3 goat, not the other way round.",
         "eliminate": "Estimate the fraction: X's total ≈ 285, Y's ≈ 303, so X ≈ 285/588 ≈ 0.485, a little under half. Any option above ½ or far below it is out. This leaves 90/196 (0.459) and 95/196 (0.485), and one rough division settles it.",
         "traps": ["Reading the equivalence upside down (cow worth 3/7 goat instead of 7/3).", "Leaving one animal type out of a person's total.", "Using animals but not months."],
+    },
+    "q-pt-find-time": {
+        "cue": "A profit ratio (or an 'equal profit' statement) is given outright, and a joining month, withdrawal month, or investment duration is the unknown.",
+        "formulas": ["pt-f1", "pt-f9"],
+        "tech": ["ratio-parts", "back-substitute"],
+        "standard": "Write both partners' capital-months, one with the unknown time in it. Set their ratio equal to the given profit ratio and solve the resulting equation for the unknown.",
+        "fast": "Reduce the known capital-months first, so the equation in the unknown time has small numbers.",
+        "ultra": "Cross-multiply once: (known capital-months) × (its ratio partner) = (other partner's capital) × (unknown time) × (its own ratio partner), then divide straight through for the unknown.",
+        "eliminate": "Plug each option's time into the capital-months expressions and check the ratio matches what's given.",
+        "traps": ["Solving for the time the partner was ABSENT instead of the time he actually invested.", "Setting up the ratio backwards (swapping which side the unknown time belongs to)."],
+    },
+    "q-pt-split-rule": {
+        "cue": "A % of the profit is taken out first as tax, or split equally among everyone, and only what's left is divided by the capital ratio.",
+        "formulas": ["pt-f10", "pt-f2"],
+        "tech": ["fraction-percent", "ratio-parts"],
+        "standard": "Remove the stated % (tax, or the equal portion) from the total first. Split only what remains by the capital ratio; nobody gets the removed part back.",
+        "fast": "If a difference between two partners is given, note that any EQUAL portion contributes nothing to that difference — it all comes from the ratio-split part.",
+        "ultra": "When a difference is given: the gap is (difference in ratio parts ÷ total parts) × (the ratio-split percentage) × profit. Solve that one-line equation for the profit directly.",
+        "eliminate": "Add the two (or three) computed shares back together and check they total the original profit.",
+        "traps": ["Giving the removed % back to one partner as if it were a working partner's commission.", "Applying the ratio to the whole profit instead of only to what's left after the deduction."],
     },
 }
 
@@ -165,6 +194,7 @@ PYQS = [
                "c": bound("Same estimate gives about 52.6%; 105/192 is 54.7%.", lambda v: v > 0.54),
                "d": bound("M keeps more animals for more months than N's share would allow at 31%.", lambda v: v < 0.4)}),
 ]
+PYQS = PYQS + PYQS_C20PT
 
 
 # ----------------------------------------------------------------------------------------------
@@ -344,6 +374,69 @@ def t_late_unknown(rng):
                 F(x * 1000) if ok else None, concepts=2, steps=5, tech=["ratio-parts"])
 
 
+def t_find_time_same(rng):
+    a, b = rng.choice([(5, 6), (7, 9), (2, 3), (3, 4), (4, 5), (3, 5), (5, 7), (7, 8), (4, 7), (5, 8)])
+    m = rng.randint(4, 10); T = rng.randint(3, 15)
+    cmX, cmY = a * m, b * T; g = gcd(cmX, cmY); p, q = cmX // g, cmY // g
+    if p == q or p > 40 or q > 40: return None
+    check = F(a * m * q, b * p)
+    wrong1, wrong2, wrong3 = F(a * m * p, b * q), F(a * m * q, p), F(m * q, b * p)
+    return prac("q-pt-find-time", "same",
+                f"X and Y invest capitals in the ratio {a} : {b}. At the end of {m} months, X withdraws his capital. If they receive profit in the ratio {p} : {q}, find how long Y's capital was used.",
+                F(T), [(wrong1, "Inverted the given profit ratio when setting up the equation."), (wrong2, "Forgot to divide by Y's capital share when solving for the time."), (wrong3, "Dropped X's capital share from the equation.")],
+                f"X's capital-months = {a}×{m} = {cmX}. Y's capital-months = {b}×T. The ratio must equal {p} : {q}, giving T = {a}×{m}×{q} ÷ ({b}×{p}) = {T} months.",
+                check, tech=["ratio-parts", "back-substitute"], fmt="num")
+
+
+def t_find_time_harder(rng):
+    cA, cB = rng.choice([15, 18, 20, 21, 24, 25, 27, 30, 32, 35, 36, 40]), rng.choice([15, 18, 20, 21, 24, 25, 27, 30, 32, 35, 36, 40])
+    if cA == cB: return None
+    m = rng.randint(2, 9); cmA, cmB = cA * 12, cB * (12 - m); g = gcd(cmA, cmB); p, q = cmA // g, cmB // g
+    if p == q or max(p, q) > 80: return None
+    check = 12 - F(cmA * q, p * cB)
+    wrong1, wrong2, wrong3 = F(cmA * q, p * cB), 12 - F(cmA * p, q * cB), 12 - F(cmA, cB)
+    if wrong1 < 0 or wrong2 < 0 or wrong3 < 0 or wrong1 > 24 or wrong3 > 24: return None
+    return prac("q-pt-find-time", "harder",
+                f"A starts a business with {inr(cA * 1000)}. B joins him after some months with {inr(cB * 1000)}. If the profit at the end of the year is divided in the ratio {p} : {q}, after how many months did B join?",
+                F(m), [(wrong1, "Gave the number of months B was in the business, not the number of months before he joined."), (wrong2, "Inverted the given profit ratio."), (wrong3, "Assumed an equal (1 : 1) split instead of using the given ratio.")],
+                f"A's capital-months = {cA}×12 = {cmA}. For ratio {p} : {q}, B's capital-months must be {cmA}×{q} ÷ {p} = {cmB}, so {cB}×(12 − m) = {cmB}, giving m = {m}.",
+                check, concepts=3, heavy=True, tech=["ratio-parts", "back-substitute"], fmt="num")
+
+
+def t_split_rule_same(rng):
+    pct = rng.choice([20, 25, 50]); a, b = rng.choice([(2, 3), (3, 4), (1, 2), (3, 5), (2, 5), (1, 3), (3, 7), (4, 7)])
+    s = a + b; mult = {20: 4, 25: 3, 50: 1}[pct]; k = rng.randint(2, 12) * mult; rest = s * k
+    if (rest * 100) % (100 - pct) != 0: return None
+    total = rest * 100 // (100 - pct); shareA, shareB = a * k, b * k; nm = rng.sample(["A", "B", "P", "Q", "X", "Y"], 2)
+    wrong1, wrong2, wrong3 = F(a, s) * total, F(pct, 100) * total + F(a, s) * rest, F(b, s) * rest
+    if len({float(shareA), float(wrong1), float(wrong2), float(wrong3)}) < 4: return None
+    return prac("q-pt-split-rule", "same",
+                f"A profit of {inr(total)} is earned in a business. {pct}% of it is paid as tax, and the rest is divided between {nm[0]} and {nm[1]} in the ratio {a} : {b}. Find {nm[0]}'s share.",
+                F(shareA), [(wrong1, "Applied the ratio to the full profit instead of only to what's left after tax."), (wrong2, f"Treated the tax as if it were a commission paid back to {nm[0]}."), (wrong3, f"Gave {nm[1]}'s share instead of {nm[0]}'s.")],
+                f"After {pct}% tax, {inr(rest)} remains. Split in the ratio {a} : {b} ({s} parts): {nm[0]} gets {a}/{s} × {inr(rest)} = {inr(shareA)}.",
+                F((total - F(pct, 100) * total) - shareB), tech=["fraction-percent", "ratio-parts"])
+
+
+def t_split_rule_harder(rng):
+    eq_pct = rng.choice([40, 50, 60, 70]); a, b = rng.choice([(5, 3), (3, 2), (7, 4), (5, 4), (8, 5), (9, 7), (4, 3)])
+    if a <= b: return None
+    s = a + b; diff_target = rng.choice([100, 150, 200, 250, 300, 400, 500])
+    num, den = diff_target * s * 100, (a - b) * (100 - eq_pct)
+    if num % den != 0: return None
+    P = num // den; eq_amt = F(eq_pct, 100) * P; rest = P - eq_amt
+    shareA, shareB = F(1, 2) * eq_amt + F(a, s) * rest, F(1, 2) * eq_amt + F(b, s) * rest
+    if shareA - shareB != diff_target: return None
+    wrong1, wrong2, wrong3 = F(diff_target * s, a - b), F(diff_target * s * 100, (a - b) * eq_pct), F(P * 2)
+    if len({float(P), float(wrong1), float(wrong2), float(wrong3)}) < 4: return None
+    check_shareA = F(1, 2) * F(eq_pct, 100) * P + F(a, s) * F(100 - eq_pct, 100) * P
+    check_shareB = F(1, 2) * F(eq_pct, 100) * P + F(b, s) * F(100 - eq_pct, 100) * P
+    return prac("q-pt-split-rule", "harder",
+                f"Two partners invest in the ratio {a} : {b}. They agree that {eq_pct}% of the profit should be divided equally between them, and the rest divided in the ratio of their capitals. If one partner gets {inr(diff_target)} more than the other, find the total profit.",
+                F(P), [(wrong1, f"Ignored the {eq_pct}% equal-split part entirely, as if the whole profit were split by ratio."), (wrong2, "Used the equal-split percentage itself instead of the remaining ratio-split percentage."), (wrong3, "Accidentally doubled the correct total.")],
+                f"The equal {eq_pct}% portion gives both partners the same amount, so the whole {inr(diff_target)} gap comes from the {100 - eq_pct}% split by ratio {a} : {b}. Solving gives the total profit = {inr(P)}.",
+                F(P) if (check_shareA - check_shareB) == diff_target else None, concepts=3, heavy=True, tech=["fraction-percent", "ratio-parts"])
+
+
 def t_working_total(rng):
     r = rng.choice([(2, 3), (3, 5), (1, 3), (2, 7), (3, 4), (4, 5)]); c = rng.choice([5, 10, 12, 15, 20]); k = rng.randint(2, 9)
     profit = 1000 * sum(r) * k; w = rng.randint(0, 1); nm = rng.sample(["P", "Q", "A", "B", "X", "Y"], 2)
@@ -400,6 +493,10 @@ def practice_items():
     out += variants(PREFIX, "two-total", 3, t_two_total)
     out += variants(PREFIX, "late-share", 2, t_late_share)
     out += variants(PREFIX, "late-unknown", 3, t_late_unknown)
+    out += variants(PREFIX, "find-time-same", 3, t_find_time_same)
+    out += variants(PREFIX, "find-time-harder", 3, t_find_time_harder)
+    out += variants(PREFIX, "split-rule-same", 3, t_split_rule_same)
+    out += variants(PREFIX, "split-rule-harder", 3, t_split_rule_harder)
     out += variants(PREFIX, "work-total", 2, t_working_total)
     out += variants(PREFIX, "work-find", 3, t_working_find)
     out += variants(PREFIX, "pasture-simple", 2, t_pasture_simple)
