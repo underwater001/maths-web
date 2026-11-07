@@ -1,0 +1,168 @@
+"""Chapter 21 (Trigonometry) of Rakesh Yadav '7300+ Maths', book pp.676-690 (273 questions total,
+organised by the book's own Type A-Y labels). This is an identity-heavy chapter with enormous
+repetition (many questions are the same technique with different numbers), so a representative slice
+was kept rather than anywhere near all 273 - about 20 questions across 7 new solving patterns, plus a
+couple more filed into the two pre-existing qtypes. Every answer was independently recomputed (not
+read off the book's working) and also checked against the book's own printed answer key (pp.689-690),
+which every one of these matched exactly.
+"""
+import math
+from bank import bound, mistake, pyq
+
+RY = "ry7300-ch21-trig"
+
+PYQS_RY = [
+    # --- q-tr-max-linear (new): max/min of a trig expression using the ±sqrt(a2+b2) or interval bound ---
+    pyq(RY, 1, "q-tr-max-linear",
+        'The minimum value of 2sin²θ + 3cos²θ is',
+        ['0', '3', '2', '1'], "c",
+        ['2sin²θ + 3cos²θ = 2(sin²θ + cos²θ) + cos²θ = 2 + cos²θ.', 'cos²θ ranges over [0, 1], so the minimum is at cos²θ = 0: minimum = 2.'],
+        lambda: 2, 2, 0, tech=['identity', 'bounds'], concepts=2,
+        trick='Rewrite as (the smaller coefficient) + (coefficient gap) × cos²θ (or sin²θ), then use that cos²θ, sin²θ ∈ [0, 1].',
+        wrong={'b': mistake('Gave the larger coefficient (3) instead of 2 + 0.', 3, 0)}),
+    pyq(RY, 4, "q-tr-max-linear",
+        'Maximum value of (2sinθ + 3cosθ) is',
+        ['2', '√13', '√15', '1'], "b",
+        ['The maximum of a sinθ + b cosθ is √(a² + b²).', '√(2² + 3²) = √13.'],
+        lambda: math.sqrt(13), math.sqrt(13), 1e-9, tech=['standard-values'],
+        optvals=[2, math.sqrt(13), math.sqrt(15), 1],
+        trick='Maximum of a·sinθ + b·cosθ is always √(a² + b²); the minimum is −√(a² + b²).',
+        wrong={'c': mistake('Added the coefficients’ squares to the wrong total (2² + 3² + 2 = 15).', math.sqrt(15), 1e-9)}),
+
+    # --- q-tr-max-amgm (new): AM-GM bound on a tan²+b cot² style sums ---
+    pyq(RY, 3, "q-tr-max-amgm",
+        'The minimum value of sin²θ + cos²θ + sec²θ + cosec²θ + tan²θ + cot²θ is',
+        ['1', '3', '5', '7'], "d",
+        ['sin²θ + cos²θ = 1. sec²θ = 1 + tan²θ and cosec²θ = 1 + cot²θ.', 'Total = 1 + (1 + tan²θ) + (1 + cot²θ) + tan²θ + cot²θ = 3 + 2(tan²θ + cot²θ).', 'By AM-GM, tan²θ + cot²θ ≥ 2, with equality at θ = 45°, so the minimum is 3 + 2(2) = 7.'],
+        lambda: 7, 7, 0, tech=['identity', 'bounds'], concepts=3, heavy=True,
+        trick='Collapse every term to a 1 or a tan²θ/cot²θ pair first, then apply AM-GM: tan²θ + cot²θ ≥ 2.',
+        wrong={'c': mistake('Used AM-GM’s bound (2) directly as the final answer instead of adding the collapsed constant 3.', 5, 0)}),
+    pyq(RY, 6, "q-tr-max-amgm",
+        'The minimum value of 4tan²θ + 9cot²θ is equal to',
+        ['1', '2', '12', '13'], "c",
+        ['By AM-GM, 4tan²θ + 9cot²θ ≥ 2√(4tan²θ × 9cot²θ) = 2√36 = 12.', 'Equality holds when 4tan²θ = 9cot²θ, i.e. tan⁴θ = 9/4, which has a real solution.'],
+        lambda: 2 * math.sqrt(4 * 9), 12, 1e-9, tech=['bounds'],
+        trick='a·x² + b/x² ≥ 2√(ab) by AM-GM (here x = tanθ); the equality case always exists for a trig AM-GM like this.',
+        wrong={'d': mistake('Added 4 + 9 = 13 instead of using the AM-GM product bound.', 13, 0)}),
+
+    # --- q-tr-bound-trick (new): matching the achievable range of sin/cos forces an equation's hand ---
+    pyq(RY, 5, "q-tr-bound-trick",
+        'The equation cos²θ = (x + y)² / 4xy is only possible when',
+        ['x = −y', 'x > y', 'x = y', 'x < y'], "c",
+        ['Since cos²θ ≤ 1, (x + y)² ≤ 4xy, i.e. x² + 2xy + y² ≤ 4xy, i.e. x² − 2xy + y² ≤ 0.', 'That is (x − y)² ≤ 0, and a square can never be negative, so (x − y)² = 0, forcing x = y.'],
+        lambda: 1, 1, 0, tech=['bounds'], optvals=[0, 0, 1, 0], concepts=2,
+        trick='Use cos²θ ≤ 1 to turn the equation into a "square ≤ 0" statement, which can only be an equality.'),
+    pyq(RY, 9, "q-tr-bound-trick",
+        'If cos πx = x² − x + 5/4, the value of x will be',
+        ['0', '1', '−1', 'None of the above'], "d",
+        ['x² − x + 5/4 = (x − 1/2)² + 1, which is always ≥ 1, with equality only at x = 1/2.', 'But cos(πx) ≤ 1 always, so the only way the equation could hold is at x = 1/2 — yet cos(π/2) = 0, not 1.', 'No real x satisfies the equation, so none of the given options work.'],
+        lambda: 1, 1, 0, tech=['bounds'], optvals=[0, 0, 0, 1], concepts=3, heavy=True,
+        trick='Complete the square on the right first; if its minimum already exceeds what cos(πx) can ever reach, there is no solution at all.'),
+    pyq(RY, 10, "q-tr-bound-trick",
+        'If sin(πx/2) = x² − 2x + 2, then the value of x is',
+        ['0', '1', '−1', 'None of these'], "b",
+        ['x² − 2x + 2 = (x − 1)² + 1, which is always ≥ 1, with equality only at x = 1.', 'Since sin(πx/2) ≤ 1 always, the only way the equation can hold is at x = 1, where sin(π/2) = 1 exactly — it checks out.'],
+        lambda: 1, 1, 0, tech=['bounds'], optvals=[0, 1, 0, 0], concepts=2,
+        trick='Complete the square on the right; here (unlike a similar-looking question) the minimum equals 1 and sin does reach 1, so this one does have a solution.'),
+
+    # --- q-tr-identity-simplify (new): substitute the Pythagorean identities to collapse a big expression ---
+    pyq(RY, 34, "q-tr-identity-simplify",
+        'The numerical value of 1/(1 + cot²θ) + 3/(1 + tan²θ) + 2sin²θ will be',
+        ['2', '5', '6', '3'], "d",
+        ['1 + cot²θ = cosec²θ, so 1/(1 + cot²θ) = sin²θ.', '1 + tan²θ = sec²θ, so 3/(1 + tan²θ) = 3cos²θ.', 'Total = sin²θ + 3cos²θ + 2sin²θ = 3sin²θ + 3cos²θ = 3.'],
+        lambda: 3, 3, 0, tech=['identity'], concepts=2,
+        trick='Rewrite 1/(1+cot²θ) as sin²θ and 1/(1+tan²θ) as cos²θ immediately, before anything else.',
+        wrong={'c': mistake('Treated 1/(1+tan²θ) as tan²θ·cos²θ = sin²θ instead of cos²θ, giving an extra sin² instead of 3cos².', 6, 0)}),
+    pyq(RY, 42, "q-tr-identity-simplify",
+        'If sinθ + sin²θ = 1, then the value of cos²θ + cos⁴θ',
+        ['2', '4', '0', '1'], "d",
+        ['sinθ + sin²θ = 1 means sinθ = 1 − sin²θ = cos²θ.', 'cos⁴θ = (cos²θ)² = sin²θ (squaring both sides of cos²θ = sinθ).', 'cos²θ + cos⁴θ = sinθ + sin²θ = 1 (the given value).'],
+        lambda: 1, 1, 0, tech=['identity', 'plug-numbers'], concepts=2,
+        trick='cos²θ equals sinθ here, so cos⁴θ equals sin²θ — the target expression is just a relabelling of the given one.'),
+
+    # --- q-tr-complement-telescope (new): products of complementary-angle pairs collapse to 1 ---
+    pyq(RY, 69, "q-tr-complement-telescope",
+        'The value of tan4°. tan43°.tan47°.tan86° is',
+        ['2', '3', '1', '4'], "c",
+        ['4° and 86° are complementary (4 + 86 = 90), so tan4°·tan86° = tan4°·cot4° = 1.', '43° and 47° are complementary too, so tan43°·tan47° = 1.', 'The product is 1 × 1 = 1.'],
+        lambda: 1, 1, 0, tech=['identity'], concepts=2,
+        trick='Pair up angles that sum to 90°; each such pair of tangents multiplies to exactly 1.'),
+    pyq(RY, 70, "q-tr-complement-telescope",
+        'The value of tan1°. tan2°. tan3°........tan89° is',
+        ['1', '0', '√3', '1/√3'], "a",
+        ['Pair tan k° with tan(90° − k)° for k = 1 to 44: each pair multiplies to 1 (44 pairs).', 'tan45° = 1 is left over on its own.', 'The whole product is 1.'],
+        lambda: 1, 1, 0, tech=['identity'], optvals=[1, 0, math.sqrt(3), 1 / math.sqrt(3)], concepts=2,
+        trick='The full product tan1°tan2°...tan89° always collapses to 1, however many terms: everything pairs up except tan45° = 1.'),
+
+    # --- q-tr-complement-sumsq (new): sin² over a complementary-paired range sums to half the pair count ---
+    pyq(RY, 75, "q-tr-complement-sumsq",
+        'sin²5° + sin²6° + ........ + sin²84° + sin²85° = ?',
+        ['30½', '40½', '40', '39½'], "b",
+        ['Pair sin²k° with sin²(90° − k)°: since sin²θ + sin²(90°−θ) = 1, each pair sums to 1.', 'From 5° to 85° there are 81 terms; pairing 5↔85, 6↔84, ..., 44↔46 gives 40 pairs (= 40), leaving sin²45° = 1/2 unpaired.', 'Total = 40 + 1/2 = 40½.'],
+        lambda: 81 / 2, 40.5, 1e-9, tech=['identity'], optvals=[30.5, 40.5, 40, 39.5], concepts=2,
+        trick='Count the terms, pair the ends inward (each pair = 1), and don’t forget the lone middle term at 45° (= 1/2) if the count is odd.'),
+    pyq(RY, 76, "q-tr-complement-sumsq",
+        'sin²5° + sin²10° + sin²15° + .......+ sin²85° + sin²90° is equal to',
+        ['7½', '8½', '9', '9½'], "d",
+        ['Pair sin²k° with sin²(90°−k)° in steps of 5°: 5↔85, 10↔80, ..., 40↔50 — 8 pairs, each summing to 1.', 'sin²45° = 1/2 is left over unpaired, and sin²90° = 1 is an extra term outside the pairing.', 'Total = 8 + 1/2 + 1 = 9½.'],
+        lambda: 8 + 0.5 + 1, 9.5, 1e-9, tech=['identity'], optvals=[7.5, 8.5, 9, 9.5], concepts=3, heavy=True,
+        trick='Same pairing idea as a plain complementary sum, but watch for an extra unpaired term like sin²90° tacked on at the end.',
+        wrong={'b': mistake('Forgot to add the extra sin²90° = 1 term after pairing.', 8.5, 1e-9)}),
+
+    # --- q-tr-componendo (new): secθ+tanθ & secθ-tanθ are reciprocals, since their product is 1 ---
+    pyq(RY, 32, "q-tr-componendo",
+        'If (secθ + tanθ)/(secθ − tanθ) = 5/3, sinθ is equal to',
+        ['1/4', '1/3', '2/3', '3/4'], "a",
+        ['Cross-multiplying: 3(secθ + tanθ) = 5(secθ − tanθ), so 8tanθ = 2secθ, i.e. 4tanθ = secθ.', '4·(sinθ/cosθ) = 1/cosθ, so 4sinθ = 1, giving sinθ = 1/4.'],
+        lambda: 1 / 4, 0.25, 1e-9, tech=['identity'],
+        trick='Cross-multiply the given ratio directly into a secθ = (number)·tanθ relation, then convert to sinθ, cosθ.'),
+    pyq(RY, 229, "q-tr-componendo",
+        'If secθ + tanθ = 5 then the value of (tanθ+1)/(tanθ−1) is',
+        ['11/7', '13/7', '15/7', '17/7'], "d",
+        ['Since sec²θ − tan²θ = 1 = (secθ+tanθ)(secθ−tanθ), and secθ+tanθ = 5, secθ−tanθ = 1/5.', 'Subtracting: 2tanθ = 5 − 1/5 = 24/5, so tanθ = 12/5.', '(tanθ+1)/(tanθ−1) = (12/5+1)/(12/5−1) = (17/5)/(7/5) = 17/7.'],
+        lambda: (12 / 5 + 1) / (12 / 5 - 1), 17 / 7, 1e-9, tech=['identity'], concepts=2,
+        trick='secθ+tanθ and secθ−tanθ always multiply to 1, so knowing one gives the other instantly — no need to find θ itself.'),
+
+    # --- q-tr-power-sum-trap (new): sinθ+cosecθ=2 forces sinθ=1, so any power sum is just 2 ---
+    pyq(RY, 146, "q-tr-power-sum-trap",
+        'If sinθ + cosecθ = 2, then the value of sin⁹θ + cosec⁹θ is',
+        ['3', '2', '4', '1'], "b",
+        ['By AM-GM, sinθ + 1/sinθ ≥ 2 for sinθ > 0, with equality only when sinθ = 1.', 'So sinθ = 1 (and cosecθ = 1), and sin⁹θ + cosec⁹θ = 1 + 1 = 2.'],
+        lambda: 2, 2, 0, tech=['bounds'], concepts=2,
+        trick='sinθ + cosecθ = 2 can only happen at sinθ = 1 — so every power sum sinⁿθ + cosecⁿθ is just 2, whatever n is.'),
+    pyq(RY, 202, "q-tr-power-sum-trap",
+        'If sinθ + cosecθ = 2, then value of sin¹⁰⁰θ + cosec¹⁰⁰θ is equal to :',
+        ['1', '2', '3', '100'], "b",
+        ['As with any power, sinθ + cosecθ = 2 forces sinθ = 1 (its only possible value by AM-GM).', 'sin¹⁰⁰θ + cosec¹⁰⁰θ = 1 + 1 = 2, regardless of how large the exponent is.'],
+        lambda: 2, 2, 0, tech=['bounds'], concepts=2,
+        trick='The huge exponent (100) is a distraction — the moment you see sinθ + cosecθ = 2, the answer to any power-sum version is 2.'),
+
+    # --- q-tr-equation-solve (new): solve a trig equation for the acute angle theta ---
+    pyq(RY, 130, "q-tr-equation-solve",
+        'If 2(cos²θ − sin²θ) = 1, θ is a positive acute angle, then the value of θ is',
+        ['60°', '30°', '45°', '22½°'], "b",
+        ['cos²θ − sin²θ = cos2θ, so the equation is 2cos2θ = 1, i.e. cos2θ = 1/2.', '2θ = 60°, so θ = 30°.'],
+        lambda: 30, 30, 0, tech=['identity', 'back-substitute'], concepts=2,
+        trick='Recognise cos²θ − sin²θ as the double-angle identity cos2θ before solving.'),
+    pyq(RY, 159, "q-tr-equation-solve",
+        'The value of θ, which satisfies the equation tan²θ + 3 = 3secθ, 0 ≤ θ < 90° is',
+        ['15° or 0°', '30° or 0°', '45° or 0°', '60° or 0°'], "d",
+        ['Using tan²θ = sec²θ − 1: sec²θ − 1 + 3 = 3secθ, i.e. sec²θ − 3secθ + 2 = 0.', 'Factoring: (secθ − 1)(secθ − 2) = 0, so secθ = 1 or secθ = 2.', 'secθ = 1 gives θ = 0°; secθ = 2 gives θ = 60°.'],
+        lambda: 1, 1, 0, tech=['identity', 'back-substitute'], optvals=[0, 0, 0, 1], concepts=3, heavy=True,
+        trick='Replace tan²θ with sec²θ − 1 to turn the equation into a quadratic in secθ, then factor.'),
+
+    # --- q-tr-triangle (existing qtype): more "one ratio given, find another" questions ---
+    pyq(RY, 210, "q-tr-triangle",
+        'If θ be acute angle and cosθ = 15/17, then the value of cot(90° − θ) is',
+        ['2√8/15', '8/15', '√2/17', '8√2/17'], "b",
+        ['Base 15, hypotenuse 17, so the height is √(17² − 15²) = 8.', 'cot(90° − θ) = tanθ = height ÷ base = 8/15.'],
+        lambda: 8 / 15, 8 / 15, 1e-9, tech=['standard-values', 'identity'], concepts=2,
+        trick='cot(90°−θ) is just tanθ in disguise — convert the complementary angle first.'),
+    pyq(RY, 212, "q-tr-triangle",
+        'If tanθ = 3/4 and θ is acute angle, then cosecθ = ?',
+        ['4/5', '5/3', '2', '1/2'], "b",
+        ['Opposite 3, adjacent 4, so the hypotenuse is √(3² + 4²) = 5.', 'cosecθ = hypotenuse ÷ opposite = 5/3.'],
+        lambda: 5 / 3, 5 / 3, 1e-9, tech=['standard-values'],
+        trick='3–4–5 triangle. cosec is hypotenuse over opposite.',
+        wrong={'a': mistake('Gave sinθ = 3/5 instead of cosecθ = 5/3.', 4 / 5, 1e-9)}),
+]
