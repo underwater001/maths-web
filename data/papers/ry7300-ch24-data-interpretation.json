@@ -1,0 +1,328 @@
+{
+  "id": "ry7300-ch24-data-interpretation",
+  "exam": "Rakesh Yadav 7300+ Maths",
+  "kind": "similar-paper",
+  "publisher": "Rakesh Yadav Readers Publication",
+  "date": "",
+  "shift": "Chapter 24: Statistics & Data Interpretation",
+  "link": "",
+  "quant": 464,
+  "note": "Chapter 24 (titled 'Statistics & Data Interpretation') runs from book p.839 to p.905 (PDF 842-908): a Questions section (book 839-888, Q1-Q464) followed by an Answer-Key table and ad (book 888-889) and a same-numbered Solutions section (book 890-905). Despite the chapter title, no standalone Statistics theory content (mean, median, mode, standard deviation as a topic of its own) was found anywhere in the chapter's ~51-page Questions section - confirmed by four independent page-by-page passes covering the entire range - so no tools/topics/statistics.py module was created; everything filed here is Data Interpretation. Q464 (the chapter's last question, a stray coordinate-geometry/slope question with no connection to any chart) was excluded as out of scope for this topic. 45 of the 464 raw questions were selected and filed, spanning every major chart type in the chapter (simple/grouped/stacked bar, pie by %/by angle, single- and dual-series line graphs, distance-time graphs, tables, histograms, and cumulative-frequency 'ogive' graphs) under 20 new chart-agnostic question types, organised by solving METHOD rather than by chart type, per the project's own rule that two questions are the same type if the same method solves both once the numbers change. Every question actually filed was independently recomputed from its own printed numbers via a standalone pre-check script before being written up; every question flagged by the cataloguing pass as ambiguous, misprinted, or internally inconsistent (several pie-chart sum errors off 100%, a watermark-obscured block, a few English/Hindi text mismatches, a likely .2 billion vs .2 million misprint, and others) was skipped rather than filed, consistent with the project's data-integrity rule of never filing a question whose correctness depends on an unresolved book error. As with earlier chapters, no compact printed answer-key table covering this exact page range was independently cross-checked against; every answer here was verified the primary way only, by recomputing it from the question's own numbers.",
+  "rows": [
+    {
+      "qno": 8,
+      "topic": "data-interpretation",
+      "key": "a",
+      "answer": "26.47%",
+      "verified": true
+    },
+    {
+      "qno": 16,
+      "topic": "data-interpretation",
+      "key": "c",
+      "answer": "30",
+      "verified": true
+    },
+    {
+      "qno": 25,
+      "topic": "data-interpretation",
+      "key": "a",
+      "answer": "15%",
+      "verified": true
+    },
+    {
+      "qno": 29,
+      "topic": "data-interpretation",
+      "key": "c",
+      "answer": "A, B, C",
+      "verified": true
+    },
+    {
+      "qno": 38,
+      "topic": "data-interpretation",
+      "key": "b",
+      "answer": "\u20b9200",
+      "verified": true
+    },
+    {
+      "qno": 57,
+      "topic": "data-interpretation",
+      "key": "a",
+      "answer": "10:30am",
+      "verified": true
+    },
+    {
+      "qno": 58,
+      "topic": "data-interpretation",
+      "key": "b",
+      "answer": "48",
+      "verified": true
+    },
+    {
+      "qno": 59,
+      "topic": "data-interpretation",
+      "key": "c",
+      "answer": "2.5",
+      "verified": true
+    },
+    {
+      "qno": 60,
+      "topic": "data-interpretation",
+      "key": "d",
+      "answer": "80",
+      "verified": true
+    },
+    {
+      "qno": 65,
+      "topic": "data-interpretation",
+      "key": "b",
+      "answer": "3504cr",
+      "verified": true
+    },
+    {
+      "qno": 67,
+      "topic": "data-interpretation",
+      "key": "d",
+      "answer": "34:31",
+      "verified": true
+    },
+    {
+      "qno": 69,
+      "topic": "data-interpretation",
+      "key": "d",
+      "answer": "15.58%",
+      "verified": true
+    },
+    {
+      "qno": 75,
+      "topic": "data-interpretation",
+      "key": "c",
+      "answer": "1999",
+      "verified": true
+    },
+    {
+      "qno": 116,
+      "topic": "data-interpretation",
+      "key": "b",
+      "answer": "12.5%",
+      "verified": true
+    },
+    {
+      "qno": 118,
+      "topic": "data-interpretation",
+      "key": "d",
+      "answer": "5:6",
+      "verified": true
+    },
+    {
+      "qno": 119,
+      "topic": "data-interpretation",
+      "key": "c",
+      "answer": "3600",
+      "verified": true
+    },
+    {
+      "qno": 133,
+      "topic": "data-interpretation",
+      "key": "a",
+      "answer": "2750",
+      "verified": true
+    },
+    {
+      "qno": 134,
+      "topic": "data-interpretation",
+      "key": "c",
+      "answer": "\u20b922.50",
+      "verified": true
+    },
+    {
+      "qno": 145,
+      "topic": "data-interpretation",
+      "key": "d",
+      "answer": "20%",
+      "verified": true
+    },
+    {
+      "qno": 146,
+      "topic": "data-interpretation",
+      "key": "b",
+      "answer": "\u20b9138",
+      "verified": true
+    },
+    {
+      "qno": 147,
+      "topic": "data-interpretation",
+      "key": "d",
+      "answer": "Data inadequate",
+      "verified": true
+    },
+    {
+      "qno": 153,
+      "topic": "data-interpretation",
+      "key": "c",
+      "answer": "3",
+      "verified": true
+    },
+    {
+      "qno": 177,
+      "topic": "data-interpretation",
+      "key": "c",
+      "answer": "\u20b96150",
+      "verified": true
+    },
+    {
+      "qno": 196,
+      "topic": "data-interpretation",
+      "key": "c",
+      "answer": "70%",
+      "verified": true
+    },
+    {
+      "qno": 230,
+      "topic": "data-interpretation",
+      "key": "b",
+      "answer": "10.75%",
+      "verified": true
+    },
+    {
+      "qno": 248,
+      "topic": "data-interpretation",
+      "key": "d",
+      "answer": "None of these",
+      "verified": true
+    },
+    {
+      "qno": 249,
+      "topic": "data-interpretation",
+      "key": "a",
+      "answer": "Pep-up only",
+      "verified": true
+    },
+    {
+      "qno": 257,
+      "topic": "data-interpretation",
+      "key": "b",
+      "answer": "25:21",
+      "verified": true
+    },
+    {
+      "qno": 263,
+      "topic": "data-interpretation",
+      "key": "d",
+      "answer": "3:2",
+      "verified": true
+    },
+    {
+      "qno": 268,
+      "topic": "data-interpretation",
+      "key": "c",
+      "answer": "Statement (c)",
+      "verified": true
+    },
+    {
+      "qno": 291,
+      "topic": "data-interpretation",
+      "key": "a",
+      "answer": "20",
+      "verified": true
+    },
+    {
+      "qno": 300,
+      "topic": "data-interpretation",
+      "key": "b",
+      "answer": "70",
+      "verified": true
+    },
+    {
+      "qno": 302,
+      "topic": "data-interpretation",
+      "key": "d",
+      "answer": "\u20b912000",
+      "verified": true
+    },
+    {
+      "qno": 347,
+      "topic": "data-interpretation",
+      "key": "d",
+      "answer": "72",
+      "verified": true
+    },
+    {
+      "qno": 351,
+      "topic": "data-interpretation",
+      "key": "a",
+      "answer": "10",
+      "verified": true
+    },
+    {
+      "qno": 353,
+      "topic": "data-interpretation",
+      "key": "a",
+      "answer": "28 4/7%",
+      "verified": true
+    },
+    {
+      "qno": 374,
+      "topic": "data-interpretation",
+      "key": "c",
+      "answer": "5%",
+      "verified": true
+    },
+    {
+      "qno": 381,
+      "topic": "data-interpretation",
+      "key": "b",
+      "answer": "3:2",
+      "verified": true
+    },
+    {
+      "qno": 402,
+      "topic": "data-interpretation",
+      "key": "c",
+      "answer": "1995 & 2001",
+      "verified": true
+    },
+    {
+      "qno": 406,
+      "topic": "data-interpretation",
+      "key": "c",
+      "answer": "69800",
+      "verified": true
+    },
+    {
+      "qno": 423,
+      "topic": "data-interpretation",
+      "key": "c",
+      "answer": "\u20b99,850cr",
+      "verified": true
+    },
+    {
+      "qno": 450,
+      "topic": "data-interpretation",
+      "key": "c",
+      "answer": "102%",
+      "verified": true
+    },
+    {
+      "qno": 456,
+      "topic": "data-interpretation",
+      "key": "d",
+      "answer": "2011",
+      "verified": true
+    },
+    {
+      "qno": 457,
+      "topic": "data-interpretation",
+      "key": "d",
+      "answer": "Can't be determined",
+      "verified": true
+    },
+    {
+      "qno": 459,
+      "topic": "data-interpretation",
+      "key": "d",
+      "answer": "0",
+      "verified": true
+    }
+  ]
+}
